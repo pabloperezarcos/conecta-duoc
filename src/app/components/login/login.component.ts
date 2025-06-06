@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { UserService } from '../../core/services/user.service';
 
 /**
  * Este componente maneja el inicio y cierre de sesión utilizando MSAL.
@@ -30,7 +31,11 @@ export class LoginComponent implements OnInit {
    * @param msalService Servicio de autenticación con MSAL.
    * @param router Router para la navegación entre componentes.
    */
-  constructor(private msalService: MsalService, private router: Router) { }
+  constructor(
+    private msalService: MsalService,
+    private router: Router,
+    private userService: UserService
+  ) { }
   /**
     * Hook que se ejecuta al inicializar el componente.
     * Comprueba si el usuario está autenticado y, de ser así, redirige al dashboard.
@@ -52,13 +57,20 @@ export class LoginComponent implements OnInit {
   login() {
     this.msalService.loginPopup().subscribe({
       next: (result) => {
-        console.log('Login success:', result);
+        //console.log('Login success:', result);
 
         // Establece la cuenta activa
         const account = this.msalService.instance.getAllAccounts()[0];
         this.msalService.instance.setActiveAccount(account);
 
         this.isLoggedIn = true;
+
+        const correo = account.username;
+        if (correo === 'pab.moraa@duocuc.cl') {
+          this.userService.setRole('admin');
+        } else {
+          this.userService.setRole('alumno');
+        }
 
         // Redirigir al dashboard después del login
         this.router.navigate(['/dashboard']);
@@ -79,6 +91,9 @@ export class LoginComponent implements OnInit {
       next: () => {
         console.log('Logout success');
         this.isLoggedIn = false;
+
+        // Limpiar rol al salir
+        this.userService.clearRole();
 
         // Redirigir al login después del logout
         this.router.navigate(['/']);
