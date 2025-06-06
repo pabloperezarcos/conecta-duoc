@@ -6,11 +6,12 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 import { PublicacionesService } from '../../../core/services/publicaciones.service';
 import { UserService } from '../../../core/services/user.service';
 import { Publicacion } from '../../../models/publicacion';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-ayudantias',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, BreadcrumbComponent, ReactiveFormsModule],
+  imports: [CommonModule, NavbarComponent, BreadcrumbComponent, ReactiveFormsModule, RouterLink],
   templateUrl: './ayudantias.component.html',
   styleUrls: ['./ayudantias.component.scss']
 })
