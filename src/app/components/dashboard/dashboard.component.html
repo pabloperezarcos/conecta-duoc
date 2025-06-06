@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Participa en la comunidad DUOC</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col" *ngFor="let cat of categorias">
+            <a class="card h-100 text-center text-decoration-none categoria-card" [routerLink]="cat.ruta">
+                <div class="card-body">
+                    <div class="mb-3" style="font-size: 3rem;">
+                        <i [class]="cat.icono"></i>
+                    </div>
+                    <h5 class="card-title text-dark">{{ cat.nombre }}</h5>
+                    <p class="card-text text-muted">{{ cat.descripcion }}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
+</div>

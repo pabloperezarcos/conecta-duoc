@@ -1,0 +1,15 @@
+@use 'styles' as *;
+
+.titulo {
+    color: $negro;
+    font-weight: bold;
+}
+
+button {
+    background-color: $amarillo;
+    color: $negro;
+
+    &:hover {
+        background-color: darken($amarillo, 10%);
+    }
+}

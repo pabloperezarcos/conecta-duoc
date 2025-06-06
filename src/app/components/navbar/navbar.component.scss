@@ -1,0 +1,33 @@
+@use 'styles' as *;
+
+.navbar {
+    background-color: $negro;
+    color: $blanco;
+    padding: 1rem 2rem;
+
+    .logo {
+        height: 36px;
+    }
+
+    .titulo {
+        font-weight: bold;
+        color: $amarillo;
+        font-size: 1.25rem;
+    }
+
+    .usuario {
+        font-size: 0.95rem;
+        color: $blanco;
+    }
+
+    button {
+        background-color: $amarillo;
+        border: none;
+        color: $negro;
+        font-weight: bold;
+
+        &:hover {
+            background-color: darken($amarillo, 10%);
+        }
+    }
+}

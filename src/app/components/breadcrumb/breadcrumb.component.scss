@@ -1,0 +1,27 @@
+@use 'styles' as *;
+
+.breadcrumb-container {
+    background-color: transparent;
+    padding: 0;
+
+    .breadcrumb {
+        background-color: transparent;
+        font-size: 0.95rem;
+    }
+
+    .breadcrumb-item {
+        a {
+            color: $amarillo;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &.active {
+            color: $gris;
+            font-weight: bold;
+        }
+    }
+}

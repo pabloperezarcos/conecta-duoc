@@ -1,0 +1,65 @@
+@use 'styles' as *;
+
+.login-container {
+    background-color: $negro;
+    padding: 2rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    background-color: $blanco;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    .card-header {
+        background-color: $amarillo;
+        padding: 2rem 1rem;
+
+        .logo {
+            width: 60px;
+        }
+
+        .titulo {
+            color: $negro;
+            font-weight: bold;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+    }
+
+    .card-body {
+        padding: 2rem 1.5rem;
+
+        button {
+            font-weight: bold;
+            padding: 0.75rem;
+            font-size: 1rem;
+
+            &.btn-warning {
+                background-color: $amarillo;
+                color: $negro;
+
+                &:hover {
+                    background-color: darken($amarillo, 10%);
+                }
+            }
+
+            &.btn-outline-light {
+                border-color: $gris;
+                color: $gris;
+
+                &:hover {
+                    background-color: $gris;
+                    color: $blanco;
+                }
+            }
+        }
+    }
+
+    .card-footer {
+        background-color: transparent;
+        padding: 1rem 1.5rem;
+    }
+}
