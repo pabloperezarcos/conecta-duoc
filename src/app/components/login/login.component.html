@@ -1,26 +1,24 @@
-<div class="login-container">
-    <div class="card">
-        <!-- Encabezado con Logo -->
-        <div class="card-header">
-            <img src="assets/images/logo.png" alt="Logo Conecta-DUOC" class="logo">
-            <h1>{{ title }}</h1>
-            <p>Conecta-DUOC</p>
+<div class="login-container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card login-card shadow">
+        <!-- Encabezado con logo -->
+        <div class="card-header text-center bg-amarillo">
+            <img src="assets/logo/logo.png" alt="Logo ConectaDuoc" class="logo mb-2">
+            <h1 class="titulo">ConectaDuoc</h1>
         </div>
 
         <!-- Cuerpo -->
-        <div class="card-body">
-
-            <!-- Botones -->
-            <button class="btn btn-success" (click)="login()" *ngIf="!isLoggedIn">
+        <div class="card-body text-center">
+            <p class="mb-4 text-muted">Plataforma de colaboración estudiantil DUOC UC</p>
+            <button class="btn btn-warning w-100" (click)="login()" *ngIf="!isLoggedIn">
                 Iniciar Sesión
             </button>
-            <button class="btn btn-outline-secondary" (click)="logout()" *ngIf="isLoggedIn">
+            <button class="btn btn-outline-light w-100" (click)="logout()" *ngIf="isLoggedIn">
                 Cerrar Sesión
             </button>
         </div>
 
         <!-- Footer -->
-        <div class="card-footer">
+        <div class="card-footer text-center text-muted small">
             <p>© 2025 Conecta-DUOC. Todos los derechos reservados.</p>
             <p>Desarrollado por JP DEV</p>
         </div>
