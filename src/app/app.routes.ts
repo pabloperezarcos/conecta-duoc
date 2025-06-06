@@ -14,5 +14,19 @@ export const routes: Routes = [
     {
         path: '**',
         redirectTo: ''
-    }
+    },
+
+/*     {
+        path: 'admin',
+        loadComponent: () => import('./components/admin/admin.component').then(m => m.AdminComponent),
+        canActivate: [RoleGuard],
+        data: { expectedRole: 'admin' }
+    },
+    {
+        path: 'alumno',
+        loadComponent: () => import('./components/alumno/alumno.component').then(m => m.AlumnoComponent),
+        canActivate: [RoleGuard],
+        data: { expectedRole: 'alumno' }
+    } */
+
 ];
