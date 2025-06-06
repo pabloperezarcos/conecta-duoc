@@ -15,11 +15,11 @@ import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
   // 1) Instancia Msal
   const pca = new PublicClientApplication({
     auth: {
-      clientId: '',
-      authority: 'https://login.microsoftonline.com/',
-      redirectUri: '',
+      clientId: '314ead43-a75f-4a94-be0b-80bb5e3a313f',
+      authority: 'https://login.microsoftonline.com/154990ff-5d59-40e6-ad84-28aacd6d84e0',
+      redirectUri: 'http://localhost:4200/',
+      //redirectUri: 'https://carnesag.cl/conectaDuoc',
     },
-    // system: { asyncJIT: true }  // normalmente ya viene true por defecto en versiones nuevas
   });
 
   // 2) Esperar inicialización
