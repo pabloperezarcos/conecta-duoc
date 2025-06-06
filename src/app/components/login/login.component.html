@@ -1,0 +1,28 @@
+<div class="login-container">
+    <div class="card">
+        <!-- Encabezado con Logo -->
+        <div class="card-header">
+            <img src="assets/images/logo.png" alt="Logo Conecta-DUOC" class="logo">
+            <h1>{{ title }}</h1>
+            <p>Conecta-DUOC</p>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="card-body">
+
+            <!-- Botones -->
+            <button class="btn btn-success" (click)="login()" *ngIf="!isLoggedIn">
+                Iniciar Sesión
+            </button>
+            <button class="btn btn-outline-secondary" (click)="logout()" *ngIf="isLoggedIn">
+                Cerrar Sesión
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer">
+            <p>© 2025 Conecta-DUOC. Todos los derechos reservados.</p>
+            <p>Desarrollado por JP DEV</p>
+        </div>
+    </div>
+</div>
