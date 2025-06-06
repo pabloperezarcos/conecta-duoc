@@ -17,6 +17,11 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'dashboard/ayudantias/:id',
+        loadComponent: () => import('./components/categorias/ayudantias/detalle-ayudantia/detalle-ayudantia.component').then(m => m.DetalleAyudantiaComponent),
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'categoria/culturales',
         loadComponent: () => import('./components/categorias/culturales/culturales.component').then(m => m.CulturalesComponent),
         canActivate: [AuthGuard]
