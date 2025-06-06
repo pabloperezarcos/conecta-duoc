@@ -5,12 +5,55 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="titulo">Ayudantías Académicas</h2>
-        <button class="btn btn-warning fw-bold">
-            <i class="fas fa-plus"></i> Publicar ayudantía
+        <button class="btn btn-warning fw-bold" (click)="toggleFormulario()">
+            <i class="fas fa-plus"></i>
+            {{ mostrarFormulario ? 'Cancelar' : 'Publicar ayudantía' }}
         </button>
     </div>
 
     <div *ngIf="!publicaciones.length" class="alert alert-info text-center">
         Aún no hay ayudantías publicadas. Sé el primero en compartir una 💡
     </div>
+
+    <form *ngIf="mostrarFormulario" (ngSubmit)="crearPublicacion()" [formGroup]="form" class="mb-4">
+        <div class="mb-3">
+            <label>Título</label>
+            <input formControlName="titulo" class="form-control" placeholder="Ej: Ayuda con matemáticas" />
+        </div>
+
+        <div class="mb-3">
+            <label>Descripción</label>
+            <textarea formControlName="descripcion" class="form-control" rows="4"
+                placeholder="Detalle de la ayudantía..."></textarea>
+        </div>
+
+        <button class="btn btn-warning" [disabled]="form.invalid">
+            {{ publicacionEditando ? 'Guardar cambios' : 'Publicar' }}
+        </button>
+
+    </form>
+
+    <div class="row g-4" *ngIf="publicaciones.length">
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let pub of publicaciones">
+            <a [routerLink]="['/dashboard/ayudantias', pub.id]"
+                class="card shadow-sm h-100 ayudantia-card text-decoration-none text-dark">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pub.titulo }}</h5>
+                    <p class="card-text text-muted">{{ pub.descripcion }}</p>
+                    <div *ngIf="puedeEditar(pub)" class="text-end">
+                        <span class="badge bg-secondary">Editable</span>
+                    </div>
+                </div>
+
+                <div class="card-footer small text-muted d-flex justify-content-between">
+                    <span><i class="fas fa-user"></i> {{ pub.autor }}</span>
+                    <span><i class="fas fa-clock"></i> {{ pub.fecha | date:'shortDate' }}</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
+
 </div>
