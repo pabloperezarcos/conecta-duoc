@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { RoleService } from '../services/role.service';
+import { UserService } from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
 
-  constructor(private roleService: RoleService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const expectedRole = route.data['expectedRole'];
+    const userRole = this.userService.getRole();
 
-    if (this.roleService.hasRole(expectedRole)) {
+    if (userRole === expectedRole) {
       return true;
     }
 
