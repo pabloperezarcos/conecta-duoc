@@ -5,7 +5,8 @@ export interface Publicacion {
     fecha: string;
     autor: string;
     sede: string;
-    comentarios?: Comentario[];
+    comentarios: Comentario[];
+    visitas?: number; 
 }
 
 export interface Comentario {
