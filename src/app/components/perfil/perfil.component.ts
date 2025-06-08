@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { UserService } from '../../core/services/user.service';
 import { PublicacionesService } from '../../core/services/publicaciones.service';
@@ -11,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, BreadcrumbComponent, RouterModule, FormsModule],
+  imports: [CommonModule, BreadcrumbComponent, RouterModule, FormsModule],
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss']
 })
