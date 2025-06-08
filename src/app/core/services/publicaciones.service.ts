@@ -16,8 +16,11 @@ export class PublicacionesService {
     const nueva: Publicacion = {
       ...publicacion,
       id: this.idCounter++,
-      fecha: new Date().toISOString()
+      fecha: new Date().toISOString(),
+      visitas: Math.floor(Math.random() * 100),
+      comentarios: []
     };
+
     this.publicaciones.unshift(nueva);
   }
 }
