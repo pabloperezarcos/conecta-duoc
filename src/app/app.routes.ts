@@ -1,10 +1,18 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+//import { RoleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
     {
         path: '',
         loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent),
+    },
+    {
+        path: 'dashboard/perfil',
+        loadComponent: () =>
+            import('./components/perfil/perfil.component').then(m => m.PerfilComponent),
+        canActivate: [AuthGuard],
+        //data: { allowedRoles: ['alumno', 'admin'] }
     },
     {
         path: 'dashboard',
