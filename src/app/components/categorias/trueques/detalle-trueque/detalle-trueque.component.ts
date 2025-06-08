@@ -28,7 +28,7 @@ export class DetalleTruequeComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.publicacion = this.publicacionesService.getAll().find(p => p.id === id);
+    this.publicacion = this.publicacionesService.getById('trueques', id);
 
     if (!this.publicacion) {
       this.router.navigate(['/categoria/trueques']);

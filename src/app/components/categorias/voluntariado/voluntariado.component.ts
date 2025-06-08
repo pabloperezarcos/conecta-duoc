@@ -37,7 +37,7 @@ export class VoluntariadoComponent implements OnInit {
       descripcion: ['', Validators.required]
     });
 
-    this.publicaciones = this.publicacionesService.getAll();
+    this.publicaciones = this.publicacionesService.getAll('voluntariado');
     this.publicaciones.forEach(pub => {
       this.comentarioForms[pub.id] = this.fb.group({
         texto: ['', Validators.required]
@@ -54,14 +54,14 @@ export class VoluntariadoComponent implements OnInit {
       const autor = this.userService.getUsername() || 'anónimo';
       const sede = 'San Joaquín'; // futura detección real
 
-      this.publicacionesService.crear({
+      this.publicacionesService.crear('voluntariado', {
         ...this.form.value,
         autor,
         sede
       });
     }
 
-    this.publicaciones = this.publicacionesService.getAll();
+    this.publicaciones = this.publicacionesService.getAll('voluntariado');
 
     this.publicaciones.forEach(pub => {
       if (!this.comentarioForms[pub.id]) {
