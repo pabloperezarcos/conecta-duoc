@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+    <app-breadcrumb></app-breadcrumb>
+
+    <div class="perfil-box p-4 shadow-sm mb-4">
+        <h4 class="mb-3">Mi Perfil</h4>
+        <p><strong>Correo:</strong> {{ correo }}</p>
+        <p><strong>Rol:</strong> {{ rol }}</p>
+        <p>
+            <strong>Sede:</strong>
+            <select class="form-select form-select-sm d-inline w-auto" title="Selecciona sede" [(ngModel)]="sede" (change)="guardarSede()">
+                <option *ngFor="let s of sedes" [value]="s">{{ s }}</option>
+            </select>
+        </p>
+    </div>
+
+    <div class="shadow-sm p-4 bg-white rounded">
+        <h5 class="mb-3">Mis publicaciones</h5>
+
+        <div class="stats-box bg-light p-3 rounded mb-4">
+            <h6 class="mb-2">Estadísticas personales</h6>
+            <ul class="list-unstyled mb-0 small">
+                <li><i class="fas fa-bullhorn me-1"></i> Publicaciones: {{ publicacionesPropias.length }}</li>
+                <li><i class="fas fa-comments me-1"></i> Comentarios recibidos: {{ totalComentarios }}</li>
+            </ul>
+        </div>
+
+        <div *ngIf="!publicacionesPropias.length" class="alert alert-info">
+            <p>Aún no has publicado nada.</p>
+        </div>
+
+        <ul class="list-group" *ngIf="publicacionesPropias.length">
+            <li class="list-group-item d-flex justify-content-between align-items-center"
+                *ngFor="let pub of publicacionesPropias">
+                <div>
+                    <strong>{{ pub.titulo }}</strong>
+                    <div class="small text-muted">{{ pub.fecha | date:'dd/MM/yyyy' }}</div>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" (click)="editar(pub)">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
