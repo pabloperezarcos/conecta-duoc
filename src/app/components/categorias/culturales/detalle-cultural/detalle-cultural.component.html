@@ -1,1 +1,60 @@
-<p>detalle-cultural works!</p>
+<div class="container mt-4">
+    <app-breadcrumb></app-breadcrumb>
+
+    <!-- Título principal -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold mb-0 text-dark">
+            {{ publicacion?.titulo }}
+        </h2>
+        <button class="btn btn-outline-secondary btn-sm" (click)="volver()">
+            ← Volver
+        </button>
+    </div>
+
+    <!-- Detalle de publicación -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <p class="fs-5 text-muted">{{ publicacion?.descripcion }}</p>
+        </div>
+        <div class="card-footer bg-white text-muted small d-flex justify-content-between">
+            <span><i class="fas fa-user"></i> {{ publicacion?.autor }}</span>
+            <span><i class="fas fa-calendar-alt"></i> {{ publicacion?.fecha | date:'fullDate' }}</span>
+        </div>
+    </div>
+
+    <!-- Sección de comentarios -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">Comentarios</h5>
+        </div>
+
+        <div class="card-body">
+            <div *ngIf="publicacion && publicacion.comentarios.length > 0; else sinComentarios">
+                <div *ngFor="let com of publicacion.comentarios" class="border-bottom py-2">
+                    <div class="d-flex justify-content-between small">
+                        <strong class="text-dark">{{ com.autor }}</strong>
+                        <span class="text-muted">{{ com.fecha | date:'dd/MM/yyyy HH:mm' }}</span>
+                    </div>
+                    <p class="mb-1 small">{{ com.texto }}</p>
+                </div>
+            </div>
+
+            <ng-template #sinComentarios>
+                <div class="alert alert-info text-center mb-0">
+                    No hay comentarios todavía. ¡Sé el primero en participar!
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Formulario para comentar -->
+        <div class="card-footer bg-white">
+            <form [formGroup]="comentarioForm" (ngSubmit)="comentar()">
+                <div class="input-group">
+                    <input formControlName="texto" class="form-control form-control-sm"
+                        placeholder="Escribe un comentario..." />
+                    <button class="btn btn-warning btn-sm" [disabled]="comentarioForm.invalid">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
