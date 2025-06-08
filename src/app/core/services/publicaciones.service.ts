@@ -5,22 +5,39 @@ import { Publicacion } from '../../models/publicacion';
   providedIn: 'root'
 })
 export class PublicacionesService {
-  private publicaciones: Publicacion[] = [];
+  private publicaciones: { [categoria: string]: Publicacion[] } = {};
   private idCounter = 1;
 
-  getAll(): Publicacion[] {
-    return this.publicaciones;
+  private ensureCategoria(categoria: string): void {
+    if (!this.publicaciones[categoria]) {
+      this.publicaciones[categoria] = [];
+    }
   }
 
-  crear(publicacion: Omit<Publicacion, 'id' | 'fecha'>): void {
+  getAll(categoria?: string): Publicacion[] {
+    if (categoria) {
+      this.ensureCategoria(categoria);
+      return this.publicaciones[categoria];
+    }
+    return Object.values(this.publicaciones).flat();
+  }
+
+  getById(categoria: string, id: number): Publicacion | undefined {
+    this.ensureCategoria(categoria);
+    return this.publicaciones[categoria].find(p => p.id === id);
+  }
+
+  crear(categoria: string, publicacion: Omit<Publicacion, 'id' | 'fecha' | 'categoria'>): void {
+    this.ensureCategoria(categoria);
     const nueva: Publicacion = {
       ...publicacion,
+      categoria,
       id: this.idCounter++,
       fecha: new Date().toISOString(),
       visitas: Math.floor(Math.random() * 100),
       comentarios: []
     };
 
-    this.publicaciones.unshift(nueva);
+    this.publicaciones[categoria].unshift(nueva);
   }
 }

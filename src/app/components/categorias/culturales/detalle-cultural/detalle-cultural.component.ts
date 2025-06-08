@@ -28,7 +28,7 @@ export class DetalleCulturalComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.publicacion = this.publicacionesService.getAll().find(p => p.id === id);
+    this.publicacion = this.publicacionesService.getById('culturales', id);
 
     if (!this.publicacion) {
       this.router.navigate(['/categoria/culturales']);

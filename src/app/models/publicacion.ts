@@ -2,11 +2,12 @@ export interface Publicacion {
     id: number;
     titulo: string;
     descripcion: string;
+    categoria: string;
     fecha: string;
     autor: string;
     sede: string;
     comentarios: Comentario[];
-    visitas?: number; 
+    visitas?: number;
 }
 
 export interface Comentario {
