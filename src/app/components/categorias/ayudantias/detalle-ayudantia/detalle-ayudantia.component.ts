@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../../../navbar/navbar.component';
 import { BreadcrumbComponent } from '../../../breadcrumb/breadcrumb.component';
 import { PublicacionesService } from '../../../../core/services/publicaciones.service';
 import { UserService } from '../../../../core/services/user.service';
@@ -11,7 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 @Component({
   selector: 'app-detalle-ayudantia',
   standalone: true,
-  imports: [CommonModule, RouterModule, NavbarComponent, BreadcrumbComponent, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, BreadcrumbComponent, ReactiveFormsModule],
   templateUrl: './detalle-ayudantia.component.html',
   styleUrls: ['./detalle-ayudantia.component.scss']
 })
