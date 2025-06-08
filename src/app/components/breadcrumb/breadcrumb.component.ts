@@ -17,15 +17,22 @@ export class BreadcrumbComponent implements OnInit {
   ngOnInit(): void {
     const fullPath = this.router.url.split('?')[0];
     const segments = fullPath.split('/').filter(Boolean);
-
+    
     let cumulativePath = '';
-    this.items = segments.map((seg, index) => {
+    this.items = [];
+
+    segments.forEach((seg, index) => {
       cumulativePath += `/${seg}`;
 
-      return {
+      if (seg === 'dashboard' || seg === 'categoria') {
+        return;
+      }
+
+      const isLast = index === segments.length - 1;
+      this.items.push({
         label: this.toReadable(seg),
-        path: index < segments.length - 1 ? cumulativePath : undefined
-      };
+        path: isLast ? undefined : cumulativePath
+      });
     });
 
     // Agregar manualmente 'Inicio' al comienzo
