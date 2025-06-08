@@ -1,0 +1,71 @@
+@use 'styles' as *;
+
+.reglas-wrapper {
+    background-color: $blanco;
+    color: $negro;
+    flex: 1;
+
+    .reglas-container {
+        max-width: 920px;
+        margin: auto;
+        background-color: $blanco;
+        border-radius: 16px;
+        padding: 3rem 2rem;
+        box-shadow: 0 0 14px rgba(0, 0, 0, 0.06);
+    }
+
+    .titulo {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: $negro;
+        border-left: 8px solid $amarillo;
+        padding-left: 1rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .intro {
+        font-size: 1.15rem;
+        color: $gris;
+        line-height: 1.7;
+    }
+
+    .regla {
+        margin-bottom: 2rem;
+
+        .regla-titulo {
+            font-weight: 600;
+            color: $negro;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .regla-texto {
+            font-size: 1.05rem;
+            color: $gris;
+            line-height: 1.6;
+        }
+    }
+
+    .final {
+        font-size: 1rem;
+        font-style: italic;
+        color: $gris;
+        text-align: center;
+        margin-top: 3rem;
+    }
+
+    .btn-amarillo {
+        background-color: $amarillo;
+        color: $negro-puro;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 12px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darken($amarillo, 7%);
+            cursor: pointer;
+        }
+    }
+}
