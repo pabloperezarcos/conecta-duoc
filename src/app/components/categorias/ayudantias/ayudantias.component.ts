@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
-import { NavbarComponent } from '../../navbar/navbar.component';
 import { PublicacionesService } from '../../../core/services/publicaciones.service';
 import { UserService } from '../../../core/services/user.service';
 import { Publicacion } from '../../../models/publicacion';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-ayudantias',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, BreadcrumbComponent, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, BreadcrumbComponent, ReactiveFormsModule, RouterLink, FormsModule],
   templateUrl: './ayudantias.component.html',
   styleUrls: ['./ayudantias.component.scss']
 })
@@ -21,6 +22,8 @@ export class AyudantiasComponent implements OnInit {
   publicaciones: Publicacion[] = [];
   publicacionEditando: Publicacion | null = null;
   comentarioForms: { [pubId: number]: FormGroup } = {};
+  filtroBusqueda: string = '';
+
 
   constructor(
     private fb: FormBuilder,
@@ -104,5 +107,17 @@ export class AyudantiasComponent implements OnInit {
     pub.comentarios.push(nuevoComentario);
     form.reset();
   }
+
+  get publicacionesFiltradas(): Publicacion[] {
+    if (!this.filtroBusqueda.trim()) return this.publicaciones;
+
+    const texto = this.filtroBusqueda.trim().toLowerCase();
+
+    return this.publicaciones.filter(pub =>
+      pub.titulo.toLowerCase().includes(texto) ||
+      pub.descripcion.toLowerCase().includes(texto)
+    );
+  }
+
 
 }

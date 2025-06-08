@@ -1,0 +1,25 @@
+@use 'styles' as *;
+
+.perfil-box {
+    background-color: #fff7e6;
+    border-left: 5px solid $amarillo;
+    border-radius: 0.5rem;
+}
+
+h4,
+h5 {
+    color: $negro;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #eee;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    button {
+        font-size: 0.85rem;
+    }
+}

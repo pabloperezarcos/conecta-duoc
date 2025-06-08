@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../core/services/user.service';
 import { RouterModule } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
-import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, NavbarComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

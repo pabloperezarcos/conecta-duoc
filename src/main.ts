@@ -6,6 +6,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
 
+import localeEsCL from '@angular/common/locales/es-CL';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEsCL, 'es-CL');
+
 // MSAL
 import { MsalModule } from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';

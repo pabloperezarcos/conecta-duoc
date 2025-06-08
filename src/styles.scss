@@ -4,3 +4,26 @@ $blanco: #FFFFFF;
 $gris: #666666;
 $negro-puro: #000000;
 $amarillo: #F1B634;
+
+footer {
+    flex-shrink: 0;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+app-root {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

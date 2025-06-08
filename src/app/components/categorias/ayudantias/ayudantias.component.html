@@ -1,5 +1,3 @@
-<app-navbar></app-navbar>
-
 <div class="container mt-4">
     <app-breadcrumb></app-breadcrumb>
 
@@ -14,6 +12,27 @@
     <div *ngIf="!publicaciones.length" class="alert alert-info text-center">
         Aún no hay ayudantías publicadas. Sé el primero en compartir una 💡
     </div>
+
+    <!-- ALERTAS ESTILO DUOC UC 
+    <div class="alert alert-primary d-flex align-items-center my-4" role="alert">
+        <i class="fas fa-info-circle me-3"></i>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.</span>
+    </div>
+
+
+    <div class="alert alert-warning d-flex align-items-center my-4" role="alert">
+        <i class="fas fa-exclamation-circle me-3"></i>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+    </div>
+
+
+    <div class="alert alert-danger d-flex align-items-center my-4" role="alert">
+        <i class="fas fa-times-circle me-3"></i>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.</span>
+    </div>
+ -->
 
     <form *ngIf="mostrarFormulario" (ngSubmit)="crearPublicacion()" [formGroup]="form" class="mb-4">
         <div class="mb-3">
@@ -33,26 +52,56 @@
 
     </form>
 
-    <div class="row g-4" *ngIf="publicaciones.length">
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let pub of publicaciones">
-            <a [routerLink]="['/dashboard/ayudantias', pub.id]"
-                class="card shadow-sm h-100 ayudantia-card text-decoration-none text-dark">
-                <div class="card-body">
-                    <h5 class="card-title">{{ pub.titulo }}</h5>
-                    <p class="card-text text-muted">{{ pub.descripcion }}</p>
-                    <div *ngIf="puedeEditar(pub)" class="text-end">
-                        <span class="badge bg-secondary">Editable</span>
-                    </div>
-                </div>
-
-                <div class="card-footer small text-muted d-flex justify-content-between">
-                    <span><i class="fas fa-user"></i> {{ pub.autor }}</span>
-                    <span><i class="fas fa-clock"></i> {{ pub.fecha | date:'shortDate' }}</span>
-                </div>
-            </a>
-        </div>
+    <div *ngIf="publicaciones.length" class="mb-3">
+        <input type="text" class="form-control" placeholder="Buscar por palabra clave..." [(ngModel)]="filtroBusqueda"
+            name="filtroBusqueda">
     </div>
 
+    <div class="table-responsive" *ngIf="publicaciones.length">
+        <table class="table table-hover table-borderless foro-lista">
+            <thead class="border-bottom">
+                <tr class="small text-muted">
+                    <th>Título</th>
+                    <th class="text-center d-none d-md-table-cell">Autor</th>
+                    <th class="text-center d-none d-md-table-cell">Fecha</th>
+                    <th class="text-center">Comentarios</th>
+                    <th class="text-center d-none d-md-table-cell">Visitas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pub of publicacionesFiltradas" class="align-middle">
+                    <td>
+                        <a [routerLink]="['/dashboard/ayudantias', pub.id]"
+                            class="fw-bold text-dark text-decoration-none">
+                            {{ pub.titulo }}
+                        </a>
+                        <div class="small text-muted d-md-none">
+                            por {{ pub.autor }} • {{ pub.fecha | date:'dd/MM/yyyy' }}
+                        </div>
+                    </td>
+                    <td class="text-center d-none d-md-table-cell small text-muted">
+                        {{ pub.autor }}
+                    </td>
+                    <td class="text-center d-none d-md-table-cell small text-muted">
+                        {{ pub.fecha | date:'dd/MM/yyyy' }}
+
+                    </td>
+                    <td class="text-center col-comentarios">
+                        <span class="badge bg-light text-dark fs-6 px-3 py-1">
+                            💬 {{ pub.comentarios.length || 0 }}
+                        </span>
+                    </td>
+                    <td class="text-center d-none d-md-table-cell">
+                        👁️ {{ pub.visitas }}
+                    </td>
+                </tr>
+
+                <div *ngIf="!publicacionesFiltradas.length" class="alert alert-warning text-center">
+                    No se encontraron coincidencias para "{{ filtroBusqueda }}".
+                </div>
+            </tbody>
+        </table>
+    </div>
 
 
 
