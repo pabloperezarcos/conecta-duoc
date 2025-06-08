@@ -1,0 +1,36 @@
+@use 'styles' as *;
+
+h2 {
+    color: $negro;
+}
+
+.card {
+    border-radius: 0.75rem;
+}
+
+.card-body {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.card-header {
+    border-bottom: 1px solid #eee;
+}
+
+.card-footer {
+    font-size: 0.85rem;
+}
+
+input.form-control-sm {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+}
+
+button.btn-warning {
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+        background-color: darken($amarillo, 10%);
+    }
+}

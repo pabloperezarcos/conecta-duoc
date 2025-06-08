@@ -32,7 +32,7 @@ export class DetalleAyudantiaComponent implements OnInit {
     this.publicacion = this.publicacionesService.getAll().find(p => p.id === id);
 
     if (!this.publicacion) {
-      this.router.navigate(['/dashboard/ayudantias']);
+      this.router.navigate(['/categoria/ayudantias']);
       return;
     }
 
@@ -66,6 +66,6 @@ export class DetalleAyudantiaComponent implements OnInit {
   }
 
   volver(): void {
-    this.router.navigate(['/dashboard/ayudantias']);
+    this.router.navigate(['/categoria/ayudantias']);
   }
 }
