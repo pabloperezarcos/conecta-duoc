@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { LOCALE_ID } from '@angular/core';
 
 import { routes } from './app.routes';
 
@@ -20,5 +21,11 @@ export const appConfig: ApplicationConfig = {
     /**
      * Proporciona las rutas definidas en el archivo `app.routes.ts` al enrutador global.
      */
-    provideRouter(routes)]
+    provideRouter(routes),
+
+    /**
+     * Establece el idioma global de Angular para fechas y localización.
+     */
+    { provide: LOCALE_ID, useValue: 'es-CL' }
+  ]
 };
