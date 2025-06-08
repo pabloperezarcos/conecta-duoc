@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
-import { NavbarComponent } from '../../navbar/navbar.component';
 import { PublicacionesService } from '../../../core/services/publicaciones.service';
 import { UserService } from '../../../core/services/user.service';
 import { Publicacion } from '../../../models/publicacion';
@@ -13,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-ayudantias',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, BreadcrumbComponent, ReactiveFormsModule, RouterLink, FormsModule],
+  imports: [CommonModule, BreadcrumbComponent, ReactiveFormsModule, RouterLink, FormsModule],
   templateUrl: './ayudantias.component.html',
   styleUrls: ['./ayudantias.component.scss']
 })
