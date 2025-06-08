@@ -41,8 +41,20 @@ export const routes: Routes = [
         data: { showNavbar: true, showFooter: true }
     },
     {
+        path: 'dashboard/culturales/:id',
+        loadComponent: () => import('./components/categorias/culturales/detalle-cultural/detalle-cultural.component').then(m => m.DetalleCulturalComponent),
+        canActivate: [AuthGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
         path: 'categoria/deportes',
         loadComponent: () => import('./components/categorias/deportes/deportes.component').then(m => m.DeportesComponent),
+        canActivate: [AuthGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
+        path: 'dashboard/deportes/:id',
+        loadComponent: () => import('./components/categorias/deportes/detalle-deporte/detalle-deporte.component').then(m => m.DetalleDeporteComponent),
         canActivate: [AuthGuard],
         data: { showNavbar: true, showFooter: true }
     },
@@ -53,8 +65,20 @@ export const routes: Routes = [
         data: { showNavbar: true, showFooter: true }
     },
     {
+        path: 'dashboard/trueques/:id',
+        loadComponent: () => import('./components/categorias/trueques/detalle-trueque/detalle-trueque.component').then(m => m.DetalleTruequeComponent),
+        canActivate: [AuthGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
         path: 'categoria/voluntariado',
         loadComponent: () => import('./components/categorias/voluntariado/voluntariado.component').then(m => m.VoluntariadoComponent),
+        canActivate: [AuthGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
+        path: 'dashboard/voluntariado/:id',
+        loadComponent: () => import('./components/categorias/voluntariado/detalle-voluntariado/detalle-voluntariado.component').then(m => m.DetalleVoluntariadoComponent),
         canActivate: [AuthGuard],
         data: { showNavbar: true, showFooter: true }
     },
