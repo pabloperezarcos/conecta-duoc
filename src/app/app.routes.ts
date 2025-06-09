@@ -1,7 +1,7 @@
 import { Router, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { RoleGuard } from './core/guards/role.guard';
 import { inject } from '@angular/core';
-//import { RoleGuard } from './core/guards/role.guard';
 
 const reglasAceptadasGuard = () => {
     const router = inject(Router);
@@ -34,6 +34,12 @@ export const routes: Routes = [
         loadComponent: () => import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
+    },
+    {
+        path: 'dashboard/reportes',
+        loadComponent: () => import('./components/publicaciones-reportadas/publicaciones-reportadas.component').then(m => m.PublicacionesReportadasComponent),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { showNavbar: true, showFooter: true, expectedRole: 'admin' }
     },
     {
         path: 'categoria/ayudantias',

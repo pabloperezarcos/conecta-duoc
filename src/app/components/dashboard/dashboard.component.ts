@@ -45,6 +45,13 @@ export class DashboardComponent implements OnInit {
       descripcion: 'Intercambia útiles, alimentos o materiales sin fines de lucro.',
       icono: 'fas fa-exchange-alt',
       ruta: '/categoria/trueques'
+    },
+    {
+      nombre: 'Publicaciones Reportadas',
+      descripcion: 'Administra los reportes enviados por la comunidad.',
+      icono: 'fas fa-flag',
+      ruta: '/dashboard/reportes',
+      adminOnly: true
     }
   ];
 

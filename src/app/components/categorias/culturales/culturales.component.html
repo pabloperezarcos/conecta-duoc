@@ -66,6 +66,7 @@
                     <th class="text-center d-none d-md-table-cell">Fecha</th>
                     <th class="text-center">Comentarios</th>
                     <th class="text-center d-none d-md-table-cell">Visitas</th>
+                    <th class="text-center">Reportar</th>
                 </tr>
             </thead>
             <tbody>
@@ -93,6 +94,11 @@
                     </td>
                     <td class="text-center d-none d-md-table-cell">
                         👁️ {{ pub.visitas }}
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-link text-danger p-0" (click)="reportarPublicacion(pub)">
+                            <i class="fas fa-flag"></i>
+                        </button>
                     </td>
                 </tr>
 
