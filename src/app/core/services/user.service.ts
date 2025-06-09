@@ -25,4 +25,9 @@ export class UserService {
     return account?.username || null;
   }
 
+  getNombre(): string | null {
+    return localStorage.getItem('nombre');
+  }
+
+
 }
