@@ -23,3 +23,25 @@ h5 {
         font-size: 0.85rem;
     }
 }
+
+.perfil-header {
+    .avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+        background-color: #6c757d;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+}
