@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../../../breadcrumb/breadcrumb.component';
 import { PublicacionesService } from '../../../../core/services/publicaciones.service';
 import { UserService } from '../../../../core/services/user.service';
-import { Publicacion } from '../../../../models/publicacion';
+import { Publicacion, Comentario } from '../../../../models/publicacion';
+import { ReportesService } from '../../../../core/services/reportes.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -23,7 +24,8 @@ export class DetalleAyudantiaComponent implements OnInit {
     private publicacionesService: PublicacionesService,
     private userService: UserService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +64,18 @@ export class DetalleAyudantiaComponent implements OnInit {
     if (!this.publicacion.comentarios) this.publicacion.comentarios = [];
     this.publicacion.comentarios.push(nuevoComentario);
     this.comentarioForm.reset();
+  }
+
+  reportarPublicacion(): void {
+    if (this.publicacion) {
+      this.reportesService.reportarPublicacion('ayudantias', this.publicacion);
+    }
+  }
+
+  reportarComentario(comentario: Comentario): void {
+    if (this.publicacion) {
+      this.reportesService.reportarComentario('ayudantias', this.publicacion.id, comentario);
+    }
   }
 
   volver(): void {
