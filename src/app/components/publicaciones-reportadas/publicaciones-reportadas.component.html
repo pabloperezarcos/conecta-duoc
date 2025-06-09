@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Reportes de la comunidad</h2>
+
+  <div *ngIf="!publicacionesReportadas.length && !comentariosReportados.length" class="alert alert-info">
+    No hay reportes pendientes.
+  </div>
+
+  <div *ngIf="publicacionesReportadas.length">
+    <h4>Publicaciones reportadas</h4>
+    <ul class="list-group mb-4">
+      <li *ngFor="let rep of publicacionesReportadas" class="list-group-item">
+        <strong>[{{ rep.categoria }}]</strong>
+        {{ rep.publicacion.titulo }} - {{ rep.publicacion.autor }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="comentariosReportados.length">
+    <h4>Comentarios reportados</h4>
+    <ul class="list-group">
+      <li *ngFor="let rep of comentariosReportados" class="list-group-item">
+        <strong>[{{ rep.categoria }} #{{ rep.publicacionId }}]</strong>
+        {{ rep.comentario.texto }} - {{ rep.comentario.autor }}
+      </li>
+    </ul>
+  </div>
+</div>

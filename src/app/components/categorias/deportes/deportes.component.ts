@@ -5,6 +5,7 @@ import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 import { PublicacionesService } from '../../../core/services/publicaciones.service';
 import { UserService } from '../../../core/services/user.service';
 import { Publicacion } from '../../../models/publicacion';
+import { ReportesService } from '../../../core/services/reportes.service';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -28,7 +29,8 @@ export class DeportesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private publicacionesService: PublicacionesService,
-    private userService: UserService
+    private userService: UserService,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit(): void {
@@ -106,6 +108,10 @@ export class DeportesComponent implements OnInit {
     if (!pub.comentarios) pub.comentarios = [];
     pub.comentarios.push(nuevoComentario);
     form.reset();
+  }
+
+  reportarPublicacion(pub: Publicacion): void {
+    this.reportesService.reportarPublicacion('deportes', pub);
   }
 
   get publicacionesFiltradas(): Publicacion[] {

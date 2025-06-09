@@ -6,9 +6,14 @@
         <h2 class="fw-bold mb-0 text-dark">
             {{ publicacion?.titulo }}
         </h2>
-        <button class="btn btn-outline-secondary btn-sm" (click)="volver()">
-            ← Volver
-        </button>
+        <div>
+            <button class="btn btn-link text-danger btn-sm me-2" (click)="reportarPublicacion()">
+                <i class="fas fa-flag"></i>
+            </button>
+            <button class="btn btn-outline-secondary btn-sm" (click)="volver()">
+                ← Volver
+            </button>
+        </div>
     </div>
 
     <!-- Detalle de publicación -->
@@ -36,6 +41,9 @@
                         <span class="text-muted">{{ com.fecha | date:'dd/MM/yyyy HH:mm' }}</span>
                     </div>
                     <p class="mb-1 small">{{ com.texto }}</p>
+                    <button class="btn btn-link text-danger btn-sm p-0" (click)="reportarComentario(com)">
+                        <i class="fas fa-flag"></i>
+                    </button>
                 </div>
             </div>
 
