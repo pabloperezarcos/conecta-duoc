@@ -1,6 +1,19 @@
-import { Routes } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
+import { inject } from '@angular/core';
+
+const reglasAceptadasGuard = () => {
+    const router = inject(Router);
+    const aceptadas = localStorage.getItem('conectaReglasAceptadas') === 'true';
+
+    if (!aceptadas) {
+        router.navigate(['/reglas-de-la-comunidad']);
+        return false;
+    }
+
+    return true;
+};
 
 export const routes: Routes = [
     {
@@ -19,7 +32,7 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         loadComponent: () => import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
@@ -88,6 +101,13 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         data: { showNavbar: true, showFooter: true }
     },
+    {
+        path: 'reglas-de-la-comunidad',
+        loadComponent: () => import('./components/reglas-de-la-comunidad/reglas-de-la-comunidad.component').then(m => m.ReglasDeLaComunidadComponent),
+        canActivate: [AuthGuard],
+        data: { showNavbar: true, showFooter: true }
+    }
+    ,
     {
         path: '**',
         redirectTo: ''

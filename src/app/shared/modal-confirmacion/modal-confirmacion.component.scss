@@ -1,0 +1,47 @@
+@use 'styles' as *;
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modal-box {
+        background-color: $blanco;
+        border-radius: 16px;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+        h2 {
+            font-size: 1.5rem;
+            color: $negro;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: $gris;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .acciones {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+
+            .btn {
+                min-width: 140px;
+            }
+        }
+    }
+}

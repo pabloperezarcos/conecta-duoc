@@ -1,13 +1,10 @@
 <nav class="navbar">
     <div class="container d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-2">
+
+        <div routerLink="/dashboard" class="d-flex align-items-center gap-2">
             <img src="assets/logo/logo.png" alt="Logo ConectaDuoc" class="logo">
             <span class="titulo d-none d-md-block">ConectaDuoc</span>
         </div>
-
-        <a class="text-white text-decoration-none me-4" routerLink="/dashboard">
-            <i class="fas fa-home me-1"></i> Inicio
-        </a>
 
         <div class="d-flex align-items-center gap-3">
             <span class="usuario">👤 {{ username }}</span>
@@ -19,3 +16,7 @@
 
     </div>
 </nav>
+
+<app-modal-confirmacion [visible]="mostrarModalLogout" titulo="¿Cerrar sesión?"
+    mensaje="¿Estás seguro que deseas cerrar tu sesión de ConectaDuoc?" (confirmar)="confirmarLogout()"
+    (cancelar)="cancelarLogout()"></app-modal-confirmacion>

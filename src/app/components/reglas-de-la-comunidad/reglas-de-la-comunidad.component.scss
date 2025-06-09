@@ -1,0 +1,126 @@
+@use 'styles' as *;
+
+.reglas-wrapper {
+    background-color: $blanco;
+    color: $negro;
+    flex: 1;
+
+    .reglas-container {
+        max-width: 920px;
+        margin: auto;
+        background-color: $blanco;
+        border-radius: 16px;
+        padding: 3rem 2rem;
+        box-shadow: 0 0 14px rgba(0, 0, 0, 0.06);
+    }
+
+    .titulo {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: $negro;
+        border-left: 8px solid $amarillo;
+        padding-left: 1rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .intro {
+        font-size: 1.15rem;
+        color: $gris;
+        line-height: 1.7;
+    }
+
+    .regla {
+        margin-bottom: 2rem;
+
+        .regla-titulo {
+            font-weight: 600;
+            color: $negro;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .regla-texto {
+            font-size: 1.05rem;
+            color: $gris;
+            line-height: 1.6;
+        }
+    }
+
+    .final {
+        font-size: 1rem;
+        font-style: italic;
+        color: $gris;
+        text-align: center;
+        margin-top: 3rem;
+    }
+
+    .btn-amarillo {
+        background-color: $amarillo;
+        color: $negro-puro;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 12px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darken($amarillo, 7%);
+            cursor: pointer;
+        }
+    }
+
+    .btn-outline-dark {
+        border: 2px solid $negro;
+        color: $negro;
+        font-weight: 500;
+        padding: 0.7rem 1.4rem;
+        border-radius: 12px;
+        background-color: transparent;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: $negro;
+            color: $blanco;
+        }
+    }
+
+    .acciones-botones {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem; // separación profesional entre botones
+        flex-wrap: wrap;
+        margin-top: 2rem;
+
+        button {
+            min-width: 180px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-amarillo {
+            background-color: $amarillo;
+            color: $negro-puro;
+            border: none;
+
+            &:hover {
+                background-color: darken($amarillo, 10%);
+            }
+        }
+
+        .btn-outline-dark {
+            background-color: transparent;
+            border: 2px solid $negro;
+            color: $negro;
+
+            &:hover {
+                background-color: $negro;
+                color: $blanco;
+            }
+        }
+    }
+
+
+}
