@@ -1,29 +1,49 @@
 <div class="container mt-4">
     <app-breadcrumb></app-breadcrumb>
 
-    <div class="perfil-box p-4 shadow-sm mb-4">
-        <h4 class="mb-3">Mi Perfil</h4>
-        <p><strong>Correo:</strong> {{ correo }}</p>
-        <p><strong>Rol:</strong> {{ rol }}</p>
-        <p>
-            <strong>Sede:</strong>
-            <select class="form-select form-select-sm d-inline w-auto" title="Selecciona sede" [(ngModel)]="sede"
-                (change)="guardarSede()">
-                <option *ngFor="let s of sedes" [value]="s">{{ s }}</option>
-            </select>
-        </p>
+    <!-- PERFIL PRINCIPAL -->
+    <div class="perfil-header d-flex align-items-center gap-4 shadow-sm p-4 mb-4 rounded bg-white">
+        <div class="avatar rounded-circle d-flex justify-content-center align-items-center">
+            <ng-container *ngIf="avatarUrl; else letraAvatar">
+                <img [src]="avatarUrl" class="img-fluid rounded-circle" alt="Avatar" />
+            </ng-container>
+            <ng-template #letraAvatar>
+                {{ nombre ? nombre.charAt(0).toUpperCase() : '?' }}
+            </ng-template>
+        </div>
+
+        <div class="flex-grow-1">
+            <h4 class="mb-1">{{ nombre || 'Mi Perfil' }}</h4>
+            <p class="mb-1"><strong>Correo:</strong> {{ correo }}</p>
+            <p class="mb-1"><strong>Rol:</strong> {{ rol }}</p>
+            <p class="mb-0">
+                <strong>Sede:</strong>
+                <select class="form-select form-select-sm d-inline w-auto" [(ngModel)]="sede" (change)="guardarSede()">
+                    <option *ngFor="let s of sedes" [value]="s">{{ s }}</option>
+                </select>
+            </p>
+        </div>
+        <div>
+            <button class="btn btn-sm btn-outline-primary" disabled>
+                <i class="fas fa-edit me-1"></i> Editar Perfil
+            </button>
+        </div>
     </div>
 
-    <div class="shadow-sm p-4 bg-white rounded">
-        <h5 class="mb-3">Mis publicaciones</h5>
-
-        <div class="stats-box bg-light p-3 rounded mb-4">
-            <h6 class="mb-2">Estadísticas personales</h6>
+    <!-- ESTADÍSTICAS -->
+    <div class="bg-white shadow-sm p-4 rounded mb-4">
+        <h5 class="mb-3">Estadísticas personales</h5>
+        <div class="stats-box bg-light p-3 rounded">
             <ul class="list-unstyled mb-0 small">
-                <li><i class="fas fa-bullhorn me-1"></i> Publicaciones: {{ publicacionesPropias.length }}</li>
-                <li><i class="fas fa-comments me-1"></i> Comentarios recibidos: {{ totalComentarios }}</li>
+                <li><i class="fas fa-bullhorn me-2"></i>Publicaciones: {{ publicacionesPropias.length }}</li>
+                <li><i class="fas fa-comments me-2"></i>Comentarios recibidos: {{ totalComentarios }}</li>
             </ul>
         </div>
+    </div>
+
+    <!-- PUBLICACIONES -->
+    <div class="bg-white shadow-sm p-4 rounded">
+        <h5 class="mb-3">Mis publicaciones</h5>
 
         <div *ngIf="!publicacionesPropias.length" class="alert alert-info">
             <p>Aún no has publicado nada.</p>

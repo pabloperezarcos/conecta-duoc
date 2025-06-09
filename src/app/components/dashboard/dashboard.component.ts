@@ -51,7 +51,8 @@ export class DashboardComponent implements OnInit {
       descripcion: 'Administra los reportes enviados por la comunidad.',
       icono: 'fas fa-flag',
       ruta: '/dashboard/reportes',
-      adminOnly: true
+      adminOnly: true,
+      colorClass: 'text-danger' 
     }
   ];
 

@@ -20,6 +20,8 @@ export class PerfilComponent implements OnInit {
   sede: string = '';
   publicacionesPropias: Publicacion[] = [];
   totalComentarios = 0;
+  nombre: string | null = '';
+  avatarUrl: string | null = null; 
 
   sedes: string[] = [
     'Modalidad online',
@@ -54,6 +56,7 @@ export class PerfilComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.nombre = this.userService.getNombre(); 
     this.correo = this.userService.getUsername();
     this.rol = this.userService.getRole();
     this.sede = localStorage.getItem('sede') || 'Sin asignar';
