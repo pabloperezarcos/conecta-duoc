@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ModalConfirmacionComponent } from '../shared/modal-confirmacion/modal-confirmacion.component';
+import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/modal-confirmacion.component';
 
 @Component({
   selector: 'app-reglas-de-la-comunidad',
