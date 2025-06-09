@@ -1,10 +1,12 @@
 @use 'styles' as *;
 
+// CONTENEDOR PRINCIPAL LOGIN
 .login-container {
     background-color: $negro;
     padding: 2rem;
 }
 
+// TARJETA LOGIN
 .login-card {
     width: 100%;
     max-width: 400px;
@@ -17,8 +19,17 @@
         background-color: $amarillo;
         padding: 2rem 1rem;
 
+        .logo-wrapper {
+            background-color: $blanco;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
         .logo {
-            width: 60px;
+            width: 90px;
+            height: auto;
         }
 
         .titulo {
@@ -62,4 +73,20 @@
         background-color: transparent;
         padding: 1rem 1.5rem;
     }
+}
+
+// CLASES GLOBALES (NO ANIDADAS)
+.bg-amarillo {
+    background-color: #f4b942;
+}
+
+.titulo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000;
+}
+
+.logo {
+    height: 48px;
+    width: auto;
 }

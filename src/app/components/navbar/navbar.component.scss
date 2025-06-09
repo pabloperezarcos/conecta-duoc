@@ -5,8 +5,17 @@
     color: $blanco;
     padding: 1rem 2rem;
 
+    .logo-wrapper {
+        background-color: $blanco;
+        padding: 0.35rem;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(255, 255, 255, 0.15);
+    }
+
     .logo {
-        height: 36px;
+        height: 45px;
+        width: auto;
     }
 
     .titulo {
