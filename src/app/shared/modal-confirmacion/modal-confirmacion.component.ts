@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./modal-confirmacion.component.scss']
 })
 export class ModalConfirmacionComponent {
-  @Input() titulo = '¿Estás seguro de que no deseas aceptar las reglas de la comunidad?\n\nSin aceptarlas, no podrás usar la plataforma.';
+  @Input() titulo = '¿Estás seguro?';
   @Input() mensaje = '';
   @Input() visible = false;
 
