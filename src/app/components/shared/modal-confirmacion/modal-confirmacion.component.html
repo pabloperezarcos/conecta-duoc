@@ -1,0 +1,10 @@
+<div class="modal-overlay" *ngIf="visible">
+    <div class="modal-box">
+        <h2>{{ titulo }}</h2>
+        <p>{{ mensaje }}</p>
+        <div class="acciones">
+            <button class="btn btn-outline-dark" (click)="cancelar.emit()">Cancelar</button>
+            <button class="btn btn-amarillo" (click)="confirmar.emit()">Sí, cerrar sesión</button>
+        </div>
+    </div>
+</div>
