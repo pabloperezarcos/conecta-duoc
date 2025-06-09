@@ -2,15 +2,18 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ModalConfirmacionComponent } from '../shared/modal-confirmacion/modal-confirmacion.component';
 
 @Component({
   selector: 'app-reglas-de-la-comunidad',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalConfirmacionComponent],
   templateUrl: './reglas-de-la-comunidad.component.html',
   styleUrl: './reglas-de-la-comunidad.component.scss'
 })
 export class ReglasDeLaComunidadComponent {
+  mostrarModal = false;
+
   constructor(private router: Router) { }
 
   reglas = [
@@ -64,4 +67,36 @@ export class ReglasDeLaComunidadComponent {
     localStorage.setItem('conectaReglasAceptadas', 'true');
     this.router.navigate(['/dashboard']);
   }
+
+  /*  
+   rechazarReglas() {
+      const confirmar = confirm(
+        '¿Estás seguro de que no deseas aceptar las reglas de la comunidad?\n\nSin aceptarlas, no podrás usar la plataforma.'
+      );
+      if (confirmar) {
+        localStorage.removeItem('conectaReglasAceptadas');
+        localStorage.removeItem('token');
+        localStorage.clear();
+        sessionStorage.clear();
+        this.router.navigate(['/login']);
+      }
+    } 
+  */
+
+  rechazarReglas() {
+    this.mostrarModal = true;
+  }
+
+  confirmarRechazo() {
+    localStorage.removeItem('conectaReglasAceptadas');
+    localStorage.removeItem('token');
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
+  cancelarRechazo() {
+    this.mostrarModal = false;
+  }
+
 }

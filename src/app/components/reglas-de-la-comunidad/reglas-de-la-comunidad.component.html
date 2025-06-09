@@ -20,12 +20,15 @@
             </p>
         </div>
 
-
-        <div class="text-center mt-5">
+        <div class="acciones-botones mt-5">
             <button class="btn btn-amarillo" (click)="aceptarReglas()">Estoy de acuerdo</button>
+            <button class="btn btn-outline-dark" (click)="rechazarReglas()">No estoy de acuerdo</button>
         </div>
 
-        
     </div>
 
 </div>
+
+<app-modal-confirmacion [visible]="mostrarModal" titulo="¿Estás seguro de rechazar las reglas?"
+    mensaje="Si no aceptas las Reglas de la Comunidad, tu sesión se cerrará y no podrás usar la plataforma."
+    (confirmar)="confirmarRechazo()" (cancelar)="cancelarRechazo()"></app-modal-confirmacion>
