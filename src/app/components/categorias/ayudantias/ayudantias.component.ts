@@ -21,7 +21,7 @@ export class AyudantiasComponent implements OnInit {
   form!: FormGroup;
   mostrarFormulario = false;
   publicaciones: Post[] = [];
-  filtroBusqueda: string = '';
+  filtroBusqueda = '';
   idCategoryAyudantia: number | null = null;
   loading = false;
 

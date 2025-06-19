@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class RoleService {
 
-  constructor() { }
-
   // Obtener el rol actual desde localStorage
   getRole(): string | null {
     return localStorage.getItem('userRole');

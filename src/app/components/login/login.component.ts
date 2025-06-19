@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.msalService.loginPopup().subscribe({
-      next: (result) => {
+      next: () => {
         const account = this.msalService.instance.getAllAccounts()[0];
         this.msalService.instance.setActiveAccount(account);
 

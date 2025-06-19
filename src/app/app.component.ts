@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Data, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { filter, map, mergeMap } from 'rxjs';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
