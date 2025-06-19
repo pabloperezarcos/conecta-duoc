@@ -9,18 +9,18 @@
 
     <form [formGroup]="registerForm" (ngSubmit)="guardarRegistro()">
       <div class="mb-3">
-        <label class="fw-bold">Email</label>
-        <input class="form-control campo-readonly" [value]="email" readonly />
+        <label for="email" class="fw-bold">Email</label>
+        <input id="email" class="form-control campo-readonly" [value]="email" readonly />
       </div>
 
       <div class="mb-3">
-        <label class="fw-bold">Nombre completo</label>
-        <input class="form-control campo-readonly" [value]="name" readonly />
+        <label for="name" class="fw-bold">Nombre completo</label>
+        <input id="name" class="form-control campo-readonly" [value]="name" readonly />
       </div>
 
       <div class="mb-3">
-        <label class="fw-bold">Sede</label>
-        <select formControlName="center" class="form-select">
+        <label for="center" class="fw-bold">Sede</label>
+        <select id="center" class="form-select">
           <option value="" disabled selected>Seleccione su sede</option>
           @for (s of sedes; track s) {
             <option [value]="s">{{ s }}</option>

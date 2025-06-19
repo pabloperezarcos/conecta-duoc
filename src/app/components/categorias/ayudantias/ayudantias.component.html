@@ -39,13 +39,13 @@
   @if (mostrarFormulario) {
     <form (ngSubmit)="crearPublicacion()" [formGroup]="form" class="mb-4">
       <div class="mb-3">
-        <label>Título</label>
-        <input formControlName="titulo" class="form-control" placeholder="Ej: Ayuda con matemáticas" />
+        <label for="titulo">Título</label>
+        <input id="titulo" formControlName="titulo" class="form-control" placeholder="Ej: Ayuda con matemáticas" />
       </div>
       <div class="mb-3">
-        <label>Descripción</label>
-        <textarea formControlName="descripcion" class="form-control" rows="4"
-        placeholder="Detalle de la ayudantía..."></textarea>
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="4"
+        placeholder="Detalle de la actividad..."></textarea>
       </div>
     </form>
   }

@@ -93,6 +93,8 @@ export class VoluntariadoComponent implements OnInit {
 
   reportarPublicacion(pub: Post): void {
     this.reportService.reportPost(pub.idPost, 'Contenido inapropiado').subscribe(() => {
+      // Por implementar: mostrar mensaje de éxito
+      console.log('Publicación reportada con éxito');
     });
   }
 
