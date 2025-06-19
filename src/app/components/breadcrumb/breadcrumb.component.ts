@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
-  items: { label: string; path?: string }[] = [];
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  items: { label: string; path?: string }[] = [];
 
   ngOnInit(): void {
     const fullPath = this.router.url.split('?')[0];

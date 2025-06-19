@@ -1,7 +1,11 @@
-<app-navbar *ngIf="mostrarNavbar"></app-navbar>
+@if (mostrarNavbar) {
+  <app-navbar></app-navbar>
+}
 
 <div class="flex-fill d-flex flex-column">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 
-<app-footer *ngIf="mostrarFooter"></app-footer>
+@if (mostrarFooter) {
+  <app-footer></app-footer>
+}

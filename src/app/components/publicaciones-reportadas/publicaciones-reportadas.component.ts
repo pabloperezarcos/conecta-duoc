@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReportesService, ReportePublicacion, ReporteComentario } from '../../core/services/reportes.service';
+import { ReportService } from '../../core/services/report.service';
+import { Report } from '../../models/report';
 
 @Component({
   selector: 'app-publicaciones-reportadas',
@@ -10,13 +11,25 @@ import { ReportesService, ReportePublicacion, ReporteComentario } from '../../co
   styleUrls: ['./publicaciones-reportadas.component.scss']
 })
 export class PublicacionesReportadasComponent implements OnInit {
-  publicacionesReportadas: ReportePublicacion[] = [];
-  comentariosReportados: ReporteComentario[] = [];
+  private reportService = inject(ReportService);
 
-  constructor(private reportesService: ReportesService) {}
+  postReports: Report[] = [];
+  commentReports: Report[] = [];
+  loading = true;
 
   ngOnInit(): void {
-    this.publicacionesReportadas = this.reportesService.getPublicacionesReportadas();
-    this.comentariosReportados = this.reportesService.getComentariosReportados();
+    this.reportService.getAllReports().subscribe({
+      next: (reports: Report[]) => {
+        // Reportes de publicaciones
+        this.postReports = reports.filter(r => r.idPost && !r.idComment);
+        // Reportes de comentarios
+        this.commentReports = reports.filter(r => r.idComment);
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar reportes:', error);
+        this.loading = false;
+      }
+    });
   }
 }

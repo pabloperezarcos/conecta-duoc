@@ -1,0 +1,62 @@
+@use 'styles' as *;
+@use 'sass:color';
+
+.registro-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $blanco;
+}
+
+.container {
+    padding-bottom: 0 !important;
+}
+
+.registro-card {
+    max-width: 400px;
+    border-radius: 1.25rem;
+    border: none;
+    background: $blanco;
+    border-top: 5px solid $amarillo;
+}
+
+.logo-registro {
+    height: 60px;
+}
+
+.titulo-registro {
+    color: $amarillo;
+}
+
+label {
+    color: $negro;
+}
+
+.campo-readonly {
+    background: #f9fafb !important;
+    color: $gris !important;
+    font-weight: 600;
+}
+
+.form-select:invalid {
+    color: $gris;
+    font-style: italic;
+}
+
+.boton-registro {
+    background-color: $amarillo !important;
+    border: none !important;
+    color: $negro !important;
+    transition: background 0.2s;
+
+    &:hover {
+        background-color: color.adjust($amarillo, $lightness: -10%) !important;
+        color: $negro !important;
+    }
+}
+
+
+.text-center a {
+    font-size: 0.95rem;
+}

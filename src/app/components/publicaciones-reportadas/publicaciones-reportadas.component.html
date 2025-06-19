@@ -1,27 +1,59 @@
 <div class="container mt-4">
   <h2 class="mb-4">Reportes de la comunidad</h2>
 
-  <div *ngIf="!publicacionesReportadas.length && !comentariosReportados.length" class="alert alert-info">
-    No hay reportes pendientes.
-  </div>
+  @if (loading) {
+    <div class="text-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">Cargando reportes...</p>
+    </div>
+  }
 
-  <div *ngIf="publicacionesReportadas.length">
-    <h4>Publicaciones reportadas</h4>
-    <ul class="list-group mb-4">
-      <li *ngFor="let rep of publicacionesReportadas" class="list-group-item">
-        <strong>[{{ rep.categoria }}]</strong>
-        {{ rep.publicacion.titulo }} - {{ rep.publicacion.autor }}
-      </li>
-    </ul>
-  </div>
+  @if (!loading && !postReports.length && !commentReports.length) {
+    <div class="alert alert-info">
+      No hay reportes pendientes.
+    </div>
+  }
 
-  <div *ngIf="comentariosReportados.length">
-    <h4>Comentarios reportados</h4>
-    <ul class="list-group">
-      <li *ngFor="let rep of comentariosReportados" class="list-group-item">
-        <strong>[{{ rep.categoria }} #{{ rep.publicacionId }}]</strong>
-        {{ rep.comentario.texto }} - {{ rep.comentario.autor }}
-      </li>
-    </ul>
-  </div>
+  @if (postReports.length) {
+    <div>
+      <h4 class="mb-3">Publicaciones reportadas</h4>
+      <ul class="list-group mb-4">
+        @for (rep of postReports; track rep) {
+          <li class="list-group-item">
+            <div>
+              <strong>Publicación #{{ rep.idPost }}</strong>
+              @if (!rep.status) {
+                <span class="badge bg-warning text-dark ms-2">Resuelto</span>
+              }
+            </div>
+            <div><span class="text-muted">Motivo:</span> {{ rep.reason }}</div>
+            <div><span class="text-muted">Fecha:</span> {{ rep.date | date:'short' }}</div>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (commentReports.length) {
+    <div>
+      <h4 class="mb-3">Comentarios reportados</h4>
+      <ul class="list-group">
+        @for (rep of commentReports; track rep) {
+          <li class="list-group-item">
+            <div>
+              <strong>Comentario #{{ rep.idComment }}</strong>
+              @if (!rep.status) {
+                <span class="badge bg-warning text-dark ms-2">Resuelto</span>
+              }
+            </div>
+            <div><span class="text-muted">Motivo:</span> {{ rep.reason }}</div>
+            <div><span class="text-muted">Fecha:</span> {{ rep.date | date:'short' }}</div>
+            <!-- Aquí podrías mostrar un preview del comentario si lo tienes disponible -->
+          </li>
+        }
+      </ul>
+    </div>
+  }
 </div>

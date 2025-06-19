@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/modal-confirmacion.component';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-reglas-de-la-comunidad',
   standalone: true,
-  imports: [CommonModule, FormsModule, ModalConfirmacionComponent],
+  imports: [FormsModule, ModalConfirmacionComponent],
   templateUrl: './reglas-de-la-comunidad.component.html',
-  styleUrl: './reglas-de-la-comunidad.component.scss'
+  styleUrls: ['./reglas-de-la-comunidad.component.scss']
 })
 export class ReglasDeLaComunidadComponent {
   mostrarModal = false;
-
-  constructor(private router: Router) { }
+  private userService = inject(UserService);
+  private router = inject(Router);
 
   reglas = [
     {
@@ -64,24 +65,22 @@ export class ReglasDeLaComunidadComponent {
   ];
 
   aceptarReglas() {
-    localStorage.setItem('conectaReglasAceptadas', 'true');
-    this.router.navigate(['/dashboard']);
+    // Llamamos al backend para marcar "policies" como true
+    const email = this.userService.getAzureUser()?.email;
+    if (email) {
+      this.userService.getUser(email).subscribe(user => {
+        const updatedUser = { ...user, policies: true };
+        this.userService.registerUser(updatedUser).subscribe(() => {
+          localStorage.setItem('conectaReglasAceptadas', 'true');
+          this.router.navigate(['/dashboard']);
+        });
+      });
+    } else {
+      // Fallback: solo localStorage (en caso de error raro)
+      localStorage.setItem('conectaReglasAceptadas', 'true');
+      this.router.navigate(['/dashboard']);
+    }
   }
-
-  /*  
-   rechazarReglas() {
-      const confirmar = confirm(
-        '¿Estás seguro de que no deseas aceptar las reglas de la comunidad?\n\nSin aceptarlas, no podrás usar la plataforma.'
-      );
-      if (confirmar) {
-        localStorage.removeItem('conectaReglasAceptadas');
-        localStorage.removeItem('token');
-        localStorage.clear();
-        sessionStorage.clear();
-        this.router.navigate(['/login']);
-      }
-    } 
-  */
 
   rechazarReglas() {
     this.mostrarModal = true;
@@ -89,8 +88,8 @@ export class ReglasDeLaComunidadComponent {
 
   confirmarRechazo() {
     localStorage.removeItem('conectaReglasAceptadas');
-    localStorage.removeItem('token');
-    localStorage.clear();
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('name');
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }

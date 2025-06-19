@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'styles' as *;
 
 h2 {
@@ -31,6 +32,6 @@ button.btn-warning {
     padding: 0.5rem 1rem;
 
     &:hover {
-        background-color: darken($amarillo, 10%);
+        background-color: color.adjust($amarillo, $lightness: -10%);
     }
 }
