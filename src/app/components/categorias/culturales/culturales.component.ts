@@ -21,7 +21,7 @@ export class CulturalesComponent implements OnInit {
   form!: FormGroup;
   mostrarFormulario = false;
   publicaciones: Post[] = [];
-  filtroBusqueda: string = '';
+  filtroBusqueda = '';
   idCategoryCultural: number | null = null;
   loading = false;
 

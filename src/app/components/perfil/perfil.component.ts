@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 export class PerfilComponent implements OnInit {
   user: User | null = null;
   posts: Post[] = [];
-  sede: string = '';
+  sede = '';
   sedes: string[] = [
     'Modalidad online',
     'Campus Virtual',

@@ -21,7 +21,7 @@ export class TruequesComponent implements OnInit {
   form!: FormGroup;
   mostrarFormulario = false;
   publicaciones: Post[] = [];
-  filtroBusqueda: string = '';
+  filtroBusqueda = '';
   idCategoryTrueque: number | null = null;
   loading = false;
 

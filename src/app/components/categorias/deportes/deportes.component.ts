@@ -21,7 +21,7 @@ export class DeportesComponent implements OnInit {
   form!: FormGroup;
   mostrarFormulario = false;
   publicaciones: Post[] = [];
-  filtroBusqueda: string = '';
+  filtroBusqueda = '';
   idCategoryDeporte: number | null = null;
   loading = false;
 

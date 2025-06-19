@@ -21,7 +21,7 @@ export class VoluntariadoComponent implements OnInit {
   form!: FormGroup;
   mostrarFormulario = false;
   publicaciones: Post[] = [];
-  filtroBusqueda: string = '';
+  filtroBusqueda = '';
   idCategoryVoluntariado: number | null = null;
   loading = false;
 

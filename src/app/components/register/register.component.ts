@@ -14,8 +14,8 @@ import { User } from '../../models/user';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  email: string = '';
-  name: string = '';
+  email = '';
+  name = '';
   sedes: string[] = [
     'Modalidad online', 'Campus Virtual', 'Sede Alameda', 'Sede Padre Alonso de Ovalle',
     'Sede Antonio Varas', 'Sede Educación Continua', 'Sede Maipú', 'Sede Melipilla',
