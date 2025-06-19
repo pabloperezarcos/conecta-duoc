@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/modal-confirmacion.component';
@@ -8,7 +8,7 @@ import { UserService } from '../../core/services/user.service';
 @Component({
   selector: 'app-reglas-de-la-comunidad',
   standalone: true,
-  imports: [CommonModule, FormsModule, ModalConfirmacionComponent],
+  imports: [FormsModule, ModalConfirmacionComponent],
   templateUrl: './reglas-de-la-comunidad.component.html',
   styleUrls: ['./reglas-de-la-comunidad.component.scss']
 })

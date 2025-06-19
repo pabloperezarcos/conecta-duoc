@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
@@ -9,7 +9,7 @@ import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/moda
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, ModalConfirmacionComponent],
+  imports: [RouterLink, ModalConfirmacionComponent],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })

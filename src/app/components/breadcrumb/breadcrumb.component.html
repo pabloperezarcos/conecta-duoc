@@ -1,12 +1,14 @@
 <nav aria-label="breadcrumb" class="breadcrumb-container">
-    <ol class="breadcrumb m-0">
-        <li *ngFor="let item of items; let last = last" class="breadcrumb-item" [class.active]="last">
-            <ng-container *ngIf="!last && item.path">
-                <a [routerLink]="item.path">{{ item.label }}</a>
-            </ng-container>
-            <ng-container *ngIf="last || !item.path">
-                {{ item.label }}
-            </ng-container>
-        </li>
-    </ol>
+  <ol class="breadcrumb m-0">
+    @for (item of items; track item; let last = $last) {
+      <li class="breadcrumb-item" [class.active]="last">
+        @if (!last && item.path) {
+          <a [routerLink]="item.path">{{ item.label }}</a>
+        }
+        @if (last || !item.path) {
+          {{ item.label }}
+        }
+      </li>
+    }
+  </ol>
 </nav>

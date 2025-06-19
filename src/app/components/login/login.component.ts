@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { User } from '../../models/user';
@@ -8,7 +8,7 @@ import { User } from '../../models/user';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

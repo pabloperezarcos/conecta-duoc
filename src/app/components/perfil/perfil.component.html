@@ -1,60 +1,68 @@
 <div class="container mt-4">
-    <app-breadcrumb></app-breadcrumb>
+  <app-breadcrumb></app-breadcrumb>
 
-    <!-- PERFIL PRINCIPAL -->
-    <div class="perfil-header d-flex align-items-center gap-4 shadow-sm p-4 mb-4 rounded bg-white">
-        <div class="avatar rounded-circle d-flex justify-content-center align-items-center fs-2 bg-primary text-white"
-            style="width:60px; height:60px;">
-            {{ getUserInitial() }}
-        </div>
+  <!-- PERFIL PRINCIPAL -->
+  <div class="perfil-header d-flex align-items-center gap-4 shadow-sm p-4 mb-4 rounded bg-white">
+    <div class="avatar rounded-circle d-flex justify-content-center align-items-center fs-2 bg-primary text-white"
+      style="width:60px; height:60px;">
+      {{ getUserInitial() }}
+    </div>
 
-        <div class="flex-grow-1">
-            <h4 class="mb-1">{{ user?.name || 'Mi Perfil' }}</h4>
-            <p class="mb-1"><strong>Correo:</strong> {{ user?.email }}</p>
-            <p class="mb-1"><strong>Rol:</strong> {{ user?.role }}</p>
-            <p class="mb-0">
-                <strong>Sede:</strong>
-                <select class="form-select form-select-sm d-inline w-auto" [(ngModel)]="sede" (change)="guardarSede()">
-                    <option *ngFor="let s of sedes" [value]="s">{{ s }}</option>
-                </select>
-            </p>
-        </div>
-        <div>
-            <button class="btn btn-sm btn-outline-primary" disabled>
-                <i class="fas fa-edit me-1"></i> Editar Perfil
+    <div class="flex-grow-1">
+      <h4 class="mb-1">{{ user?.name || 'Mi Perfil' }}</h4>
+      <p class="mb-1"><strong>Correo:</strong> {{ user?.email }}</p>
+      <p class="mb-1"><strong>Rol:</strong> {{ user?.role }}</p>
+      <p class="mb-0">
+        <strong>Sede:</strong>
+        <select class="form-select form-select-sm d-inline w-auto" [(ngModel)]="sede" (change)="guardarSede()">
+          @for (s of sedes; track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+      </p>
+    </div>
+    <div>
+      <button class="btn btn-sm btn-outline-primary" disabled>
+        <i class="fas fa-edit me-1"></i> Editar Perfil
+      </button>
+    </div>
+  </div>
+
+  <!-- ESTADÍSTICAS -->
+  <div class="bg-white shadow-sm p-4 rounded mb-4">
+    <h5 class="mb-3">Estadísticas personales</h5>
+    <div class="stats-box bg-light p-3 rounded">
+      <ul class="list-unstyled mb-0 small">
+        <li><i class="fas fa-bullhorn me-2"></i>Publicaciones: {{ totalPosts }}</li>
+        <li><i class="fas fa-comments me-2"></i>Comentarios recibidos: {{ totalComments }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PUBLICACIONES -->
+  <div class="bg-white shadow-sm p-4 rounded">
+    <h5 class="mb-3">Mis publicaciones</h5>
+
+    @if (!posts.length) {
+      <div class="alert alert-info">
+        <p>Aún no has publicado nada.</p>
+      </div>
+    }
+
+    @if (posts.length) {
+      <ul class="list-group">
+        @for (pub of posts; track pub) {
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ pub.title }}</strong>
+              <div class="small text-muted">{{ pub.date | date:'dd/MM/yyyy' }}</div>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary" (click)="editar(pub)">
+              <i class="fas fa-edit"></i> Editar
             </button>
-        </div>
-    </div>
-
-    <!-- ESTADÍSTICAS -->
-    <div class="bg-white shadow-sm p-4 rounded mb-4">
-        <h5 class="mb-3">Estadísticas personales</h5>
-        <div class="stats-box bg-light p-3 rounded">
-            <ul class="list-unstyled mb-0 small">
-                <li><i class="fas fa-bullhorn me-2"></i>Publicaciones: {{ totalPosts }}</li>
-                <li><i class="fas fa-comments me-2"></i>Comentarios recibidos: {{ totalComments }}</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- PUBLICACIONES -->
-    <div class="bg-white shadow-sm p-4 rounded">
-        <h5 class="mb-3">Mis publicaciones</h5>
-
-        <div *ngIf="!posts.length" class="alert alert-info">
-            <p>Aún no has publicado nada.</p>
-        </div>
-
-        <ul class="list-group" *ngIf="posts.length">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let pub of posts">
-                <div>
-                    <strong>{{ pub.title }}</strong>
-                    <div class="small text-muted">{{ pub.date | date:'dd/MM/yyyy' }}</div>
-                </div>
-                <button class="btn btn-sm btn-outline-secondary" (click)="editar(pub)">
-                    <i class="fas fa-edit"></i> Editar
-                </button>
-            </li>
-        </ul>
-    </div>
+          </li>
+        }
+      </ul>
+    }
+  </div>
 </div>

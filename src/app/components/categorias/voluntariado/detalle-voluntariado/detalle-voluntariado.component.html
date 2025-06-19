@@ -1,70 +1,75 @@
 <div class="container mt-4">
-    <app-breadcrumb></app-breadcrumb>
+  <app-breadcrumb></app-breadcrumb>
 
-    <!-- Título principal -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="fw-bold mb-0 text-dark">
-            {{ post?.title }}
-        </h2>
+  <!-- Título principal -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="fw-bold mb-0 text-dark">
+      {{ post?.title }}
+    </h2>
+    <div>
+      <button class="btn btn-link text-danger btn-sm me-2" (click)="reportarPublicacion()" [disabled]="!post">
+        <i class="fas fa-flag"></i>
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" (click)="volver()">
+        ← Volver
+      </button>
+    </div>
+  </div>
+
+  <!-- Detalle de publicación -->
+  @if (post) {
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-body">
+        <p class="fs-5 text-muted">{{ post.content }}</p>
+      </div>
+      <div class="card-footer bg-white text-muted small d-flex justify-content-between">
+        <span><i class="fas fa-user"></i> {{ post.idUser }}</span>
+        <span><i class="fas fa-calendar-alt"></i> {{ post.date | date:'fullDate' }}</span>
+      </div>
+    </div>
+  }
+
+  <!-- Sección de comentarios -->
+  <div class="card border-0 shadow-sm">
+    <div class="card-header bg-light">
+      <h5 class="mb-0">Comentarios</h5>
+    </div>
+
+    <div class="card-body">
+      @if (comments && comments.length > 0) {
         <div>
-            <button class="btn btn-link text-danger btn-sm me-2" (click)="reportarPublicacion()" [disabled]="!post">
+          @for (com of comments; track com) {
+            <div class="border-bottom py-2">
+              <div class="d-flex justify-content-between small">
+                <strong class="text-dark">{{ com.idUser }}</strong>
+                <span class="text-muted">{{ com.date | date:'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+              <p class="mb-1 small">{{ com.content }}</p>
+              <button class="btn btn-link text-danger btn-sm p-0" (click)="reportarComentario(com)">
                 <i class="fas fa-flag"></i>
-            </button>
-            <button class="btn btn-outline-secondary btn-sm" (click)="volver()">
-                ← Volver
-            </button>
-        </div>
-    </div>
-
-    <!-- Detalle de publicación -->
-    <div class="card border-0 shadow-sm mb-4" *ngIf="post">
-        <div class="card-body">
-            <p class="fs-5 text-muted">{{ post.content }}</p>
-        </div>
-        <div class="card-footer bg-white text-muted small d-flex justify-content-between">
-            <span><i class="fas fa-user"></i> {{ post.idUser }}</span>
-            <span><i class="fas fa-calendar-alt"></i> {{ post.date | date:'fullDate' }}</span>
-        </div>
-    </div>
-
-    <!-- Sección de comentarios -->
-    <div class="card border-0 shadow-sm">
-        <div class="card-header bg-light">
-            <h5 class="mb-0">Comentarios</h5>
-        </div>
-
-        <div class="card-body">
-            <div *ngIf="comments && comments.length > 0; else sinComentarios">
-                <div *ngFor="let com of comments" class="border-bottom py-2">
-                    <div class="d-flex justify-content-between small">
-                        <strong class="text-dark">{{ com.idUser }}</strong>
-                        <span class="text-muted">{{ com.date | date:'dd/MM/yyyy HH:mm' }}</span>
-                    </div>
-                    <p class="mb-1 small">{{ com.content }}</p>
-                    <button class="btn btn-link text-danger btn-sm p-0" (click)="reportarComentario(com)">
-                        <i class="fas fa-flag"></i>
-                    </button>
-                </div>
+              </button>
             </div>
-
-            <ng-template #sinComentarios>
-                <div class="alert alert-info text-center mb-0">
-                    No hay comentarios todavía. ¡Sé el primero en participar!
-                </div>
-            </ng-template>
+          }
         </div>
-
-        <!-- Formulario para comentar -->
-        <div class="card-footer bg-white">
-            <form [formGroup]="comentarioForm" (ngSubmit)="comentar()">
-                <div class="input-group">
-                    <input formControlName="content" class="form-control form-control-sm"
-                        placeholder="Escribe un comentario..." />
-                    <button class="btn btn-warning btn-sm" [disabled]="comentarioForm.invalid || postingComment">
-                        Enviar
-                    </button>
-                </div>
-            </form>
+      } @else {
+        <div class="alert alert-info text-center mb-0">
+          No hay comentarios todavía. ¡Sé el primero en participar!
         </div>
+      }
+
     </div>
-</div>
+
+    <!-- Formulario para comentar -->
+    <div class="card-footer bg-white">
+      <form [formGroup]="comentarioForm" (ngSubmit)="comentar()">
+        <div class="input-group">
+          <input formControlName="content" class="form-control form-control-sm"
+            placeholder="Escribe un comentario..." />
+            <button class="btn btn-warning btn-sm" [disabled]="comentarioForm.invalid || postingComment">
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
