@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { UserService } from '../../core/services/user.service';
@@ -16,6 +16,10 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
+  private userService = inject(UserService);
+  private postService = inject(PostService);
+  private router = inject(Router);
+
   user: User | null = null;
   posts: Post[] = [];
   sede = '';
@@ -46,12 +50,6 @@ export class PerfilComponent implements OnInit {
 
   totalPosts = 0;
   totalComments = 0;
-
-  constructor(
-    private userService: UserService,
-    private postService: PostService,
-    private router: Router
-  ) { }
 
   ngOnInit(): void {
     const email = this.userService.getAzureUser()?.email || this.userService.getName();

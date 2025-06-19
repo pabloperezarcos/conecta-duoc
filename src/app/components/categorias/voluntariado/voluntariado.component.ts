@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
@@ -18,20 +18,18 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./voluntariado.component.scss']
 })
 export class VoluntariadoComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private postService = inject(PostService);
+  private userService = inject(UserService);
+  private reportService = inject(ReportService);
+  private postCategoryService = inject(PostCategoryService);
+
   form!: FormGroup;
   mostrarFormulario = false;
   publicaciones: Post[] = [];
   filtroBusqueda = '';
   idCategoryVoluntariado: number | null = null;
   loading = false;
-
-  constructor(
-    private fb: FormBuilder,
-    private postService: PostService,
-    private userService: UserService,
-    private reportService: ReportService,
-    private postCategoryService: PostCategoryService
-  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({

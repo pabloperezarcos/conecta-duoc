@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 
 import { Router } from '@angular/router';
@@ -13,14 +13,12 @@ import { User } from '../../models/user';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  private msalService = inject(MsalService);
+  private router = inject(Router);
+  private userService = inject(UserService);
+
   title = 'Conecta-DUOC';
   isLoggedIn = false;
-
-  constructor(
-    private msalService: MsalService,
-    private router: Router,
-    private userService: UserService
-  ) { }
 
   ngOnInit(): void {
     const account = this.msalService.instance.getActiveAccount();

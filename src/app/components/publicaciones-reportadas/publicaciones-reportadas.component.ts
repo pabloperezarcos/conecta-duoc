@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReportService } from '../../core/services/report.service';
 import { Report } from '../../models/report';
@@ -11,11 +11,11 @@ import { Report } from '../../models/report';
   styleUrls: ['./publicaciones-reportadas.component.scss']
 })
 export class PublicacionesReportadasComponent implements OnInit {
+  private reportService = inject(ReportService);
+
   postReports: Report[] = [];
   commentReports: Report[] = [];
   loading = true;
-
-  constructor(private reportService: ReportService) { }
 
   ngOnInit(): void {
     this.reportService.getAllReports().subscribe({

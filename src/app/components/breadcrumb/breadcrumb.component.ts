@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 
@@ -10,9 +10,10 @@ import { RouterModule, ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
-  items: { label: string; path?: string }[] = [];
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  items: { label: string; path?: string }[] = [];
 
   ngOnInit(): void {
     const fullPath = this.router.url.split('?')[0];

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,6 +13,10 @@ import { User } from '../../models/user';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private userService = inject(UserService);
+  private router = inject(Router);
+
   registerForm!: FormGroup;
   email = '';
   name = '';
@@ -24,12 +28,6 @@ export class RegisterComponent implements OnInit {
     'Sede Valparaíso', 'Sede Viña del Mar', 'Campus Arauco', 'Campus Nacimiento',
     'Sede San Andrés de Concepción', 'Campus Villarrica', 'Sede Puerto Montt'
   ];
-
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private router: Router
-  ) { }
 
   ngOnInit(): void {
     const azureUser = this.userService.getAzureUser();

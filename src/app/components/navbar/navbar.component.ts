@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
@@ -14,14 +14,12 @@ import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/moda
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  private userService = inject(UserService);
+  private router = inject(Router);
+  private msal = inject(MsalService);
+
   username: string | null = null;
   mostrarModalLogout = false;
-
-  constructor(
-    private userService: UserService,
-    private router: Router,
-    private msal: MsalService
-  ) { }
 
   ngOnInit(): void {
     // Mostrar en consola todos los datos del usuario activo de Azure AD

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../../../breadcrumb/breadcrumb.component';
@@ -17,21 +17,19 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrls: ['./detalle-voluntariado.component.scss']
 })
 export class DetalleVoluntariadoComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private postService = inject(PostService);
+  private commentService = inject(CommentService);
+  private userService = inject(UserService);
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private reportService = inject(ReportService);
+
   post: Post | undefined;
   comments: Comment[] = [];
   comentarioForm!: FormGroup;
   loading = true;
   postingComment = false;
-
-  constructor(
-    private route: ActivatedRoute,
-    private postService: PostService,
-    private commentService: CommentService,
-    private userService: UserService,
-    private fb: FormBuilder,
-    private router: Router,
-    private reportService: ReportService
-  ) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
