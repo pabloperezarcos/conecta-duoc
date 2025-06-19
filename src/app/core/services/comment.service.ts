@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Comment } from '../../models/post';
 import { Observable } from 'rxjs';
@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CommentService {
   private apiUrl = 'https://tu-backend-url.com/api/comments';
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   // Obtener todos los comentarios de un post
   getByPostId(idPost: number): Observable<Comment[]> {

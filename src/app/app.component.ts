@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { inject, Component } from '@angular/core';
 
 import { ActivatedRoute, Data, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -16,7 +16,10 @@ export class AppComponent {
   mostrarNavbar = true;
   mostrarFooter = true;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
+  constructor() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../../models/post';
 import { Observable } from 'rxjs';
@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
   private apiUrl = 'https://tu-backend-url.com/api/posts';
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   // Obtener todas las publicaciones (opcional: por categoría)
   getAll(categoryId?: number): Observable<Post[]> {

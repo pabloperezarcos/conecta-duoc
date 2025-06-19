@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Report } from '../../models/report';
 import { Observable } from 'rxjs';
@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ReportService {
   private apiUrl = 'https://tu-backend-url.com/api/reports';
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   // Reportar una publicación
   reportPost(idPost: number, reason: string): Observable<Report> {

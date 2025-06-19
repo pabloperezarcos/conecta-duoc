@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PostCategory } from '../../models/postCategory';
@@ -8,8 +8,7 @@ import { PostCategory } from '../../models/postCategory';
 })
 export class PostCategoryService {
   private apiUrl = 'https://tu-backend-url.com/api/post-categories';
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   getAll(): Observable<PostCategory[]> {
     return this.http.get<PostCategory[]>(this.apiUrl);

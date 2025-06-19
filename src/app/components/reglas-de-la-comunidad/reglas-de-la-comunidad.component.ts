@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -14,8 +14,8 @@ import { UserService } from '../../core/services/user.service';
 })
 export class ReglasDeLaComunidadComponent {
   mostrarModal = false;
-
-  constructor(private router: Router, private userService: UserService) { }
+  private userService = inject(UserService);
+  private router = inject(Router);
 
   reglas = [
     {

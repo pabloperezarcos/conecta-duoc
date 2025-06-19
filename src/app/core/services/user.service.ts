@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user';
@@ -8,10 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-
   private apiUrl = 'https://tu-backend-url.com/api/users';
-
-  constructor(private msalService: MsalService, private http: HttpClient) { }
+  private msalService = inject(MsalService);
+  private http = inject(HttpClient);
 
   // Obtener el usuario actual desde Azure AD
   getAzureUser(): { email: string; fullName: string } | null {

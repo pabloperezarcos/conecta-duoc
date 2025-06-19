@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 
@@ -9,17 +9,13 @@ import { MsalService } from '@azure/msal-angular';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  /**
- * Constructor del guard.
- * @param msalService Servicio de MSAL para manejar la autenticación.
- * @param router Servicio de enrutamiento para redirigir a otras rutas.
- */
-  constructor(private msalService: MsalService, private router: Router) { }
+  private msalService = inject(MsalService);
+  private router = inject(Router);
 
   /**
- * Verifica si el usuario tiene una sesión activa para permitir el acceso a la ruta protegida.
- * @returns `true` si el usuario está autenticado, de lo contrario, redirige al inicio de sesión y retorna `false`.
- */
+   * Verifica si el usuario tiene una sesión activa para permitir el acceso a la ruta protegida.
+   * @returns `true` si el usuario está autenticado, de lo contrario, redirige al inicio de sesión y retorna `false`.
+   */
   canActivate(): boolean {
     const account = this.msalService.instance.getActiveAccount();
 
