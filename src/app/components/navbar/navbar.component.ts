@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
@@ -13,12 +13,30 @@ import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/moda
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   username: string | null = null;
   mostrarModalLogout = false;
 
-  constructor(private userService: UserService, private router: Router, private msal: MsalService) {
-    this.username = this.userService.getUsername();
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private msal: MsalService
+  ) { }
+
+  ngOnInit(): void {
+    // Mostrar en consola todos los datos del usuario activo de Azure AD
+    const account = this.msal.instance.getActiveAccount();
+    if (account) {
+      console.log('ACCOUNT:', account);
+      console.log('ID TOKEN CLAIMS:', account.idTokenClaims);
+    }
+
+    // Obtener el nombre de usuario desde el servicio UserService
+    this.username =
+      this.userService.getName() ||
+      this.userService.getAzureUser()?.fullName ||
+      this.userService.getAzureUser()?.email ||
+      null;
   }
 
   logout() {
@@ -29,6 +47,7 @@ export class NavbarComponent {
     this.msal.logoutPopup().subscribe({
       next: () => {
         this.userService.clearRole();
+        // Si limpias más datos en logout, hazlo aquí
         this.router.navigate(['/']);
       }
     });

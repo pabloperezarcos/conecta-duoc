@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { UserService } from '../../core/services/user.service';
-import { PublicacionesService } from '../../core/services/publicaciones.service';
-import { Publicacion } from '../../models/publicacion';
+import { PostService } from '../../core/services/post.service';
+import { User } from '../../models/user';
+import { Post } from '../../models/post';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -15,14 +16,9 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  correo: string | null = '';
-  rol: string | null = '';
+  user: User | null = null;
+  posts: Post[] = [];
   sede: string = '';
-  publicacionesPropias: Publicacion[] = [];
-  totalComentarios = 0;
-  nombre: string | null = '';
-  avatarUrl: string | null = null; 
-
   sedes: string[] = [
     'Modalidad online',
     'Campus Virtual',
@@ -48,33 +44,54 @@ export class PerfilComponent implements OnInit {
     'Sede Puerto Montt'
   ];
 
+  totalPosts = 0;
+  totalComments = 0;
 
   constructor(
     private userService: UserService,
-    private publicacionesService: PublicacionesService,
+    private postService: PostService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.nombre = this.userService.getNombre(); 
-    this.correo = this.userService.getUsername();
-    this.rol = this.userService.getRole();
-    this.sede = localStorage.getItem('sede') || 'Sin asignar';
+    const email = this.userService.getAzureUser()?.email || this.userService.getName();
+    if (!email) {
+      this.router.navigate(['/']);
+      return;
+    }
 
-    const todas = this.publicacionesService.getAll();
-    this.publicacionesPropias = todas.filter(p => p.autor === this.correo);
-    this.totalComentarios = this.publicacionesPropias.reduce(
-      (acc, pub) => acc + (pub.comentarios?.length || 0),
-      0
-    );
+    this.userService.getUser(email).subscribe(user => {
+      this.user = user;
+      this.sede = user.center;
+    });
+
+    this.postService.getAll().subscribe(posts => {
+      // Solo las publicaciones del usuario
+      this.posts = posts.filter(p => p.idUser === email);
+      this.totalPosts = this.posts.length;
+
+      // Si tienes un sistema para obtener el número de comentarios por post,
+      // aquí sumarías ese dato (por ejemplo, si el backend retorna posts con un campo 'commentsCount')
+      // Por ahora, lo dejamos en cero, o si quieres, podrías hacer una petición extra por cada post.
+      this.totalComments = 0;
+    });
   }
 
-  editar(pub: Publicacion): void {
-    this.router.navigate(['/dashboard/ayudantias'], { state: { editar: pub } });
+  getUserInitial(): string {
+    return this.user?.name ? this.user.name.charAt(0).toUpperCase() : '?';
   }
 
   guardarSede(): void {
-    localStorage.setItem('sede', this.sede);
+    if (this.user) {
+      const updatedUser = { ...this.user, center: this.sede };
+      this.userService.registerUser(updatedUser).subscribe(() => {
+        // Puede que quieras notificar al usuario de que el cambio fue exitoso
+      });
+    }
   }
 
+  editar(post: Post): void {
+    // Redirecciona a la vista de edición según categoría
+    this.router.navigate(['/dashboard/ayudantias', post.idPost], { state: { editar: post } });
+  }
 }

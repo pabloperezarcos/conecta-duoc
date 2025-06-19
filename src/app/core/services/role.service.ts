@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
-import { MsalService } from '@azure/msal-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
 
-  constructor(private msalService: MsalService) { }
+  constructor() { }
 
-  getUserRoles(): string[] {
-    const account = this.msalService.instance.getActiveAccount();
-    const idTokenClaims = account?.idTokenClaims as any;
-
-    if (idTokenClaims && idTokenClaims.roles) {
-      return idTokenClaims.roles;
-    }
-
-    return [];
+  // Obtener el rol actual desde localStorage
+  getRole(): string | null {
+    return localStorage.getItem('userRole');
   }
 
+  // Verifica si el usuario tiene un rol específico
   hasRole(expectedRole: string): boolean {
-    return this.getUserRoles().includes(expectedRole);
+    const role = this.getRole();
+    return role === expectedRole;
+  }
+
+  // Verifica si el usuario es admin
+  isAdmin(): boolean {
+    return this.getRole() === 'admin';
+  }
+
+  // Verifica si el usuario es estudiante
+  isStudent(): boolean {
+    return this.getRole() === 'student';
   }
 }

@@ -37,9 +37,10 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard/reportes',
-        loadComponent: () => import('./components/publicaciones-reportadas/publicaciones-reportadas.component').then(m => m.PublicacionesReportadasComponent),
+        loadComponent: () => import('./components/publicaciones-reportadas/publicaciones-reportadas.component')
+            .then(m => m.PublicacionesReportadasComponent),
         canActivate: [AuthGuard, RoleGuard],
-        data: { showNavbar: true, showFooter: true, expectedRole: 'admin' }
+        data: { showNavbar: true, showFooter: true, expectedRoles: ['admin'] }
     },
     {
         path: 'categoria/ayudantias',
@@ -106,8 +107,19 @@ export const routes: Routes = [
         loadComponent: () => import('./components/reglas-de-la-comunidad/reglas-de-la-comunidad.component').then(m => m.ReglasDeLaComunidadComponent),
         canActivate: [AuthGuard],
         data: { showNavbar: true, showFooter: true }
-    }
-    ,
+    },
+    {
+        path: 'forbidden',
+        loadComponent: () => import('./components/forbidden/forbidden.component').then(m => m.ForbiddenComponent),
+        canActivate: [AuthGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent),
+        canActivate: [AuthGuard],
+        data: { showNavbar: false, showFooter: false }
+    },
     {
         path: '**',
         redirectTo: ''

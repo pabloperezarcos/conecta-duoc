@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
-import { PublicacionesService } from '../../../core/services/publicaciones.service';
+import { PostService } from '../../../core/services/post.service';
 import { UserService } from '../../../core/services/user.service';
-import { Publicacion } from '../../../models/publicacion';
-import { ReportesService } from '../../../core/services/reportes.service';
+import { Post } from '../../../models/post';
+import { ReportService } from '../../../core/services/report.service';
+import { PostCategoryService } from '../../../core/services/post-category.service';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-deportes',
@@ -20,110 +20,90 @@ import { FormsModule } from '@angular/forms';
 export class DeportesComponent implements OnInit {
   form!: FormGroup;
   mostrarFormulario = false;
-  publicaciones: Publicacion[] = [];
-  publicacionEditando: Publicacion | null = null;
-  comentarioForms: { [pubId: number]: FormGroup } = {};
+  publicaciones: Post[] = [];
   filtroBusqueda: string = '';
-
+  idCategoryDeporte: number | null = null;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
-    private publicacionesService: PublicacionesService,
+    private postService: PostService,
     private userService: UserService,
-    private reportesService: ReportesService
+    private reportService: ReportService,
+    private postCategoryService: PostCategoryService
   ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      titulo: ['', Validators.required],
-      descripcion: ['', Validators.required]
+      title: ['', Validators.required],
+      content: ['', Validators.required]
     });
 
-    this.publicaciones = this.publicacionesService.getAll('deportes');
-    this.publicaciones.forEach(pub => {
-      this.comentarioForms[pub.id] = this.fb.group({
-        texto: ['', Validators.required]
-      });
+    this.postCategoryService.getAll().subscribe(categories => {
+      const found = categories.find(cat => cat.categoryName.toLowerCase().includes('deporte'));
+      if (found) {
+        this.idCategoryDeporte = found.idCategory;
+        this.cargarPublicaciones();
+      }
+    });
+  }
+
+  cargarPublicaciones(): void {
+    if (this.idCategoryDeporte == null) return;
+    this.loading = true;
+    this.postService.getAll(this.idCategoryDeporte).subscribe({
+      next: posts => {
+        this.publicaciones = posts;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
     });
   }
 
   crearPublicacion(): void {
-    if (this.publicacionEditando) {
-      this.publicacionEditando.titulo = this.form.value.titulo;
-      this.publicacionEditando.descripcion = this.form.value.descripcion;
-      this.publicacionEditando = null;
-    } else {
-      const autor = this.userService.getUsername() || 'anónimo';
-      const sede = 'San Joaquín'; // futura detección real
-
-      this.publicacionesService.crear('deportes', {
-        ...this.form.value,
-        autor,
-        sede
-      });
-    }
-
-    this.publicaciones = this.publicacionesService.getAll('deportes');
-
-    this.publicaciones.forEach(pub => {
-      if (!this.comentarioForms[pub.id]) {
-        this.comentarioForms[pub.id] = this.fb.group({
-          texto: ['', Validators.required]
-        });
+    if (this.idCategoryDeporte == null) return;
+    const idUser = this.userService.getAzureUser()?.email || 'anónimo';
+    const nueva: Omit<Post, 'idPost' | 'date'> = {
+      title: this.form.value.title,
+      content: this.form.value.content,
+      idUser,
+      idCategory: this.idCategoryDeporte
+    };
+    this.postService.create(nueva).subscribe({
+      next: () => {
+        this.cargarPublicaciones();
+        this.form.reset();
+        this.mostrarFormulario = false;
       }
     });
-
-    this.form.reset();
-    this.mostrarFormulario = false;
   }
 
   toggleFormulario(): void {
     this.mostrarFormulario = !this.mostrarFormulario;
+    if (!this.mostrarFormulario) {
+      this.form.reset();
+    }
   }
 
-  puedeEditar(pub: Publicacion): boolean {
-    const user = this.userService.getUsername();
+  puedeEditar(pub: Post): boolean {
+    const user = this.userService.getAzureUser()?.email;
     const role = this.userService.getRole();
-    return pub.autor === user || role === 'admin';
+    return pub.idUser === user || role === 'admin';
   }
 
-  editarPublicacion(pub: Publicacion): void {
-    this.form.patchValue({
-      titulo: pub.titulo,
-      descripcion: pub.descripcion
+  reportarPublicacion(pub: Post): void {
+    this.reportService.reportPost(pub.idPost, 'Contenido inapropiado').subscribe(() => {
     });
-    this.publicacionEditando = pub;
-    this.mostrarFormulario = true;
   }
 
-  comentar(pub: Publicacion): void {
-    const form = this.comentarioForms[pub.id];
-    const nuevoComentario = {
-      id: Date.now(),
-      texto: form.value.texto,
-      autor: this.userService.getUsername() || 'anónimo',
-      fecha: new Date().toISOString()
-    };
-
-    if (!pub.comentarios) pub.comentarios = [];
-    pub.comentarios.push(nuevoComentario);
-    form.reset();
-  }
-
-  reportarPublicacion(pub: Publicacion): void {
-    this.reportesService.reportarPublicacion('deportes', pub);
-  }
-
-  get publicacionesFiltradas(): Publicacion[] {
+  get publicacionesFiltradas(): Post[] {
     if (!this.filtroBusqueda.trim()) return this.publicaciones;
-
     const texto = this.filtroBusqueda.trim().toLowerCase();
-
     return this.publicaciones.filter(pub =>
-      pub.titulo.toLowerCase().includes(texto) ||
-      pub.descripcion.toLowerCase().includes(texto)
+      pub.title.toLowerCase().includes(texto) ||
+      pub.content.toLowerCase().includes(texto)
     );
   }
-
-
 }

@@ -4,10 +4,10 @@
     <!-- Título principal -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="fw-bold mb-0 text-dark">
-            {{ publicacion?.titulo }}
+            {{ post?.title }}
         </h2>
         <div>
-            <button class="btn btn-link text-danger btn-sm me-2" (click)="reportarPublicacion()">
+            <button class="btn btn-link text-danger btn-sm me-2" (click)="reportarPublicacion()" [disabled]="!post">
                 <i class="fas fa-flag"></i>
             </button>
             <button class="btn btn-outline-secondary btn-sm" (click)="volver()">
@@ -17,13 +17,13 @@
     </div>
 
     <!-- Detalle de publicación -->
-    <div class="card border-0 shadow-sm mb-4">
+    <div class="card border-0 shadow-sm mb-4" *ngIf="post">
         <div class="card-body">
-            <p class="fs-5 text-muted">{{ publicacion?.descripcion }}</p>
+            <p class="fs-5 text-muted">{{ post.content }}</p>
         </div>
         <div class="card-footer bg-white text-muted small d-flex justify-content-between">
-            <span><i class="fas fa-user"></i> {{ publicacion?.autor }}</span>
-            <span><i class="fas fa-calendar-alt"></i> {{ publicacion?.fecha | date:'fullDate' }}</span>
+            <span><i class="fas fa-user"></i> {{ post.idUser }}</span>
+            <span><i class="fas fa-calendar-alt"></i> {{ post.date | date:'fullDate' }}</span>
         </div>
     </div>
 
@@ -34,13 +34,13 @@
         </div>
 
         <div class="card-body">
-            <div *ngIf="publicacion && publicacion.comentarios.length > 0; else sinComentarios">
-                <div *ngFor="let com of publicacion.comentarios" class="border-bottom py-2">
+            <div *ngIf="comments && comments.length > 0; else sinComentarios">
+                <div *ngFor="let com of comments" class="border-bottom py-2">
                     <div class="d-flex justify-content-between small">
-                        <strong class="text-dark">{{ com.autor }}</strong>
-                        <span class="text-muted">{{ com.fecha | date:'dd/MM/yyyy HH:mm' }}</span>
+                        <strong class="text-dark">{{ com.idUser }}</strong>
+                        <span class="text-muted">{{ com.date | date:'dd/MM/yyyy HH:mm' }}</span>
                     </div>
-                    <p class="mb-1 small">{{ com.texto }}</p>
+                    <p class="mb-1 small">{{ com.content }}</p>
                     <button class="btn btn-link text-danger btn-sm p-0" (click)="reportarComentario(com)">
                         <i class="fas fa-flag"></i>
                     </button>
@@ -58,9 +58,11 @@
         <div class="card-footer bg-white">
             <form [formGroup]="comentarioForm" (ngSubmit)="comentar()">
                 <div class="input-group">
-                    <input formControlName="texto" class="form-control form-control-sm"
+                    <input formControlName="content" class="form-control form-control-sm"
                         placeholder="Escribe un comentario..." />
-                    <button class="btn btn-warning btn-sm" [disabled]="comentarioForm.invalid">Enviar</button>
+                    <button class="btn btn-warning btn-sm" [disabled]="comentarioForm.invalid || postingComment">
+                        Enviar
+                    </button>
                 </div>
             </form>
         </div>

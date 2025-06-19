@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="container d-flex justify-content-between align-items-center">
 
-        <div routerLink="/dashboard" class="d-flex align-items-center gap-2">
+        <div routerLink="/dashboard" class="d-flex align-items-center gap-2" style="cursor:pointer;">
             <div class="logo-wrapper bg-white p-1 rounded-circle shadow-sm">
                 <img src="assets/logo/logo.png" alt="Logo ConectaDuoc" class="logo" />
             </div>
@@ -9,16 +9,21 @@
         </div>
 
         <div class="d-flex align-items-center gap-3">
-            <span class="usuario">👤 {{ username }}</span>
+            <span class="usuario fw-bold text-primary bg-light px-2 py-1 rounded d-flex align-items-center gap-1">
+                <i class="fas fa-user-circle"></i>
+                {{ username }}
+            </span>
             <a class="text-white text-decoration-none me-2" routerLink="/dashboard/perfil">
-                <i class="fas fa-user-circle me-1"></i> Mi Perfil
+                <i class="fas fa-id-badge me-1"></i> Mi Perfil
             </a>
-            <button class="btn btn-sm btn-warning" (click)="logout()">Cerrar sesión</button>
+            <button class="btn btn-sm btn-warning" (click)="logout()">
+                <i class="fas fa-sign-out-alt me-1"></i> Cerrar sesión
+            </button>
         </div>
-
     </div>
 </nav>
 
 <app-modal-confirmacion [visible]="mostrarModalLogout" titulo="¿Cerrar sesión?"
     mensaje="¿Estás seguro que deseas cerrar tu sesión de ConectaDuoc?" (confirmar)="confirmarLogout()"
-    (cancelar)="cancelarLogout()"></app-modal-confirmacion>
+    (cancelar)="cancelarLogout()">
+</app-modal-confirmacion>

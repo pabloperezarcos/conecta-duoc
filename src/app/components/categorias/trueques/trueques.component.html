@@ -46,10 +46,6 @@
                 placeholder="Detalle de la trueque..."></textarea>
         </div>
 
-        <button class="btn btn-warning" [disabled]="form.invalid">
-            {{ publicacionEditando ? 'Guardar cambios' : 'Publicar' }}
-        </button>
-
     </form>
 
     <div *ngIf="publicaciones.length" class="mb-3">
@@ -72,28 +68,28 @@
             <tbody>
                 <tr *ngFor="let pub of publicacionesFiltradas" class="align-middle">
                     <td>
-                        <a [routerLink]="['/dashboard/trueques', pub.id]"
+                        <a [routerLink]="['/dashboard/voluntariado', pub.idPost]"
                             class="fw-bold text-dark text-decoration-none">
-                            {{ pub.titulo }}
+                            {{ pub.title }}
                         </a>
                         <div class="small text-muted d-md-none">
-                            por {{ pub.autor }} • {{ pub.fecha | date:'dd/MM/yyyy' }}
+                            por {{ pub.idUser }} • {{ pub.date | date:'dd/MM/yyyy' }}
                         </div>
                     </td>
                     <td class="text-center d-none d-md-table-cell small text-muted">
-                        {{ pub.autor }}
+                        {{ pub.idUser }}
                     </td>
                     <td class="text-center d-none d-md-table-cell small text-muted">
-                        {{ pub.fecha | date:'dd/MM/yyyy' }}
+                        {{ pub.date | date:'dd/MM/yyyy' }}
 
                     </td>
                     <td class="text-center col-comentarios">
                         <span class="badge bg-light text-dark fs-6 px-3 py-1">
-                            💬 {{ pub.comentarios.length || 0 }}
+                            💬 {{ pub.commentsCount || 0 }}
                         </span>
                     </td>
                     <td class="text-center d-none d-md-table-cell">
-                        👁️ {{ pub.visitas }}
+                        👁️ {{ pub.views || 0 }}
                     </td>
                     <td class="text-center">
                         <button class="btn btn-link text-danger p-0" (click)="reportarPublicacion(pub)">
