@@ -3,5 +3,5 @@ export interface User {
     name: string;
     role?: string;
     center: string;
-    policies: boolean; // 0 No, 1 Sí
+    policies: number; // 0 No, 1 Sí
 }
