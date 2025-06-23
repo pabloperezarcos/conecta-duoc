@@ -10,9 +10,9 @@
   </div>
 
   @if (!publicaciones.length) {
-    <div class="alert alert-info text-center">
-      Aún no hay ayudantías publicadas. Sé el primero en compartir una 💡
-    </div>
+  <div class="alert alert-info text-center">
+    Aún no hay ayudantías publicadas. Sé el primero en compartir una 💡
+  </div>
   }
 
   <!-- ALERTAS ESTILO DUOC UC
@@ -37,82 +37,84 @@
   -->
 
   @if (mostrarFormulario) {
-    <form (ngSubmit)="crearPublicacion()" [formGroup]="form" class="mb-4">
-      <div class="mb-3">
-        <label for="titulo">Título</label>
-        <input id="titulo" formControlName="titulo" class="form-control" placeholder="Ej: Ayuda con matemáticas" />
-      </div>
-      <div class="mb-3">
-        <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="4"
+  <form (ngSubmit)="nuevaPublicacion()" [formGroup]="form" class="mb-4">
+    <div class="mb-3">
+      <label for="title">Título</label>
+      <input id="title" formControlName="title" class="form-control" placeholder="Ej: Ayuda con matemáticas" />
+    </div>
+    <div class="mb-3">
+      <label for="content">Descripción</label>
+      <textarea id="content" formControlName="content" class="form-control" rows="4"
         placeholder="Detalle de la actividad..."></textarea>
-      </div>
-    </form>
+    </div>
+    <button type="submit" class="btn btn-warning fw-bold w-100" [disabled]="form.invalid">
+      Publicar
+    </button>
+  </form>
   }
 
   @if (publicaciones.length) {
-    <div class="mb-3">
-      <input type="text" class="form-control" placeholder="Buscar por palabra clave..." [(ngModel)]="filtroBusqueda"
-        name="filtroBusqueda">
-      </div>
-    }
-
-    @if (publicaciones.length) {
-      <div class="table-responsive">
-        <table class="table table-hover table-borderless foro-lista">
-          <thead class="border-bottom">
-            <tr class="small text-muted">
-              <th>Título</th>
-              <th class="text-center d-none d-md-table-cell">Autor</th>
-              <th class="text-center d-none d-md-table-cell">Fecha</th>
-              <th class="text-center">Comentarios</th>
-              <th class="text-center d-none d-md-table-cell">Visitas</th>
-              <th class="text-center">Reportar</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (pub of publicacionesFiltradas; track pub) {
-              <tr class="align-middle">
-                <td>
-                  <a [routerLink]="['/dashboard/voluntariado', pub.idPost]"
-                    class="fw-bold text-dark text-decoration-none">
-                    {{ pub.title }}
-                  </a>
-                  <div class="small text-muted d-md-none">
-                    por {{ pub.idUser }} • {{ pub.date | date:'dd/MM/yyyy' }}
-                  </div>
-                </td>
-                <td class="text-center d-none d-md-table-cell small text-muted">
-                  {{ pub.idUser }}
-                </td>
-                <td class="text-center d-none d-md-table-cell small text-muted">
-                  {{ pub.date | date:'dd/MM/yyyy' }}
-                </td>
-                <td class="text-center col-comentarios">
-                  <span class="badge bg-light text-dark fs-6 px-3 py-1">
-                    💬 {{ pub.commentsCount || 0 }}
-                  </span>
-                </td>
-                <td class="text-center d-none d-md-table-cell">
-                  👁️ {{ pub.views || 0 }}
-                </td>
-                <td class="text-center">
-                  <button class="btn btn-link text-danger p-0" (click)="reportarPublicacion(pub)">
-                    <i class="fas fa-flag"></i>
-                  </button>
-                </td>
-              </tr>
-            }
-            @if (!publicacionesFiltradas.length) {
-              <div class="alert alert-warning text-center">
-                No se encontraron coincidencias para "{{ filtroBusqueda }}".
-              </div>
-            }
-          </tbody>
-        </table>
-      </div>
-    }
-
-
-
+  <div class="mb-3">
+    <input type="text" class="form-control" placeholder="Buscar por palabra clave..." [(ngModel)]="filtroBusqueda"
+      name="filtroBusqueda">
   </div>
+  }
+
+  @if (publicaciones.length) {
+  <div class="table-responsive">
+    <table class="table table-hover table-borderless foro-lista">
+      <thead class="border-bottom">
+        <tr class="small text-muted">
+          <th>Título</th>
+          <th class="text-center d-none d-md-table-cell">Autor</th>
+          <th class="text-center d-none d-md-table-cell">Fecha</th>
+          <th class="text-center">Comentarios</th>
+          <th class="text-center d-none d-md-table-cell">Visitas</th>
+          <th class="text-center">Reportar</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pub of publicacionesFiltradas; track pub) {
+        <tr class="align-middle">
+          <td>
+            <a [routerLink]="['/dashboard/voluntariado', pub.idPost]" class="fw-bold text-dark text-decoration-none">
+              {{ pub.title }}
+            </a>
+            <div class="small text-muted d-md-none">
+              <!-- por {{ pub.idUser }} • {{ pub.date | date:'dd/MM/yyyy' }} -->
+            </div>
+          </td>
+          <td class="text-center d-none d-md-table-cell small text-muted">
+            {{ pub.idUser }}
+          </td>
+          <td class="text-center d-none d-md-table-cell small text-muted">
+            <!-- {{ pub.date | date:'dd/MM/yyyy' }} -->
+          </td>
+          <td class="text-center col-comentarios">
+            <span class="badge bg-light text-dark fs-6 px-3 py-1">
+              <!-- 💬 {{ pub.commentsCount || 0 }} -->
+            </span>
+          </td>
+          <td class="text-center d-none d-md-table-cell">
+            👁️ {{ pub.views || 0 }}
+          </td>
+          <td class="text-center">
+            <button class="btn btn-link text-danger p-0" (click)="reportarPublicacion(pub)">
+              <i class="fas fa-flag"></i>
+            </button>
+          </td>
+        </tr>
+        }
+        @if (!publicacionesFiltradas.length) {
+        <div class="alert alert-warning text-center">
+          No se encontraron coincidencias para "{{ filtroBusqueda }}".
+        </div>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+
+
+
+</div>

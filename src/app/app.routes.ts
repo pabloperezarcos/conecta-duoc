@@ -25,9 +25,8 @@ export const routes: Routes = [
         path: 'dashboard/perfil',
         loadComponent: () =>
             import('./components/perfil/perfil.component').then(m => m.PerfilComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
-        //data: { allowedRoles: ['alumno', 'admin'] }
     },
     {
         path: 'dashboard',
@@ -39,67 +38,67 @@ export const routes: Routes = [
         path: 'dashboard/reportes',
         loadComponent: () => import('./components/publicaciones-reportadas/publicaciones-reportadas.component')
             .then(m => m.PublicacionesReportadasComponent),
-        canActivate: [AuthGuard, RoleGuard],
+        canActivate: [AuthGuard, RoleGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true, expectedRoles: ['admin'] }
     },
     {
         path: 'categoria/ayudantias',
         loadComponent: () => import('./components/categorias/ayudantias/ayudantias.component').then(m => m.AyudantiasComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'dashboard/ayudantias/:id',
         loadComponent: () => import('./components/categorias/ayudantias/detalle-ayudantia/detalle-ayudantia.component').then(m => m.DetalleAyudantiaComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'categoria/culturales',
         loadComponent: () => import('./components/categorias/culturales/culturales.component').then(m => m.CulturalesComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'dashboard/culturales/:id',
         loadComponent: () => import('./components/categorias/culturales/detalle-cultural/detalle-cultural.component').then(m => m.DetalleCulturalComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'categoria/deportes',
         loadComponent: () => import('./components/categorias/deportes/deportes.component').then(m => m.DeportesComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'dashboard/deportes/:id',
         loadComponent: () => import('./components/categorias/deportes/detalle-deporte/detalle-deporte.component').then(m => m.DetalleDeporteComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'categoria/trueques',
         loadComponent: () => import('./components/categorias/trueques/trueques.component').then(m => m.TruequesComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'dashboard/trueques/:id',
         loadComponent: () => import('./components/categorias/trueques/detalle-trueque/detalle-trueque.component').then(m => m.DetalleTruequeComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'categoria/voluntariado',
         loadComponent: () => import('./components/categorias/voluntariado/voluntariado.component').then(m => m.VoluntariadoComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
         path: 'dashboard/voluntariado/:id',
         loadComponent: () => import('./components/categorias/voluntariado/detalle-voluntariado/detalle-voluntariado.component').then(m => m.DetalleVoluntariadoComponent),
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
@@ -115,7 +114,7 @@ export const routes: Routes = [
         data: { showNavbar: true, showFooter: true }
     },
     {
-        path: 'register',
+        path: 'registro',
         loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent),
         canActivate: [AuthGuard],
         data: { showNavbar: false, showFooter: false }

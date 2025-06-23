@@ -24,9 +24,8 @@ export class PostService {
   }
 
   // Crear una nueva publicación
-  create(post: Omit<Post, 'idPost' | 'date'>): Observable<Post> {
-    const newPost = { ...post, date: new Date().toISOString() };
-    return this.http.post<Post>(this.apiUrl, newPost);
+  createPost(post: Omit<Post, 'idPost' | 'createdDate' | 'views'>): Observable<Post> {
+    return this.http.post<Post>(this.apiUrl, post);
   }
 
   // Eliminar una publicación (si decides permitirlo)

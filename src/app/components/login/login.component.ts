@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
-
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { User } from '../../models/user';
@@ -71,23 +70,32 @@ export class LoginComponent implements OnInit {
   private checkAndRedirect(email: string) {
     this.userService.checkUserExists(email).subscribe({
       next: (exists) => {
+        //console.log('Existe usuario?', exists);
+
         if (exists) {
-          // Trae el usuario completo para guardar rol y otros datos en localStorage
           this.userService.getUser(email).subscribe({
             next: (user: User) => {
               this.userService.setRole(user.role || 'student');
               this.userService.setName(user.name);
 
-              // Verifica si aceptó las políticas
-              if (user.policies) {
+              if (user.idUser !== undefined && user.idUser !== null) {
+                this.userService.setIdUser(user.idUser);
+              }
+
+              if (user.policies === 1) {
                 this.router.navigate(['/dashboard']);
               } else {
                 this.router.navigate(['/reglas-de-la-comunidad']);
               }
+            },
+            error: err => {
+              console.error('Error al traer usuario:', err);
             }
           });
-        } else {
-          // Redirige al registro (o muestra modal de registro)
+        }
+
+        else {
+          console.log('Redirijo a registro');
           this.router.navigate(['/registro']);
         }
       },
@@ -97,4 +105,5 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
 }

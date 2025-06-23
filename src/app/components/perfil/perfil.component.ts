@@ -65,7 +65,7 @@ export class PerfilComponent implements OnInit {
 
     this.postService.getAll().subscribe(posts => {
       // Solo las publicaciones del usuario
-      this.posts = posts.filter(p => p.idUser === email);
+      this.posts = posts.filter(p => String(p.idUser) === email);
       this.totalPosts = this.posts.length;
 
       // Si tienes un sistema para obtener el número de comentarios por post,

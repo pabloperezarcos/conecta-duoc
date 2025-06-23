@@ -38,7 +38,7 @@ export class VoluntariadoComponent implements OnInit {
     });
 
     this.postCategoryService.getAll().subscribe(categories => {
-      const found = categories.find(cat => cat.categoryName.toLowerCase().includes('voluntariado'));
+      const found = categories.find(cat => cat.name.toLowerCase().includes('voluntariado'));
       if (found) {
         this.idCategoryVoluntariado = found.idCategory;
         this.cargarPublicaciones();
@@ -62,18 +62,30 @@ export class VoluntariadoComponent implements OnInit {
 
   crearPublicacion(): void {
     if (this.idCategoryVoluntariado == null) return;
-    const idUser = this.userService.getAzureUser()?.email || 'anónimo';
-    const nueva: Omit<Post, 'idPost' | 'date'> = {
+
+    // idUser numérico desde el UserService
+    const idUser = this.userService.getIdUser();
+    if (!idUser) {
+      alert('No se pudo obtener el ID del usuario.');
+      return;
+    }
+
+    const nueva: Omit<Post, 'idPost' | 'createdDate' | 'views'> = {
       title: this.form.value.title,
       content: this.form.value.content,
-      idUser,
-      idCategory: this.idCategoryVoluntariado
+      idCategory: this.idCategoryVoluntariado,
+      idUser
     };
-    this.postService.create(nueva).subscribe({
+
+    this.postService.createPost(nueva).subscribe({
       next: () => {
         this.cargarPublicaciones();
         this.form.reset();
         this.mostrarFormulario = false;
+        console.log('Publicación creada con éxito');
+      },
+      error: err => {
+        console.error('Error al crear la publicación:', err);
       }
     });
   }
@@ -86,17 +98,18 @@ export class VoluntariadoComponent implements OnInit {
   }
 
   puedeEditar(pub: Post): boolean {
-    const user = this.userService.getAzureUser()?.email;
+    const idUser = this.userService.getIdUser();
     const role = this.userService.getRole();
-    return pub.idUser === user || role === 'admin';
+    return pub.idUser === idUser || role === 'admin';
   }
 
   reportarPublicacion(pub: Post): void {
     this.reportService.reportPost(pub.idPost, 'Contenido inapropiado').subscribe(() => {
-      // Por implementar: mostrar mensaje de éxito
+      alert('Publicación reportada con éxito');
       console.log('Publicación reportada con éxito');
     });
   }
+
 
   get publicacionesFiltradas(): Post[] {
     if (!this.filtroBusqueda.trim()) return this.publicaciones;

@@ -20,10 +20,10 @@
 
       <div class="mb-3">
         <label for="center" class="fw-bold">Sede</label>
-        <select id="center" class="form-select">
+        <select id="center" class="form-select" formControlName="center">
           <option value="" disabled selected>Seleccione su sede</option>
           @for (s of sedes; track s) {
-            <option [value]="s">{{ s }}</option>
+          <option [value]="s">{{ s }}</option>
           }
         </select>
       </div>
