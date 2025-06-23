@@ -7,7 +7,7 @@ import { PostCategory } from '../../models/postCategory';
   providedIn: 'root'
 })
 export class PostCategoryService {
-  private apiUrl = 'https://tu-backend-url.com/api/post-categories';
+  private apiUrl = 'http://localhost:9090/api/post-category';
   private http = inject(HttpClient);
 
   getAll(): Observable<PostCategory[]> {
