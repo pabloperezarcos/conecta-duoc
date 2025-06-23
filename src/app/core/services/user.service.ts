@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'https://tu-backend-url.com/api/users';
+  private apiUrl = 'http://localhost:9090/api/user';
   private msalService = inject(MsalService);
   private http = inject(HttpClient);
 
@@ -36,7 +36,6 @@ export class UserService {
   getUser(email: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${email}`);
   }
-
   // Guardar el rol en localStorage (por conveniencia de uso en frontend)
   setRole(role: string) {
     localStorage.setItem('userRole', role);
