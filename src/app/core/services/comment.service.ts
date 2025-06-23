@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentService {
-  private apiUrl = 'https://tu-backend-url.com/api/comments';
+  private apiUrl = 'http://localhost:9090/api/comment';
   private http = inject(HttpClient);
 
   // Obtener todos los comentarios de un post

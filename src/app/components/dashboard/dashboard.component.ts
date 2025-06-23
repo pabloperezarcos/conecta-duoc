@@ -23,33 +23,25 @@ export class DashboardComponent implements OnInit {
   role: string | null = null;
 
   ngOnInit(): void {
+    //console.log('Categorías recibidas:', this.categories);
     this.username = this.userService.getName() || this.userService.getAzureUser()?.fullName || this.userService.getAzureUser()?.email || 'Desconocido';
     this.role = this.userService.getRole();
 
     this.postCategoryService.getAll().subscribe(categories => {
       this.categories = categories
-        .filter(cat => cat.status) // Solo activas
+        .filter(cat => cat.status)
+        .filter(cat => cat.name.toLowerCase() !== 'reportes' || this.role === 'admin')
         .map(cat => ({
           ...cat,
-          icono: this.getIconForCategory(cat.categoryName),
-          ruta: this.getRouteForCategory(cat.categoryName)
+          icono: this.getIconForCategory(cat.name),
+          ruta: this.getRouteForCategory(cat.name)
         }));
 
-      // Si el usuario es admin, agrega la categoría de Reportes
-      if (this.role === 'admin') {
-        this.categories.push({
-          idCategory: 999, // un id especial, nunca usado por el backend
-          categoryName: 'Reportes',
-          description: 'Administra los reportes enviados por la comunidad.',
-          status: true,
-          icono: 'fas fa-flag',
-          ruta: '/dashboard/reportes',
-          colorClass: 'text-danger',
-          adminOnly: true
-        });
-      }
+      //console.log('ROL:', this.role);
+      //console.log('CATEGORIAS:', this.categories);
     });
   }
+
 
   getIconForCategory(name: string): string {
     switch (name.toLowerCase()) {
@@ -80,6 +72,8 @@ export class DashboardComponent implements OnInit {
         return '/categoria/voluntariado';
       case 'trueques estudiantiles':
         return '/categoria/trueques';
+      case 'reportes':
+        return '/dashboard/reportes';
       default:
         return '/dashboard';
     }

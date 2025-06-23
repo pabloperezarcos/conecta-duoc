@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = 'https://tu-backend-url.com/api/posts';
+  private apiUrl = 'http://localhost:9090/api/post';
   private http = inject(HttpClient);
 
   // Obtener todas las publicaciones (opcional: por categoría)
@@ -24,12 +24,8 @@ export class PostService {
   }
 
   // Crear una nueva publicación
-  create(post: Omit<Post, 'idPost' | 'date'>): Observable<Post> {
-    const newPost = {
-      ...post,
-      date: new Date().toISOString()
-    };
-    return this.http.post<Post>(this.apiUrl, newPost);
+  createPost(post: Omit<Post, 'idPost' | 'createdDate' | 'views'>): Observable<Post> {
+    return this.http.post<Post>(this.apiUrl, post);
   }
 
   // Eliminar una publicación (si decides permitirlo)

@@ -7,29 +7,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReportService {
-  private apiUrl = 'https://tu-backend-url.com/api/reports';
+  private apiUrl = 'http://localhost:9090/api/reportes';
   private http = inject(HttpClient);
 
   // Reportar una publicación
   reportPost(idPost: number, reason: string): Observable<Report> {
-    const report: Report = {
-      idPost,
-      reason,
-      status: true,
-      date: new Date().toISOString()
-    };
-    return this.http.post<Report>(`${this.apiUrl}`, report);
+    const report: Report = { idPost, reason, status: 1, date: new Date().toISOString() };
+    return this.http.post<Report>(`${this.apiUrl}/publicacion`, report);
   }
 
   // Reportar un comentario
   reportComment(idComment: number, reason: string): Observable<Report> {
-    const report: Report = {
-      idComment,
-      reason,
-      status: true,
-      date: new Date().toISOString()
-    };
-    return this.http.post<Report>(`${this.apiUrl}`, report);
+    const report: Report = { idComment, reason, status: 1, date: new Date().toISOString() };
+    return this.http.post<Report>(`${this.apiUrl}/comentario`, report);
   }
 
   // Obtener todos los reportes (solo para administrador o revisión)

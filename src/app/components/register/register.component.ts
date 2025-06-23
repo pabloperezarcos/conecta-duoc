@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
@@ -52,7 +51,7 @@ export class RegisterComponent implements OnInit {
       name: this.name,
       center: this.registerForm.value.center,
       role: 'student',
-      policies: false // Aceptación viene después en el flujo
+      policies: 0 // Aceptación viene después en el flujo
     };
 
     this.userService.registerUser(user).subscribe({
@@ -61,7 +60,8 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/reglas-de-la-comunidad']);
       },
       error: () => {
-        // Aquí puedes mostrar un mensaje de error
+        // Manejo de error, podrías mostrar un mensaje al usuario
+        console.error('Error al registrar el usuario');
       }
     });
   }

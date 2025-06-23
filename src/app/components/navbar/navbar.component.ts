@@ -24,10 +24,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     // Mostrar en consola todos los datos del usuario activo de Azure AD
     const account = this.msal.instance.getActiveAccount();
-    if (account) {
-      console.log('ACCOUNT:', account);
-      console.log('ID TOKEN CLAIMS:', account.idTokenClaims);
-    }
+    //if (account) {
+      //console.log('ACCOUNT:', account);
+      //console.log('ID TOKEN CLAIMS:', account.idTokenClaims);
+    //}
 
     // Obtener el nombre de usuario desde el servicio UserService
     this.username =

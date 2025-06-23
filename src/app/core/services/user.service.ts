@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'https://tu-backend-url.com/api/users';
+  private apiUrl = 'http://localhost:9090/api/usuarios';
   private msalService = inject(MsalService);
   private http = inject(HttpClient);
 
@@ -24,7 +24,8 @@ export class UserService {
 
   // Buscar si el usuario ya está registrado en la base de datos
   checkUserExists(email: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.apiUrl}/exists/${email}`);
+    const encodedEmail = encodeURIComponent(email);
+    return this.http.get<boolean>(`${this.apiUrl}/exists/${encodedEmail}`);
   }
 
   // Registrar usuario nuevo
@@ -36,7 +37,6 @@ export class UserService {
   getUser(email: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${email}`);
   }
-
   // Guardar el rol en localStorage (por conveniencia de uso en frontend)
   setRole(role: string) {
     localStorage.setItem('userRole', role);
@@ -58,4 +58,16 @@ export class UserService {
   getName(): string | null {
     return localStorage.getItem('name');
   }
+
+  setIdUser(idUser: number) {
+    localStorage.setItem('idUser', idUser.toString());
+  }
+
+  getIdUser(): number | null {
+    const raw = localStorage.getItem('idUser');
+    return raw ? Number(raw) : null;
+  }
+
+
+
 }

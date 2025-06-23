@@ -69,7 +69,7 @@ export class ReglasDeLaComunidadComponent {
     const email = this.userService.getAzureUser()?.email;
     if (email) {
       this.userService.getUser(email).subscribe(user => {
-        const updatedUser = { ...user, policies: true };
+        const updatedUser = { ...user, policies: 1 };
         this.userService.registerUser(updatedUser).subscribe(() => {
           localStorage.setItem('conectaReglasAceptadas', 'true');
           this.router.navigate(['/dashboard']);
@@ -87,11 +87,27 @@ export class ReglasDeLaComunidadComponent {
   }
 
   confirmarRechazo() {
-    localStorage.removeItem('conectaReglasAceptadas');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('name');
-    sessionStorage.clear();
-    this.router.navigate(['/login']);
+    const email = this.userService.getAzureUser()?.email;
+    if (email) {
+      this.userService.getUser(email).subscribe(user => {
+        const updatedUser = { ...user, policies: 0 };
+        this.userService.registerUser(updatedUser).subscribe(() => {
+          // Ahora sí, limpia el storage y cierra sesión
+          localStorage.removeItem('conectaReglasAceptadas');
+          localStorage.removeItem('userRole');
+          localStorage.removeItem('name');
+          sessionStorage.clear();
+          this.router.navigate(['/login']);
+        });
+      });
+    } else {
+      // Si por algún motivo no hay email, igual cierra sesión
+      localStorage.removeItem('conectaReglasAceptadas');
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('name');
+      sessionStorage.clear();
+      this.router.navigate(['/login']);
+    }
   }
 
   cancelarRechazo() {

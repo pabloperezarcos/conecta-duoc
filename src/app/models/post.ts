@@ -1,12 +1,11 @@
 export interface Post {
     idPost: number;
     title: string;
-    idUser: string;
     content: string;
     idCategory: number;
-    date: string;
-    commentsCount?: number; // Número de comentarios, opcional
-    views?: number; // Número de vistas, opcional
+    idUser: number;
+    createdDate?: string;
+    views?: number;
 }
 
 export interface Comment {
@@ -20,7 +19,7 @@ export interface Comment {
 export interface Score {
     idPost: number;
     idUser: string;
-    score: number; // 0 al 5
+    score: number;
 }
 
 export interface PostView {
