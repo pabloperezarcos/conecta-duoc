@@ -68,6 +68,10 @@ export class UserService {
     return raw ? Number(raw) : null;
   }
 
+  getUserById(idUser: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/id/${idUser}`);
+  }
+
 
 
 }
