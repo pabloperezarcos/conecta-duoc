@@ -1,14 +1,15 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { Post } from '../../../models/post';
+import { User } from '../../../models/user';
 import { PostService } from '../../../core/services/post.service';
 import { UserService } from '../../../core/services/user.service';
-import { Post } from '../../../models/post';
 import { ReportService } from '../../../core/services/report.service';
 import { PostCategoryService } from '../../../core/services/post-category.service';
-import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ayudantias',
@@ -30,6 +31,7 @@ export class AyudantiasComponent implements OnInit {
   filtroBusqueda = '';
   idCategoryAyudantia: number | null = null;
   loading = false;
+  nombresUsuarios: { [id: number]: string } = {};
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -59,6 +61,20 @@ export class AyudantiasComponent implements OnInit {
     this.postService.getAll(this.idCategoryAyudantia).subscribe({
       next: posts => {
         this.publicaciones = posts;
+        // Buscar nombres de usuario y guardarlos en el mapa
+        posts.forEach(pub => {
+          if (pub.idUser && !this.nombresUsuarios[pub.idUser]) {
+            this.userService.getUserById(pub.idUser).subscribe({
+              next: (user: User) => {
+                this.nombresUsuarios[pub.idUser] = user.name;
+              },
+              error: () => {
+                this.nombresUsuarios[pub.idUser] = 'Desconocido';
+              }
+            });
+          }
+        });
+
         this.loading = false;
       },
       error: () => {
@@ -66,41 +82,6 @@ export class AyudantiasComponent implements OnInit {
       }
     });
   }
-
-  /*   Metodo Obsoleto, se reemplaza por nuevaPublicacion()
-    crearPublicacion(): void {
-      console.log('Intentando publicar...');
-      if (this.idCategoryAyudantia == null) return;
-  
-      const idUser = this.userService.getIdUser();
-      console.log('ID_USER:', idUser);
-      if (!idUser) {
-        alert('No se pudo obtener el ID del usuario.');
-        return;
-      }
-  
-      const nueva: Omit<Post, 'idPost' | 'createdDate' | 'views'> = {
-        title: this.form.value.title,
-        content: this.form.value.content,
-        idCategory: this.idCategoryAyudantia,
-        idUser: idUser // aseguramos que es número
-      };
-  
-      console.log('Enviando post:', nueva);
-  
-      this.postService.createPost(nueva).subscribe({
-        next: () => {
-          console.log('Publicación creada con éxito');
-          this.cargarPublicaciones();
-          this.form.reset();
-          this.mostrarFormulario = false;
-        },
-        error: err => {
-          console.error('Error al crear la publicación:', err);
-        }
-      });
-    }
-   */
 
   nuevaPublicacion(): void {
     // Valida el formulario antes de continuar
@@ -127,7 +108,8 @@ export class AyudantiasComponent implements OnInit {
       title: this.form.value.title,
       content: this.form.value.content,
       idCategory: this.idCategoryAyudantia,
-      idUser: Number(idUser) // fuerza número
+      idUser: Number(idUser), // fuerza número
+      createdDate: new Date().toISOString()
     };
 
     console.log('Intentando publicar...', nueva);
@@ -146,8 +128,6 @@ export class AyudantiasComponent implements OnInit {
       }
     });
   }
-
-
 
   toggleFormulario(): void {
     this.mostrarFormulario = !this.mostrarFormulario;

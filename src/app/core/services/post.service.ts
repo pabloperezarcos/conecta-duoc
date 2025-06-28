@@ -32,4 +32,16 @@ export class PostService {
   delete(idPost: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${idPost}`);
   }
+
+  /* ADICIONALES */
+  // Sumar una visualización a un post
+  sumarVisualizacion(idPost: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${idPost}/view`, {});
+  }
+
+
+
+
+
+
 }

@@ -34,28 +34,39 @@ export class DetalleAyudantiaComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (!id) {
-      this.router.navigate(['/categoria/voluntariado']);
+      this.router.navigate(['/categoria/ayudantias']);
       return;
     }
 
-    // Obtener post por ID
-    this.postService.getById(id).subscribe({
-      next: (post) => {
-        this.post = post;
-        document.title = `ConectaDuoc | ${post.title}`;
-        // Obtener comentarios asociados a la publicación
-        this.commentService.getByPostId(post.idPost).subscribe(comments => {
-          this.comments = comments;
-          this.loading = false;
+    // Inicializa el formulario aquí, no dentro del subscribe
+    this.comentarioForm = this.fb.group({
+      content: ['', [Validators.required, Validators.maxLength(300)]]
+    });
+
+    // Sumar visualización al cargar detalle
+    this.postService.sumarVisualizacion(id).subscribe({
+      next: () => {
+        // Después de sumar visualización, pide el post actualizado
+        this.postService.getById(id).subscribe({
+          next: (post) => {
+            this.post = post;
+            document.title = `ConectaDuoc | ${post.title}`;
+
+            // Obtiene comentarios asociados
+            this.commentService.getByPostId(post.idPost).subscribe(comments => {
+              this.comments = comments;
+              this.loading = false;
+            });
+          },
+          error: () => {
+            this.router.navigate(['/categoria/ayudantias']);
+          }
         });
       },
       error: () => {
-        this.router.navigate(['/categoria/voluntariado']);
+        // Maneja error si quieres
+        this.loading = false;
       }
-    });
-
-    this.comentarioForm = this.fb.group({
-      content: ['', [Validators.required, Validators.maxLength(300)]]
     });
   }
 
@@ -97,6 +108,6 @@ export class DetalleAyudantiaComponent implements OnInit {
   }
 
   volver(): void {
-    this.router.navigate(['/categoria/voluntariado']);
+    this.router.navigate(['/categoria/ayudantias']);
   }
 }

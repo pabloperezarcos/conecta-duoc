@@ -4,8 +4,8 @@ export interface Post {
     content: string;
     idCategory: number;
     idUser: number;
-    createdDate?: string;
-    views?: number;
+    createdDate: string;
+    views: number;
 }
 
 export interface Comment {
