@@ -41,6 +41,12 @@ export const routes: Routes = [
         data: { showNavbar: true, showFooter: true, expectedRoles: ['admin'] }
     },
     {
+        path: 'dashboard/configuracion',
+        loadComponent: () => import('./components/configuracion/configuracion.component').then(m => m.ConfiguracionComponent),
+        canActivate: [AuthGuard, reglasAceptadasGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
         path: 'categoria/:slug',
         loadComponent: () => import('./components/categorias/categorias.component').then(m => m.CategoriasComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
