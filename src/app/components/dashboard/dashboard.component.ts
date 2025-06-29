@@ -26,8 +26,16 @@ export class DashboardComponent implements OnInit {
 
     this.postCategoryService.getAll().subscribe(categories => {
       this.categories = categories
-        .filter(cat => cat.status)
-        .filter(cat => cat.name.toLowerCase() !== 'reportes' || this.role === 'admin')
+        .filter(cat => {
+          if (!cat.status) return false;
+
+          const nombre = cat.name.toLowerCase();
+          if (nombre === 'reportes' || nombre === 'panel de configuración') {
+            return this.role === 'admin';
+          }
+
+          return true;
+        })
         .map(cat => ({
           ...cat,
           icono: this.getIconForCategory(cat.name),
@@ -35,7 +43,6 @@ export class DashboardComponent implements OnInit {
         }));
     });
   }
-
 
   getIconForCategory(name: string): string {
     switch (name.toLowerCase()) {
@@ -49,6 +56,10 @@ export class DashboardComponent implements OnInit {
         return 'fas fa-leaf';
       case 'trueques estudiantiles':
         return 'fas fa-exchange-alt';
+      case 'panel de configuración':
+        return 'fas fa-cog';
+      case 'reportes':
+        return 'fas fa-chart-bar';
       default:
         return 'fas fa-asterisk';
     }
@@ -68,6 +79,8 @@ export class DashboardComponent implements OnInit {
         return '/categoria/trueques';
       case 'reportes':
         return '/dashboard/reportes';
+      case 'panel de configuración':
+        return '/dashboard/configuracion';
       default:
         return '/dashboard';
     }
