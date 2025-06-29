@@ -23,8 +23,7 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard/perfil',
-        loadComponent: () =>
-            import('./components/perfil/perfil.component').then(m => m.PerfilComponent),
+        loadComponent: () => import('./components/perfil/perfil.component').then(m => m.PerfilComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
@@ -42,62 +41,14 @@ export const routes: Routes = [
         data: { showNavbar: true, showFooter: true, expectedRoles: ['admin'] }
     },
     {
-        path: 'categoria/ayudantias',
-        loadComponent: () => import('./components/categorias/ayudantias/ayudantias.component').then(m => m.AyudantiasComponent),
+        path: 'categoria/:slug',
+        loadComponent: () => import('./components/categorias/categorias.component').then(m => m.CategoriasComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
-        path: 'dashboard/ayudantias/:id',
-        loadComponent: () => import('./components/categorias/ayudantias/detalle-ayudantia/detalle-ayudantia.component').then(m => m.DetalleAyudantiaComponent),
-        canActivate: [AuthGuard, reglasAceptadasGuard],
-        data: { showNavbar: true, showFooter: true }
-    },
-    {
-        path: 'categoria/culturales',
-        loadComponent: () => import('./components/categorias/culturales/culturales.component').then(m => m.CulturalesComponent),
-        canActivate: [AuthGuard, reglasAceptadasGuard],
-        data: { showNavbar: true, showFooter: true }
-    },
-    {
-        path: 'dashboard/culturales/:id',
-        loadComponent: () => import('./components/categorias/culturales/detalle-cultural/detalle-cultural.component').then(m => m.DetalleCulturalComponent),
-        canActivate: [AuthGuard, reglasAceptadasGuard],
-        data: { showNavbar: true, showFooter: true }
-    },
-    {
-        path: 'categoria/deportes',
-        loadComponent: () => import('./components/categorias/deportes/deportes.component').then(m => m.DeportesComponent),
-        canActivate: [AuthGuard, reglasAceptadasGuard],
-        data: { showNavbar: true, showFooter: true }
-    },
-    {
-        path: 'dashboard/deportes/:id',
-        loadComponent: () => import('./components/categorias/deportes/detalle-deporte/detalle-deporte.component').then(m => m.DetalleDeporteComponent),
-        canActivate: [AuthGuard, reglasAceptadasGuard],
-        data: { showNavbar: true, showFooter: true }
-    },
-    {
-        path: 'categoria/trueques',
-        loadComponent: () => import('./components/categorias/trueques/trueques.component').then(m => m.TruequesComponent),
-        canActivate: [AuthGuard, reglasAceptadasGuard],
-        data: { showNavbar: true, showFooter: true }
-    },
-    {
-        path: 'dashboard/trueques/:id',
-        loadComponent: () => import('./components/categorias/trueques/detalle-trueque/detalle-trueque.component').then(m => m.DetalleTruequeComponent),
-        canActivate: [AuthGuard, reglasAceptadasGuard],
-        data: { showNavbar: true, showFooter: true }
-    },
-    {
-        path: 'categoria/voluntariado',
-        loadComponent: () => import('./components/categorias/voluntariado/voluntariado.component').then(m => m.VoluntariadoComponent),
-        canActivate: [AuthGuard, reglasAceptadasGuard],
-        data: { showNavbar: true, showFooter: true }
-    },
-    {
-        path: 'dashboard/voluntariado/:id',
-        loadComponent: () => import('./components/categorias/voluntariado/detalle-voluntariado/detalle-voluntariado.component').then(m => m.DetalleVoluntariadoComponent),
+        path: 'categoria/:slug/:id',
+        loadComponent: () => import('./components/categorias/detalle/detalle.component').then(m => m.DetalleComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
@@ -123,5 +74,4 @@ export const routes: Routes = [
         path: '**',
         redirectTo: ''
     },
-
 ];

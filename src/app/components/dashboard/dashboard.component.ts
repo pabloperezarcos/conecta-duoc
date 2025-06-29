@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../core/services/user.service';
 import { RouterModule } from '@angular/router';
-import { MsalService } from '@azure/msal-angular';
 import { PostCategoryService } from '../../core/services/post-category.service';
 import { PostCategory } from '../../models/postCategory';
 
@@ -15,7 +14,6 @@ import { PostCategory } from '../../models/postCategory';
 })
 export class DashboardComponent implements OnInit {
   private userService = inject(UserService);
-  private msal = inject(MsalService);
   private postCategoryService = inject(PostCategoryService);
 
   categories: (PostCategory & { icono: string; ruta: string; colorClass?: string; adminOnly?: boolean })[] = [];
@@ -23,7 +21,6 @@ export class DashboardComponent implements OnInit {
   role: string | null = null;
 
   ngOnInit(): void {
-    //console.log('Categorías recibidas:', this.categories);
     this.username = this.userService.getName() || this.userService.getAzureUser()?.fullName || this.userService.getAzureUser()?.email || 'Desconocido';
     this.role = this.userService.getRole();
 
@@ -36,9 +33,6 @@ export class DashboardComponent implements OnInit {
           icono: this.getIconForCategory(cat.name),
           ruta: this.getRouteForCategory(cat.name)
         }));
-
-      //console.log('ROL:', this.role);
-      //console.log('CATEGORIAS:', this.categories);
     });
   }
 
@@ -56,7 +50,7 @@ export class DashboardComponent implements OnInit {
       case 'trueques estudiantiles':
         return 'fas fa-exchange-alt';
       default:
-        return 'fas fa-asterisk'; // Icono genérico
+        return 'fas fa-asterisk';
     }
   }
 

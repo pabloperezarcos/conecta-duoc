@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   private apiUrl = 'http://localhost:9090/api/usuarios';
+  //private apiUrl = 'http://3.87.223.144:9090/api/usuarios';
   private msalService = inject(MsalService);
   private http = inject(HttpClient);
 
