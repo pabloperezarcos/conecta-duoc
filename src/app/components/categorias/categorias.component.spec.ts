@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetalleTruequeComponent } from './detalle-trueque.component';
+import { CategoriasComponent } from './categorias.component';
 
-describe('DetalleTruequeComponent', () => {
-  let component: DetalleTruequeComponent;
-  let fixture: ComponentFixture<DetalleTruequeComponent>;
+describe('CategoriasComponent', () => {
+  let component: CategoriasComponent;
+  let fixture: ComponentFixture<CategoriasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DetalleTruequeComponent]
+      imports: [CategoriasComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DetalleTruequeComponent);
+    fixture = TestBed.createComponent(CategoriasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
