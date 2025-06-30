@@ -1,11 +1,20 @@
 @use 'sass:color';
-// Paleta institucional
+
+// Tipos institucionales
 $negro: #1A1A1A;
 $blanco: #FFFFFF;
 $gris: #666666;
+$gris-claro: #EEEEEE;
 $negro-puro: #000000;
-$amarillo: #F1B634;
+$amarillo: #FFB800;
+$azul: #307FE2;
+$rojo: #D50032;
 
+// Tipografías
+$font-primary: 'Merriweather', serif;
+$font-secondary: 'Lato', sans-serif;
+
+// Reset básico
 footer {
     flex-shrink: 0;
 }
@@ -21,8 +30,12 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: $font-secondary;
+    color: $negro;
+    background-color: $blanco;
 }
 
+// Componente root
 app-root {
     display: flex;
     flex-direction: column;

@@ -1,13 +1,14 @@
-<div class="container mt-4">
+<div class="container mt-4 mb-4 foro-categoria-container">
     <app-breadcrumb></app-breadcrumb>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="titulo text-capitalize">{{ nombreCategoriaMostrada }}</h2>
+    <div class="d-flex justify-content-between align-items-center cabecera-categoria mt-5">
+        <h2 class="titulo-categoria text-capitalize">{{ nombreCategoriaMostrada }}</h2>
         <button class="btn btn-warning fw-bold" (click)="toggleFormulario()">
             <i class="fas fa-plus"></i>
             {{ mostrarFormulario ? 'Cancelar' : 'Publicar' }}
         </button>
     </div>
+
 
     @if (!publicaciones.length) {
     <div class="alert alert-info text-center">

@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  //private apiUrl = 'http://localhost:9090/api/usuarios';
-  private apiUrl = 'http://3.87.223.144:9090/api/usuarios';
+  private apiUrl = 'http://localhost:9090/api/usuarios';
+  //private apiUrl = 'http://3.87.223.144:9090/api/usuarios';
   private msalService = inject(MsalService);
   private http = inject(HttpClient);
 
@@ -71,6 +71,24 @@ export class UserService {
 
   getUserById(idUser: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/id/${idUser}`);
+  }
+
+
+  /* ADICIONALES PARA MODULO DE CONFIGURACIONES */
+  
+  // Obtener todos los usuarios
+  getAll(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl);
+  }
+
+  // Actualizar usuario
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/${id}`, user);
+  }
+
+  // Eliminar usuario
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
 

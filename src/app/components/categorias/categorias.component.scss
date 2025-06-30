@@ -1,0 +1,32 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.foro-categoria-container {
+    app-breadcrumb {
+        margin-bottom: 1.5rem;
+    }
+
+    .cabecera-categoria {
+        margin-bottom: 2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .titulo-categoria {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $negro;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: $amarillo;
+            border-radius: 2px;
+        }
+    }
+}

@@ -47,6 +47,18 @@ export const routes: Routes = [
         data: { showNavbar: true, showFooter: true }
     },
     {
+        path: 'dashboard/configuracion/usuarios',
+        loadComponent: () => import('./components/configuracion/usuarios/usuarios.component').then(m => m.UsuariosComponent),
+        canActivate: [AuthGuard, reglasAceptadasGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
+        path: 'dashboard/configuracion/categorias',
+        loadComponent: () => import('./components/configuracion/categorias-admin/categorias-admin.component').then(m => m.CategoriasAdminComponent),
+        canActivate: [AuthGuard, reglasAceptadasGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
         path: 'categoria/:slug',
         loadComponent: () => import('./components/categorias/categorias.component').then(m => m.CategoriasComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
