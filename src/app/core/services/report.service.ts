@@ -26,4 +26,9 @@ export class ReportService {
   getAllReports(): Observable<Report[]> {
     return this.http.get<Report[]>(`${this.apiUrl}`);
   }
+
+  // Actualizar el estado de un reporte
+  updateStatus(idReport: number, status: number): Observable<Report> {
+    return this.http.put<Report>(`${this.apiUrl}/${idReport}`, { status });
+  }
 }
