@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   private apiUrl = 'http://localhost:9090/api/usuarios';
-  //private apiUrl = 'http://3.87.223.144:9090/api/usuarios';
+  //private apiUrl = 'https://yr3rp1l7fd.execute-api.us-east-1.amazonaws.com/api/usuarios';
   private msalService = inject(MsalService);
   private http = inject(HttpClient);
 
@@ -75,7 +75,7 @@ export class UserService {
 
 
   /* ADICIONALES PARA MODULO DE CONFIGURACIONES */
-  
+
   // Obtener todos los usuarios
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
