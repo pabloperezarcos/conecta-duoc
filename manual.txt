@@ -1,0 +1,6 @@
+1.- Levantar el backend para poder iniciar sesion.
+
+2.- Usar NG SERVE para levantar la aplicacion en "http://localhost:4200".
+
+3.- En caso de error, utilizar NPM INSTALL para volver a instalar las dependencias de ANGULAR. 
+  Considerar que se esta utilizando ANGULAR en su version 20.0.3 y NODE en su version 24.2.0
