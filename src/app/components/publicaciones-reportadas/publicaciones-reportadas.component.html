@@ -2,58 +2,70 @@
   <h2 class="mb-4">Reportes de la comunidad</h2>
 
   @if (loading) {
-    <div class="text-center my-4">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
-      <p class="mt-2">Cargando reportes...</p>
+  <div class="text-center my-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
     </div>
+    <p class="mt-2">Cargando reportes...</p>
+  </div>
   }
 
   @if (!loading && !postReports.length && !commentReports.length) {
-    <div class="alert alert-info">
-      No hay reportes pendientes.
-    </div>
+  <div class="alert alert-info">
+    No hay reportes pendientes.
+  </div>
   }
 
   @if (postReports.length) {
-    <div>
-      <h4 class="mb-3">Publicaciones reportadas</h4>
-      <ul class="list-group mb-4">
-        @for (rep of postReports; track rep) {
-          <li class="list-group-item">
-            <div>
-              <strong>Publicación #{{ rep.idPost }}</strong>
-              @if (!rep.status) {
-                <span class="badge bg-warning text-dark ms-2">Resuelto</span>
-              }
-            </div>
-            <div><span class="text-muted">Motivo:</span> {{ rep.reason }}</div>
-            <div><span class="text-muted">Fecha:</span> {{ rep.date | date:'short' }}</div>
-          </li>
+  <div>
+    <h4 class="mb-3">Publicaciones reportadas</h4>
+    <ul class="list-group mb-4">
+      @for (rep of postReports; track rep) {
+      <li class="list-group-item">
+        <div>
+          <strong>Publicación #{{ rep.idPost }}</strong>
+          @if (!rep.status) {
+          <span class="badge bg-warning text-dark ms-2">Resuelto</span>
+          }
+        </div>
+        <div><span class="text-muted">Motivo:</span> {{ rep.reason }}</div>
+        <div class="mb-2"><span class="text-muted">Fecha:</span> {{ rep.date | date:'short' }}</div>
+        @if (rep.status) {
+        <button class="btn btn-danger btn-sm me-2" (click)="confirmarPost(rep)">
+          Confirmar y eliminar
+        </button>
+        <button class="btn btn-secondary btn-sm" (click)="denegarPost(rep)">
+          Denegar
+        </button>
         }
-      </ul>
-    </div>
+      </li>
+      }
+    </ul>
+  </div>
   }
 
   @if (commentReports.length) {
-    <div>
-      <h4 class="mb-3">Comentarios reportados</h4>
-      <ul class="list-group">
-        @for (rep of commentReports; track rep) {
-          <li class="list-group-item">
-            <div>
-              <strong>Comentario #{{ rep.idComment }}</strong>
-              @if (!rep.status) {
-                <span class="badge bg-warning text-dark ms-2">Resuelto</span>
-              }
-            </div>
-            <div><span class="text-muted">Motivo:</span> {{ rep.reason }}</div>
-            <div><span class="text-muted">Fecha:</span> {{ rep.date | date:'short' }}</div>
-            <!-- Aquí podrías mostrar un preview del comentario si lo tienes disponible -->
-          </li>
+  <div>
+    <h4 class="mb-3">Comentarios reportados</h4>
+    <ul class="list-group">
+      @for (rep of commentReports; track rep) {
+      <li class="list-group-item">
+        <div>
+          <strong>Comentario #{{ rep.idComment }}</strong>
+          @if (!rep.status) {
+          <span class="badge bg-warning text-dark ms-2">Resuelto</span>
+          }
+        </div>
+        <div><span class="text-muted">Motivo:</span> {{ rep.reason }}</div>
+        <div class="mb-2"><span class="text-muted">Fecha:</span> {{ rep.date | date:'short' }}</div>
+        @if (rep.status) {
+        <button class="btn btn-danger btn-sm me-2" (click)="confirmarComentario(rep)">Confirmar y eliminar</button>
+        <button class="btn btn-secondary btn-sm" (click)="denegarComentario(rep)">Denegar</button>
         }
-      </ul>
-    </div>
+        <!-- Aquí podrías mostrar un preview del comentario si lo tienes disponible -->
+      </li>
+      }
+    </ul>
+  </div>
   }
 </div>
