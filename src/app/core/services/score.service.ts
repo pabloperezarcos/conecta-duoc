@@ -15,10 +15,17 @@ export class ScoreService {
   }
 
   getUserScore(idPost: number, idUser: number): Observable<Score | null> {
-    return this.http.get<Score | null>(`${this.apiUrl}?idPost=${idPost}&idUser=${idUser}`);
+    return this.http.get<Score | null>(`${this.apiUrl}/user/${idUser}/post/${idPost}`);
   }
 
   setScore(score: Score): Observable<Score> {
-    return this.http.post<Score>(this.apiUrl, score);
+    return this.http.post<Score>(`${this.apiUrl}/save`, score);
   }
+
+  getResumenScores(idUser: number, idCategoria?: number): Observable<{ idPost: number; promedio: number; miScore: number | null }[]> {
+    let url = `${this.apiUrl}/resumen?idUser=${idUser}`;
+    if (idCategoria !== undefined) url += `&idCategoria=${idCategoria}`;
+    return this.http.get<{ idPost: number; promedio: number; miScore: number | null }[]>(url);
+  }
+
 }
