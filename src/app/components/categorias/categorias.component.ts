@@ -82,7 +82,6 @@ export class CategoriasComponent implements OnInit {
       this.publicaciones = posts;
       this.loading = false;
 
-      // Obtener nombres de los autores
       const ids = [...new Set(posts.map(p => p.idUser))];
       ids.forEach(id => {
         this.userService.getUserById(id).subscribe(user => {
@@ -90,19 +89,15 @@ export class CategoriasComponent implements OnInit {
         });
       });
 
-
-      // Obtener puntajes promedio y del usuario
-      posts.forEach(p => {
-        this.scoreService.getAverageScore(p.idPost).subscribe(avg => {
-          this.promedioScores[p.idPost] = avg;
-        });
-        const idUser = this.userService.getIdUser();
-        if (idUser) {
-          this.scoreService.getUserScore(p.idPost, idUser).subscribe(score => {
-            this.misScores[p.idPost] = score ? score.score : null;
+      const idUser = this.userService.getIdUser();
+      if (idUser) {
+        this.scoreService.getResumenScores(idUser, this.categoriaId ?? undefined).subscribe(resumenes => {
+          resumenes.forEach(r => {
+            this.promedioScores[r.idPost] = r.promedio;
+            this.misScores[r.idPost] = r.miScore;
           });
-        }
-      });
+        });
+      }
     });
   }
 
