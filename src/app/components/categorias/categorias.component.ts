@@ -1,13 +1,21 @@
+/* ANGULAR IMPORTS */
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
+/* BREADCRUMB */
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+
+/* MODELS */
+import { Post } from '../../models/post';
+
+/* SERVICES */
 import { PostCategoryService } from '../../core/services/post-category.service';
 import { PostService } from '../../core/services/post.service';
 import { UserService } from '../../core/services/user.service';
 import { ReportService } from '../../core/services/report.service';
-import { Post } from '../../models/post';
-import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { ScoreService } from '../../core/services/score.service';
 
 @Component({
   selector: 'app-categorias',
@@ -24,6 +32,7 @@ export class CategoriasComponent implements OnInit {
   private postService = inject(PostService);
   private userService = inject(UserService);
   private reportService = inject(ReportService);
+  private scoreService = inject(ScoreService);
 
   slug = '';
   categoriaId: number | null = null;
@@ -31,6 +40,8 @@ export class CategoriasComponent implements OnInit {
   nombreCategoriaMostrada = '';
   publicaciones: Post[] = [];
   nombresUsuarios: Record<number, string> = {};
+  promedioScores: Record<number, number> = {};
+  misScores: Record<number, number | null> = {};
   filtroBusqueda = '';
   form!: FormGroup;
   mostrarFormulario = false;
@@ -77,6 +88,20 @@ export class CategoriasComponent implements OnInit {
         this.userService.getUserById(id).subscribe(user => {
           this.nombresUsuarios[id] = user.name;
         });
+      });
+
+
+      // Obtener puntajes promedio y del usuario
+      posts.forEach(p => {
+        this.scoreService.getAverageScore(p.idPost).subscribe(avg => {
+          this.promedioScores[p.idPost] = avg;
+        });
+        const idUser = this.userService.getIdUser();
+        if (idUser) {
+          this.scoreService.getUserScore(p.idPost, idUser).subscribe(score => {
+            this.misScores[p.idPost] = score ? score.score : null;
+          });
+        }
       });
     });
   }
@@ -148,5 +173,18 @@ export class CategoriasComponent implements OnInit {
         return 'otros';
     }
   }
+
+  calificar(pub: Post, valor: number): void {
+    const idUser = this.userService.getIdUser();
+    if (!idUser) return;
+
+    this.scoreService.setScore({ idPost: pub.idPost, idUser, score: valor }).subscribe(() => {
+      this.misScores[pub.idPost] = valor;
+      this.scoreService.getAverageScore(pub.idPost).subscribe(avg => {
+        this.promedioScores[pub.idPost] = avg;
+      });
+    });
+  }
+
 
 }

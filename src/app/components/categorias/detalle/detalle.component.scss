@@ -2,18 +2,115 @@
 @use 'styles' as *;
 
 .titulo-principal {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 2.25rem;
+    font-weight: 700;
     color: $negro;
     position: relative;
 
     &::after {
         content: '';
-        display: block;
+        position: absolute;
+        bottom: -8px;
+        left: 0;
         width: 60px;
         height: 4px;
-        margin: 8px auto 0;
         background-color: $amarillo;
         border-radius: 2px;
+    }
+}
+
+.card-post {
+    background-color: #fff;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+    border: none;
+
+    .card-body {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: #444;
+    }
+
+    .card-footer {
+        font-size: 0.875rem;
+        color: #888;
+        border-top: 1px solid #eee;
+        padding-top: 0.75rem;
+        margin-top: 1rem;
+    }
+}
+
+.card-comentarios {
+    border-radius: 1.25rem;
+    border: none;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .comentario:hover {
+        background-color: #f9f9f9;
+    }
+
+    .card-header {
+        border-bottom: 1px solid #eee;
+        background-color: transparent;
+        font-weight: 600;
+        font-size: 1.25rem;
+    }
+
+    .comentario {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 0.75rem 0;
+
+        .autor {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .fecha {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .contenido {
+            font-size: 0.95rem;
+            margin: 0.25rem 0;
+        }
+    }
+
+    .alert-info {
+        background-color: #f0f8ff;
+        color: #555;
+        border: none;
+        border-radius: 0.75rem;
+        padding: 1rem;
+    }
+}
+
+.card-footer form {
+    background-color: #fafafa;
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+
+    .form-control {
+        border: none;
+        box-shadow: none;
+        border-radius: 0.75rem 0 0 0.75rem;
+    }
+
+    .btn {
+        border-radius: 0 0.75rem 0.75rem 0;
+        font-weight: 600;
     }
 }

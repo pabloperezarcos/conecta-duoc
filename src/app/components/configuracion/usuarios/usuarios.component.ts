@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../models/user';
@@ -9,7 +9,7 @@ import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 @Component({
   selector: 'app-config-usuarios',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, BreadcrumbComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, BreadcrumbComponent, FormsModule],
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss']
 })
@@ -20,6 +20,7 @@ export class UsuariosComponent implements OnInit {
   users: User[] = [];
   userForm!: FormGroup;
   editing: User | null = null;
+  filtroNombre: string = '';
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -30,6 +31,12 @@ export class UsuariosComponent implements OnInit {
     });
 
     this.cargarUsuarios();
+  }
+
+  get usuariosFiltrados(): User[] {
+    if (!this.filtroNombre.trim()) return this.users;
+    const filtro = this.filtroNombre.toLowerCase();
+    return this.users.filter(u => u.name?.toLowerCase().includes(filtro));
   }
 
   cargarUsuarios(): void {
