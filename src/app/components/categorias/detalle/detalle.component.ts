@@ -1,12 +1,20 @@
+/* ANGULAR IMPORTS */
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PostService } from '../../../core/services/post.service';
-import { CommentService } from '../../../core/services/comment.service';
-import { UserService } from '../../../core/services/user.service';
-import { ReportService } from '../../../core/services/report.service';
+
+/* MODELS */
 import { Post, Comment } from '../../../models/post';
+
+/* SERVICES */
+import { PostService } from '../../../core/services/post.service';
+import { UserService } from '../../../core/services/user.service';
+import { ScoreService } from '../../../core/services/score.service';
+import { ReportService } from '../../../core/services/report.service';
+import { CommentService } from '../../../core/services/comment.service';
+
+/* BreadCrumb */
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 
 @Component({
@@ -23,6 +31,7 @@ export class DetalleComponent implements OnInit {
   private commentService = inject(CommentService);
   private userService = inject(UserService);
   private reportService = inject(ReportService);
+  private scoreService = inject(ScoreService);
   private fb = inject(FormBuilder);
 
   post: Post | undefined;
@@ -30,6 +39,10 @@ export class DetalleComponent implements OnInit {
   comentarioForm!: FormGroup;
   loading = true;
   postingComment = false;
+  promedio = 0;
+  miScore: number | null = null;
+  estrellas = [1, 2, 3, 4, 5];
+  nombreAutor: string = 'Autor desconocido';
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -48,6 +61,26 @@ export class DetalleComponent implements OnInit {
       next: (post) => {
         this.post = post;
         document.title = `ConectaDuoc | ${post.title}`;
+
+        this.scoreService.getAverageScore(post.idPost).subscribe(avg => {
+          this.promedio = avg;
+        });
+        const idUser = this.userService.getIdUser();
+        if (idUser) {
+          this.scoreService.getUserScore(post.idPost, idUser).subscribe(score => {
+            this.miScore = score ? score.score : null;
+          });
+        }
+
+        this.userService.getUserById(post.idUser).subscribe({
+          next: (user) => {
+            this.nombreAutor = user.name;
+          },
+          error: () => {
+            this.nombreAutor = 'Autor desconocido';
+          }
+        });
+
         this.commentService.getByPostId(post.idPost).subscribe(comments => {
           this.comments = comments;
           this.loading = false;
@@ -57,6 +90,7 @@ export class DetalleComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       }
     });
+
   }
 
   comentar(): void {
@@ -98,5 +132,18 @@ export class DetalleComponent implements OnInit {
   volver(): void {
     const slug = this.route.snapshot.paramMap.get('slug') || 'dashboard';
     this.router.navigate(['/categoria', slug]);
+  }
+
+  calificar(valor: number): void {
+    if (!this.post) return;
+    const idUser = this.userService.getIdUser();
+    if (!idUser) return;
+
+    this.scoreService.setScore({ idPost: this.post.idPost, idUser, score: valor }).subscribe(() => {
+      this.miScore = valor;
+      this.scoreService.getAverageScore(this.post!.idPost).subscribe(avg => {
+        this.promedio = avg;
+      });
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PostCategoryService } from '../../../core/services/post-category.service';
 import { PostCategory } from '../../../models/postCategory';
@@ -9,7 +9,7 @@ import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 @Component({
   selector: 'app-config-categorias',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, BreadcrumbComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, BreadcrumbComponent, FormsModule],
   templateUrl: './categorias-admin.component.html',
   styleUrls: ['./categorias-admin.component.scss']
 })
@@ -20,6 +20,7 @@ export class CategoriasAdminComponent implements OnInit {
   categorias: PostCategory[] = [];
   categoriaForm!: FormGroup;
   editing: PostCategory | null = null;
+  filtroCategoria: string = '';
 
   ngOnInit(): void {
     this.categoriaForm = this.fb.group({
@@ -30,6 +31,13 @@ export class CategoriasAdminComponent implements OnInit {
 
     this.cargar();
   }
+
+  get categoriasFiltradas(): PostCategory[] {
+    if (!this.filtroCategoria.trim()) return this.categorias;
+    const filtro = this.filtroCategoria.toLowerCase();
+    return this.categorias.filter(c => c.name.toLowerCase().includes(filtro));
+  }
+
 
   cargar(): void {
     this.categoryService.getAll().subscribe(c => (this.categorias = c));

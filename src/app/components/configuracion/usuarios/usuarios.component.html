@@ -28,6 +28,11 @@
         </div>
     </form>
 
+    <!-- Filtro de búsqueda por nombre -->
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Buscar por nombre o apellido..." [(ngModel)]="filtroNombre" />
+    </div>
+
     <div class="table-responsive">
         <table class="table table-hover align-middle">
             <thead>
@@ -40,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let u of users">
+                <tr *ngFor="let u of usuariosFiltrados">
                     <td>{{ u.email }}</td>
                     <td>{{ u.name }}</td>
                     <td>{{ u.role }}</td>

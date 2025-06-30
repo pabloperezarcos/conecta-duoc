@@ -26,23 +26,48 @@ h5 {
 }
 
 .perfil-header {
+    border: 1px solid #eee;
+    border-radius: 1rem;
+    background: #fff;
+
     .avatar {
         width: 80px;
         height: 80px;
-        font-size: 2rem;
-        background-color: #6c757d;
+        background-color: #0d6efd;
         color: white;
+        border-radius: 50%;
+        font-size: 2rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        text-transform: uppercase;
-        overflow: hidden;
+        box-shadow: 0 0 0 3px white;
+        font-weight: 600;
+    }
+}
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+h4,
+h5 {
+    color: #212529;
+}
+
+.bg-white {
+    border: 1px solid #e0e0e0;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s ease;
+
+    &:hover {
+        background-color: #f8f9fa;
     }
 
+    .btn {
+        font-size: 0.85rem;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
 }

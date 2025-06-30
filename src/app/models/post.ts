@@ -18,7 +18,7 @@ export interface Comment {
 
 export interface Score {
     idPost: number;
-    idUser: string;
+    idUser: number;
     score: number;
 }
 

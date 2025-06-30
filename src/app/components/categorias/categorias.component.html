@@ -1,14 +1,21 @@
 <div class="container mt-4 mb-4 foro-categoria-container">
     <app-breadcrumb></app-breadcrumb>
 
-    <div class="d-flex justify-content-between align-items-center cabecera-categoria mt-5">
+    <div class="d-flex justify-content-between align-items-center cabecera-categoria mt-3">
         <h2 class="titulo-categoria text-capitalize">{{ nombreCategoriaMostrada }}</h2>
         <button class="btn btn-warning fw-bold" (click)="toggleFormulario()">
             <i class="fas fa-plus"></i>
             {{ mostrarFormulario ? 'Cancelar' : 'Publicar' }}
         </button>
     </div>
-
+    <p class="text-muted">
+        Aquí puedes compartir tus dudas, preguntas o temas relacionados con {{ nombreCategoriaMostrada
+        }}. ¡Sé parte de la comunidad!
+    </p>
+    <p class="text-muted">
+        <strong>Recuerda:</strong> Sé respetuoso y sigue las normas de la comunidad. Las publicaciones inapropiadas
+        pueden ser eliminadas.
+    </p>
 
     @if (!publicaciones.length) {
     <div class="alert alert-info text-center">
@@ -34,63 +41,55 @@
     }
 
     @if (publicaciones.length) {
-    <div class="mb-3">
+    <div class="mt-4 mb-4">
         <input type="text" class="form-control" placeholder="Buscar por palabra clave..." [(ngModel)]="filtroBusqueda"
             name="filtroBusqueda">
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-hover table-borderless foro-lista">
-            <thead class="border-bottom">
-                <tr class="small text-muted">
-                    <th>Título</th>
-                    <th class="text-center d-none d-md-table-cell">Autor</th>
-                    <th class="text-center d-none d-md-table-cell">Fecha</th>
-                    <th class="text-center">Comentarios</th>
-                    <th class="text-center d-none d-md-table-cell">Visitas</th>
-                    <th class="text-center">Reportar</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (pub of publicacionesFiltradas; track pub) {
-                <tr class="align-middle">
-                    <td>
-                        <a [routerLink]="['/categoria', slug, pub.idPost]"
-                            class="fw-bold text-dark text-decoration-none">
-                            {{ pub.title }}
-                        </a>
-                        <div class="small text-muted d-md-none">
-                            por {{ pub.idUser }} • {{ pub.createdDate | date:'dd/MM/yyyy' }}
-                        </div>
-                    </td>
-                    <td class="text-center d-none d-md-table-cell small text-muted">
-                        {{ nombresUsuarios[pub.idUser] || 'Cargando...' }}
-                    </td>
-                    <td class="text-center d-none d-md-table-cell small text-muted">
-                        {{ pub.createdDate | date:'dd/MM/yyyy' }}
-                    </td>
-                    <td class="text-center col-comentarios">
-                        <span class="badge bg-light text-dark fs-6 px-3 py-1">
-                            <!-- 💬 {{ pub.commentsCount || 0 }} -->
-                        </span>
-                    </td>
-                    <td class="text-center d-none d-md-table-cell">
-                        👁️ {{ pub.views || 0 }}
-                    </td>
-                    <td class="text-center">
-                        <button class="btn btn-link text-danger p-0" (click)="reportarPublicacion(pub)">
+    <div class="row g-3">
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let pub of publicacionesFiltradas">
+
+            <div class="card h-100 shadow-sm rounded-4 position-relative">
+                <a [routerLink]="['/categoria', slug, pub.idPost]" class="stretched-link"></a>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ pub.title }}</h5>
+                    <p class="text-muted small mb-2">
+                        por {{ nombresUsuarios[pub.idUser] || 'Cargando...' }} • {{ pub.createdDate | date:'dd/MM/yyyy'
+                        }}
+                    </p>
+                    <p class="card-text text-truncate">
+                        {{ pub.content }}
+                    </p>
+                    <!-- Calificación del usuario y promedio -->
+                    <div class="d-flex align-items-center gap-2 mt-3">
+
+                        <!-- Estrellas de calificación -->
+                        <ng-container *ngFor="let s of [1,2,3,4,5]">
+                            <i class="fa-star" [ngClass]="{
+                            'fas text-warning': (misScores[pub.idPost] ?? 0) >= s,
+                            'far text-muted': (misScores[pub.idPost] ?? 0) < s
+                            }" (click)="calificar(pub, s)" style="cursor:pointer"></i>
+                        </ng-container>
+
+                        <!-- Promedio -->
+                        <small class="text-muted ms-2">
+                            {{ promedioScores[pub.idPost] | number:'1.1-1' }} / 5
+                        </small>
+
+                        <!-- Botón de reportar -->
+                        <button class="btn btn-link text-danger p-0 ms-auto" matTooltip="Reportar publicación"
+                            (click)="reportarPublicacion(pub)">
                             <i class="fas fa-flag"></i>
                         </button>
-                    </td>
-                </tr>
-                }
-                @if (!publicacionesFiltradas.length) {
-                <div class="alert alert-warning text-center">
-                    No se encontraron coincidencias para "{{ filtroBusqueda }}".
+                    </div>
+
+
                 </div>
-                }
-            </tbody>
-        </table>
+            </div>
+
+        </div>
     </div>
+
     }
 </div>

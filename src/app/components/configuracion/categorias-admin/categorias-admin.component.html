@@ -25,6 +25,12 @@
         </div>
     </form>
 
+    <!-- Filtro de búsqueda por nombre de categoría -->
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Buscar por nombre de categoría..."
+            [(ngModel)]="filtroCategoria" />
+    </div>
+
     <div class="table-responsive">
         <table class="table table-hover align-middle">
             <thead>
@@ -36,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let c of categorias">
+                <tr *ngFor="let c of categoriasFiltradas">
                     <td>{{ c.name }}</td>
                     <td>{{ c.description }}</td>
                     <td>{{ c.status ? 'Activa' : 'Inactiva' }}</td>

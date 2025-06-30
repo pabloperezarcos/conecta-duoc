@@ -1,12 +1,23 @@
+ /* Angular imports */
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
-import { UserService } from '../../core/services/user.service';
-import { PostService } from '../../core/services/post.service';
-import { User } from '../../models/user';
-import { Post } from '../../models/post';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+
+/* BreadCrumb */
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+
+/* Services */
+import { UserService } from '../../core/services/user.service';
+import { PostService } from '../../core/services/post.service';
+import { CommentService } from '../../core/services/comment.service';
+import { PostCategoryService } from '../../core/services/post-category.service';
+
+/* Models */
+import { User } from '../../models/user';
+import { Post } from '../../models/post';
+import { PostCategory } from '../../models/postCategory';
 
 @Component({
   selector: 'app-perfil',
@@ -19,9 +30,12 @@ export class PerfilComponent implements OnInit {
   private userService = inject(UserService);
   private postService = inject(PostService);
   private router = inject(Router);
+  private commentService = inject(CommentService);
+  private postCategoryService = inject(PostCategoryService);
 
   user: User | null = null;
   posts: Post[] = [];
+  categories: PostCategory[] = [];
   sede = '';
   sedes: string[] = [
     'Modalidad online',
@@ -58,20 +72,30 @@ export class PerfilComponent implements OnInit {
       return;
     }
 
+    this.postCategoryService.getAll().subscribe(cats => (this.categories = cats));
+
     this.userService.getUser(email).subscribe(user => {
       this.user = user;
       this.sede = user.center;
+      if (user.idUser !== undefined) {
+        this.cargarPublicaciones(user.idUser);
+      }
     });
+  }
 
+  cargarPublicaciones(idUser: number): void {
     this.postService.getAll().subscribe(posts => {
-      // Solo las publicaciones del usuario
-      this.posts = posts.filter(p => String(p.idUser) === email);
+      this.posts = posts.filter(p => p.idUser === idUser);
       this.totalPosts = this.posts.length;
 
-      // Si tienes un sistema para obtener el número de comentarios por post,
-      // aquí sumarías ese dato (por ejemplo, si el backend retorna posts con un campo 'commentsCount')
-      // Por ahora, lo dejamos en cero, o si quieres, podrías hacer una petición extra por cada post.
-      this.totalComments = 0;
+      const commentRequests = this.posts.map(p => this.commentService.getByPostId(p.idPost));
+      if (commentRequests.length) {
+        forkJoin(commentRequests).subscribe(all => {
+          this.totalComments = all.reduce((acc, arr) => acc + arr.length, 0);
+        });
+      } else {
+        this.totalComments = 0;
+      }
     });
   }
 
@@ -83,13 +107,11 @@ export class PerfilComponent implements OnInit {
     if (this.user) {
       const updatedUser = { ...this.user, center: this.sede };
       this.userService.registerUser(updatedUser).subscribe(() => {
-        // Puede que quieras notificar al usuario de que el cambio fue exitoso
       });
     }
   }
 
   editar(post: Post): void {
-    // Redirecciona a la vista de edición según categoría
     this.router.navigate(['/dashboard/ayudantias', post.idPost], { state: { editar: post } });
   }
 }
