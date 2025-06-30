@@ -1,0 +1,53 @@
+<div class="container mt-5 mb-4">
+    <app-breadcrumb></app-breadcrumb>
+    <h2 class="mt-4 mb-2 text-center titulo-panel">Categorías</h2>
+    <p class="text-center text-muted mb-5">Administra las categorías de la plataforma</p>
+
+    <form [formGroup]="categoriaForm" (ngSubmit)="guardar()" class="mb-4">
+        <div class="row g-2">
+            <div class="col-sm">
+                <input type="text" formControlName="name" class="form-control" placeholder="Nombre" />
+            </div>
+            <div class="col-sm">
+                <input type="text" formControlName="description" class="form-control" placeholder="Descripción" />
+            </div>
+            <div class="col-sm">
+                <select formControlName="status" class="form-select">
+                    <option [value]="1">Activa</option>
+                    <option [value]="0">Inactiva</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-warning" type="submit">{{ editing ? 'Actualizar' : 'Agregar' }}</button>
+                <button class="btn btn-secondary ms-2" type="button" *ngIf="editing"
+                    (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of categorias">
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.description }}</td>
+                    <td>{{ c.status ? 'Activa' : 'Inactiva' }}</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(c)"><i
+                                class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" (click)="eliminar(c)"><i
+                                class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

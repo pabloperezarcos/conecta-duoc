@@ -1,0 +1,58 @@
+<div class="container mt-5 mb-4">
+    <app-breadcrumb></app-breadcrumb>
+    <h2 class="mt-4 mb-2 text-center titulo-panel">Usuarios</h2>
+    <p class="text-center text-muted mb-5">Administra los usuarios de la plataforma</p>
+
+    <form [formGroup]="userForm" (ngSubmit)="guardar()" class="mb-4">
+        <div class="row g-2">
+            <div class="col-sm">
+                <input type="email" formControlName="email" class="form-control" placeholder="Email" />
+            </div>
+            <div class="col-sm">
+                <input type="text" formControlName="name" class="form-control" placeholder="Nombre" />
+            </div>
+            <div class="col-sm">
+                <select formControlName="role" class="form-select">
+                    <option value="admin">Admin</option>
+                    <option value="student">Student</option>
+                </select>
+            </div>
+            <div class="col-sm">
+                <input type="text" formControlName="center" class="form-control" placeholder="Sede" />
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-warning" type="submit">{{ editing ? 'Actualizar' : 'Agregar' }}</button>
+                <button class="btn btn-secondary ms-2" type="button" *ngIf="editing"
+                    (click)="cancelarEdicion()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Sede</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let u of users">
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.name }}</td>
+                    <td>{{ u.role }}</td>
+                    <td>{{ u.center }}</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(u)"><i
+                                class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" (click)="eliminar(u)"><i
+                                class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

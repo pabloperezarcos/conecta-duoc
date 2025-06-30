@@ -13,4 +13,18 @@ export class PostCategoryService {
   getAll(): Observable<PostCategory[]> {
     return this.http.get<PostCategory[]>(this.apiUrl);
   }
+
+  /* ADICIONALES PARA MODULO DE CONFIGURACIONES */
+
+  create(category: Omit<PostCategory, 'idCategory'>): Observable<PostCategory> {
+    return this.http.post<PostCategory>(this.apiUrl, category);
+  }
+
+  update(id: number, category: PostCategory): Observable<PostCategory> {
+    return this.http.put<PostCategory>(`${this.apiUrl}/${id}`, category);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }
