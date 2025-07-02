@@ -1,0 +1,1952 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>conecta-duoc documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">conecta-duoc documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CategoriasComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/categorias/categorias.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que gestiona la visualización, creación, filtrado, reporte y puntuación
+de publicaciones dentro de una categoría específica en ConectaDuoc.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-categorias</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="../components/BreadcrumbComponent.html" target="_self" >BreadcrumbComponent</a></code>
+                            <code>FormsModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>RouterModule</code>
+                            <code>CommonModule</code>
+                                <code><a href="../components/NotificacionBannerComponent.html" target="_self" >NotificacionBannerComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./categorias.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./categorias.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#categoriaId" >categoriaId</a>
+                            </li>
+                            <li>
+                                <a href="#categoriaNombre" >categoriaNombre</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#filtroBusqueda" >filtroBusqueda</a>
+                            </li>
+                            <li>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#misScores" >misScores</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarFormulario" >mostrarFormulario</a>
+                            </li>
+                            <li>
+                                <a href="#nombreCategoriaMostrada" >nombreCategoriaMostrada</a>
+                            </li>
+                            <li>
+                                <a href="#nombresUsuarios" >nombresUsuarios</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#postCategoryService" >postCategoryService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#postService" >postService</a>
+                            </li>
+                            <li>
+                                <a href="#promedioScores" >promedioScores</a>
+                            </li>
+                            <li>
+                                <a href="#publicaciones" >publicaciones</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#reportService" >reportService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#scoreService" >scoreService</a>
+                            </li>
+                            <li>
+                                <a href="#slug" >slug</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#calificar" >calificar</a>
+                            </li>
+                            <li>
+                                <a href="#cargarPublicaciones" >cargarPublicaciones</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#nuevaPublicacion" >nuevaPublicacion</a>
+                            </li>
+                            <li>
+                                <a href="#reportarPublicacion" >reportarPublicacion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#slugify" >slugify</a>
+                            </li>
+                            <li>
+                                <a href="#toggleFormulario" >toggleFormulario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#publicacionesFiltradas" >publicacionesFiltradas</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calificar"></a>
+                    <span class="name">
+                        <span ><b>calificar</b></span>
+                        <a href="#calificar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calificar(pub: <a href="../interfaces/Post.html" target="_self">Post</a>, valor: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="214"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:214</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>pub</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Post.html" target="_self" >Post</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>valor</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarPublicaciones"></a>
+                    <span class="name">
+                        <span ><b>cargarPublicaciones</b></span>
+                        <a href="#cargarPublicaciones"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarPublicaciones()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Carga todas las publicaciones de la categoría actual, junto con los nombres de usuarios
+y las puntuaciones (promedio y personales).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa la vista de categoría, cargando la categoría correspondiente y sus publicaciones.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nuevaPublicacion"></a>
+                    <span class="name">
+                        <span ><b>nuevaPublicacion</b></span>
+                        <a href="#nuevaPublicacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>nuevaPublicacion()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Envía una nueva publicación al backend si el formulario es válido.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportarPublicacion"></a>
+                    <span class="name">
+                        <span ><b>reportarPublicacion</b></span>
+                        <a href="#reportarPublicacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reportarPublicacion(pub: <a href="../interfaces/Post.html" target="_self">Post</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Reporta una publicación por contenido inapropiado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>pub</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Post.html" target="_self" >Post</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Publicación a reportar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="slugify"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>slugify</b></span>
+                        <a href="#slugify"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>slugify(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:206</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>text</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleFormulario"></a>
+                    <span class="name">
+                        <span ><b>toggleFormulario</b></span>
+                        <a href="#toggleFormulario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleFormulario()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Muestra u oculta el formulario para crear una nueva publicación.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categoriaId"></a>
+                    <span class="name">
+                        <span ><b>categoriaId</b></span>
+                        <a href="#categoriaId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/categorias/categorias.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>ID de la categoría actual</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categoriaNombre"></a>
+                    <span class="name">
+                        <span ><b>categoriaNombre</b></span>
+                        <a href="#categoriaNombre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/categorias/categorias.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombre legible de la categoría actual</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/categorias/categorias.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filtroBusqueda"></a>
+                    <span class="name">
+                        <span ><b>filtroBusqueda</b></span>
+                        <a href="#filtroBusqueda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/categorias/categorias.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Texto de búsqueda para filtrar publicaciones</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/categorias/categorias.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario para nueva publicación</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/categorias/categorias.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado de carga</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="misScores"></a>
+                    <span class="name">
+                        <span ><b>misScores</b></span>
+                        <a href="#misScores"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;number | number | null&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/categorias/categorias.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Diccionario con puntuación personal del usuario en cada publicación</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarFormulario"></a>
+                    <span class="name">
+                        <span ><b>mostrarFormulario</b></span>
+                        <a href="#mostrarFormulario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/categorias/categorias.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla visibilidad del formulario</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nombreCategoriaMostrada"></a>
+                    <span class="name">
+                        <span ><b>nombreCategoriaMostrada</b></span>
+                        <a href="#nombreCategoriaMostrada"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/categorias/categorias.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nombresUsuarios"></a>
+                    <span class="name">
+                        <span ><b>nombresUsuarios</b></span>
+                        <a href="#nombresUsuarios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;number | string&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/categorias/categorias.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Diccionario con nombres de usuarios indexados por ID</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postCategoryService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>postCategoryService</b></span>
+                        <a href="#postCategoryService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PostCategoryService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/categorias/categorias.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>postService</b></span>
+                        <a href="#postService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PostService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/categorias/categorias.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="promedioScores"></a>
+                    <span class="name">
+                        <span ><b>promedioScores</b></span>
+                        <a href="#promedioScores"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;number | number&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/components/categorias/categorias.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Diccionario con promedios de puntuación por publicación</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="publicaciones"></a>
+                    <span class="name">
+                        <span ><b>publicaciones</b></span>
+                        <a href="#publicaciones"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Post.html" target="_self" >Post[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/categorias/categorias.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Publicaciones cargadas desde el backend</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>reportService</b></span>
+                        <a href="#reportService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReportService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/categorias/categorias.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/categorias/categorias.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/categorias/categorias.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scoreService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>scoreService</b></span>
+                        <a href="#scoreService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ScoreService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/categorias/categorias.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="slug"></a>
+                    <span class="name">
+                        <span ><b>slug</b></span>
+                        <a href="#slug"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/categorias/categorias.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Slug obtenido desde la URL</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/categorias/categorias.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="publicacionesFiltradas"></a>
+                        <span class="name"><b>publicacionesFiltradas</b><a href="#publicacionesFiltradas"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>publicacionesFiltradas()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/components/categorias/categorias.component.ts:142</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Devuelve las publicaciones filtradas por el texto ingresado.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/Post.html" target="_self" >Post[]</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+
+/* BREADCRUMB y BANNER*/
+import { BreadcrumbComponent } from &#x27;../breadcrumb/breadcrumb.component&#x27;;
+import { NotificacionBannerComponent } from &#x27;../notificacion-banner/notificacion-banner.component&#x27;;
+
+/* MODELS */
+import { Post } from &#x27;../../models/post&#x27;;
+
+/* SERVICES */
+import { PostCategoryService } from &#x27;../../core/services/post-category.service&#x27;;
+import { PostService } from &#x27;../../core/services/post.service&#x27;;
+import { UserService } from &#x27;../../core/services/user.service&#x27;;
+import { ReportService } from &#x27;../../core/services/report.service&#x27;;
+import { ScoreService } from &#x27;../../core/services/score.service&#x27;;
+
+/**
+ * Componente que gestiona la visualización, creación, filtrado, reporte y puntuación
+ * de publicaciones dentro de una categoría específica en ConectaDuoc.
+ */
+@Component({
+  selector: &#x27;app-categorias&#x27;,
+  standalone: true,
+  imports: [BreadcrumbComponent, FormsModule, ReactiveFormsModule, RouterModule, CommonModule, NotificacionBannerComponent],
+  templateUrl: &#x27;./categorias.component.html&#x27;,
+  styleUrls: [&#x27;./categorias.component.scss&#x27;]
+})
+export class CategoriasComponent implements OnInit {
+  private route &#x3D; inject(ActivatedRoute);
+  private router &#x3D; inject(Router);
+  private fb &#x3D; inject(FormBuilder);
+  private postCategoryService &#x3D; inject(PostCategoryService);
+  private postService &#x3D; inject(PostService);
+  private userService &#x3D; inject(UserService);
+  private reportService &#x3D; inject(ReportService);
+  private scoreService &#x3D; inject(ScoreService);
+
+  /** Slug obtenido desde la URL */
+  slug &#x3D; &#x27;&#x27;;
+
+  /** ID de la categoría actual */
+  categoriaId: number | null &#x3D; null;
+
+  /** Nombre legible de la categoría actual */
+  categoriaNombre &#x3D; &#x27;&#x27;;
+
+  /* Nombre de la categoría a mostrar */
+  nombreCategoriaMostrada &#x3D; &#x27;&#x27;;
+
+  /** Publicaciones cargadas desde el backend */
+  publicaciones: Post[] &#x3D; [];
+
+  /** Diccionario con nombres de usuarios indexados por ID */
+  nombresUsuarios: Record&lt;number, string&gt; &#x3D; {};
+
+  /** Diccionario con promedios de puntuación por publicación */
+  promedioScores: Record&lt;number, number&gt; &#x3D; {};
+
+  /** Diccionario con puntuación personal del usuario en cada publicación */
+  misScores: Record&lt;number, number | null&gt; &#x3D; {};
+
+  /** Texto de búsqueda para filtrar publicaciones */
+  filtroBusqueda &#x3D; &#x27;&#x27;;
+
+  /** Formulario para nueva publicación */
+  form!: FormGroup;
+
+  /** Controla visibilidad del formulario */
+  mostrarFormulario &#x3D; false;
+
+  /** Estado de carga */
+  loading &#x3D; true;
+
+  /**
+   * Inicializa la vista de categoría, cargando la categoría correspondiente y sus publicaciones.
+   */
+  ngOnInit(): void {
+    this.form &#x3D; this.fb.group({
+      title: [&#x27;&#x27;, Validators.required],
+      content: [&#x27;&#x27;, Validators.required]
+    });
+
+    this.slug &#x3D; this.route.snapshot.paramMap.get(&#x27;slug&#x27;) || &#x27;&#x27;;
+    console.log(&#x27;Slug cargado:&#x27;, this.slug);
+
+    this.postCategoryService.getAll().subscribe(categories &#x3D;&gt; {
+      const categoria &#x3D; categories.find(cat &#x3D;&gt;
+        this.slugify(cat.name) &#x3D;&#x3D;&#x3D; this.slug
+      );
+
+      if (!categoria) {
+        this.router.navigate([&#x27;/dashboard&#x27;]);
+        return;
+      }
+
+      this.categoriaId &#x3D; categoria.idCategory;
+      this.categoriaNombre &#x3D; categoria.name;
+      this.nombreCategoriaMostrada &#x3D; categoria.name;
+
+      this.cargarPublicaciones();
+    });
+  }
+
+  /**
+   * Carga todas las publicaciones de la categoría actual, junto con los nombres de usuarios
+   * y las puntuaciones (promedio y personales).
+   */
+  cargarPublicaciones(): void {
+    if (!this.categoriaId) return;
+
+    this.loading &#x3D; true;
+    this.postService.getAll(this.categoriaId).subscribe(posts &#x3D;&gt; {
+      this.publicaciones &#x3D; posts;
+      this.loading &#x3D; false;
+
+      const ids &#x3D; [...new Set(posts.map(p &#x3D;&gt; p.idUser))];
+      ids.forEach(id &#x3D;&gt; {
+        this.userService.getUserById(id).subscribe(user &#x3D;&gt; {
+          this.nombresUsuarios[id] &#x3D; user.name;
+        });
+      });
+
+      const idUser &#x3D; this.userService.getIdUser();
+      if (idUser) {
+        this.scoreService.getResumenScores(idUser, this.categoriaId ?? undefined).subscribe(resumenes &#x3D;&gt; {
+          resumenes.forEach(r &#x3D;&gt; {
+            this.promedioScores[r.idPost] &#x3D; r.promedio;
+            this.misScores[r.idPost] &#x3D; r.miScore;
+          });
+        });
+      }
+    });
+  }
+
+  /**
+   * Devuelve las publicaciones filtradas por el texto ingresado.
+   */
+  get publicacionesFiltradas(): Post[] {
+    if (!this.filtroBusqueda.trim()) return this.publicaciones;
+    const texto &#x3D; this.filtroBusqueda.trim().toLowerCase();
+    return this.publicaciones.filter(pub &#x3D;&gt;
+      pub.title.toLowerCase().includes(texto) ||
+      pub.content.toLowerCase().includes(texto)
+    );
+  }
+
+  /**
+   * Muestra u oculta el formulario para crear una nueva publicación.
+   */
+  toggleFormulario(): void {
+    this.mostrarFormulario &#x3D; !this.mostrarFormulario;
+    if (!this.mostrarFormulario) this.form.reset();
+  }
+
+
+  /**
+   * Envía una nueva publicación al backend si el formulario es válido.
+   */
+  nuevaPublicacion(): void {
+    if (this.form.invalid || !this.categoriaId) return;
+
+    const idUser &#x3D; this.userService.getIdUser();
+    if (!idUser) {
+      alert(&#x27;No se pudo obtener el ID del usuario.&#x27;);
+      return;
+    }
+
+    const nueva &#x3D; {
+      title: this.form.value.title,
+      content: this.form.value.content,
+      idCategory: this.categoriaId,
+      idUser: idUser,
+      createdDate: new Date().toISOString()
+    };
+
+    this.postService.createPost(nueva).subscribe({
+      next: () &#x3D;&gt; {
+        this.cargarPublicaciones();
+        this.form.reset();
+        this.mostrarFormulario &#x3D; false;
+        alert(&#x27;¡Publicación creada con éxito!&#x27;);
+      },
+      error: err &#x3D;&gt; {
+        console.error(&#x27;Error al crear publicación:&#x27;, err);
+        alert(&#x27;Error al publicar&#x27;);
+      }
+    });
+  }
+
+  /**
+   * Reporta una publicación por contenido inapropiado.
+   * @param pub Publicación a reportar.
+   */
+  reportarPublicacion(pub: Post): void {
+    const reason &#x3D; prompt(&#x27;Motivo del reporte&#x27;, &#x27;Contenido inapropiado&#x27;);
+    if (!reason) return;
+    this.reportService.reportPost(pub.idPost, reason).subscribe(() &#x3D;&gt; {
+      alert(&#x27;Publicación reportada&#x27;);
+    });
+  }
+
+  private slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize(&#x27;NFD&#x27;).replace(/[\u0300-\u036f]/g, &#x27;&#x27;)
+      .replace(/[^a-z0-9]+/g, &#x27;-&#x27;)
+      .replace(/(^-|-$)/g, &#x27;&#x27;);
+  }
+
+  calificar(pub: Post, valor: number): void {
+    const idUser &#x3D; this.userService.getIdUser();
+    if (!idUser) return;
+
+    this.scoreService.setScore({ idPost: pub.idPost, idUser, score: valor }).subscribe(() &#x3D;&gt; {
+      this.misScores[pub.idPost] &#x3D; valor;
+      this.scoreService.getAverageScore(pub.idPost).subscribe(avg &#x3D;&gt; {
+        this.promedioScores[pub.idPost] &#x3D; avg;
+      });
+    });
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-notificacion-banner&gt;&lt;/app-notificacion-banner&gt;
+&lt;div class&#x3D;&quot;container mt-4 mb-4 foro-categoria-container&quot;&gt;
+    &lt;app-breadcrumb&gt;&lt;/app-breadcrumb&gt;
+
+    &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center cabecera-categoria mt-3&quot;&gt;
+        &lt;h2 class&#x3D;&quot;titulo-categoria text-capitalize&quot;&gt;{{ nombreCategoriaMostrada }}&lt;/h2&gt;
+        &lt;button class&#x3D;&quot;btn btn-warning fw-bold&quot; (click)&#x3D;&quot;toggleFormulario()&quot;&gt;
+            &lt;i class&#x3D;&quot;fas fa-plus&quot;&gt;&lt;/i&gt;
+            {{ mostrarFormulario ? &#x27;Cancelar&#x27; : &#x27;Publicar&#x27; }}
+        &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p class&#x3D;&quot;text-muted&quot;&gt;
+        Aquí puedes compartir tus dudas, preguntas o temas relacionados con {{ nombreCategoriaMostrada
+        }}. ¡Sé parte de la comunidad!
+    &lt;/p&gt;
+    &lt;p class&#x3D;&quot;text-muted&quot;&gt;
+        &lt;strong&gt;Recuerda:&lt;/strong&gt; Sé respetuoso y sigue las normas de la comunidad. Las publicaciones inapropiadas
+        pueden ser eliminadas.
+    &lt;/p&gt;
+
+    @if (!publicaciones.length) {
+    &lt;div class&#x3D;&quot;alert alert-info text-center&quot;&gt;
+        Aún no hay publicaciones en esta categoría. Sé el primero en compartir una 💡
+    &lt;/div&gt;
+    }
+
+    @if (mostrarFormulario) {
+    &lt;form (ngSubmit)&#x3D;&quot;nuevaPublicacion()&quot; [formGroup]&#x3D;&quot;form&quot; class&#x3D;&quot;mb-4&quot;&gt;
+        &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+            &lt;label for&#x3D;&quot;title&quot;&gt;Título&lt;/label&gt;
+            &lt;input id&#x3D;&quot;title&quot; formControlName&#x3D;&quot;title&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Ej: Ayuda con matemáticas&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+            &lt;label for&#x3D;&quot;content&quot;&gt;Descripción&lt;/label&gt;
+            &lt;textarea id&#x3D;&quot;content&quot; formControlName&#x3D;&quot;content&quot; class&#x3D;&quot;form-control&quot; rows&#x3D;&quot;4&quot;
+                placeholder&#x3D;&quot;Detalle de la publicación...&quot;&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+        &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-warning fw-bold w-100&quot; [disabled]&#x3D;&quot;form.invalid&quot;&gt;
+            Publicar
+        &lt;/button&gt;
+    &lt;/form&gt;
+    }
+
+    @if (publicaciones.length) {
+    &lt;div class&#x3D;&quot;mt-4 mb-4&quot;&gt;
+        &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Buscar por palabra clave...&quot; [(ngModel)]&#x3D;&quot;filtroBusqueda&quot;
+            name&#x3D;&quot;filtroBusqueda&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;row g-3&quot;&gt;
+        &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-4&quot; *ngFor&#x3D;&quot;let pub of publicacionesFiltradas&quot;&gt;
+
+            &lt;div class&#x3D;&quot;card h-100 shadow-sm rounded-4 position-relative&quot;&gt;
+                &lt;a [routerLink]&#x3D;&quot;[&#x27;/categoria&#x27;, slug, pub.idPost]&quot; class&#x3D;&quot;stretched-link&quot;&gt;&lt;/a&gt;
+
+                &lt;div class&#x3D;&quot;card-body&quot;&gt;
+                    &lt;h5 class&#x3D;&quot;card-title&quot;&gt;{{ pub.title }}&lt;/h5&gt;
+                    &lt;p class&#x3D;&quot;text-muted small mb-2&quot;&gt;
+                        por {{ nombresUsuarios[pub.idUser] || &#x27;Cargando...&#x27; }} • {{ pub.createdDate | date:&#x27;dd/MM/yyyy&#x27;
+                        }}
+                    &lt;/p&gt;
+                    &lt;p class&#x3D;&quot;card-text text-truncate&quot;&gt;
+                        {{ pub.content }}
+                    &lt;/p&gt;
+                    &lt;!-- Calificación del usuario y promedio --&gt;
+                    &lt;div class&#x3D;&quot;d-flex align-items-center gap-2 mt-3&quot;&gt;
+
+                        &lt;!-- Estrellas de calificación --&gt;
+                        &lt;ng-container *ngFor&#x3D;&quot;let s of [1,2,3,4,5]&quot;&gt;
+                            &lt;i class&#x3D;&quot;fa-star&quot; [ngClass]&#x3D;&quot;{
+                            &#x27;fas text-warning&#x27;: (misScores[pub.idPost] ?? 0) &gt;&#x3D; s,
+                            &#x27;far text-muted&#x27;: (misScores[pub.idPost] ?? 0) &lt; s
+                            }&quot; (click)&#x3D;&quot;calificar(pub, s)&quot; style&#x3D;&quot;cursor:pointer&quot;&gt;&lt;/i&gt;
+                        &lt;/ng-container&gt;
+
+                        &lt;!-- Promedio --&gt;
+                        &lt;small class&#x3D;&quot;text-muted ms-2&quot;&gt;
+                            {{ promedioScores[pub.idPost] | number:&#x27;1.1-1&#x27; }} / 5
+                        &lt;/small&gt;
+
+                        &lt;!-- Botón de reportar --&gt;
+                        &lt;button class&#x3D;&quot;btn btn-link text-danger p-0 ms-auto&quot; matTooltip&#x3D;&quot;Reportar publicación&quot;
+                            (click)&#x3D;&quot;reportarPublicacion(pub)&quot;&gt;
+                            &lt;i class&#x3D;&quot;fas fa-flag&quot;&gt;&lt;/i&gt;
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+
+
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    }
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./categorias.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;sass:color&#x27;;
+@use &#x27;styles&#x27; as *;
+
+/* CONTENEDOR GENERAL */
+.foro-categoria-container {
+    //background-color: $gris;
+    border-radius: 1rem;
+    padding: 2rem;
+
+    .cabecera-categoria {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+    }
+
+    .titulo-categoria {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: $negro;
+        position: relative;
+
+        &amp;::after {
+            content: &#x27;&#x27;;
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: $amarillo;
+            border-radius: 4px;
+        }
+    }
+}
+
+/* Formulario de publicación */
+form {
+    background-color: $blanco;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+
+    label {
+        font-weight: 600;
+    }
+
+    input,
+    textarea {
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ced4da;
+    }
+
+    button {
+        margin-top: 1rem;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+    }
+}
+
+/* Tabla de publicaciones */
+.card {
+    transition: transform 0.2s ease;
+    position: relative;
+
+    &amp;:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .stretched-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .btn,
+    .badge,
+    .card-body * {
+        position: relative;
+        z-index: 3;
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-notificacion-banner></app-notificacion-banner><div class="container mt-4 mb-4 foro-categoria-container">    <app-breadcrumb></app-breadcrumb>    <div class="d-flex justify-content-between align-items-center cabecera-categoria mt-3">        <h2 class="titulo-categoria text-capitalize">{{ nombreCategoriaMostrada }}</h2>        <button class="btn btn-warning fw-bold" (click)="toggleFormulario()">            <i class="fas fa-plus"></i>            {{ mostrarFormulario ? \'Cancelar\' : \'Publicar\' }}        </button>    </div>    <p class="text-muted">        Aquí puedes compartir tus dudas, preguntas o temas relacionados con {{ nombreCategoriaMostrada        }}. ¡Sé parte de la comunidad!    </p>    <p class="text-muted">        <strong>Recuerda:</strong> Sé respetuoso y sigue las normas de la comunidad. Las publicaciones inapropiadas        pueden ser eliminadas.    </p>    @if (!publicaciones.length) {    <div class="alert alert-info text-center">        Aún no hay publicaciones en esta categoría. Sé el primero en compartir una 💡    </div>    }    @if (mostrarFormulario) {    <form (ngSubmit)="nuevaPublicacion()" [formGroup]="form" class="mb-4">        <div class="mb-3">            <label for="title">Título</label>            <input id="title" formControlName="title" class="form-control" placeholder="Ej: Ayuda con matemáticas" />        </div>        <div class="mb-3">            <label for="content">Descripción</label>            <textarea id="content" formControlName="content" class="form-control" rows="4"                placeholder="Detalle de la publicación..."></textarea>        </div>        <button type="submit" class="btn btn-warning fw-bold w-100" [disabled]="form.invalid">            Publicar        </button>    </form>    }    @if (publicaciones.length) {    <div class="mt-4 mb-4">        <input type="text" class="form-control" placeholder="Buscar por palabra clave..." [(ngModel)]="filtroBusqueda"            name="filtroBusqueda">    </div>    <div class="row g-3">        <div class="col-12 col-md-6 col-lg-4" *ngFor="let pub of publicacionesFiltradas">            <div class="card h-100 shadow-sm rounded-4 position-relative">                <a [routerLink]="[\'/categoria\', slug, pub.idPost]" class="stretched-link"></a>                <div class="card-body">                    <h5 class="card-title">{{ pub.title }}</h5>                    <p class="text-muted small mb-2">                        por {{ nombresUsuarios[pub.idUser] || \'Cargando...\' }} • {{ pub.createdDate | date:\'dd/MM/yyyy\'                        }}                    </p>                    <p class="card-text text-truncate">                        {{ pub.content }}                    </p>                    <!-- Calificación del usuario y promedio -->                    <div class="d-flex align-items-center gap-2 mt-3">                        <!-- Estrellas de calificación -->                        <ng-container *ngFor="let s of [1,2,3,4,5]">                            <i class="fa-star" [ngClass]="{                            \'fas text-warning\': (misScores[pub.idPost] ?? 0) >= s,                            \'far text-muted\': (misScores[pub.idPost] ?? 0) < s                            }" (click)="calificar(pub, s)" style="cursor:pointer"></i>                        </ng-container>                        <!-- Promedio -->                        <small class="text-muted ms-2">                            {{ promedioScores[pub.idPost] | number:\'1.1-1\' }} / 5                        </small>                        <!-- Botón de reportar -->                        <button class="btn btn-link text-danger p-0 ms-auto" matTooltip="Reportar publicación"                            (click)="reportarPublicacion(pub)">                            <i class="fas fa-flag"></i>                        </button>                    </div>                </div>            </div>        </div>    </div>    }</div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotificacionBannerComponent', 'selector': 'app-notificacion-banner'},{'name': 'NotificacionesComponent', 'selector': 'app-notificaciones'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CategoriasComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CategoriasComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

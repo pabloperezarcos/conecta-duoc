@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { User } from '../../models/user';
 
+/**
+ * Componente responsable del inicio de sesión con Azure AD.
+ * Valida si el usuario existe, redirige a registro o dashboard,
+ * y maneja la lógica de aceptación de políticas.
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -16,9 +21,16 @@ export class LoginComponent implements OnInit {
   private router = inject(Router);
   private userService = inject(UserService);
 
+  /** Título de la pantalla de inicio de sesión */
   title = 'Conecta-DUOC';
+
+  /** Indica si el usuario está autenticado actualmente */
   isLoggedIn = false;
 
+  /**
+   * Al iniciar, verifica si ya hay una sesión activa.
+   * Si existe, intenta redirigir al flujo correspondiente.
+   */
   ngOnInit(): void {
     const account = this.msalService.instance.getActiveAccount();
     this.isLoggedIn = !!account;
@@ -28,6 +40,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * Inicia sesión usando MSAL (popup).
+   * Si es exitoso, valida al usuario en el backend y redirige.
+   */
   login() {
     this.msalService.loginPopup().subscribe({
       next: () => {
@@ -49,7 +65,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
+  /**
+   * Cierra sesión mediante MSAL y limpia los datos locales.
+   */
   logout() {
     this.msalService.logoutPopup().subscribe({
       next: () => {
@@ -64,8 +82,10 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Verifica si el usuario existe en la BD, si no existe lo fuerza a registrarse,
-   * y si existe revisa si aceptó políticas para redirigirlo correctamente.
+   * Verifica si el usuario ya existe en la base de datos.
+   * - Si no existe, lo redirige a la vista de registro.
+   * - Si existe, guarda sus datos y lo redirige según si aceptó políticas.
+   * @param email Correo del usuario autenticado por MSAL.
    */
   private checkAndRedirect(email: string) {
     this.userService.checkUserExists(email).subscribe({

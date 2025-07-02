@@ -3,6 +3,12 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 import { inject } from '@angular/core';
 
+/**
+ * Guard personalizado que verifica si el usuario ha aceptado las reglas de la comunidad.
+ * Si no lo ha hecho, redirige a la ruta `/reglas-de-la-comunidad`.
+ * Se usa en conjunto con `AuthGuard` para rutas protegidas.
+ * @returns `true` si las reglas fueron aceptadas, `false` si se redirige.
+ */
 const reglasAceptadasGuard = () => {
     const router = inject(Router);
     const aceptadas = localStorage.getItem('conectaReglasAceptadas') === 'true';
@@ -15,6 +21,11 @@ const reglasAceptadasGuard = () => {
     return true;
 };
 
+/**
+ * Definición de todas las rutas de la aplicación ConectaDuoc.
+ * Incluye configuración de guards, carga perezosa de componentes,
+ * visibilidad de navbar/footer, y control de acceso por rol.
+ */
 export const routes: Routes = [
     {
         path: '',

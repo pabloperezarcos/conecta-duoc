@@ -1,0 +1,2163 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>conecta-duoc documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">conecta-duoc documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PublicacionesReportadasComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente administrativo para revisar, moderar y resolver reportes
+sobre publicaciones y comentarios en la plataforma ConectaDuoc.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-publicaciones-reportadas</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                                <code><a href="../components/BreadcrumbComponent.html" target="_self" >BreadcrumbComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./publicaciones-reportadas.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./publicaciones-reportadas.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#commentReports" >commentReports</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#commentService" >commentService</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarSoloPendientes" >mostrarSoloPendientes</a>
+                            </li>
+                            <li>
+                                <a href="#paginaActualComments" >paginaActualComments</a>
+                            </li>
+                            <li>
+                                <a href="#paginaActualPosts" >paginaActualPosts</a>
+                            </li>
+                            <li>
+                                <a href="#postReports" >postReports</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#postService" >postService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#reportService" >reportService</a>
+                            </li>
+                            <li>
+                                <a href="#totalPorPagina" >totalPorPagina</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cambiarPaginaComments" >cambiarPaginaComments</a>
+                            </li>
+                            <li>
+                                <a href="#cambiarPaginaPosts" >cambiarPaginaPosts</a>
+                            </li>
+                            <li>
+                                <a href="#confirmarComentario" >confirmarComentario</a>
+                            </li>
+                            <li>
+                                <a href="#confirmarPost" >confirmarPost</a>
+                            </li>
+                            <li>
+                                <a href="#denegarComentario" >denegarComentario</a>
+                            </li>
+                            <li>
+                                <a href="#denegarPost" >denegarPost</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#recargar" >recargar</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#postPendientes" >postPendientes</a>
+                                </li>
+                                <li>
+                                    <a href="#postConcedidos" >postConcedidos</a>
+                                </li>
+                                <li>
+                                    <a href="#postRechazados" >postRechazados</a>
+                                </li>
+                                <li>
+                                    <a href="#commentPendientes" >commentPendientes</a>
+                                </li>
+                                <li>
+                                    <a href="#commentConcedidos" >commentConcedidos</a>
+                                </li>
+                                <li>
+                                    <a href="#commentRechazados" >commentRechazados</a>
+                                </li>
+                                <li>
+                                    <a href="#postReportsPaginados" >postReportsPaginados</a>
+                                </li>
+                                <li>
+                                    <a href="#commentReportsPaginados" >commentReportsPaginados</a>
+                                </li>
+                                <li>
+                                    <a href="#paginasPosts" >paginasPosts</a>
+                                </li>
+                                <li>
+                                    <a href="#totalPaginasPosts" >totalPaginasPosts</a>
+                                </li>
+                                <li>
+                                    <a href="#paginasComments" >paginasComments</a>
+                                </li>
+                                <li>
+                                    <a href="#totalPaginasComments" >totalPaginasComments</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarPaginaComments"></a>
+                    <span class="name">
+                        <span ><b>cambiarPaginaComments</b></span>
+                        <a href="#cambiarPaginaComments"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cambiarPaginaComments(delta: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cambia la página actual de comentarios.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>delta</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Desplazamiento (1 = siguiente, -1 = anterior).</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarPaginaPosts"></a>
+                    <span class="name">
+                        <span ><b>cambiarPaginaPosts</b></span>
+                        <a href="#cambiarPaginaPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cambiarPaginaPosts(delta: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:219</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cambia la página actual de publicaciones.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>delta</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Desplazamiento (1 = siguiente, -1 = anterior).</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmarComentario"></a>
+                    <span class="name">
+                        <span ><b>confirmarComentario</b></span>
+                        <a href="#confirmarComentario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmarComentario(reporte: <a href="../interfaces/Report.html" target="_self">Report</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un comentario y marca el reporte como <code>concedido</code>.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>reporte</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Report.html" target="_self" >Report</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Reporte asociado al comentario.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmarPost"></a>
+                    <span class="name">
+                        <span ><b>confirmarPost</b></span>
+                        <a href="#confirmarPost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmarPost(reporte: <a href="../interfaces/Report.html" target="_self">Report</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Confirma y elimina la publicación reportada.
+Marca el reporte como <code>concedido</code> (status = 2).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>reporte</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Report.html" target="_self" >Report</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Reporte a resolver.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="denegarComentario"></a>
+                    <span class="name">
+                        <span ><b>denegarComentario</b></span>
+                        <a href="#denegarComentario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>denegarComentario(reporte: <a href="../interfaces/Report.html" target="_self">Report</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:197</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Rechaza un reporte de comentario (status = 3).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>reporte</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Report.html" target="_self" >Report</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Reporte a rechazar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="denegarPost"></a>
+                    <span class="name">
+                        <span ><b>denegarPost</b></span>
+                        <a href="#denegarPost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>denegarPost(reporte: <a href="../interfaces/Report.html" target="_self">Report</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:171</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Rechaza el reporte de una publicación (status = 3).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>reporte</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Report.html" target="_self" >Report</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Reporte a marcar como rechazado.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Al inicializar, obtiene todos los reportes del backend
+y carga los datos de las publicaciones asociadas.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recargar"></a>
+                    <span class="name">
+                        <span ><b>recargar</b></span>
+                        <a href="#recargar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>recargar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Vuelve a cargar todos los reportes desde el backend.
+Reinicia paginación y activa el spinner.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentReports"></a>
+                    <span class="name">
+                        <span ><b>commentReports</b></span>
+                        <a href="#commentReports"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Report.html" target="_self" >Report[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reportes de comentarios</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>commentService</b></span>
+                        <a href="#commentService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CommentService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indica si se están cargando los datos</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarSoloPendientes"></a>
+                    <span class="name">
+                        <span ><b>mostrarSoloPendientes</b></span>
+                        <a href="#mostrarSoloPendientes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Muestra solo reportes pendientes si es <code>true</code></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paginaActualComments"></a>
+                    <span class="name">
+                        <span ><b>paginaActualComments</b></span>
+                        <a href="#paginaActualComments"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Página actual de comentarios</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paginaActualPosts"></a>
+                    <span class="name">
+                        <span ><b>paginaActualPosts</b></span>
+                        <a href="#paginaActualPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Página actual de publicaciones</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postReports"></a>
+                    <span class="name">
+                        <span ><b>postReports</b></span>
+                        <a href="#postReports"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Report.html" target="_self" >Report[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reportes de publicaciones</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>postService</b></span>
+                        <a href="#postService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PostService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>reportService</b></span>
+                        <a href="#reportService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReportService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalPorPagina"></a>
+                    <span class="name">
+                        <span ><b>totalPorPagina</b></span>
+                        <a href="#totalPorPagina"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>5</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cantidad de ítems por página</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postPendientes"></a>
+                        <span class="name"><b>postPendientes</b><a href="#postPendientes"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>postPendientes()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:48</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>CONTADORES</p>
+</div>
+
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postConcedidos"></a>
+                        <span class="name"><b>postConcedidos</b><a href="#postConcedidos"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>postConcedidos()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:51</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postRechazados"></a>
+                        <span class="name"><b>postRechazados</b><a href="#postRechazados"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>postRechazados()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:54</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="commentPendientes"></a>
+                        <span class="name"><b>commentPendientes</b><a href="#commentPendientes"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>commentPendientes()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:57</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="commentConcedidos"></a>
+                        <span class="name"><b>commentConcedidos</b><a href="#commentConcedidos"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>commentConcedidos()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:60</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="commentRechazados"></a>
+                        <span class="name"><b>commentRechazados</b><a href="#commentRechazados"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>commentRechazados()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:63</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postReportsPaginados"></a>
+                        <span class="name"><b>postReportsPaginados</b><a href="#postReportsPaginados"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>postReportsPaginados()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:101</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Devuelve las publicaciones filtradas y ordenadas según la configuración actual de paginación.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/Report.html" target="_self" >Report[]</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="commentReportsPaginados"></a>
+                        <span class="name"><b>commentReportsPaginados</b><a href="#commentReportsPaginados"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>commentReportsPaginados()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:117</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Devuelve los comentarios reportados, filtrados y paginados.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/Report.html" target="_self" >Report[]</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paginasPosts"></a>
+                        <span class="name"><b>paginasPosts</b><a href="#paginasPosts"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>paginasPosts()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:130</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalPaginasPosts"></a>
+                        <span class="name"><b>totalPaginasPosts</b><a href="#totalPaginasPosts"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>totalPaginasPosts()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:134</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paginasComments"></a>
+                        <span class="name"><b>paginasComments</b><a href="#paginasComments"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>paginasComments()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:141</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalPaginasComments"></a>
+                        <span class="name"><b>totalPaginasComments</b><a href="#totalPaginasComments"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>totalPaginasComments()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/components/publicaciones-reportadas/publicaciones-reportadas.component.ts:145</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { ReportService } from &#x27;../../core/services/report.service&#x27;;
+import { Report } from &#x27;../../models/report&#x27;;
+import { PostService } from &#x27;../../core/services/post.service&#x27;;
+import { CommentService } from &#x27;../../core/services/comment.service&#x27;;
+import { BreadcrumbComponent } from &#x27;../breadcrumb/breadcrumb.component&#x27;;
+
+/**
+ * Componente administrativo para revisar, moderar y resolver reportes
+ * sobre publicaciones y comentarios en la plataforma ConectaDuoc.
+ */
+@Component({
+  selector: &#x27;app-publicaciones-reportadas&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule, BreadcrumbComponent],
+  templateUrl: &#x27;./publicaciones-reportadas.component.html&#x27;,
+  styleUrls: [&#x27;./publicaciones-reportadas.component.scss&#x27;]
+})
+export class PublicacionesReportadasComponent implements OnInit {
+  private reportService &#x3D; inject(ReportService);
+  private postService &#x3D; inject(PostService);
+  private commentService &#x3D; inject(CommentService);
+
+  /** Reportes de publicaciones */
+  postReports: Report[] &#x3D; [];
+
+  /** Reportes de comentarios */
+  commentReports: Report[] &#x3D; [];
+
+  /** Indica si se están cargando los datos */
+  loading &#x3D; true;
+
+  /** Muestra solo reportes pendientes si es &#x60;true&#x60; */
+  mostrarSoloPendientes &#x3D; true;
+
+  /** Página actual de publicaciones */
+  paginaActualPosts &#x3D; 1;
+
+  /** Cantidad de ítems por página */
+  totalPorPagina &#x3D; 5;
+
+  /** Página actual de comentarios */
+  paginaActualComments &#x3D; 1;
+
+  /** CONTADORES */
+  get postPendientes() {
+    return this.postReports?.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 1).length || 0;
+  }
+  get postConcedidos() {
+    return this.postReports?.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 2).length || 0;
+  }
+  get postRechazados() {
+    return this.postReports?.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 3).length || 0;
+  }
+  get commentPendientes() {
+    return this.commentReports?.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 1).length || 0;
+  }
+  get commentConcedidos() {
+    return this.commentReports?.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 2).length || 0;
+  }
+  get commentRechazados() {
+    return this.commentReports?.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 3).length || 0;
+  }
+
+  /**
+   * Al inicializar, obtiene todos los reportes del backend
+   * y carga los datos de las publicaciones asociadas.
+   */
+  ngOnInit(): void {
+    this.reportService.getAllReports().subscribe({
+      next: (reports: Report[]) &#x3D;&gt; {
+        const postReports &#x3D; reports.filter(r &#x3D;&gt; r.idPost &amp;&amp; !r.idComment);
+        const commentReports &#x3D; reports.filter(r &#x3D;&gt; r.idComment);
+
+        // Cargar publicaciones asociadas a los reportes
+        postReports.forEach(rep &#x3D;&gt; {
+          if (rep.idPost) {
+            this.postService.getById(rep.idPost).subscribe({
+              next: (post) &#x3D;&gt; rep.post &#x3D; post,
+              error: () &#x3D;&gt; console.warn(&#x27;No se pudo cargar el contenido de la publicación #&#x27; + rep.idPost)
+            });
+          }
+        });
+
+        this.postReports &#x3D; postReports;
+        this.commentReports &#x3D; commentReports;
+        this.loading &#x3D; false;
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Error al cargar reportes:&#x27;, error);
+        this.loading &#x3D; false;
+      }
+    });
+  }
+
+  /**
+   * Devuelve las publicaciones filtradas y ordenadas según la configuración actual de paginación.
+   */
+  get postReportsPaginados(): Report[] {
+    const filtrados &#x3D; this.mostrarSoloPendientes
+      ? this.postReports.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 1)
+      : this.postReports;
+
+    const ordenados &#x3D; filtrados.sort((a, b) &#x3D;&gt;
+      new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+    );
+
+    const inicio &#x3D; (this.paginaActualPosts - 1) * this.totalPorPagina;
+    return ordenados.slice(inicio, inicio + this.totalPorPagina);
+  }
+
+  /**
+   * Devuelve los comentarios reportados, filtrados y paginados.
+   */
+  get commentReportsPaginados(): Report[] {
+    const filtrados &#x3D; this.mostrarSoloPendientes
+      ? this.commentReports.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 1)
+      : this.commentReports;
+
+    const ordenados &#x3D; filtrados.sort((a, b) &#x3D;&gt;
+      new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+    );
+
+    const inicio &#x3D; (this.paginaActualComments - 1) * this.totalPorPagina;
+    return ordenados.slice(inicio, inicio + this.totalPorPagina);
+  }
+
+  get paginasPosts(): number[] {
+    return Array.from({ length: this.totalPaginasPosts }, (_, i) &#x3D;&gt; i + 1);
+  }
+
+  get totalPaginasPosts(): number {
+    const total &#x3D; this.mostrarSoloPendientes
+      ? this.postReports.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 1).length
+      : this.postReports.length;
+    return Math.ceil(total / this.totalPorPagina);
+  }
+
+  get paginasComments(): number[] {
+    return Array.from({ length: this.totalPaginasComments }, (_, i) &#x3D;&gt; i + 1);
+  }
+
+  get totalPaginasComments(): number {
+    const total &#x3D; this.mostrarSoloPendientes
+      ? this.commentReports.filter(r &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; 1).length
+      : this.commentReports.length;
+    return Math.ceil(total / this.totalPorPagina);
+  }
+
+  /**
+   * Confirma y elimina la publicación reportada.
+   * Marca el reporte como &#x60;concedido&#x60; (status &#x3D; 2).
+   * @param reporte Reporte a resolver.
+   */
+  confirmarPost(reporte: Report): void {
+    const confirmar &#x3D; confirm(&#x27;¿Estás seguro de eliminar esta publicación? Esta acción no se puede deshacer.&#x27;);
+    if (!confirmar) return;
+
+    if (!reporte.idReport || !reporte.idPost) return;
+    this.postService.delete(reporte.idPost).subscribe(() &#x3D;&gt; {
+      this.reportService.updateStatus(reporte.idReport!, 2).subscribe(() &#x3D;&gt; this.recargar());
+    });
+  }
+
+  /**
+   * Rechaza el reporte de una publicación (status &#x3D; 3).
+   * @param reporte Reporte a marcar como rechazado.
+   */
+  denegarPost(reporte: Report): void {
+    if (!reporte.idReport) return;
+    this.reportService.updateStatus(reporte.idReport, 3).subscribe(() &#x3D;&gt; this.recargar());
+  }
+
+  /**
+   * Elimina un comentario y marca el reporte como &#x60;concedido&#x60;.
+   * @param reporte Reporte asociado al comentario.
+   */
+  confirmarComentario(reporte: Report): void {
+    const confirmar &#x3D; confirm(&#x27;¿Estás seguro de eliminar este comentario? Esta acción no se puede deshacer.&#x27;);
+    if (!confirmar) return;
+
+    if (!reporte.idReport || !reporte.idComment) return;
+
+    this.commentService.delete(reporte.idComment).subscribe(() &#x3D;&gt; {
+      this.reportService.updateStatus(reporte.idReport!, 2).subscribe(() &#x3D;&gt; {
+        this.commentReports &#x3D; this.commentReports.filter(r &#x3D;&gt; r.idReport !&#x3D;&#x3D; reporte.idReport);
+      });
+    });
+  }
+
+  /**
+   * Rechaza un reporte de comentario (status &#x3D; 3).
+   * @param reporte Reporte a rechazar.
+   */
+  denegarComentario(reporte: Report): void {
+    if (!reporte.idReport) return;
+    this.reportService.updateStatus(reporte.idReport, 3).subscribe(() &#x3D;&gt; {
+      this.commentReports &#x3D; this.commentReports.filter(r &#x3D;&gt; r.idReport !&#x3D;&#x3D; reporte.idReport);
+    });
+  }
+
+  /**
+   * Vuelve a cargar todos los reportes desde el backend.
+   * Reinicia paginación y activa el spinner.
+   */
+  recargar(): void {
+    this.paginaActualPosts &#x3D; 1;
+    this.paginaActualComments &#x3D; 1;
+    this.loading &#x3D; true;
+    this.ngOnInit();
+  }
+
+  /**
+   * Cambia la página actual de publicaciones.
+   * @param delta Desplazamiento (1 &#x3D; siguiente, -1 &#x3D; anterior).
+   */
+  cambiarPaginaPosts(delta: number): void {
+    this.paginaActualPosts +&#x3D; delta;
+  }
+
+  /**
+   * Cambia la página actual de comentarios.
+   * @param delta Desplazamiento (1 &#x3D; siguiente, -1 &#x3D; anterior).
+   */
+  cambiarPaginaComments(delta: number): void {
+    this.paginaActualComments +&#x3D; delta;
+  }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container mt-4&quot;&gt;
+  &lt;app-breadcrumb&gt;&lt;/app-breadcrumb&gt;
+  &lt;h2 class&#x3D;&quot;mt-4 mb-2 text-center titulo-panel&quot;&gt;Reportes de la comunidad&lt;/h2&gt;
+  &lt;p class&#x3D;&quot;text-center text-muted mb-5&quot;&gt;Administra los reportes alertados por la comunidad.&lt;/p&gt;
+
+
+  @if (loading) {
+  &lt;div class&#x3D;&quot;text-center my-4&quot;&gt;
+    &lt;div class&#x3D;&quot;spinner-border text-primary&quot; role&#x3D;&quot;status&quot;&gt;
+      &lt;span class&#x3D;&quot;visually-hidden&quot;&gt;Cargando...&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p class&#x3D;&quot;mt-2&quot;&gt;Cargando reportes...&lt;/p&gt;
+  &lt;/div&gt;
+  }
+
+  @if (!loading &amp;&amp; !postReports.length &amp;&amp; !commentReports.length) {
+  &lt;div class&#x3D;&quot;card border-0 shadow-sm rounded-4 text-center p-4 bg-light-subtle&quot;&gt;
+    &lt;i class&#x3D;&quot;fas fa-check-circle fa-2x text-success mb-2&quot;&gt;&lt;/i&gt;
+    &lt;h5 class&#x3D;&quot;mb-1&quot;&gt;Sin reportes pendientes&lt;/h5&gt;
+    &lt;p class&#x3D;&quot;text-muted mb-0&quot;&gt;¡Todo limpio por ahora! 🚀&lt;/p&gt;
+  &lt;/div&gt;
+  }
+
+  &lt;div class&#x3D;&quot;card border-0 shadow-sm rounded-4 p-3 mb-4&quot;&gt;
+    &lt;div class&#x3D;&quot;row text-center&quot;&gt;
+      &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+        &lt;h6 class&#x3D;&quot;mb-1&quot;&gt;📝 Publicaciones&lt;/h6&gt;
+        &lt;p class&#x3D;&quot;text-muted small mb-0&quot;&gt;
+          {{ postReports.length || 0 }} total |
+          {{ postPendientes }} pendientes |
+          {{ postConcedidos }} concedidos |
+          {{ postRechazados }} rechazados
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+        &lt;h6 class&#x3D;&quot;mb-1&quot;&gt;💬 Comentarios&lt;/h6&gt;
+        &lt;p class&#x3D;&quot;text-muted small mb-0&quot;&gt;
+          {{ commentReports.length || 0 }} total |
+          {{ commentPendientes }} pendientes |
+          {{ commentConcedidos }} concedidos |
+          {{ commentRechazados }} rechazados
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  @if (postReports.length) {
+  &lt;div&gt;
+    &lt;h4 class&#x3D;&quot;mb-3&quot;&gt;Publicaciones reportadas&lt;/h4&gt;
+    &lt;div class&#x3D;&quot;form-check form-switch mb-3&quot;&gt;
+      &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;togglePendientes&quot; [(ngModel)]&#x3D;&quot;mostrarSoloPendientes&quot; /&gt;
+      &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;togglePendientes&quot;&gt;
+        Mostrar solo reportes pendientes de publicaciones.
+      &lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;ul class&#x3D;&quot;list-group mb-4&quot;&gt;
+      @for (rep of postReportsPaginados; track rep.idReport) {
+      &lt;div class&#x3D;&quot;card shadow-sm rounded-4 p-4 mb-4 border-0&quot;&gt;
+        &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center mb-2&quot;&gt;
+          &lt;div&gt;
+            &lt;strong class&#x3D;&quot;text-dark&quot;&gt;Publicación #{{ rep.idPost }}&lt;/strong&gt;
+            &lt;span *ngIf&#x3D;&quot;rep.status &#x3D;&#x3D;&#x3D; 1&quot; class&#x3D;&quot;badge bg-primary ms-2&quot;&gt;Pendiente&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;rep.status &#x3D;&#x3D;&#x3D; 2&quot; class&#x3D;&quot;badge bg-success ms-2&quot;&gt;Reporte concedido, la publicación fue
+              eliminada.&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;rep.status &#x3D;&#x3D;&#x3D; 3&quot; class&#x3D;&quot;badge bg-danger ms-2&quot;&gt;Reporte rechazado, la publicación no infringe
+              las normas comunitarias.&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;span class&#x3D;&quot;text-muted small&quot;&gt;{{ rep.createdDate | date:&#x27;short&#x27; }}&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;mb-2&quot;&gt;&lt;span class&#x3D;&quot;text-muted&quot;&gt;📄 Motivo:&lt;/span&gt; {{ rep.reason }}&lt;/div&gt;
+
+        @if (rep.post) {
+        &lt;div class&#x3D;&quot;bg-light border rounded p-3 mb-2&quot;&gt;
+          &lt;h6 class&#x3D;&quot;fw-bold mb-1&quot;&gt;{{ rep.post.title }}&lt;/h6&gt;
+          &lt;p class&#x3D;&quot;mb-0 text-muted&quot;&gt;{{ rep.post.content }}&lt;/p&gt;
+        &lt;/div&gt;
+        }
+
+        @if (rep.status &#x3D;&#x3D;&#x3D; 1) {
+        &lt;div class&#x3D;&quot;d-flex gap-2 mt-2&quot;&gt;
+          &lt;button class&#x3D;&quot;btn btn-danger btn-sm&quot; (click)&#x3D;&quot;confirmarPost(rep)&quot;&gt;
+            🗑️ Confirmar y eliminar
+          &lt;/button&gt;
+          &lt;button class&#x3D;&quot;btn btn-outline-secondary btn-sm&quot; (click)&#x3D;&quot;denegarPost(rep)&quot;&gt;
+            ❌ Denegar
+          &lt;/button&gt;
+        &lt;/div&gt;
+        }
+      &lt;/div&gt;
+      }
+      &lt;nav *ngIf&#x3D;&quot;totalPaginasPosts &gt; 1&quot; class&#x3D;&quot;mt-2&quot;&gt;
+        &lt;ul class&#x3D;&quot;pagination justify-content-center&quot;&gt;
+          &lt;li class&#x3D;&quot;page-item&quot; [class.disabled]&#x3D;&quot;paginaActualPosts &#x3D;&#x3D;&#x3D; 1&quot;&gt;
+            &lt;button class&#x3D;&quot;page-link&quot; (click)&#x3D;&quot;cambiarPaginaPosts(-1)&quot;&gt;Anterior&lt;/button&gt;
+          &lt;/li&gt;
+
+          @for (p of paginasPosts; track p) {
+          &lt;li class&#x3D;&quot;page-item&quot; [class.active]&#x3D;&quot;paginaActualPosts &#x3D;&#x3D;&#x3D; p&quot;&gt;
+            &lt;button class&#x3D;&quot;page-link&quot; (click)&#x3D;&quot;paginaActualPosts &#x3D; p&quot;&gt;{{ p }}&lt;/button&gt;
+          &lt;/li&gt;
+          }
+
+          &lt;li class&#x3D;&quot;page-item&quot; [class.disabled]&#x3D;&quot;paginaActualPosts &#x3D;&#x3D;&#x3D; totalPaginasPosts&quot;&gt;
+            &lt;button class&#x3D;&quot;page-link&quot; (click)&#x3D;&quot;cambiarPaginaPosts(1)&quot;&gt;Siguiente&lt;/button&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+  }
+
+  @if (commentReports.length) {
+  &lt;div&gt;
+    &lt;h4 class&#x3D;&quot;mb-3&quot;&gt;Comentarios reportados&lt;/h4&gt;
+    &lt;div class&#x3D;&quot;form-check form-switch mb-3&quot;&gt;
+      &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;togglePendientes2&quot; [(ngModel)]&#x3D;&quot;mostrarSoloPendientes&quot; /&gt;
+      &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;togglePendientes2&quot;&gt;
+        Mostrar solo reportes pendientes de comentarios.
+      &lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;ul class&#x3D;&quot;list-group&quot;&gt;
+      @for (rep of commentReportsPaginados; track rep.idReport) {
+      &lt;div class&#x3D;&quot;card shadow-sm rounded-4 p-4 mb-4 border-0&quot;&gt;
+        &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center mb-2&quot;&gt;
+          &lt;div&gt;
+            &lt;strong class&#x3D;&quot;text-dark&quot;&gt;Comentario #{{ rep.idComment }}&lt;/strong&gt;
+            &lt;span *ngIf&#x3D;&quot;rep.status &#x3D;&#x3D;&#x3D; 1&quot; class&#x3D;&quot;badge bg-primary ms-2&quot;&gt;Pendiente&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;rep.status &#x3D;&#x3D;&#x3D; 2&quot; class&#x3D;&quot;badge bg-success ms-2&quot;&gt;Reporte concedido, el comentario fue
+              eliminado.&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;rep.status &#x3D;&#x3D;&#x3D; 3&quot; class&#x3D;&quot;badge bg-danger ms-2&quot;&gt;Reporte rechazado, el comentario no infringe
+              las normas comunitarias&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;span class&#x3D;&quot;text-muted small&quot;&gt;{{ rep.createdDate | date:&#x27;short&#x27; }}&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;mb-2&quot;&gt;
+          &lt;span class&#x3D;&quot;text-muted&quot;&gt;📄 Motivo:&lt;/span&gt; {{ rep.reason }}
+        &lt;/div&gt;
+
+        @if (rep.comment) {
+        &lt;div class&#x3D;&quot;bg-light border rounded p-3 mb-2&quot;&gt;
+          &lt;p class&#x3D;&quot;mb-0 text-muted&quot;&gt;{{ rep.comment }}&lt;/p&gt;
+        &lt;/div&gt;
+        }
+
+        @if (rep.status &#x3D;&#x3D;&#x3D; 1) {
+        &lt;div class&#x3D;&quot;d-flex gap-2 mt-2&quot;&gt;
+          &lt;button class&#x3D;&quot;btn btn-danger btn-sm&quot; (click)&#x3D;&quot;confirmarComentario(rep)&quot;&gt;
+            🗑️ Confirmar y eliminar
+          &lt;/button&gt;
+          &lt;button class&#x3D;&quot;btn btn-outline-secondary btn-sm&quot; (click)&#x3D;&quot;denegarComentario(rep)&quot;&gt;
+            ❌ Denegar
+          &lt;/button&gt;
+        &lt;/div&gt;
+        }
+      &lt;/div&gt;
+      }
+    &lt;/ul&gt;
+    &lt;nav *ngIf&#x3D;&quot;totalPaginasComments &gt; 1&quot; class&#x3D;&quot;mt-2&quot;&gt;
+      &lt;ul class&#x3D;&quot;pagination justify-content-center&quot;&gt;
+        &lt;li class&#x3D;&quot;page-item&quot; [class.disabled]&#x3D;&quot;paginaActualComments &#x3D;&#x3D;&#x3D; 1&quot;&gt;
+          &lt;button class&#x3D;&quot;page-link&quot; (click)&#x3D;&quot;cambiarPaginaPosts(-1)&quot;&gt;Siguiente&lt;/button&gt;
+        &lt;/li&gt;
+
+        @for (p of paginasComments; track p) {
+        &lt;li class&#x3D;&quot;page-item&quot; [class.active]&#x3D;&quot;paginaActualComments &#x3D;&#x3D;&#x3D; p&quot;&gt;
+          &lt;button class&#x3D;&quot;page-link&quot; (click)&#x3D;&quot;paginaActualComments &#x3D; p&quot;&gt;{{ p }}&lt;/button&gt;
+        &lt;/li&gt;
+        }
+
+        &lt;li class&#x3D;&quot;page-item&quot; [class.disabled]&#x3D;&quot;paginaActualComments &#x3D;&#x3D;&#x3D; totalPaginasComments&quot;&gt;
+          &lt;button class&#x3D;&quot;page-link&quot; (click)&#x3D;&quot;cambiarPaginaPosts(1)&quot;&gt;Siguiente&lt;/button&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+  }
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./publicaciones-reportadas.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;sass:color&#x27;;
+@use &#x27;styles&#x27; as *;
+
+.titulo-panel {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $negro;
+    position: relative;
+    margin-bottom: 0.5rem;
+
+    &amp;::after {
+        content: &#x27;&#x27;;
+        display: block;
+        width: 60px;
+        height: 4px;
+        margin: 8px auto 0;
+        background-color: $amarillo;
+        border-radius: 2px;
+    }
+}
+
+.alert-light.border {
+    background-color: #fff;
+    border-radius: 1rem;
+    border-color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    font-size: 0.95rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.list-group-item {
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.25rem;
+
+    h6 {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    p {
+        margin: 0.5rem 0 0;
+        color: #555;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .btn {
+        font-weight: 500;
+        border-radius: 0.5rem;
+    }
+}
+
+.form-check-input:checked {
+    background-color: $amarillo;
+    border-color: $amarillo;
+}
+
+.form-check-label {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.pagination .page-link {
+    border-radius: 0.75rem;
+    margin: 0 2px;
+    font-weight: 500;
+    color: $negro;
+
+    &amp;:hover {
+        background-color: $amarillo;
+        color: white;
+    }
+
+    &amp;.active,
+    &amp;.active:focus {
+        background-color: $amarillo;
+        color: white;
+        border-color: $amarillo;
+    }
+}
+
+
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+.card {
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container mt-4">  <app-breadcrumb></app-breadcrumb>  <h2 class="mt-4 mb-2 text-center titulo-panel">Reportes de la comunidad</h2>  <p class="text-center text-muted mb-5">Administra los reportes alertados por la comunidad.</p>  @if (loading) {  <div class="text-center my-4">    <div class="spinner-border text-primary" role="status">      <span class="visually-hidden">Cargando...</span>    </div>    <p class="mt-2">Cargando reportes...</p>  </div>  }  @if (!loading && !postReports.length && !commentReports.length) {  <div class="card border-0 shadow-sm rounded-4 text-center p-4 bg-light-subtle">    <i class="fas fa-check-circle fa-2x text-success mb-2"></i>    <h5 class="mb-1">Sin reportes pendientes</h5>    <p class="text-muted mb-0">¡Todo limpio por ahora! 🚀</p>  </div>  }  <div class="card border-0 shadow-sm rounded-4 p-3 mb-4">    <div class="row text-center">      <div class="col-md-6">        <h6 class="mb-1">📝 Publicaciones</h6>        <p class="text-muted small mb-0">          {{ postReports.length || 0 }} total |          {{ postPendientes }} pendientes |          {{ postConcedidos }} concedidos |          {{ postRechazados }} rechazados        </p>      </div>      <div class="col-md-6">        <h6 class="mb-1">💬 Comentarios</h6>        <p class="text-muted small mb-0">          {{ commentReports.length || 0 }} total |          {{ commentPendientes }} pendientes |          {{ commentConcedidos }} concedidos |          {{ commentRechazados }} rechazados        </p>      </div>    </div>  </div>  @if (postReports.length) {  <div>    <h4 class="mb-3">Publicaciones reportadas</h4>    <div class="form-check form-switch mb-3">      <input class="form-check-input" type="checkbox" id="togglePendientes" [(ngModel)]="mostrarSoloPendientes" />      <label class="form-check-label" for="togglePendientes">        Mostrar solo reportes pendientes de publicaciones.      </label>    </div>    <ul class="list-group mb-4">      @for (rep of postReportsPaginados; track rep.idReport) {      <div class="card shadow-sm rounded-4 p-4 mb-4 border-0">        <div class="d-flex justify-content-between align-items-center mb-2">          <div>            <strong class="text-dark">Publicación #{{ rep.idPost }}</strong>            <span *ngIf="rep.status === 1" class="badge bg-primary ms-2">Pendiente</span>            <span *ngIf="rep.status === 2" class="badge bg-success ms-2">Reporte concedido, la publicación fue              eliminada.</span>            <span *ngIf="rep.status === 3" class="badge bg-danger ms-2">Reporte rechazado, la publicación no infringe              las normas comunitarias.</span>          </div>          <span class="text-muted small">{{ rep.createdDate | date:\'short\' }}</span>        </div>        <div class="mb-2"><span class="text-muted">📄 Motivo:</span> {{ rep.reason }}</div>        @if (rep.post) {        <div class="bg-light border rounded p-3 mb-2">          <h6 class="fw-bold mb-1">{{ rep.post.title }}</h6>          <p class="mb-0 text-muted">{{ rep.post.content }}</p>        </div>        }        @if (rep.status === 1) {        <div class="d-flex gap-2 mt-2">          <button class="btn btn-danger btn-sm" (click)="confirmarPost(rep)">            🗑️ Confirmar y eliminar          </button>          <button class="btn btn-outline-secondary btn-sm" (click)="denegarPost(rep)">            ❌ Denegar          </button>        </div>        }      </div>      }      <nav *ngIf="totalPaginasPosts > 1" class="mt-2">        <ul class="pagination justify-content-center">          <li class="page-item" [class.disabled]="paginaActualPosts === 1">            <button class="page-link" (click)="cambiarPaginaPosts(-1)">Anterior</button>          </li>          @for (p of paginasPosts; track p) {          <li class="page-item" [class.active]="paginaActualPosts === p">            <button class="page-link" (click)="paginaActualPosts = p">{{ p }}</button>          </li>          }          <li class="page-item" [class.disabled]="paginaActualPosts === totalPaginasPosts">            <button class="page-link" (click)="cambiarPaginaPosts(1)">Siguiente</button>          </li>        </ul>      </nav>    </ul>  </div>  }  @if (commentReports.length) {  <div>    <h4 class="mb-3">Comentarios reportados</h4>    <div class="form-check form-switch mb-3">      <input class="form-check-input" type="checkbox" id="togglePendientes2" [(ngModel)]="mostrarSoloPendientes" />      <label class="form-check-label" for="togglePendientes2">        Mostrar solo reportes pendientes de comentarios.      </label>    </div>    <ul class="list-group">      @for (rep of commentReportsPaginados; track rep.idReport) {      <div class="card shadow-sm rounded-4 p-4 mb-4 border-0">        <div class="d-flex justify-content-between align-items-center mb-2">          <div>            <strong class="text-dark">Comentario #{{ rep.idComment }}</strong>            <span *ngIf="rep.status === 1" class="badge bg-primary ms-2">Pendiente</span>            <span *ngIf="rep.status === 2" class="badge bg-success ms-2">Reporte concedido, el comentario fue              eliminado.</span>            <span *ngIf="rep.status === 3" class="badge bg-danger ms-2">Reporte rechazado, el comentario no infringe              las normas comunitarias</span>          </div>          <span class="text-muted small">{{ rep.createdDate | date:\'short\' }}</span>        </div>        <div class="mb-2">          <span class="text-muted">📄 Motivo:</span> {{ rep.reason }}        </div>        @if (rep.comment) {        <div class="bg-light border rounded p-3 mb-2">          <p class="mb-0 text-muted">{{ rep.comment }}</p>        </div>        }        @if (rep.status === 1) {        <div class="d-flex gap-2 mt-2">          <button class="btn btn-danger btn-sm" (click)="confirmarComentario(rep)">            🗑️ Confirmar y eliminar          </button>          <button class="btn btn-outline-secondary btn-sm" (click)="denegarComentario(rep)">            ❌ Denegar          </button>        </div>        }      </div>      }    </ul>    <nav *ngIf="totalPaginasComments > 1" class="mt-2">      <ul class="pagination justify-content-center">        <li class="page-item" [class.disabled]="paginaActualComments === 1">          <button class="page-link" (click)="cambiarPaginaPosts(-1)">Siguiente</button>        </li>        @for (p of paginasComments; track p) {        <li class="page-item" [class.active]="paginaActualComments === p">          <button class="page-link" (click)="paginaActualComments = p">{{ p }}</button>        </li>        }        <li class="page-item" [class.disabled]="paginaActualComments === totalPaginasComments">          <button class="page-link" (click)="cambiarPaginaPosts(1)">Siguiente</button>        </li>      </ul>    </nav>  </div>  }</div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotificacionBannerComponent', 'selector': 'app-notificacion-banner'},{'name': 'NotificacionesComponent', 'selector': 'app-notificaciones'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PublicacionesReportadasComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PublicacionesReportadasComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

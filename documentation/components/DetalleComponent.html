@@ -1,0 +1,1566 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>conecta-duoc documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">conecta-duoc documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DetalleComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/categorias/detalle/detalle.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-detalle</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                            <code>ReactiveFormsModule</code>
+                                <code><a href="../components/BreadcrumbComponent.html" target="_self" >BreadcrumbComponent</a></code>
+                                <code><a href="../components/NotificacionBannerComponent.html" target="_self" >NotificacionBannerComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./detalle.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./detalle.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#comentarioForm" >comentarioForm</a>
+                            </li>
+                            <li>
+                                <a href="#comments" >comments</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#commentService" >commentService</a>
+                            </li>
+                            <li>
+                                <a href="#estrellas" >estrellas</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#miScore" >miScore</a>
+                            </li>
+                            <li>
+                                <a href="#nombreAutor" >nombreAutor</a>
+                            </li>
+                            <li>
+                                <a href="#post" >post</a>
+                            </li>
+                            <li>
+                                <a href="#postingComment" >postingComment</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#postService" >postService</a>
+                            </li>
+                            <li>
+                                <a href="#promedio" >promedio</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#reportService" >reportService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#scoreService" >scoreService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#calificar" >calificar</a>
+                            </li>
+                            <li>
+                                <a href="#comentar" >comentar</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#reportarComentario" >reportarComentario</a>
+                            </li>
+                            <li>
+                                <a href="#reportarPublicacion" >reportarPublicacion</a>
+                            </li>
+                            <li>
+                                <a href="#volver" >volver</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calificar"></a>
+                    <span class="name">
+                        <span ><b>calificar</b></span>
+                        <a href="#calificar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calificar(valor: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:141</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>valor</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comentar"></a>
+                    <span class="name">
+                        <span ><b>comentar</b></span>
+                        <a href="#comentar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>comentar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportarComentario"></a>
+                    <span class="name">
+                        <span ><b>reportarComentario</b></span>
+                        <a href="#reportarComentario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reportarComentario(com: <a href="../interfaces/Comment.html" target="_self">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>com</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Comment.html" target="_self" >Comment</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportarPublicacion"></a>
+                    <span class="name">
+                        <span ><b>reportarPublicacion</b></span>
+                        <a href="#reportarPublicacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reportarPublicacion()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="volver"></a>
+                    <span class="name">
+                        <span ><b>volver</b></span>
+                        <a href="#volver"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>volver()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comentarioForm"></a>
+                    <span class="name">
+                        <span ><b>comentarioForm</b></span>
+                        <a href="#comentarioForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comments"></a>
+                    <span class="name">
+                        <span ><b>comments</b></span>
+                        <a href="#comments"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Comment.html" target="_self" >Comment[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>commentService</b></span>
+                        <a href="#commentService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CommentService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="estrellas"></a>
+                    <span class="name">
+                        <span ><b>estrellas</b></span>
+                        <a href="#estrellas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[1, 2, 3, 4, 5]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="miScore"></a>
+                    <span class="name">
+                        <span ><b>miScore</b></span>
+                        <a href="#miScore"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nombreAutor"></a>
+                    <span class="name">
+                        <span ><b>nombreAutor</b></span>
+                        <a href="#nombreAutor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Autor desconocido&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="post"></a>
+                    <span class="name">
+                        <span ><b>post</b></span>
+                        <a href="#post"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Post.html" target="_self" >Post | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postingComment"></a>
+                    <span class="name">
+                        <span ><b>postingComment</b></span>
+                        <a href="#postingComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>postService</b></span>
+                        <a href="#postService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PostService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="promedio"></a>
+                    <span class="name">
+                        <span ><b>promedio</b></span>
+                        <a href="#promedio"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>reportService</b></span>
+                        <a href="#reportService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReportService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scoreService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>scoreService</b></span>
+                        <a href="#scoreService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ScoreService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/categorias/detalle/detalle.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+
+/* MODELS */
+import { Post, Comment } from &#x27;../../../models/post&#x27;;
+
+/* SERVICES */
+import { PostService } from &#x27;../../../core/services/post.service&#x27;;
+import { UserService } from &#x27;../../../core/services/user.service&#x27;;
+import { ScoreService } from &#x27;../../../core/services/score.service&#x27;;
+import { ReportService } from &#x27;../../../core/services/report.service&#x27;;
+import { CommentService } from &#x27;../../../core/services/comment.service&#x27;;
+
+/* BreadCrumb y BANNER */
+import { BreadcrumbComponent } from &#x27;../../breadcrumb/breadcrumb.component&#x27;;
+import { NotificacionBannerComponent } from &#x27;../../notificacion-banner/notificacion-banner.component&#x27;;
+
+@Component({
+  selector: &#x27;app-detalle&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, BreadcrumbComponent, NotificacionBannerComponent],
+  templateUrl: &#x27;./detalle.component.html&#x27;,
+  styleUrls: [&#x27;./detalle.component.scss&#x27;]
+})
+export class DetalleComponent implements OnInit {
+  private route &#x3D; inject(ActivatedRoute);
+  private router &#x3D; inject(Router);
+  private postService &#x3D; inject(PostService);
+  private commentService &#x3D; inject(CommentService);
+  private userService &#x3D; inject(UserService);
+  private reportService &#x3D; inject(ReportService);
+  private scoreService &#x3D; inject(ScoreService);
+  private fb &#x3D; inject(FormBuilder);
+
+  post: Post | undefined;
+  comments: Comment[] &#x3D; [];
+  comentarioForm!: FormGroup;
+  loading &#x3D; true;
+  postingComment &#x3D; false;
+  promedio &#x3D; 0;
+  miScore: number | null &#x3D; null;
+  estrellas &#x3D; [1, 2, 3, 4, 5];
+  nombreAutor: string &#x3D; &#x27;Autor desconocido&#x27;;
+
+  ngOnInit(): void {
+    const id &#x3D; Number(this.route.snapshot.paramMap.get(&#x27;id&#x27;));
+    if (!id) {
+      this.router.navigate([&#x27;/dashboard&#x27;]);
+      return;
+    }
+
+    this.comentarioForm &#x3D; this.fb.group({
+      content: [&#x27;&#x27;, [Validators.required, Validators.maxLength(300)]]
+    });
+
+    this.postService.sumarVisualizacion(id).subscribe();
+
+    this.postService.getById(id).subscribe({
+      next: (post) &#x3D;&gt; {
+        this.post &#x3D; post;
+        document.title &#x3D; &#x60;ConectaDuoc | ${post.title}&#x60;;
+
+        this.scoreService.getAverageScore(post.idPost).subscribe(avg &#x3D;&gt; {
+          this.promedio &#x3D; avg;
+        });
+        const idUser &#x3D; this.userService.getIdUser();
+        if (idUser) {
+          this.scoreService.getUserScore(post.idPost, idUser).subscribe(score &#x3D;&gt; {
+            this.miScore &#x3D; score ? score.score : null;
+          });
+        }
+
+        this.userService.getUserById(post.idUser).subscribe({
+          next: (user) &#x3D;&gt; {
+            this.nombreAutor &#x3D; user.name;
+          },
+          error: () &#x3D;&gt; {
+            this.nombreAutor &#x3D; &#x27;Autor desconocido&#x27;;
+          }
+        });
+
+        this.commentService.getByPostId(post.idPost).subscribe(comments &#x3D;&gt; {
+          this.comments &#x3D; comments;
+          this.loading &#x3D; false;
+        });
+      },
+      error: () &#x3D;&gt; {
+        this.router.navigate([&#x27;/dashboard&#x27;]);
+      }
+    });
+
+  }
+
+  comentar(): void {
+    if (!this.post || this.comentarioForm.invalid || this.postingComment) return;
+
+    const nuevoComentario: Omit&lt;Comment, &#x27;idComment&#x27; | &#x27;date&#x27;&gt; &#x3D; {
+      idPost: this.post.idPost,
+      idUser: this.userService.getAzureUser()?.email || &#x27;anónimo&#x27;,
+      content: this.comentarioForm.value.content
+    };
+
+    this.postingComment &#x3D; true;
+    this.commentService.create(nuevoComentario).subscribe({
+      next: (comentario) &#x3D;&gt; {
+        this.comments.push(comentario);
+        this.comentarioForm.reset();
+        this.postingComment &#x3D; false;
+      },
+      error: () &#x3D;&gt; {
+        this.postingComment &#x3D; false;
+      }
+    });
+  }
+
+  reportarPublicacion(): void {
+    if (!this.post) return;
+    const reason &#x3D; prompt(&#x27;Motivo del reporte&#x27;, &#x27;Contenido inapropiado&#x27;);
+    if (!reason) return;
+    this.reportService.reportPost(this.post.idPost, reason).subscribe(() &#x3D;&gt; {
+      alert(&#x27;Publicación reportada&#x27;);
+    });
+  }
+
+  reportarComentario(com: Comment): void {
+    const reason &#x3D; prompt(&#x27;Motivo del reporte&#x27;, &#x27;Comentario inapropiado&#x27;);
+    if (!reason) return;
+    this.reportService.reportComment(com.idComment, reason).subscribe(() &#x3D;&gt; {
+      alert(&#x27;Comentario reportado&#x27;);
+    });
+  }
+
+  volver(): void {
+    const slug &#x3D; this.route.snapshot.paramMap.get(&#x27;slug&#x27;) || &#x27;dashboard&#x27;;
+    this.router.navigate([&#x27;/categoria&#x27;, slug]);
+  }
+
+  calificar(valor: number): void {
+    if (!this.post) return;
+    const idUser &#x3D; this.userService.getIdUser();
+    if (!idUser) return;
+
+    this.scoreService.setScore({ idPost: this.post.idPost, idUser, score: valor }).subscribe(() &#x3D;&gt; {
+      this.miScore &#x3D; valor;
+      this.scoreService.getAverageScore(this.post!.idPost).subscribe(avg &#x3D;&gt; {
+        this.promedio &#x3D; avg;
+      });
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-notificacion-banner&gt;&lt;/app-notificacion-banner&gt;
+&lt;div class&#x3D;&quot;container mt-4 mb-4&quot;&gt;
+    &lt;app-breadcrumb&gt;&lt;/app-breadcrumb&gt;
+
+    &lt;!-- Título principal --&gt;
+    &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center mt-4 mb-3&quot;&gt;
+        &lt;h2 class&#x3D;&quot;titulo-principal mb-0&quot;&gt;
+            {{ post?.title }}
+        &lt;/h2&gt;
+        &lt;div&gt;
+            &lt;button class&#x3D;&quot;btn btn-link text-danger btn-sm me-2&quot; (click)&#x3D;&quot;reportarPublicacion()&quot; [disabled]&#x3D;&quot;!post&quot;&gt;
+                &lt;i class&#x3D;&quot;fas fa-flag&quot;&gt;&lt;/i&gt;
+            &lt;/button&gt;
+            &lt;button class&#x3D;&quot;btn btn-outline-secondary btn-sm&quot; (click)&#x3D;&quot;volver()&quot;&gt;
+                ← Volver
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Contenido del post --&gt;
+    @if (post) {
+    &lt;div class&#x3D;&quot;card-post&quot;&gt;
+        &lt;div class&#x3D;&quot;card-body&quot;&gt;
+            {{ post.content }}
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;card-footer d-flex justify-content-between&quot;&gt;
+            &lt;span&gt;&lt;i class&#x3D;&quot;fas fa-user me-1&quot;&gt;&lt;/i&gt;{{ nombreAutor }}&lt;/span&gt;
+            &lt;div class&#x3D;&quot;mt-3 text-center&quot;&gt;
+                &lt;ng-container *ngFor&#x3D;&quot;let s of estrellas&quot;&gt;
+                    &lt;i class&#x3D;&quot;fa-star&quot;
+                        [ngClass]&#x3D;&quot;{&#x27;fas text-warning&#x27;: (miScore ?? 0) &gt;&#x3D; s, &#x27;far text-muted&#x27;: (miScore ?? 0) &lt; s}&quot;
+                        (click)&#x3D;&quot;calificar(s)&quot; style&#x3D;&quot;cursor:pointer&quot;&gt;&lt;/i&gt;
+                &lt;/ng-container&gt;
+                &lt;div class&#x3D;&quot;small text-muted mt-1&quot;&gt;{{ promedio | number:&#x27;1.1-1&#x27; }} promedio&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span&gt;&lt;i class&#x3D;&quot;fas fa-calendar-alt me-1&quot;&gt;&lt;/i&gt;{{ post.createdDate | date: &#x27;fullDate&#x27; }}&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    }
+
+    &lt;!-- Comentarios --&gt;
+    &lt;div class&#x3D;&quot;card-comentarios&quot;&gt;
+        &lt;div class&#x3D;&quot;card-header&quot;&gt;
+            Comentarios
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;card-body&quot;&gt;
+            @if (comments &amp;&amp; comments.length &gt; 0) {
+            &lt;div&gt;
+                @for (com of comments; track com) {
+                &lt;div class&#x3D;&quot;comentario d-flex align-items-start mb-3&quot;&gt;
+                    &lt;!-- Avatar con inicial --&gt;
+                    &lt;div class&#x3D;&quot;avatar bg-warning text-white rounded-circle me-3&quot;&gt;
+                        {{ com.idUser.charAt(0).toUpperCase() }}
+                    &lt;/div&gt;
+
+                    &lt;!-- Contenido del comentario --&gt;
+                    &lt;div class&#x3D;&quot;flex-grow-1&quot;&gt;
+                        &lt;div class&#x3D;&quot;d-flex justify-content-between&quot;&gt;
+                            &lt;span class&#x3D;&quot;autor&quot;&gt;{{ com.idUser }}&lt;/span&gt;
+                            &lt;span class&#x3D;&quot;fecha&quot;&gt;{{ com.date | date:&#x27;dd/MM/yyyy HH:mm&#x27; }}&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;p class&#x3D;&quot;contenido&quot;&gt;{{ com.content }}&lt;/p&gt;
+                        &lt;button class&#x3D;&quot;btn btn-link text-danger btn-sm p-0&quot; (click)&#x3D;&quot;reportarComentario(com)&quot;&gt;
+                            &lt;i class&#x3D;&quot;fas fa-flag&quot;&gt;&lt;/i&gt;
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                }
+            &lt;/div&gt;
+            } @else {
+            &lt;div class&#x3D;&quot;alert alert-info text-center mb-0&quot;&gt;
+                No hay comentarios todavía. ¡Sé el primero en participar!
+            &lt;/div&gt;
+            }
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;card-footer&quot;&gt;
+            &lt;form [formGroup]&#x3D;&quot;comentarioForm&quot; (ngSubmit)&#x3D;&quot;comentar()&quot;&gt;
+                &lt;div class&#x3D;&quot;input-group&quot;&gt;
+                    &lt;input formControlName&#x3D;&quot;content&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Escribe un comentario...&quot; /&gt;
+                    &lt;button class&#x3D;&quot;btn btn-warning&quot; [disabled]&#x3D;&quot;comentarioForm.invalid || postingComment&quot;&gt;
+                        Enviar
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./detalle.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;sass:color&#x27;;
+@use &#x27;styles&#x27; as *;
+
+.titulo-principal {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: $negro;
+    position: relative;
+
+    &amp;::after {
+        content: &#x27;&#x27;;
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background-color: $amarillo;
+        border-radius: 2px;
+    }
+}
+
+.card-post {
+    background-color: #fff;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+    border: none;
+
+    .card-body {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: #444;
+    }
+
+    .card-footer {
+        font-size: 0.875rem;
+        color: #888;
+        border-top: 1px solid #eee;
+        padding-top: 0.75rem;
+        margin-top: 1rem;
+    }
+}
+
+.card-comentarios {
+    border-radius: 1.25rem;
+    border: none;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .comentario:hover {
+        background-color: #f9f9f9;
+    }
+
+    .card-header {
+        border-bottom: 1px solid #eee;
+        background-color: transparent;
+        font-weight: 600;
+        font-size: 1.25rem;
+    }
+
+    .comentario {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 0.75rem 0;
+
+        .autor {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .fecha {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .contenido {
+            font-size: 0.95rem;
+            margin: 0.25rem 0;
+        }
+    }
+
+    .alert-info {
+        background-color: #f0f8ff;
+        color: #555;
+        border: none;
+        border-radius: 0.75rem;
+        padding: 1rem;
+    }
+}
+
+.card-footer form {
+    background-color: #fafafa;
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+
+    .form-control {
+        border: none;
+        box-shadow: none;
+        border-radius: 0.75rem 0 0 0.75rem;
+    }
+
+    .btn {
+        border-radius: 0 0.75rem 0.75rem 0;
+        font-weight: 600;
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-notificacion-banner></app-notificacion-banner><div class="container mt-4 mb-4">    <app-breadcrumb></app-breadcrumb>    <!-- Título principal -->    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">        <h2 class="titulo-principal mb-0">            {{ post?.title }}        </h2>        <div>            <button class="btn btn-link text-danger btn-sm me-2" (click)="reportarPublicacion()" [disabled]="!post">                <i class="fas fa-flag"></i>            </button>            <button class="btn btn-outline-secondary btn-sm" (click)="volver()">                ← Volver            </button>        </div>    </div>    <!-- Contenido del post -->    @if (post) {    <div class="card-post">        <div class="card-body">            {{ post.content }}        </div>        <div class="card-footer d-flex justify-content-between">            <span><i class="fas fa-user me-1"></i>{{ nombreAutor }}</span>            <div class="mt-3 text-center">                <ng-container *ngFor="let s of estrellas">                    <i class="fa-star"                        [ngClass]="{\'fas text-warning\': (miScore ?? 0) >= s, \'far text-muted\': (miScore ?? 0) < s}"                        (click)="calificar(s)" style="cursor:pointer"></i>                </ng-container>                <div class="small text-muted mt-1">{{ promedio | number:\'1.1-1\' }} promedio</div>            </div>            <span><i class="fas fa-calendar-alt me-1"></i>{{ post.createdDate | date: \'fullDate\' }}</span>        </div>    </div>    }    <!-- Comentarios -->    <div class="card-comentarios">        <div class="card-header">            Comentarios        </div>        <div class="card-body">            @if (comments && comments.length > 0) {            <div>                @for (com of comments; track com) {                <div class="comentario d-flex align-items-start mb-3">                    <!-- Avatar con inicial -->                    <div class="avatar bg-warning text-white rounded-circle me-3">                        {{ com.idUser.charAt(0).toUpperCase() }}                    </div>                    <!-- Contenido del comentario -->                    <div class="flex-grow-1">                        <div class="d-flex justify-content-between">                            <span class="autor">{{ com.idUser }}</span>                            <span class="fecha">{{ com.date | date:\'dd/MM/yyyy HH:mm\' }}</span>                        </div>                        <p class="contenido">{{ com.content }}</p>                        <button class="btn btn-link text-danger btn-sm p-0" (click)="reportarComentario(com)">                            <i class="fas fa-flag"></i>                        </button>                    </div>                </div>                }            </div>            } @else {            <div class="alert alert-info text-center mb-0">                No hay comentarios todavía. ¡Sé el primero en participar!            </div>            }        </div>        <div class="card-footer">            <form [formGroup]="comentarioForm" (ngSubmit)="comentar()">                <div class="input-group">                    <input formControlName="content" class="form-control" placeholder="Escribe un comentario..." />                    <button class="btn btn-warning" [disabled]="comentarioForm.invalid || postingComment">                        Enviar                    </button>                </div>            </form>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotificacionBannerComponent', 'selector': 'app-notificacion-banner'},{'name': 'NotificacionesComponent', 'selector': 'app-notificaciones'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DetalleComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DetalleComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
