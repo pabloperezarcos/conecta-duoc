@@ -17,16 +17,14 @@ export interface Report {
     /** Razón o motivo del reporte */
     reason: string;
 
-    createdDate: string;
-    idUser: number;
-
-    post?: Post;
-    comment?: Comment;
-    resolucion?: 'concedido' | 'rechazado';
-
     /** Estado del reporte: 0 = Inactivo, 1 = Activo */
     status: number;
 
     /** Fecha en que se generó el reporte (ISO string) */
-    date: string;
+    createdDate: string;
+
+    idUser: number;
+    post?: Post;
+    comment?: Comment;
+    resolucion?: 'concedido' | 'rechazado';
 }
