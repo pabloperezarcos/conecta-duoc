@@ -1,0 +1,982 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>conecta-duoc documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">conecta-duoc documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ReglasDeLaComunidadComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-reglas-de-la-comunidad</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>FormsModule</code>
+                                <code><a href="../components/ModalConfirmacionComponent.html" target="_self" >ModalConfirmacionComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./reglas-de-la-comunidad.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./reglas-de-la-comunidad.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#mostrarModal" >mostrarModal</a>
+                            </li>
+                            <li>
+                                <a href="#reglas" >reglas</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#aceptarReglas" >aceptarReglas</a>
+                            </li>
+                            <li>
+                                <a href="#cancelarRechazo" >cancelarRechazo</a>
+                            </li>
+                            <li>
+                                <a href="#confirmarRechazo" >confirmarRechazo</a>
+                            </li>
+                            <li>
+                                <a href="#rechazarReglas" >rechazarReglas</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="aceptarReglas"></a>
+                    <span class="name">
+                        <span ><b>aceptarReglas</b></span>
+                        <a href="#aceptarReglas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>aceptarReglas()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancelarRechazo"></a>
+                    <span class="name">
+                        <span ><b>cancelarRechazo</b></span>
+                        <a href="#cancelarRechazo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancelarRechazo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmarRechazo"></a>
+                    <span class="name">
+                        <span ><b>confirmarRechazo</b></span>
+                        <a href="#confirmarRechazo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmarRechazo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rechazarReglas"></a>
+                    <span class="name">
+                        <span ><b>rechazarReglas</b></span>
+                        <a href="#rechazarReglas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>rechazarReglas()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarModal"></a>
+                    <span class="name">
+                        <span ><b>mostrarModal</b></span>
+                        <a href="#mostrarModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reglas"></a>
+                    <span class="name">
+                        <span ><b>reglas</b></span>
+                        <a href="#reglas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      titulo: &#x27;1. Respeto ante todo&#x27;,
+      descripcion: &#x27;No se toleran comentarios ofensivos, discriminatorios, acosadores o violentos. Toda persona debe ser tratada con dignidad y cortesía.&#x27;
+    },
+    {
+      titulo: &#x27;2. Actividades sin fines de lucro&#x27;,
+      descripcion: &#x27;ConectaDuoc es un espacio colaborativo. Está prohibida toda oferta o venta comercial dentro de la plataforma.&#x27;
+    },
+    {
+      titulo: &#x27;3. Contenido adecuado&#x27;,
+      descripcion: &#x27;Se prohíbe la publicación de material con lenguaje vulgar, violencia gráfica, apología de drogas, apuestas o cualquier contenido ilícito.&#x27;
+    },
+    {
+      titulo: &#x27;4. Protección de datos personales&#x27;,
+      descripcion: &#x27;No publiques datos personales tuyos o de terceros sin consentimiento explícito. Esto incluye RUT, correos, teléfonos o direcciones.&#x27;
+    },
+    {
+      titulo: &#x27;5. Moderación activa&#x27;,
+      descripcion: &#x27;Los administradores podrán eliminar o editar publicaciones que infrinjan las reglas. Las reincidencias pueden derivar en la suspensión del perfil.&#x27;
+    },
+    {
+      titulo: &#x27;6. Lenguaje inclusivo y empático&#x27;,
+      descripcion: &#x27;Fomentamos un lenguaje claro, inclusivo y que promueva el respeto por la diversidad de género, origen y creencias.&#x27;
+    },
+    {
+      titulo: &#x27;7. Sistema de reportes&#x27;,
+      descripcion: &#x27;Los usuarios pueden reportar contenido inapropiado mediante el botón correspondiente. Todas las denuncias serán revisadas.&#x27;
+    },
+    {
+      titulo: &#x27;8. Contenido académico y estudiantil preferente&#x27;,
+      descripcion: &#x27;Se espera que las publicaciones estén relacionadas con el quehacer estudiantil: ayudantías, actividades culturales, voluntariado, etc.&#x27;
+    },
+    {
+      titulo: &#x27;9. Responsabilidad en encuentros presenciales&#x27;,
+      descripcion: &#x27;En caso de concretarse actividades fuera de la plataforma, los usuarios deben ser responsables, actuar con respeto y cuidar su seguridad.&#x27;
+    },
+    {
+      titulo: &#x27;10. Prohibición de suplantación de identidad&#x27;,
+      descripcion: &#x27;Está estrictamente prohibido crear perfiles falsos, impersonar a terceros o utilizar datos que no correspondan.&#x27;
+    },
+    {
+      titulo: &#x27;11. Uso exclusivo de cuentas institucionales&#x27;,
+      descripcion: &#x27;Para participar en la plataforma, debes iniciar sesión con tu cuenta institucional Duoc UC. Esto asegura un entorno seguro y controlado.&#x27;
+    }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+
+import { Router } from &#x27;@angular/router&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { ModalConfirmacionComponent } from &#x27;../../shared/modal-confirmacion/modal-confirmacion.component&#x27;;
+import { UserService } from &#x27;../../core/services/user.service&#x27;;
+
+@Component({
+  selector: &#x27;app-reglas-de-la-comunidad&#x27;,
+  standalone: true,
+  imports: [FormsModule, ModalConfirmacionComponent],
+  templateUrl: &#x27;./reglas-de-la-comunidad.component.html&#x27;,
+  styleUrls: [&#x27;./reglas-de-la-comunidad.component.scss&#x27;]
+})
+export class ReglasDeLaComunidadComponent {
+  mostrarModal &#x3D; false;
+  private userService &#x3D; inject(UserService);
+  private router &#x3D; inject(Router);
+
+  reglas &#x3D; [
+    {
+      titulo: &#x27;1. Respeto ante todo&#x27;,
+      descripcion: &#x27;No se toleran comentarios ofensivos, discriminatorios, acosadores o violentos. Toda persona debe ser tratada con dignidad y cortesía.&#x27;
+    },
+    {
+      titulo: &#x27;2. Actividades sin fines de lucro&#x27;,
+      descripcion: &#x27;ConectaDuoc es un espacio colaborativo. Está prohibida toda oferta o venta comercial dentro de la plataforma.&#x27;
+    },
+    {
+      titulo: &#x27;3. Contenido adecuado&#x27;,
+      descripcion: &#x27;Se prohíbe la publicación de material con lenguaje vulgar, violencia gráfica, apología de drogas, apuestas o cualquier contenido ilícito.&#x27;
+    },
+    {
+      titulo: &#x27;4. Protección de datos personales&#x27;,
+      descripcion: &#x27;No publiques datos personales tuyos o de terceros sin consentimiento explícito. Esto incluye RUT, correos, teléfonos o direcciones.&#x27;
+    },
+    {
+      titulo: &#x27;5. Moderación activa&#x27;,
+      descripcion: &#x27;Los administradores podrán eliminar o editar publicaciones que infrinjan las reglas. Las reincidencias pueden derivar en la suspensión del perfil.&#x27;
+    },
+    {
+      titulo: &#x27;6. Lenguaje inclusivo y empático&#x27;,
+      descripcion: &#x27;Fomentamos un lenguaje claro, inclusivo y que promueva el respeto por la diversidad de género, origen y creencias.&#x27;
+    },
+    {
+      titulo: &#x27;7. Sistema de reportes&#x27;,
+      descripcion: &#x27;Los usuarios pueden reportar contenido inapropiado mediante el botón correspondiente. Todas las denuncias serán revisadas.&#x27;
+    },
+    {
+      titulo: &#x27;8. Contenido académico y estudiantil preferente&#x27;,
+      descripcion: &#x27;Se espera que las publicaciones estén relacionadas con el quehacer estudiantil: ayudantías, actividades culturales, voluntariado, etc.&#x27;
+    },
+    {
+      titulo: &#x27;9. Responsabilidad en encuentros presenciales&#x27;,
+      descripcion: &#x27;En caso de concretarse actividades fuera de la plataforma, los usuarios deben ser responsables, actuar con respeto y cuidar su seguridad.&#x27;
+    },
+    {
+      titulo: &#x27;10. Prohibición de suplantación de identidad&#x27;,
+      descripcion: &#x27;Está estrictamente prohibido crear perfiles falsos, impersonar a terceros o utilizar datos que no correspondan.&#x27;
+    },
+    {
+      titulo: &#x27;11. Uso exclusivo de cuentas institucionales&#x27;,
+      descripcion: &#x27;Para participar en la plataforma, debes iniciar sesión con tu cuenta institucional Duoc UC. Esto asegura un entorno seguro y controlado.&#x27;
+    }
+  ];
+
+  aceptarReglas() {
+    // Llamamos al backend para marcar &quot;policies&quot; como true
+    const email &#x3D; this.userService.getAzureUser()?.email;
+    if (email) {
+      this.userService.getUser(email).subscribe(user &#x3D;&gt; {
+        const updatedUser &#x3D; { ...user, policies: 1 };
+        this.userService.registerUser(updatedUser).subscribe(() &#x3D;&gt; {
+          localStorage.setItem(&#x27;conectaReglasAceptadas&#x27;, &#x27;true&#x27;);
+          this.router.navigate([&#x27;/dashboard&#x27;]);
+        });
+      });
+    } else {
+      // Fallback: solo localStorage (en caso de error raro)
+      localStorage.setItem(&#x27;conectaReglasAceptadas&#x27;, &#x27;true&#x27;);
+      this.router.navigate([&#x27;/dashboard&#x27;]);
+    }
+  }
+
+  rechazarReglas() {
+    this.mostrarModal &#x3D; true;
+  }
+
+  confirmarRechazo() {
+    const email &#x3D; this.userService.getAzureUser()?.email;
+    if (email) {
+      this.userService.getUser(email).subscribe(user &#x3D;&gt; {
+        const updatedUser &#x3D; { ...user, policies: 0 };
+        this.userService.registerUser(updatedUser).subscribe(() &#x3D;&gt; {
+          // Ahora sí, limpia el storage y cierra sesión
+          localStorage.removeItem(&#x27;conectaReglasAceptadas&#x27;);
+          localStorage.removeItem(&#x27;userRole&#x27;);
+          localStorage.removeItem(&#x27;name&#x27;);
+          sessionStorage.clear();
+          this.router.navigate([&#x27;/login&#x27;]);
+        });
+      });
+    } else {
+      // Si por algún motivo no hay email, igual cierra sesión
+      localStorage.removeItem(&#x27;conectaReglasAceptadas&#x27;);
+      localStorage.removeItem(&#x27;userRole&#x27;);
+      localStorage.removeItem(&#x27;name&#x27;);
+      sessionStorage.clear();
+      this.router.navigate([&#x27;/login&#x27;]);
+    }
+  }
+
+  cancelarRechazo() {
+    this.mostrarModal &#x3D; false;
+  }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;reglas-wrapper py-5&quot;&gt;
+  &lt;div class&#x3D;&quot;container reglas-container px-4 py-5&quot;&gt;
+    &lt;h1 class&#x3D;&quot;titulo mb-4&quot;&gt;Reglas de la Comunidad&lt;/h1&gt;
+
+    &lt;p class&#x3D;&quot;intro mb-4&quot;&gt;
+      En &lt;strong&gt;ConectaDuoc&lt;/strong&gt; creemos en una comunidad estudiantil colaborativa, inclusiva y segura. Para
+      garantizar una experiencia positiva para todos los usuarios, te invitamos a respetar los siguientes
+      principios de convivencia. El uso de esta plataforma implica la aceptación de estas reglas.
+    &lt;/p&gt;
+
+    @for (item of reglas; track item) {
+      &lt;div class&#x3D;&quot;regla&quot;&gt;
+        &lt;h5 class&#x3D;&quot;regla-titulo&quot;&gt;{{ item.titulo }}&lt;/h5&gt;
+        &lt;p class&#x3D;&quot;regla-texto&quot;&gt;{{ item.descripcion }}&lt;/p&gt;
+      &lt;/div&gt;
+    }
+
+    &lt;div class&#x3D;&quot;final mt-5&quot;&gt;
+      &lt;p&gt;
+        ConectaDuoc es un espacio construido por y para estudiantes. Tu participación responsable y respetuosa
+        nos permite fortalecer una red de apoyo mutuo. ¡Gracias por ser parte de esta comunidad!
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;acciones-botones mt-5&quot;&gt;
+      &lt;button class&#x3D;&quot;btn btn-amarillo&quot; (click)&#x3D;&quot;aceptarReglas()&quot;&gt;Estoy de acuerdo&lt;/button&gt;
+      &lt;button class&#x3D;&quot;btn btn-outline-dark&quot; (click)&#x3D;&quot;rechazarReglas()&quot;&gt;No estoy de acuerdo&lt;/button&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;app-modal-confirmacion [visible]&#x3D;&quot;mostrarModal&quot; titulo&#x3D;&quot;¿Estás seguro de rechazar las reglas?&quot;
+  mensaje&#x3D;&quot;Si no aceptas las Reglas de la Comunidad, tu sesión se cerrará y no podrás usar la plataforma.&quot;
+(confirmar)&#x3D;&quot;confirmarRechazo()&quot; (cancelar)&#x3D;&quot;cancelarRechazo()&quot;&gt;&lt;/app-modal-confirmacion&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./reglas-de-la-comunidad.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;sass:color&#x27;;
+@use &#x27;styles&#x27; as *;
+
+.reglas-wrapper {
+    background-color: $blanco;
+    color: $negro;
+    flex: 1;
+
+    .reglas-container {
+        max-width: 920px;
+        margin: auto;
+        background-color: $blanco;
+        border-radius: 16px;
+        padding: 3rem 2rem;
+        box-shadow: 0 0 14px rgba(0, 0, 0, 0.06);
+    }
+
+    .titulo {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: $negro;
+        border-left: 8px solid $amarillo;
+        padding-left: 1rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .intro {
+        font-size: 1.15rem;
+        color: $gris;
+        line-height: 1.7;
+    }
+
+    .regla {
+        margin-bottom: 2rem;
+
+        .regla-titulo {
+            font-weight: 600;
+            color: $negro;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .regla-texto {
+            font-size: 1.05rem;
+            color: $gris;
+            line-height: 1.6;
+        }
+    }
+
+    .final {
+        font-size: 1rem;
+        font-style: italic;
+        color: $gris;
+        text-align: center;
+        margin-top: 3rem;
+    }
+
+    .btn-amarillo {
+        background-color: $amarillo;
+        color: $negro-puro;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 12px;
+        transition: background-color 0.3s ease;
+
+        &amp;:hover {
+            background-color: color.adjust($amarillo, $lightness: 7%);
+            cursor: pointer;
+        }
+    }
+
+    .btn-outline-dark {
+        border: 2px solid $negro;
+        color: $negro;
+        font-weight: 500;
+        padding: 0.7rem 1.4rem;
+        border-radius: 12px;
+        background-color: transparent;
+        transition: background-color 0.3s;
+
+        &amp;:hover {
+            background-color: $negro;
+            color: $blanco;
+        }
+    }
+
+    .acciones-botones {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem; // separación profesional entre botones
+        flex-wrap: wrap;
+        margin-top: 2rem;
+
+        button {
+            min-width: 180px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-amarillo {
+            background-color: $amarillo;
+            color: $negro-puro;
+            border: none;
+
+            &amp;:hover {
+                background-color: color.adjust($amarillo, $lightness: -10%);
+            }
+        }
+
+        .btn-outline-dark {
+            background-color: transparent;
+            border: 2px solid $negro;
+            color: $negro;
+
+            &amp;:hover {
+                background-color: $negro;
+                color: $blanco;
+            }
+        }
+    }
+
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="reglas-wrapper py-5">  <div class="container reglas-container px-4 py-5">    <h1 class="titulo mb-4">Reglas de la Comunidad</h1>    <p class="intro mb-4">      En <strong>ConectaDuoc</strong> creemos en una comunidad estudiantil colaborativa, inclusiva y segura. Para      garantizar una experiencia positiva para todos los usuarios, te invitamos a respetar los siguientes      principios de convivencia. El uso de esta plataforma implica la aceptación de estas reglas.    </p>    @for (item of reglas; track item) {      <div class="regla">        <h5 class="regla-titulo">{{ item.titulo }}</h5>        <p class="regla-texto">{{ item.descripcion }}</p>      </div>    }    <div class="final mt-5">      <p>        ConectaDuoc es un espacio construido por y para estudiantes. Tu participación responsable y respetuosa        nos permite fortalecer una red de apoyo mutuo. ¡Gracias por ser parte de esta comunidad!      </p>    </div>    <div class="acciones-botones mt-5">      <button class="btn btn-amarillo" (click)="aceptarReglas()">Estoy de acuerdo</button>      <button class="btn btn-outline-dark" (click)="rechazarReglas()">No estoy de acuerdo</button>    </div>  </div></div><app-modal-confirmacion [visible]="mostrarModal" titulo="¿Estás seguro de rechazar las reglas?"  mensaje="Si no aceptas las Reglas de la Comunidad, tu sesión se cerrará y no podrás usar la plataforma."(confirmar)="confirmarRechazo()" (cancelar)="cancelarRechazo()"></app-modal-confirmacion></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ReglasDeLaComunidadComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ReglasDeLaComunidadComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

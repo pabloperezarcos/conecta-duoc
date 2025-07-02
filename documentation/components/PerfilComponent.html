@@ -1,0 +1,1315 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>conecta-duoc documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">conecta-duoc documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PerfilComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/perfil/perfil.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-perfil</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../components/BreadcrumbComponent.html" target="_self" >BreadcrumbComponent</a></code>
+                            <code>RouterModule</code>
+                            <code>FormsModule</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./perfil.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./perfil.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#categories" >categories</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#commentService" >commentService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#postCategoryService" >postCategoryService</a>
+                            </li>
+                            <li>
+                                <a href="#posts" >posts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#postService" >postService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <a href="#sede" >sede</a>
+                            </li>
+                            <li>
+                                <a href="#sedes" >sedes</a>
+                            </li>
+                            <li>
+                                <a href="#totalComments" >totalComments</a>
+                            </li>
+                            <li>
+                                <a href="#totalPosts" >totalPosts</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cargarPublicaciones" >cargarPublicaciones</a>
+                            </li>
+                            <li>
+                                <a href="#editar" >editar</a>
+                            </li>
+                            <li>
+                                <a href="#getUserInitial" >getUserInitial</a>
+                            </li>
+                            <li>
+                                <a href="#guardarSede" >guardarSede</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarPublicaciones"></a>
+                    <span class="name">
+                        <span ><b>cargarPublicaciones</b></span>
+                        <a href="#cargarPublicaciones"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarPublicaciones(idUser: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/components/perfil/perfil.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>idUser</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editar"></a>
+                    <span class="name">
+                        <span ><b>editar</b></span>
+                        <a href="#editar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editar(post: <a href="../interfaces/Post.html" target="_self">Post</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/components/perfil/perfil.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>post</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Post.html" target="_self" >Post</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUserInitial"></a>
+                    <span class="name">
+                        <span ><b>getUserInitial</b></span>
+                        <a href="#getUserInitial"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getUserInitial()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/components/perfil/perfil.component.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardarSede"></a>
+                    <span class="name">
+                        <span ><b>guardarSede</b></span>
+                        <a href="#guardarSede"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>guardarSede()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/components/perfil/perfil.component.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/components/perfil/perfil.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categories"></a>
+                    <span class="name">
+                        <span ><b>categories</b></span>
+                        <a href="#categories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>PostCategory[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/perfil/perfil.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>commentService</b></span>
+                        <a href="#commentService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CommentService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/perfil/perfil.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postCategoryService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>postCategoryService</b></span>
+                        <a href="#postCategoryService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PostCategoryService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/perfil/perfil.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="posts"></a>
+                    <span class="name">
+                        <span ><b>posts</b></span>
+                        <a href="#posts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Post.html" target="_self" >Post[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/perfil/perfil.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>postService</b></span>
+                        <a href="#postService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PostService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/perfil/perfil.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/perfil/perfil.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sede"></a>
+                    <span class="name">
+                        <span ><b>sede</b></span>
+                        <a href="#sede"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/perfil/perfil.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sedes"></a>
+                    <span class="name">
+                        <span ><b>sedes</b></span>
+                        <a href="#sedes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    &#x27;Modalidad online&#x27;,
+    &#x27;Campus Virtual&#x27;,
+    &#x27;Sede Alameda&#x27;,
+    &#x27;Sede Padre Alonso de Ovalle&#x27;,
+    &#x27;Sede Antonio Varas&#x27;,
+    &#x27;Sede Educación Continua&#x27;,
+    &#x27;Sede Maipú&#x27;,
+    &#x27;Sede Melipilla&#x27;,
+    &#x27;Sede Plaza Norte&#x27;,
+    &#x27;Sede Plaza Oeste&#x27;,
+    &#x27;Sede Plaza Vespucio&#x27;,
+    &#x27;Sede Puente Alto&#x27;,
+    &#x27;Sede San Bernardo&#x27;,
+    &#x27;Sede San Carlos de Apoquindo&#x27;,
+    &#x27;Sede San Joaquín&#x27;,
+    &#x27;Sede Valparaíso&#x27;,
+    &#x27;Sede Viña del Mar&#x27;,
+    &#x27;Campus Arauco&#x27;,
+    &#x27;Campus Nacimiento&#x27;,
+    &#x27;Sede San Andrés de Concepción&#x27;,
+    &#x27;Campus Villarrica&#x27;,
+    &#x27;Sede Puerto Montt&#x27;
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/perfil/perfil.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalComments"></a>
+                    <span class="name">
+                        <span ><b>totalComments</b></span>
+                        <a href="#totalComments"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/perfil/perfil.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalPosts"></a>
+                    <span class="name">
+                        <span ><b>totalPosts</b></span>
+                        <a href="#totalPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/perfil/perfil.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/perfil/perfil.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/perfil/perfil.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { forkJoin } from &#x27;rxjs&#x27;;
+
+/* BreadCrumb */
+import { BreadcrumbComponent } from &#x27;../breadcrumb/breadcrumb.component&#x27;;
+
+/* Services */
+import { UserService } from &#x27;../../core/services/user.service&#x27;;
+import { PostService } from &#x27;../../core/services/post.service&#x27;;
+import { CommentService } from &#x27;../../core/services/comment.service&#x27;;
+import { PostCategoryService } from &#x27;../../core/services/post-category.service&#x27;;
+
+/* Models */
+import { User } from &#x27;../../models/user&#x27;;
+import { Post } from &#x27;../../models/post&#x27;;
+import { PostCategory } from &#x27;../../models/postCategory&#x27;;
+
+@Component({
+  selector: &#x27;app-perfil&#x27;,
+  standalone: true,
+  imports: [CommonModule, BreadcrumbComponent, RouterModule, FormsModule],
+  templateUrl: &#x27;./perfil.component.html&#x27;,
+  styleUrls: [&#x27;./perfil.component.scss&#x27;]
+})
+export class PerfilComponent implements OnInit {
+  private userService &#x3D; inject(UserService);
+  private postService &#x3D; inject(PostService);
+  private router &#x3D; inject(Router);
+  private commentService &#x3D; inject(CommentService);
+  private postCategoryService &#x3D; inject(PostCategoryService);
+
+  user: User | null &#x3D; null;
+  posts: Post[] &#x3D; [];
+  categories: PostCategory[] &#x3D; [];
+  sede &#x3D; &#x27;&#x27;;
+  sedes: string[] &#x3D; [
+    &#x27;Modalidad online&#x27;,
+    &#x27;Campus Virtual&#x27;,
+    &#x27;Sede Alameda&#x27;,
+    &#x27;Sede Padre Alonso de Ovalle&#x27;,
+    &#x27;Sede Antonio Varas&#x27;,
+    &#x27;Sede Educación Continua&#x27;,
+    &#x27;Sede Maipú&#x27;,
+    &#x27;Sede Melipilla&#x27;,
+    &#x27;Sede Plaza Norte&#x27;,
+    &#x27;Sede Plaza Oeste&#x27;,
+    &#x27;Sede Plaza Vespucio&#x27;,
+    &#x27;Sede Puente Alto&#x27;,
+    &#x27;Sede San Bernardo&#x27;,
+    &#x27;Sede San Carlos de Apoquindo&#x27;,
+    &#x27;Sede San Joaquín&#x27;,
+    &#x27;Sede Valparaíso&#x27;,
+    &#x27;Sede Viña del Mar&#x27;,
+    &#x27;Campus Arauco&#x27;,
+    &#x27;Campus Nacimiento&#x27;,
+    &#x27;Sede San Andrés de Concepción&#x27;,
+    &#x27;Campus Villarrica&#x27;,
+    &#x27;Sede Puerto Montt&#x27;
+  ];
+
+  totalPosts &#x3D; 0;
+  totalComments &#x3D; 0;
+
+  ngOnInit(): void {
+    const email &#x3D; this.userService.getAzureUser()?.email || this.userService.getName();
+    if (!email) {
+      this.router.navigate([&#x27;/&#x27;]);
+      return;
+    }
+
+    this.postCategoryService.getAll().subscribe(cats &#x3D;&gt; (this.categories &#x3D; cats));
+
+    this.userService.getUser(email).subscribe(user &#x3D;&gt; {
+      this.user &#x3D; user;
+      this.sede &#x3D; user.center;
+      if (user.idUser !&#x3D;&#x3D; undefined) {
+        this.cargarPublicaciones(user.idUser);
+      }
+    });
+  }
+
+  cargarPublicaciones(idUser: number): void {
+    this.postService.getAll().subscribe(posts &#x3D;&gt; {
+      this.posts &#x3D; posts.filter(p &#x3D;&gt; p.idUser &#x3D;&#x3D;&#x3D; idUser);
+      this.totalPosts &#x3D; this.posts.length;
+
+      const commentRequests &#x3D; this.posts.map(p &#x3D;&gt; this.commentService.getByPostId(p.idPost));
+      if (commentRequests.length) {
+        forkJoin(commentRequests).subscribe(all &#x3D;&gt; {
+          this.totalComments &#x3D; all.reduce((acc, arr) &#x3D;&gt; acc + arr.length, 0);
+        });
+      } else {
+        this.totalComments &#x3D; 0;
+      }
+    });
+  }
+
+  getUserInitial(): string {
+    return this.user?.name ? this.user.name.charAt(0).toUpperCase() : &#x27;?&#x27;;
+  }
+
+  guardarSede(): void {
+    if (this.user) {
+      const updatedUser &#x3D; { ...this.user, center: this.sede };
+      this.userService.registerUser(updatedUser).subscribe(() &#x3D;&gt; {
+      });
+    }
+  }
+
+  editar(post: Post): void {
+    this.router.navigate([&#x27;/dashboard/ayudantias&#x27;, post.idPost], { state: { editar: post } });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container mt-4&quot;&gt;
+  &lt;app-breadcrumb&gt;&lt;/app-breadcrumb&gt;
+
+  &lt;!-- PERFIL PRINCIPAL --&gt;
+  &lt;div class&#x3D;&quot;perfil-header d-flex align-items-center gap-4 shadow-sm p-4 mt-4 mb-4 rounded-4 bg-white border&quot;&gt;
+    &lt;div class&#x3D;&quot;avatar text-uppercase&quot;&gt;
+      {{ getUserInitial() }}
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;flex-grow-1&quot;&gt;
+      &lt;h4 class&#x3D;&quot;mb-1 fw-semibold&quot;&gt;{{ user?.name || &#x27;Mi Perfil&#x27; }}&lt;/h4&gt;
+      &lt;p class&#x3D;&quot;mb-1 text-muted&quot;&gt;&lt;strong&gt;Correo:&lt;/strong&gt; {{ user?.email }}&lt;/p&gt;
+      &lt;p class&#x3D;&quot;mb-1 text-muted&quot;&gt;&lt;strong&gt;Rol:&lt;/strong&gt; {{ user?.role }}&lt;/p&gt;
+      &lt;p class&#x3D;&quot;mb-0 text-muted&quot;&gt;
+        &lt;strong&gt;Sede:&lt;/strong&gt;
+        &lt;select class&#x3D;&quot;form-select form-select-sm d-inline w-auto rounded-pill&quot; [(ngModel)]&#x3D;&quot;sede&quot;
+          (change)&#x3D;&quot;guardarSede()&quot;&gt;
+          @for (s of sedes; track s) {
+          &lt;option [value]&#x3D;&quot;s&quot;&gt;{{ s }}&lt;/option&gt;
+          }
+        &lt;/select&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!--     
+    &lt;div&gt;
+      &lt;button class&#x3D;&quot;btn btn-outline-primary btn-sm rounded-pill&quot; disabled&gt;
+        &lt;i class&#x3D;&quot;fas fa-user-edit me-1&quot;&gt;&lt;/i&gt; Editar Perfil
+      &lt;/button&gt;
+    &lt;/div&gt;
+     --&gt;
+
+  &lt;/div&gt;
+
+  &lt;!-- ESTADÍSTICAS --&gt;
+  &lt;div class&#x3D;&quot;bg-white shadow-sm p-4 rounded-4 mb-4 border&quot;&gt;
+    &lt;h5 class&#x3D;&quot;mb-3 fw-semibold&quot;&gt;Estadísticas personales&lt;/h5&gt;
+    &lt;div class&#x3D;&quot;bg-light p-3 rounded-3&quot;&gt;
+      &lt;ul class&#x3D;&quot;list-unstyled mb-0 small text-muted&quot;&gt;
+        &lt;li&gt;&lt;i class&#x3D;&quot;fas fa-bullhorn me-2 text-secondary&quot;&gt;&lt;/i&gt;Publicaciones: {{ totalPosts }}&lt;/li&gt;
+        &lt;li&gt;&lt;i class&#x3D;&quot;fas fa-comments me-2 text-secondary&quot;&gt;&lt;/i&gt;Comentarios recibidos: {{ totalComments }}&lt;/li&gt;
+        &lt;li&gt;&lt;i class&#x3D;&quot;fas fa-thumbs-up me-2 text-secondary&quot;&gt;&lt;/i&gt;Calificación Ponderada: 0&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- PUBLICACIONES --&gt;
+  &lt;div class&#x3D;&quot;bg-white shadow-sm p-4 rounded-4 border&quot;&gt;
+    &lt;h5 class&#x3D;&quot;mb-3 fw-semibold&quot;&gt;Mis publicaciones&lt;/h5&gt;
+
+    @if (!posts.length) {
+    &lt;div class&#x3D;&quot;alert alert-info&quot;&gt;
+      &lt;p class&#x3D;&quot;mb-0&quot;&gt;Aún no has publicado nada.&lt;/p&gt;
+    &lt;/div&gt;
+    }
+
+    @if (posts.length) {
+    &lt;ul class&#x3D;&quot;list-group list-group-flush&quot;&gt;
+      @for (pub of posts; track pub) {
+      &lt;li class&#x3D;&quot;list-group-item d-flex justify-content-between align-items-center py-3&quot;&gt;
+        &lt;div class&#x3D;&quot;fw-medium&quot;&gt;{{ pub.title }}&lt;/div&gt;
+        &lt;button class&#x3D;&quot;btn btn-outline-secondary btn-sm rounded-pill&quot; (click)&#x3D;&quot;editar(pub)&quot;&gt;
+          &lt;i class&#x3D;&quot;fas fa-edit me-1&quot;&gt;&lt;/i&gt; Editar
+        &lt;/button&gt;
+      &lt;/li&gt;
+      }
+    &lt;/ul&gt;
+    }
+  &lt;/div&gt;
+
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./perfil.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;sass:color&#x27;;
+@use &#x27;styles&#x27; as *;
+
+.perfil-box {
+    background-color: #fff7e6;
+    border-left: 5px solid $amarillo;
+    border-radius: 0.5rem;
+}
+
+h4,
+h5 {
+    color: $negro;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #eee;
+
+    &amp;:last-child {
+        border-bottom: none;
+    }
+
+    button {
+        font-size: 0.85rem;
+    }
+}
+
+.perfil-header {
+    border: 1px solid #eee;
+    border-radius: 1rem;
+    background: #fff;
+
+    .avatar {
+        width: 80px;
+        height: 80px;
+        background-color: #0d6efd;
+        color: white;
+        border-radius: 50%;
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 0 3px white;
+        font-weight: 600;
+    }
+}
+
+h4,
+h5 {
+    color: #212529;
+}
+
+.bg-white {
+    border: 1px solid #e0e0e0;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s ease;
+
+    &amp;:hover {
+        background-color: #f8f9fa;
+    }
+
+    .btn {
+        font-size: 0.85rem;
+    }
+
+    &amp;:last-child {
+        border-bottom: none;
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container mt-4">  <app-breadcrumb></app-breadcrumb>  <!-- PERFIL PRINCIPAL -->  <div class="perfil-header d-flex align-items-center gap-4 shadow-sm p-4 mt-4 mb-4 rounded-4 bg-white border">    <div class="avatar text-uppercase">      {{ getUserInitial() }}    </div>    <div class="flex-grow-1">      <h4 class="mb-1 fw-semibold">{{ user?.name || \'Mi Perfil\' }}</h4>      <p class="mb-1 text-muted"><strong>Correo:</strong> {{ user?.email }}</p>      <p class="mb-1 text-muted"><strong>Rol:</strong> {{ user?.role }}</p>      <p class="mb-0 text-muted">        <strong>Sede:</strong>        <select class="form-select form-select-sm d-inline w-auto rounded-pill" [(ngModel)]="sede"          (change)="guardarSede()">          @for (s of sedes; track s) {          <option [value]="s">{{ s }}</option>          }        </select>      </p>    </div>    <!--         <div>      <button class="btn btn-outline-primary btn-sm rounded-pill" disabled>        <i class="fas fa-user-edit me-1"></i> Editar Perfil      </button>    </div>     -->  </div>  <!-- ESTADÍSTICAS -->  <div class="bg-white shadow-sm p-4 rounded-4 mb-4 border">    <h5 class="mb-3 fw-semibold">Estadísticas personales</h5>    <div class="bg-light p-3 rounded-3">      <ul class="list-unstyled mb-0 small text-muted">        <li><i class="fas fa-bullhorn me-2 text-secondary"></i>Publicaciones: {{ totalPosts }}</li>        <li><i class="fas fa-comments me-2 text-secondary"></i>Comentarios recibidos: {{ totalComments }}</li>        <li><i class="fas fa-thumbs-up me-2 text-secondary"></i>Calificación Ponderada: 0</li>      </ul>    </div>  </div>  <!-- PUBLICACIONES -->  <div class="bg-white shadow-sm p-4 rounded-4 border">    <h5 class="mb-3 fw-semibold">Mis publicaciones</h5>    @if (!posts.length) {    <div class="alert alert-info">      <p class="mb-0">Aún no has publicado nada.</p>    </div>    }    @if (posts.length) {    <ul class="list-group list-group-flush">      @for (pub of posts; track pub) {      <li class="list-group-item d-flex justify-content-between align-items-center py-3">        <div class="fw-medium">{{ pub.title }}</div>        <button class="btn btn-outline-secondary btn-sm rounded-pill" (click)="editar(pub)">          <i class="fas fa-edit me-1"></i> Editar        </button>      </li>      }    </ul>    }  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PerfilComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PerfilComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
