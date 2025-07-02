@@ -4,15 +4,22 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+/**
+ * Servicio responsable de gestionar la información de los usuarios
+ * en la plataforma ConectaDuoc, incluyendo integración con Azure AD
+ * y operaciones CRUD sobre la base de datos.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  /** URL base del API de usuarios */
   private apiUrl = 'http://localhost:9090/api/usuarios';
   //private apiUrl = 'https://yr3rp1l7fd.execute-api.us-east-1.amazonaws.com/api/usuarios';
   private msalService = inject(MsalService);
   private http = inject(HttpClient);
 
+<<<<<<< Updated upstream
   private userNameSubject = new BehaviorSubject<string | null>(null);
   userName$ = this.userNameSubject.asObservable();
 
@@ -30,6 +37,12 @@ export class UserService {
 
 
   // Obtener el usuario actual desde Azure AD
+=======
+  /**
+   * Obtiene los datos del usuario actualmente autenticado mediante Azure AD.
+   * @returns Objeto con email y nombre completo, o `null` si no hay sesión activa.
+   */
+>>>>>>> Stashed changes
   getAzureUser(): { email: string; fullName: string } | null {
     const account = this.msalService.instance.getActiveAccount();
     if (!account) return null;
@@ -39,76 +52,121 @@ export class UserService {
     };
   }
 
-  // Buscar si el usuario ya está registrado en la base de datos
+  /**
+   * Verifica si un usuario con el correo indicado ya está registrado.
+   * @param email Correo institucional del usuario.
+   * @returns `true` si existe, `false` si no.
+   */
   checkUserExists(email: string): Observable<boolean> {
     const encodedEmail = encodeURIComponent(email);
     return this.http.get<boolean>(`${this.apiUrl}/exists/${encodedEmail}`);
   }
 
-  // Registrar usuario nuevo
+  /**
+   * Registra un nuevo usuario en la base de datos.
+   * @param user Objeto de tipo `User` con los datos del nuevo usuario.
+   */
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl, user);
   }
 
-  // Obtener el usuario completo desde la BD
+  /**
+   * Obtiene el usuario completo desde la base de datos según el correo.
+   * @param email Correo del usuario.
+   */
   getUser(email: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${email}`);
   }
-  // Guardar el rol en localStorage (por conveniencia de uso en frontend)
+
+  /**
+   * Guarda el rol del usuario en `localStorage` para uso en frontend.
+   * @param role Rol del usuario (ej: "admin", "student").
+   */
   setRole(role: string) {
     localStorage.setItem('userRole', role);
   }
 
+  /** Obtiene el rol almacenado en `localStorage`. */
   getRole(): string | null {
     return localStorage.getItem('userRole');
   }
 
+  /** Elimina el rol del usuario desde `localStorage`. */
   clearRole() {
     localStorage.removeItem('userRole');
   }
 
-  // Guardar nombre también si quieres mostrarlo en el UI
+  /**
+   * Guarda el nombre del usuario para mostrarlo en la interfaz.
+   * @param name Nombre completo del usuario.
+   */
   setName(name: string) {
     this.userNameSubject.next(name);
     localStorage.setItem('nombreUsuario', name);
   }
 
+  /** Obtiene el nombre del usuario almacenado. */
   getName(): string | null {
     return localStorage.getItem('nombreUsuario');
   }
 
+<<<<<<< Updated upstream
 
+=======
+  /**
+   * Guarda el ID del usuario autenticado.
+   * @param idUser ID numérico del usuario.
+   */
+>>>>>>> Stashed changes
   setIdUser(idUser: number) {
     localStorage.setItem('idUser', idUser.toString());
   }
 
+  /** Obtiene el ID del usuario almacenado. */
   getIdUser(): number | null {
     const raw = localStorage.getItem('idUser');
     return raw ? Number(raw) : null;
   }
 
+  /**
+   * Obtiene un usuario desde la base de datos por su ID.
+   * @param idUser ID numérico del usuario.
+   */
   getUserById(idUser: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/id/${idUser}`);
   }
 
+  // ----------------------
+  // Módulo de Configuraciones
+  // ----------------------
 
-  /* ADICIONALES PARA MODULO DE CONFIGURACIONES */
 
-  // Obtener todos los usuarios
+  /** Obtiene todos los usuarios registrados. */
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
 
+<<<<<<< Updated upstream
   // Actualizar usuario
   updateUser(email: string, user: User): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${email}`, user);
+=======
+  /**
+   * Actualiza los datos de un usuario.
+   * @param id ID del usuario a modificar.
+   * @param user Nuevos datos del usuario.
+   */
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/${id}`, user);
+>>>>>>> Stashed changes
   }
 
-  // Eliminar usuario
+  /**
+   * Elimina un usuario por su ID.
+   * @param id ID del usuario a eliminar.
+   */
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-
-
 
 }
