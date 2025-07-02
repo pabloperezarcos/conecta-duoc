@@ -15,15 +15,26 @@ export class ReportService {
   // Reportar una publicación
   reportPost(idPost: number, reason: string): Observable<Report> {
     const idUser = this.userService.getIdUser();
+
+    const now = new Date();
+    const localDateTime = now.getFullYear() + '-' +
+      String(now.getMonth() + 1).padStart(2, '0') + '-' +
+      String(now.getDate()).padStart(2, '0') + 'T' +
+      String(now.getHours()).padStart(2, '0') + ':' +
+      String(now.getMinutes()).padStart(2, '0') + ':' +
+      String(now.getSeconds()).padStart(2, '0');
+
     const report: Report = {
       idPost,
       reason,
       status: 1,
-      createdDate: new Date().toISOString(),
+      createdDate: localDateTime,
       idUser: idUser!
     };
+
     return this.http.post<Report>(`${this.apiUrl}/publicacion`, report);
   }
+
 
   // Reportar un comentario
   reportComment(idComment: number, reason: string): Observable<Report> {
