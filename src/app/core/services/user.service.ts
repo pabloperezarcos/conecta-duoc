@@ -19,7 +19,6 @@ export class UserService {
   private msalService = inject(MsalService);
   private http = inject(HttpClient);
 
-<<<<<<< Updated upstream
   private userNameSubject = new BehaviorSubject<string | null>(null);
   userName$ = this.userNameSubject.asObservable();
 
@@ -35,14 +34,10 @@ export class UserService {
     }
   }
 
-
-  // Obtener el usuario actual desde Azure AD
-=======
   /**
    * Obtiene los datos del usuario actualmente autenticado mediante Azure AD.
    * @returns Objeto con email y nombre completo, o `null` si no hay sesión activa.
    */
->>>>>>> Stashed changes
   getAzureUser(): { email: string; fullName: string } | null {
     const account = this.msalService.instance.getActiveAccount();
     if (!account) return null;
@@ -110,14 +105,10 @@ export class UserService {
     return localStorage.getItem('nombreUsuario');
   }
 
-<<<<<<< Updated upstream
-
-=======
   /**
    * Guarda el ID del usuario autenticado.
    * @param idUser ID numérico del usuario.
    */
->>>>>>> Stashed changes
   setIdUser(idUser: number) {
     localStorage.setItem('idUser', idUser.toString());
   }
@@ -140,25 +131,18 @@ export class UserService {
   // Módulo de Configuraciones
   // ----------------------
 
-
   /** Obtiene todos los usuarios registrados. */
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
 
-<<<<<<< Updated upstream
-  // Actualizar usuario
-  updateUser(email: string, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${email}`, user);
-=======
   /**
    * Actualiza los datos de un usuario.
    * @param id ID del usuario a modificar.
    * @param user Nuevos datos del usuario.
    */
-  updateUser(id: number, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, user);
->>>>>>> Stashed changes
+  updateUser(email: string, user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/${email}`, user);
   }
 
   /**
