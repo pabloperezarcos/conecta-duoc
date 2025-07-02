@@ -4,8 +4,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-/* BREADCRUMB */
+/* BREADCRUMB y BANNER*/
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { NotificacionBannerComponent } from '../notificacion-banner/notificacion-banner.component';
 
 /* MODELS */
 import { Post } from '../../models/post';
@@ -20,7 +21,7 @@ import { ScoreService } from '../../core/services/score.service';
 @Component({
   selector: 'app-categorias',
   standalone: true,
-  imports: [BreadcrumbComponent, FormsModule, ReactiveFormsModule, RouterModule, CommonModule],
+  imports: [BreadcrumbComponent, FormsModule, ReactiveFormsModule, RouterModule, CommonModule, NotificacionBannerComponent],
   templateUrl: './categorias.component.html',
   styleUrls: ['./categorias.component.scss']
 })

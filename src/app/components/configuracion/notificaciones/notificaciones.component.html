@@ -1,0 +1,74 @@
+<div class="container mt-5 mb-4">
+    <app-breadcrumb></app-breadcrumb>
+    <h2 class="mt-4 mb-2 text-center titulo-panel">Gestión de Notificaciones Globales</h2>
+    <p class="text-center text-muted mb-5">Administra las notificaciones para usuarios de la plataforma</p>
+
+    <div class="card shadow-sm rounded-4 p-4 mb-5 seccion-form">
+        <div class="d-flex align-items-center mb-4">
+            <div class="icono-seccion me-3">
+                <i class="fas fa-plus-circle text-primary"></i>
+            </div>
+            <div>
+                <h5 class="mb-1 fw-bold">Crear nueva notificación</h5>
+            </div>
+        </div>
+
+        <form [formGroup]="formulario" (ngSubmit)="crear()">
+            <div class="mb-4">
+                <label for="titulo" class="form-label fw-semibold">Título</label>
+                <input id="titulo" type="text" class="form-control campo-form" formControlName="titulo" required
+                    autofocus />
+            </div>
+
+            <div class="mb-4">
+                <label for="mensaje" class="form-label fw-semibold">Mensaje</label>
+                <textarea id="mensaje" class="form-control campo-form" formControlName="mensaje" rows="3"
+                    required></textarea>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col">
+                    <label class="form-label fw-semibold">Fecha Inicio</label>
+                    <input type="date" class="form-control campo-form" formControlName="fechaInicio" />
+                </div>
+                <div class="col">
+                    <label class="form-label fw-semibold">Fecha Fin</label>
+                    <input type="date" class="form-control campo-form" formControlName="fechaFin" />
+                </div>
+            </div>
+
+            <button class="btn btn-primary w-100 fw-bold btn-lg" type="submit" [disabled]="formulario.invalid">
+                🚀 Crear Notificación
+            </button>
+        </form>
+    </div>
+
+    <div class="card shadow-sm rounded-4 p-4">
+        <h5 class="mb-3">📋 Notificaciones Actuales</h5>
+        <ul class="list-group list-group-flush">
+            <li *ngFor="let n of notificaciones; let i = index"
+                [ngClass]="{ 'nueva-notificacion': i === notificaciones.length - 1 }"
+                class="list-group-item d-flex justify-content-between align-items-start">
+                <div>
+
+                    <h6 class="mb-1 text-primary fw-bold d-flex align-items-center">
+                        {{ n.titulo }}
+                        <small class="badge ms-2"
+                            [ngClass]="{'bg-success': esActiva(n.fechaFin),'bg-secondary': !esActiva(n.fechaFin)}">
+                            {{ esActiva(n.fechaFin) ? 'Activa' : 'Expirada' }}
+                        </small>
+                    </h6>
+                    <small class="text-muted">
+                        {{ n.fechaInicio | date:'dd/MM/yyyy' }} a {{ n.fechaFin | date:'dd/MM/yyyy' }}
+                    </small>
+                    <p class="mb-0 text-muted">{{ n.mensaje }}</p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-outline-danger btn-sm" (click)="eliminar(n.id!)" title="Eliminar">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
