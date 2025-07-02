@@ -10,13 +10,19 @@ import { registerLocaleData } from '@angular/common';
 import { routes } from './app/app.routes';
 registerLocaleData(localeEsCL, 'es-CL');
 
-// MSAL
+// MSAL (Microsoft Authentication Library)
 import { MsalModule } from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
 
 
+/**
+ * Punto de entrada principal de la aplicación ConectaDuoc.
+ * Inicializa MSAL para autenticación con Azure AD, configura el proveedor de rutas y aplica el idioma regional.
+ */
 (async () => {
-  // 1) Instancia Msal
+  /**
+   * 1) Instancia de PublicClientApplication para manejar autenticación con Azure AD.
+   */
   const pca = new PublicClientApplication({
     auth: {
       clientId: '314ead43-a75f-4a94-be0b-80bb5e3a313f',
@@ -26,10 +32,10 @@ import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
     },
   });
 
-  // 2) Esperar inicialización
+  // 2) Inicializa MSAL antes de continuar
   await pca.initialize();
 
-  // 3) Importar MsalModule
+  // 3) Bootstrap manual de la aplicación con providers
   bootstrapApplication(AppComponent, {
     providers: [
       ...appConfig.providers,
@@ -40,11 +46,11 @@ import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
         MsalModule.forRoot(
           pca,
           {
-            interactionType: InteractionType.Popup,
+            interactionType: InteractionType.Popup, // Autenticación mediante popup
             authRequest: { scopes: ['user.read'] },
           },
           {
-            interactionType: InteractionType.Redirect,
+            interactionType: InteractionType.Redirect, // Redirección al usar recursos protegidos
             protectedResourceMap: new Map([
               ['https://graph.microsoft.com/v1.0/me', ['user.read']],
             ]),
