@@ -21,6 +21,30 @@ export class UsuariosComponent implements OnInit {
   userForm!: FormGroup;
   editing: User | null = null;
   filtroNombre: string = '';
+  sedes: string[] = [
+    'Modalidad online',
+    'Campus Virtual',
+    'Sede Alameda',
+    'Sede Padre Alonso de Ovalle',
+    'Sede Antonio Varas',
+    'Sede Educación Continua',
+    'Sede Maipú',
+    'Sede Melipilla',
+    'Sede Plaza Norte',
+    'Sede Plaza Oeste',
+    'Sede Plaza Vespucio',
+    'Sede Puente Alto',
+    'Sede San Bernardo',
+    'Sede San Carlos de Apoquindo',
+    'Sede San Joaquín',
+    'Sede Valparaíso',
+    'Sede Viña del Mar',
+    'Campus Arauco',
+    'Campus Nacimiento',
+    'Sede San Andrés de Concepción',
+    'Campus Villarrica',
+    'Sede Puerto Montt'
+  ];
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -54,27 +78,27 @@ export class UsuariosComponent implements OnInit {
   }
 
   guardar(): void {
-    if (this.userForm.invalid) return;
+    if (this.userForm.invalid || !this.editing?.idUser) return;
 
-    const datos = this.userForm.value as User;
-    if (this.editing && this.editing.idUser) {
-      this.userService.updateUser(this.editing.idUser, datos).subscribe(() => {
-        this.cargarUsuarios();
-        this.cancelarEdicion();
-      });
-    } else {
-      this.userService.registerUser({ ...datos, policies: 1 }).subscribe(() => {
-        this.cargarUsuarios();
-        this.userForm.reset({ role: 'student' });
-      });
-    }
-  }
+    const datos = {
+      ...this.userForm.value,
+      policies: 1
+    };
 
-  eliminar(user: User): void {
-    if (!user.idUser) return;
-    if (!confirm('¿Eliminar usuario?')) return;
-    this.userService.deleteUser(user.idUser).subscribe(() => {
+    this.userService.updateUser(this.editing.email, datos).subscribe(() => {
+      this.userService.setName(datos.name);
       this.cargarUsuarios();
+      this.cancelarEdicion();
     });
   }
+
+  /*   
+  eliminar(user: User): void {
+      if (!user.idUser) return;
+      if (!confirm('¿Eliminar usuario?')) return;
+      this.userService.deleteUser(user.idUser).subscribe(() => {
+        this.cargarUsuarios();
+      });
+    } 
+    */
 }

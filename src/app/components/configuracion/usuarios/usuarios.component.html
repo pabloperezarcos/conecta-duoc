@@ -3,10 +3,11 @@
     <h2 class="mt-4 mb-2 text-center titulo-panel">Usuarios</h2>
     <p class="text-center text-muted mb-5">Administra los usuarios de la plataforma</p>
 
-    <form [formGroup]="userForm" (ngSubmit)="guardar()" class="mb-4">
+    <form *ngIf="editing" [formGroup]="userForm" (ngSubmit)="guardar()" class="mb-4">
         <div class="row g-2">
             <div class="col-sm">
-                <input type="email" formControlName="email" class="form-control" placeholder="Email" />
+                <input type="email" formControlName="email" class="form-control" placeholder="Email"
+                    [readonly]="editing !== null" />
             </div>
             <div class="col-sm">
                 <input type="text" formControlName="name" class="form-control" placeholder="Nombre" />
@@ -18,10 +19,13 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input type="text" formControlName="center" class="form-control" placeholder="Sede" />
+                <select formControlName="center" class="form-select">
+                    <option value="" disabled selected>Selecciona sede</option>
+                    <option *ngFor="let sede of sedes" [value]="sede">{{ sede }}</option>
+                </select>
             </div>
             <div class="col-auto">
-                <button class="btn btn-warning" type="submit">{{ editing ? 'Actualizar' : 'Agregar' }}</button>
+                <button class="btn btn-warning" type="submit">Actualizar</button>
                 <button class="btn btn-secondary ms-2" type="button" *ngIf="editing"
                     (click)="cancelarEdicion()">Cancelar</button>
             </div>
@@ -30,7 +34,8 @@
 
     <!-- Filtro de búsqueda por nombre -->
     <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Buscar por nombre o apellido..." [(ngModel)]="filtroNombre" />
+        <input type="text" class="form-control" placeholder="Buscar por nombre o apellido..."
+            [(ngModel)]="filtroNombre" />
     </div>
 
     <div class="table-responsive">
@@ -41,7 +46,7 @@
                     <th>Nombre</th>
                     <th>Rol</th>
                     <th>Sede</th>
-                    <th></th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,11 +55,11 @@
                     <td>{{ u.name }}</td>
                     <td>{{ u.role }}</td>
                     <td>{{ u.center }}</td>
-                    <td class="text-end">
+                    <td class="text-left">
                         <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(u)"><i
                                 class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-outline-danger" (click)="eliminar(u)"><i
-                                class="fas fa-trash"></i></button>
+                        <!-- <button class="btn btn-sm btn-outline-danger" (click)="eliminar(u)"><i
+                                class="fas fa-trash"></i></button> -->
                     </td>
                 </tr>
             </tbody>

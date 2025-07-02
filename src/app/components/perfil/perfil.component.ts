@@ -13,6 +13,7 @@ import { UserService } from '../../core/services/user.service';
 import { PostService } from '../../core/services/post.service';
 import { CommentService } from '../../core/services/comment.service';
 import { PostCategoryService } from '../../core/services/post-category.service';
+import { ScoreService } from '../../core/services/score.service';
 
 /* Models */
 import { User } from '../../models/user';
@@ -32,6 +33,7 @@ export class PerfilComponent implements OnInit {
   private router = inject(Router);
   private commentService = inject(CommentService);
   private postCategoryService = inject(PostCategoryService);
+  private scoreService = inject(ScoreService);
 
   user: User | null = null;
   posts: Post[] = [];
@@ -67,6 +69,7 @@ export class PerfilComponent implements OnInit {
   filtroPost = '';
   postsPorPagina = 8;
   paginaActual = 1;
+  promedioPonderado = 0;
 
   ngOnInit(): void {
     const email = this.userService.getAzureUser()?.email || this.userService.getName();
@@ -99,6 +102,17 @@ export class PerfilComponent implements OnInit {
         });
       } else {
         this.totalComments = 0;
+      }
+
+
+      const scoreRequests = this.posts.map(p => this.scoreService.getAverageScore(p.idPost));
+      if (scoreRequests.length) {
+        forkJoin(scoreRequests).subscribe(all => {
+          const total = all.reduce((acc, val) => acc + val, 0);
+          this.promedioPonderado = total / all.length;
+        });
+      } else {
+        this.promedioPonderado = 0;
       }
     });
   }

@@ -17,9 +17,20 @@ export class DashboardComponent implements OnInit {
   private userService = inject(UserService);
   private postCategoryService = inject(PostCategoryService);
 
-  categories: (PostCategory & { icono: string; ruta: string; colorClass?: string; adminOnly?: boolean })[] = [];
   username: string | null = null;
   role: string | null = null;
+  categories: (PostCategory & { icono: string; ruta: string, adminOnly?: boolean; })[] = [];
+
+  private iconMap: Record<string, string> = {
+    'ayudantias-academicas': 'fas fa-book-open',
+    'actividades-deportivas': 'fas fa-futbol',
+    'culturales-y-recreativas': 'fas fa-theater-masks',
+    'voluntariado-ecoduoc': 'fas fa-leaf',
+    'trueques-estudiantiles': 'fas fa-exchange-alt',
+    'panel-de-configuracion': 'fas fa-cog',
+    'reportes': 'fas fa-chart-bar'
+  };
+
 
   ngOnInit(): void {
     this.username = this.userService.getName() || this.userService.getAzureUser()?.fullName || this.userService.getAzureUser()?.email || 'Desconocido';
@@ -30,61 +41,36 @@ export class DashboardComponent implements OnInit {
         .filter(cat => {
           if (!cat.status) return false;
 
-          const nombre = cat.name.toLowerCase();
-          if (nombre === 'reportes' || nombre === 'panel de configuración') {
+          const slug = this.slugify(cat.name);
+          if (slug === 'reportes' || slug === 'panel-de-configuracion') {
             return this.role === 'admin';
           }
 
           return true;
         })
-        .map(cat => ({
-          ...cat,
-          icono: this.getIconForCategory(cat.name),
-          ruta: this.getRouteForCategory(cat.name)
-        }));
+        .map(cat => {
+          const slug = this.slugify(cat.name);
+          const ruta = slug === 'reportes' || slug === 'panel-de-configuracion'
+            ? `/dashboard/${slug}`
+            : `/categoria/${slug}`;
+
+          return {
+            ...cat,
+            ruta,
+            icono: this.iconMap[slug] || 'fas fa-asterisk',
+            adminOnly: slug === 'reportes' || slug === 'panel-de-configuracion'
+          };
+        });
     });
   }
 
-  getIconForCategory(name: string): string {
-    switch (name.toLowerCase()) {
-      case 'ayudantías académicas':
-        return 'fas fa-book-open';
-      case 'actividades deportivas':
-        return 'fas fa-futbol';
-      case 'culturales y recreativas':
-        return 'fas fa-theater-masks';
-      case 'voluntariado - ecoduoc':
-        return 'fas fa-leaf';
-      case 'trueques estudiantiles':
-        return 'fas fa-exchange-alt';
-      case 'panel de configuración':
-        return 'fas fa-cog';
-      case 'reportes':
-        return 'fas fa-chart-bar';
-      default:
-        return 'fas fa-asterisk';
-    }
+  private slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
   }
 
-  getRouteForCategory(name: string): string {
-    switch (name.toLowerCase()) {
-      case 'ayudantías académicas':
-        return '/categoria/ayudantias';
-      case 'actividades deportivas':
-        return '/categoria/deportes';
-      case 'culturales y recreativas':
-        return '/categoria/culturales';
-      case 'voluntariado - ecoduoc':
-        return '/categoria/voluntariado';
-      case 'trueques estudiantiles':
-        return '/categoria/trueques';
-      case 'reportes':
-        return '/dashboard/reportes';
-      case 'panel de configuración':
-        return '/dashboard/configuracion';
-      default:
-        return '/dashboard';
-    }
-  }
 
 }

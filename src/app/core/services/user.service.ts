@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,22 @@ export class UserService {
   //private apiUrl = 'https://yr3rp1l7fd.execute-api.us-east-1.amazonaws.com/api/usuarios';
   private msalService = inject(MsalService);
   private http = inject(HttpClient);
+
+  private userNameSubject = new BehaviorSubject<string | null>(null);
+  userName$ = this.userNameSubject.asObservable();
+
+  constructor() {
+    const account = this.msalService.instance.getActiveAccount();
+    const localName = localStorage.getItem('nombreUsuario');
+
+    if (account && !localName) {
+      const fullName = account.name || account.username || 'Desconocido';
+      this.setName(fullName); // guarda en BehaviorSubject + localStorage
+    } else if (localName) {
+      this.userNameSubject.next(localName); // sincroniza el observable
+    }
+  }
+
 
   // Obtener el usuario actual desde Azure AD
   getAzureUser(): { email: string; fullName: string } | null {
@@ -53,12 +69,14 @@ export class UserService {
 
   // Guardar nombre también si quieres mostrarlo en el UI
   setName(name: string) {
-    localStorage.setItem('name', name);
+    this.userNameSubject.next(name);
+    localStorage.setItem('nombreUsuario', name);
   }
 
   getName(): string | null {
-    return localStorage.getItem('name');
+    return localStorage.getItem('nombreUsuario');
   }
+
 
   setIdUser(idUser: number) {
     localStorage.setItem('idUser', idUser.toString());
@@ -82,8 +100,8 @@ export class UserService {
   }
 
   // Actualizar usuario
-  updateUser(id: number, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, user);
+  updateUser(email: string, user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/${email}`, user);
   }
 
   // Eliminar usuario

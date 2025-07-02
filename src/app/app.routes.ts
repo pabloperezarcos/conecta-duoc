@@ -41,25 +41,25 @@ export const routes: Routes = [
         data: { showNavbar: true, showFooter: true, expectedRoles: ['admin'] }
     },
     {
-        path: 'dashboard/configuracion',
+        path: 'dashboard/panel-de-configuracion',
         loadComponent: () => import('./components/configuracion/configuracion.component').then(m => m.ConfiguracionComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
-        path: 'dashboard/configuracion/usuarios',
+        path: 'dashboard/panel-de-configuracion/usuarios',
         loadComponent: () => import('./components/configuracion/usuarios/usuarios.component').then(m => m.UsuariosComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
-        path: 'dashboard/configuracion/categorias',
+        path: 'dashboard/panel-de-configuracion/categorias',
         loadComponent: () => import('./components/configuracion/categorias-admin/categorias-admin.component').then(m => m.CategoriasAdminComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
     },
     {
-        path: 'dashboard/configuracion/notificaciones',
+        path: 'dashboard/panel-de-configuracion/notificaciones',
         loadComponent: () => import('./components/configuracion/notificaciones/notificaciones.component').then(m => m.NotificacionesComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],
         data: { showNavbar: true, showFooter: true }
