@@ -55,12 +55,12 @@ export class CategoriasComponent implements OnInit {
     });
 
     this.slug = this.route.snapshot.paramMap.get('slug') || '';
+    console.log('Slug cargado:', this.slug);
 
     this.postCategoryService.getAll().subscribe(categories => {
       const categoria = categories.find(cat =>
-        this.getSlugFromName(cat.name) === this.slug
+        this.slugify(cat.name) === this.slug
       );
-
 
       if (!categoria) {
         this.router.navigate(['/dashboard']);
@@ -155,22 +155,12 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-
-  getSlugFromName(name: string): string {
-    switch (name.toLowerCase()) {
-      case 'ayudantías académicas':
-        return 'ayudantias';
-      case 'actividades deportivas':
-        return 'deportes';
-      case 'culturales y recreativas':
-        return 'culturales';
-      case 'voluntariado - ecoduoc':
-        return 'voluntariado';
-      case 'trueques estudiantiles':
-        return 'trueques';
-      default:
-        return 'otros';
-    }
+  private slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
   }
 
   calificar(pub: Post, valor: number): void {
