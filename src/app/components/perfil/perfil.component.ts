@@ -1,4 +1,4 @@
- /* Angular imports */
+/* Angular imports */
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -64,6 +64,9 @@ export class PerfilComponent implements OnInit {
 
   totalPosts = 0;
   totalComments = 0;
+  filtroPost = '';
+  postsPorPagina = 8;
+  paginaActual = 1;
 
   ngOnInit(): void {
     const email = this.userService.getAzureUser()?.email || this.userService.getName();
@@ -87,6 +90,7 @@ export class PerfilComponent implements OnInit {
     this.postService.getAll().subscribe(posts => {
       this.posts = posts.filter(p => p.idUser === idUser);
       this.totalPosts = this.posts.length;
+      this.paginaActual = 1;
 
       const commentRequests = this.posts.map(p => this.commentService.getByPostId(p.idPost));
       if (commentRequests.length) {
@@ -113,5 +117,33 @@ export class PerfilComponent implements OnInit {
 
   editar(post: Post): void {
     this.router.navigate(['/dashboard/ayudantias', post.idPost], { state: { editar: post } });
+  }
+
+
+  get postsFiltrados(): Post[] {
+    if (!this.filtroPost.trim()) return this.posts;
+    const texto = this.filtroPost.toLowerCase();
+    return this.posts.filter(p =>
+      p.title.toLowerCase().includes(texto) ||
+      p.content.toLowerCase().includes(texto)
+    );
+  }
+
+  get totalPaginas(): number {
+    return Math.ceil(this.postsFiltrados.length / this.postsPorPagina) || 1;
+  }
+
+  get paginas(): number[] {
+    return Array.from({ length: this.totalPaginas }, (_, i) => i + 1);
+  }
+
+  get postsPaginados(): Post[] {
+    const inicio = (this.paginaActual - 1) * this.postsPorPagina;
+    return this.postsFiltrados.slice(inicio, inicio + this.postsPorPagina);
+  }
+
+  cambiarPagina(pagina: number): void {
+    if (pagina < 1 || pagina > this.totalPaginas) return;
+    this.paginaActual = pagina;
   }
 }

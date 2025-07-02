@@ -116,15 +116,18 @@ export class DetalleComponent implements OnInit {
   }
 
   reportarPublicacion(): void {
-    if (this.post) {
-      this.reportService.reportPost(this.post.idPost, 'Contenido inapropiado').subscribe(() => {
-        alert('Publicación reportada');
-      });
-    }
+    if (!this.post) return;
+    const reason = prompt('Motivo del reporte', 'Contenido inapropiado');
+    if (!reason) return;
+    this.reportService.reportPost(this.post.idPost, reason).subscribe(() => {
+      alert('Publicación reportada');
+    });
   }
 
   reportarComentario(com: Comment): void {
-    this.reportService.reportComment(com.idComment, 'Comentario inapropiado').subscribe(() => {
+    const reason = prompt('Motivo del reporte', 'Comentario inapropiado');
+    if (!reason) return;
+    this.reportService.reportComment(com.idComment, reason).subscribe(() => {
       alert('Comentario reportado');
     });
   }

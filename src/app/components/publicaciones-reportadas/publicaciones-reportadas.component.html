@@ -1,5 +1,8 @@
 <div class="container mt-4">
-  <h2 class="mb-4">Reportes de la comunidad</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <h2 class="mt-4 mb-2 text-center titulo-panel">Reportes de la comunidad</h2>
+  <p class="text-center text-muted mb-5">Administra los reportes alertados por la comunidad.</p>
+
 
   @if (loading) {
   <div class="text-center my-4">
@@ -11,35 +14,99 @@
   }
 
   @if (!loading && !postReports.length && !commentReports.length) {
-  <div class="alert alert-info">
-    No hay reportes pendientes.
+  <div class="card border-0 shadow-sm rounded-4 text-center p-4 bg-light-subtle">
+    <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+    <h5 class="mb-1">Sin reportes pendientes</h5>
+    <p class="text-muted mb-0">¡Todo limpio por ahora! 🚀</p>
   </div>
   }
+
+  <div class="card border-0 shadow-sm rounded-4 p-3 mb-4">
+    <div class="row text-center">
+      <div class="col-md-6">
+        <h6 class="mb-1">📝 Publicaciones</h6>
+        <p class="text-muted small mb-0">
+          {{ postReports.length || 0 }} total |
+          {{ postPendientes }} pendientes |
+          {{ postConcedidos }} concedidos |
+          {{ postRechazados }} rechazados
+        </p>
+      </div>
+      <div class="col-md-6">
+        <h6 class="mb-1">💬 Comentarios</h6>
+        <p class="text-muted small mb-0">
+          {{ commentReports.length || 0 }} total |
+          {{ commentPendientes }} pendientes |
+          {{ commentConcedidos }} concedidos |
+          {{ commentRechazados }} rechazados
+        </p>
+      </div>
+    </div>
+  </div>
 
   @if (postReports.length) {
   <div>
     <h4 class="mb-3">Publicaciones reportadas</h4>
+    <div class="form-check form-switch mb-3">
+      <input class="form-check-input" type="checkbox" id="togglePendientes" [(ngModel)]="mostrarSoloPendientes" />
+      <label class="form-check-label" for="togglePendientes">
+        Mostrar solo reportes pendientes de publicaciones.
+      </label>
+    </div>
+
     <ul class="list-group mb-4">
-      @for (rep of postReports; track rep) {
-      <li class="list-group-item">
-        <div>
-          <strong>Publicación #{{ rep.idPost }}</strong>
-          @if (!rep.status) {
-          <span class="badge bg-warning text-dark ms-2">Resuelto</span>
-          }
+      @for (rep of postReportsPaginados; track rep.idReport) {
+      <div class="card shadow-sm rounded-4 p-4 mb-4 border-0">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <strong class="text-dark">Publicación #{{ rep.idPost }}</strong>
+            <span *ngIf="rep.status === 1" class="badge bg-primary ms-2">Pendiente</span>
+            <span *ngIf="rep.status === 2" class="badge bg-success ms-2">Reporte concedido, la publicación fue
+              eliminada.</span>
+            <span *ngIf="rep.status === 3" class="badge bg-danger ms-2">Reporte rechazado, la publicación no infringe
+              las normas comunitarias.</span>
+          </div>
+          <span class="text-muted small">{{ rep.createdDate | date:'short' }}</span>
         </div>
-        <div><span class="text-muted">Motivo:</span> {{ rep.reason }}</div>
-        <div class="mb-2"><span class="text-muted">Fecha:</span> {{ rep.date | date:'short' }}</div>
-        @if (rep.status) {
-        <button class="btn btn-danger btn-sm me-2" (click)="confirmarPost(rep)">
-          Confirmar y eliminar
-        </button>
-        <button class="btn btn-secondary btn-sm" (click)="denegarPost(rep)">
-          Denegar
-        </button>
+
+        <div class="mb-2"><span class="text-muted">📄 Motivo:</span> {{ rep.reason }}</div>
+
+        @if (rep.post) {
+        <div class="bg-light border rounded p-3 mb-2">
+          <h6 class="fw-bold mb-1">{{ rep.post.title }}</h6>
+          <p class="mb-0 text-muted">{{ rep.post.content }}</p>
+        </div>
         }
-      </li>
+
+        @if (rep.status === 1) {
+        <div class="d-flex gap-2 mt-2">
+          <button class="btn btn-danger btn-sm" (click)="confirmarPost(rep)">
+            🗑️ Confirmar y eliminar
+          </button>
+          <button class="btn btn-outline-secondary btn-sm" (click)="denegarPost(rep)">
+            ❌ Denegar
+          </button>
+        </div>
+        }
+      </div>
       }
+      <nav *ngIf="totalPaginasPosts > 1" class="mt-2">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="paginaActualPosts === 1">
+            <button class="page-link" (click)="cambiarPaginaPosts(-1)">Anterior</button>
+          </li>
+
+          @for (p of paginasPosts; track p) {
+          <li class="page-item" [class.active]="paginaActualPosts === p">
+            <button class="page-link" (click)="paginaActualPosts = p">{{ p }}</button>
+          </li>
+          }
+
+          <li class="page-item" [class.disabled]="paginaActualPosts === totalPaginasPosts">
+            <button class="page-link" (click)="cambiarPaginaPosts(1)">Siguiente</button>
+          </li>
+        </ul>
+      </nav>
     </ul>
   </div>
   }
@@ -47,25 +114,68 @@
   @if (commentReports.length) {
   <div>
     <h4 class="mb-3">Comentarios reportados</h4>
+    <div class="form-check form-switch mb-3">
+      <input class="form-check-input" type="checkbox" id="togglePendientes2" [(ngModel)]="mostrarSoloPendientes" />
+      <label class="form-check-label" for="togglePendientes2">
+        Mostrar solo reportes pendientes de comentarios.
+      </label>
+    </div>
+
     <ul class="list-group">
-      @for (rep of commentReports; track rep) {
-      <li class="list-group-item">
-        <div>
-          <strong>Comentario #{{ rep.idComment }}</strong>
-          @if (!rep.status) {
-          <span class="badge bg-warning text-dark ms-2">Resuelto</span>
-          }
+      @for (rep of commentReportsPaginados; track rep.idReport) {
+      <div class="card shadow-sm rounded-4 p-4 mb-4 border-0">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <strong class="text-dark">Comentario #{{ rep.idComment }}</strong>
+            <span *ngIf="rep.status === 1" class="badge bg-primary ms-2">Pendiente</span>
+            <span *ngIf="rep.status === 2" class="badge bg-success ms-2">Reporte concedido, el comentario fue
+              eliminado.</span>
+            <span *ngIf="rep.status === 3" class="badge bg-danger ms-2">Reporte rechazado, el comentario no infringe
+              las normas comunitarias</span>
+          </div>
+          <span class="text-muted small">{{ rep.createdDate | date:'short' }}</span>
         </div>
-        <div><span class="text-muted">Motivo:</span> {{ rep.reason }}</div>
-        <div class="mb-2"><span class="text-muted">Fecha:</span> {{ rep.date | date:'short' }}</div>
-        @if (rep.status) {
-        <button class="btn btn-danger btn-sm me-2" (click)="confirmarComentario(rep)">Confirmar y eliminar</button>
-        <button class="btn btn-secondary btn-sm" (click)="denegarComentario(rep)">Denegar</button>
+
+        <div class="mb-2">
+          <span class="text-muted">📄 Motivo:</span> {{ rep.reason }}
+        </div>
+
+        @if (rep.comment) {
+        <div class="bg-light border rounded p-3 mb-2">
+          <p class="mb-0 text-muted">{{ rep.comment }}</p>
+        </div>
         }
-        <!-- Aquí podrías mostrar un preview del comentario si lo tienes disponible -->
-      </li>
+
+        @if (rep.status === 1) {
+        <div class="d-flex gap-2 mt-2">
+          <button class="btn btn-danger btn-sm" (click)="confirmarComentario(rep)">
+            🗑️ Confirmar y eliminar
+          </button>
+          <button class="btn btn-outline-secondary btn-sm" (click)="denegarComentario(rep)">
+            ❌ Denegar
+          </button>
+        </div>
+        }
+      </div>
       }
     </ul>
+    <nav *ngIf="totalPaginasComments > 1" class="mt-2">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="paginaActualComments === 1">
+          <button class="page-link" (click)="cambiarPaginaPosts(-1)">Siguiente</button>
+        </li>
+
+        @for (p of paginasComments; track p) {
+        <li class="page-item" [class.active]="paginaActualComments === p">
+          <button class="page-link" (click)="paginaActualComments = p">{{ p }}</button>
+        </li>
+        }
+
+        <li class="page-item" [class.disabled]="paginaActualComments === totalPaginasComments">
+          <button class="page-link" (click)="cambiarPaginaPosts(1)">Siguiente</button>
+        </li>
+      </ul>
+    </nav>
   </div>
   }
 </div>

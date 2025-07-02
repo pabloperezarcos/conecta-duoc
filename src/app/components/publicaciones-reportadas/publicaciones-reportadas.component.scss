@@ -1,2 +1,109 @@
 @use 'sass:color';
 @use 'styles' as *;
+
+.titulo-panel {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $negro;
+    position: relative;
+    margin-bottom: 0.5rem;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        margin: 8px auto 0;
+        background-color: $amarillo;
+        border-radius: 2px;
+    }
+}
+
+.alert-light.border {
+    background-color: #fff;
+    border-radius: 1rem;
+    border-color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    font-size: 0.95rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.list-group-item {
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.25rem;
+
+    h6 {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    p {
+        margin: 0.5rem 0 0;
+        color: #555;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .btn {
+        font-weight: 500;
+        border-radius: 0.5rem;
+    }
+}
+
+.form-check-input:checked {
+    background-color: $amarillo;
+    border-color: $amarillo;
+}
+
+.form-check-label {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.pagination .page-link {
+    border-radius: 0.75rem;
+    margin: 0 2px;
+    font-weight: 500;
+    color: $negro;
+
+    &:hover {
+        background-color: $amarillo;
+        color: white;
+    }
+
+    &.active,
+    &.active:focus {
+        background-color: $amarillo;
+        color: white;
+        border-color: $amarillo;
+    }
+}
+
+
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+.card {
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
