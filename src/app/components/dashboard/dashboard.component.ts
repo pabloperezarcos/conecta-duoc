@@ -4,11 +4,12 @@ import { UserService } from '../../core/services/user.service';
 import { RouterModule } from '@angular/router';
 import { PostCategoryService } from '../../core/services/post-category.service';
 import { PostCategory } from '../../models/postCategory';
+import { NotificacionBannerComponent } from '../notificacion-banner/notificacion-banner.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NotificacionBannerComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

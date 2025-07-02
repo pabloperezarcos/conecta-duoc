@@ -1,0 +1,123 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.titulo-panel {
+    font-size: 2rem;
+    font-weight: bold;
+    color: $negro;
+    position: relative;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        margin: 8px auto 0;
+        background-color: $amarillo;
+        border-radius: 2px;
+    }
+}
+
+.card {
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+input[type="date"],
+input[type="text"],
+textarea {
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+
+    h6 {
+        font-size: 1.05rem;
+    }
+
+    .btn {
+        border-radius: 0.5rem;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.nueva-notificacion {
+    animation: slideFadeIn 0.4s ease-out;
+}
+
+@keyframes slideFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+}
+
+.seccion-form {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+
+    .icono-seccion i {
+        font-size: 1.5rem;
+    }
+
+    .form-label {
+        font-size: 0.95rem;
+        color: $gris;
+    }
+
+    .campo-form {
+        border-radius: 0.75rem;
+        font-size: 0.95rem;
+        padding: 0.75rem;
+        transition: border-color 0.2s;
+
+        &:focus {
+            border-color: $azul;
+            box-shadow: 0 0 0 0.1rem rgba($azul, 0.25);
+        }
+    }
+
+    .btn-primary {
+        font-size: 1.05rem;
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        background-color: $azul;
+        border: none;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: color.adjust($azul, $lightness: -5%);
+        }
+
+        &:disabled {
+            background-color: lighten($azul, 20%);
+        }
+    }
+}

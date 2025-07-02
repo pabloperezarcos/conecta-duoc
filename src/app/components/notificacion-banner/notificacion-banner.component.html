@@ -1,0 +1,11 @@
+@if (mostrar && actual) {
+<div class="notificacion-banner d-flex align-items-center shadow">
+    <div class="icono-alerta me-3">
+        <i class="fas fa-bullhorn"></i>
+    </div>
+    <div class="contenido-banner flex-grow-1">
+        <strong>{{ actual.titulo }}</strong> — {{ actual.mensaje }}
+    </div>
+    <button class="close-btn" (click)="cerrar()">×</button>
+</div>
+}

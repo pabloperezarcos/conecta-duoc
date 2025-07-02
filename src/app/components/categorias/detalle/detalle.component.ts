@@ -14,13 +14,14 @@ import { ScoreService } from '../../../core/services/score.service';
 import { ReportService } from '../../../core/services/report.service';
 import { CommentService } from '../../../core/services/comment.service';
 
-/* BreadCrumb */
+/* BreadCrumb y BANNER */
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
+import { NotificacionBannerComponent } from '../../notificacion-banner/notificacion-banner.component';
 
 @Component({
   selector: 'app-detalle',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, BreadcrumbComponent],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, BreadcrumbComponent, NotificacionBannerComponent],
   templateUrl: './detalle.component.html',
   styleUrls: ['./detalle.component.scss']
 })

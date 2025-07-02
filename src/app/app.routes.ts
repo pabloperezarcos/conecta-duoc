@@ -59,6 +59,12 @@ export const routes: Routes = [
         data: { showNavbar: true, showFooter: true }
     },
     {
+        path: 'dashboard/configuracion/notificaciones',
+        loadComponent: () => import('./components/configuracion/notificaciones/notificaciones.component').then(m => m.NotificacionesComponent),
+        canActivate: [AuthGuard, reglasAceptadasGuard],
+        data: { showNavbar: true, showFooter: true }
+    },
+    {
         path: 'categoria/:slug',
         loadComponent: () => import('./components/categorias/categorias.component').then(m => m.CategoriasComponent),
         canActivate: [AuthGuard, reglasAceptadasGuard],

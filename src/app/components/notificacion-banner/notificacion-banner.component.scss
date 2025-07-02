@@ -1,0 +1,82 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.notificacion-banner {
+    background: linear-gradient(to right, #e8f0fb, #f6f9ff);
+    color: $negro;
+    padding: 1rem 1.5rem;
+    border-left: 6px solid $azul;
+    border-radius: 1rem;
+    margin: 1.5rem auto;
+    max-width: 1200px;
+    font-family: $font-secondary;
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    animation: slideInDown 0.4s ease-out;
+
+    .contenido-banner {
+        strong {
+            font-family: $font-primary;
+            color: $azul;
+            font-weight: 700;
+        }
+    }
+}
+
+.icono-alerta {
+    font-size: 2rem;
+    color: $azul;
+    animation: pulse 1.8s infinite;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: $gris;
+    transition: color 0.2s ease;
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+
+    &:hover {
+        color: $negro;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 768px) {
+    .notificacion-banner {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+}
