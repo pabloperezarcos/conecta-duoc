@@ -4,6 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 
 /**
  * Guard para proteger rutas mediante la autenticación de MSAL (Microsoft Authentication Library).
+ * Se asegura de que el usuario tenga una sesión activa con Azure AD antes de permitir el acceso.
  */
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
   /**
    * Verifica si el usuario tiene una sesión activa para permitir el acceso a la ruta protegida.
-   * @returns `true` si el usuario está autenticado, de lo contrario, redirige al inicio de sesión y retorna `false`.
+   * @returns `true` si el usuario está autenticado, de lo contrario redirige al inicio (`/`) y retorna `false`.
    */
   canActivate(): boolean {
     const account = this.msalService.instance.getActiveAccount();
