@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >ReportService</li>
+  <li class="breadcrumb-item" >NotificacionService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/core/services/report.service.ts</code>
+            <code>src/app/core/services/notificacion.service.ts</code>
         </p>
 
 
@@ -123,8 +123,8 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Servicio encargado de gestionar reportes (denuncias) sobre publicaciones
-y comentarios en la plataforma ConectaDuoc.</p>
+                <p>Servicio encargado de gestionar las notificaciones globales
+visibles para todos los usuarios de la plataforma.</p>
 
             </p>
 
@@ -146,14 +146,6 @@ y comentarios en la plataforma ConectaDuoc.</p>
                                     <span class="modifier">Private</span>
                                 <a href="#apiUrl" >apiUrl</a>
                             </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#http" >http</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#userService" >userService</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -167,16 +159,16 @@ y comentarios en la plataforma ConectaDuoc.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getAllReports" >getAllReports</a>
+                                <a href="#crear" >crear</a>
                             </li>
                             <li>
-                                <a href="#reportComment" >reportComment</a>
+                                <a href="#eliminar" >eliminar</a>
                             </li>
                             <li>
-                                <a href="#reportPost" >reportPost</a>
+                                <a href="#getTodas" >getTodas</a>
                             </li>
                             <li>
-                                <a href="#updateStatus" >updateStatus</a>
+                                <a href="#getVigentes" >getVigentes</a>
                             </li>
                         </ul>
                     </td>
@@ -190,6 +182,54 @@ y comentarios en la plataforma ConectaDuoc.</p>
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(http: HttpClient)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/services/notificacion.service.ts:15</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                    <code>HttpClient</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -200,75 +240,31 @@ y comentarios en la plataforma ConectaDuoc.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getAllReports"></a>
+                    <a name="crear"></a>
                     <span class="name">
-                        <span ><b>getAllReports</b></span>
-                        <a href="#getAllReports"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>crear</b></span>
+                        <a href="#crear"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getAllReports()</code>
+<code>crear(nueva: <a href="../interfaces/NotificacionGlobal.html" target="_self">NotificacionGlobal</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:32</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtiene todos los reportes registrados en el sistema.
-Generalmente usado por el administrador para revisión y gestión.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Report.html" target="_self" >Observable&lt;Report[]&gt;</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Lista de objetos <code>Report</code>.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reportComment"></a>
-                    <span class="name">
-                        <span ><b>reportComment</b></span>
-                        <a href="#reportComment"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>reportComment(idComment: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, reason: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:54</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Envía un reporte sobre un comentario específico.</p>
+                        <div class="io-description"><p>Crea una nueva notificación global.</p>
 </div>
 
                             <div class="io-description">
@@ -285,9 +281,9 @@ Generalmente usado por el administrador para revisión y gestión.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>idComment</td>
+                                                <td>nueva</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="../interfaces/NotificacionGlobal.html" target="_self" >NotificacionGlobal</a></code>
                                             </td>
 
                                             <td>
@@ -296,23 +292,7 @@ Generalmente usado por el administrador para revisión y gestión.</p>
 
 
                                             <td>
-                                                    <p>ID del comentario a reportar.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>reason</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>Motivo del reporte.</p>
+                                                    <p>Objeto de tipo <code>NotificacionGlobal</code> a registrar.</p>
 
                                             </td>
                                         </tr>
@@ -320,11 +300,11 @@ Generalmente usado por el administrador para revisión y gestión.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Report.html" target="_self" >Observable&lt;Report&gt;</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/NotificacionGlobal.html" target="_self" >Observable&lt;NotificacionGlobal&gt;</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable con el reporte creado.</p>
+                                <p>Notificación creada.</p>
 
                             </div>
                 </td>
@@ -335,31 +315,31 @@ Generalmente usado por el administrador para revisión y gestión.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="reportPost"></a>
+                    <a name="eliminar"></a>
                     <span class="name">
-                        <span ><b>reportPost</b></span>
-                        <a href="#reportPost"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>eliminar</b></span>
+                        <a href="#eliminar"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>reportPost(idPost: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, reason: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>eliminar(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:40</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Envía un reporte sobre una publicación específica.</p>
+                        <div class="io-description"><p>Elimina una notificación global por su ID.</p>
 </div>
 
                             <div class="io-description">
@@ -376,7 +356,7 @@ Generalmente usado por el administrador para revisión y gestión.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>idPost</td>
+                                                <td>id</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                             </td>
@@ -387,23 +367,7 @@ Generalmente usado por el administrador para revisión y gestión.</p>
 
 
                                             <td>
-                                                    <p>ID de la publicación a reportar.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>reason</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>Motivo del reporte.</p>
+                                                    <p>ID de la notificación a eliminar.</p>
 
                                             </td>
                                         </tr>
@@ -411,11 +375,53 @@ Generalmente usado por el administrador para revisión y gestión.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Report.html" target="_self" >Observable&lt;Report&gt;</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable con el reporte creado.</p>
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTodas"></a>
+                    <span class="name">
+                        <span ><b>getTodas</b></span>
+                        <a href="#getTodas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTodas()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene todas las notificaciones registradas (vigentes e históricas).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/NotificacionGlobal.html" target="_self" >Observable&lt;NotificacionGlobal[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Arreglo de <code>NotificacionGlobal</code>.</p>
 
                             </div>
                 </td>
@@ -426,87 +432,39 @@ Generalmente usado por el administrador para revisión y gestión.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateStatus"></a>
+                    <a name="getVigentes"></a>
                     <span class="name">
-                        <span ><b>updateStatus</b></span>
-                        <a href="#updateStatus"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getVigentes</b></span>
+                        <a href="#getVigentes"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updateStatus(idReport: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>getVigentes()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:48</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Actualiza el estado de un reporte (por ejemplo, para marcarlo como revisado).</p>
+                        <div class="io-description"><p>Obtiene solo las notificaciones vigentes (activas según fecha actual).</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>idReport</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>ID del reporte a modificar.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>status</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>Nuevo estado (0 = inactivo, 1 = activo).</p>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Report.html" target="_self" >Observable&lt;Report&gt;</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/NotificacionGlobal.html" target="_self" >Observable&lt;NotificacionGlobal[]&gt;</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>Reporte actualizado.</p>
+                                <p>Arreglo de notificaciones activas.</p>
 
                             </div>
                 </td>
@@ -539,73 +497,21 @@ Generalmente usado por el administrador para revisión y gestión.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;http://localhost:9090/api/report&#x27;</code>
+                        <i>Default value : </i><code>&#x27;http://localhost:9090/api/notificaciones&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/services/report.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/services/notificacion.service.ts:15</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>URL base del API para reportes</p>
+                    <div class="io-description"><p>URL base del API para notificaciones globales</p>
 </div>
                 </td>
             </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="http"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>http</b></span>
-                        <a href="#http"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(HttpClient)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/services/report.service.ts:17</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="userService"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>userService</b></span>
-                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(UserService)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/core/services/report.service.ts:18</a></div>
-                        </td>
-                    </tr>
-
 
         </tbody>
     </table>
@@ -615,90 +521,58 @@ Generalmente usado por el administrador para revisión y gestión.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import { Report } from &#x27;../../models/report&#x27;;
+import { NotificacionGlobal } from &#x27;../../models/notificacionGlobal&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { UserService } from &#x27;./user.service&#x27;;
 
 /**
- * Servicio encargado de gestionar reportes (denuncias) sobre publicaciones
- * y comentarios en la plataforma ConectaDuoc.
+ * Servicio encargado de gestionar las notificaciones globales
+ * visibles para todos los usuarios de la plataforma.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-export class ReportService {
-  /** URL base del API para reportes */
-  private apiUrl &#x3D; &#x27;http://localhost:9090/api/report&#x27;;
-  private http &#x3D; inject(HttpClient);
-  private userService &#x3D; inject(UserService);
+export class NotificacionService {
+  /** URL base del API para notificaciones globales */
+  private apiUrl &#x3D; &#x27;http://localhost:9090/api/notificaciones&#x27;;
+
+  constructor(private http: HttpClient) { }
 
   /**
-   * Envía un reporte sobre una publicación específica.
-   * @param idPost ID de la publicación a reportar.
-   * @param reason Motivo del reporte.
-   * @returns Observable con el reporte creado.
+   * Obtiene todas las notificaciones registradas (vigentes e históricas).
+   * @returns Arreglo de &#x60;NotificacionGlobal&#x60;.
    */
-  reportPost(idPost: number, reason: string): Observable&lt;Report&gt; {
-    const idUser &#x3D; this.userService.getIdUser();
-
-    const now &#x3D; new Date();
-    const localDateTime &#x3D; now.getFullYear() + &#x27;-&#x27; +
-      String(now.getMonth() + 1).padStart(2, &#x27;0&#x27;) + &#x27;-&#x27; +
-      String(now.getDate()).padStart(2, &#x27;0&#x27;) + &#x27;T&#x27; +
-      String(now.getHours()).padStart(2, &#x27;0&#x27;) + &#x27;:&#x27; +
-      String(now.getMinutes()).padStart(2, &#x27;0&#x27;) + &#x27;:&#x27; +
-      String(now.getSeconds()).padStart(2, &#x27;0&#x27;);
-
-    const report: Report &#x3D; {
-      idPost,
-      reason,
-      status: 1,
-      createdDate: localDateTime,
-      idUser: idUser!
-    };
-
-    return this.http.post&lt;Report&gt;(&#x60;${this.apiUrl}/publicacion&#x60;, report);
+  getTodas(): Observable&lt;NotificacionGlobal[]&gt; {
+    return this.http.get&lt;NotificacionGlobal[]&gt;(this.apiUrl);
   }
 
   /**
-   * Envía un reporte sobre un comentario específico.
-   * @param idComment ID del comentario a reportar.
-   * @param reason Motivo del reporte.
-   * @returns Observable con el reporte creado.
+   * Crea una nueva notificación global.
+   * @param nueva Objeto de tipo &#x60;NotificacionGlobal&#x60; a registrar.
+   * @returns Notificación creada.
    */
-  reportComment(idComment: number, reason: string): Observable&lt;Report&gt; {
-    const idUser &#x3D; this.userService.getIdUser();
-    const report: Report &#x3D; {
-      idComment,
-      reason,
-      status: 1,
-      createdDate: new Date().toISOString(),
-      idUser: idUser!
-    };
-    return this.http.post&lt;Report&gt;(&#x60;${this.apiUrl}/comentario&#x60;, report);
+  crear(nueva: NotificacionGlobal): Observable&lt;NotificacionGlobal&gt; {
+    return this.http.post&lt;NotificacionGlobal&gt;(this.apiUrl, nueva);
   }
 
   /**
-   * Obtiene todos los reportes registrados en el sistema.
-   * Generalmente usado por el administrador para revisión y gestión.
-   * @returns Lista de objetos &#x60;Report&#x60;.
+   * Elimina una notificación global por su ID.
+   * @param id ID de la notificación a eliminar.
    */
-  getAllReports(): Observable&lt;Report[]&gt; {
-    return this.http.get&lt;Report[]&gt;(&#x60;${this.apiUrl}&#x60;);
+  eliminar(id: number): Observable&lt;void&gt; {
+    return this.http.delete&lt;void&gt;(&#x60;${this.apiUrl}/${id}&#x60;);
   }
 
   /**
-   * Actualiza el estado de un reporte (por ejemplo, para marcarlo como revisado).
-   * @param idReport ID del reporte a modificar.
-   * @param status Nuevo estado (0 &#x3D; inactivo, 1 &#x3D; activo).
-   * @returns Reporte actualizado.
+   * Obtiene solo las notificaciones vigentes (activas según fecha actual).
+   * @returns Arreglo de notificaciones activas.
    */
-  updateStatus(idReport: number, status: number): Observable&lt;Report&gt; {
-    return this.http.put&lt;Report&gt;(&#x60;${this.apiUrl}/${idReport}&#x60;, { status });
+  getVigentes(): Observable&lt;NotificacionGlobal[]&gt; {
+    return this.http.get&lt;NotificacionGlobal[]&gt;(&#x60;${this.apiUrl}/vigentes&#x60;);
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>
@@ -741,7 +615,7 @@ export class ReportService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'ReportService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NotificacionService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

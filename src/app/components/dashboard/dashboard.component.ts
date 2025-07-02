@@ -6,6 +6,11 @@ import { PostCategoryService } from '../../core/services/post-category.service';
 import { PostCategory } from '../../models/postCategory';
 import { NotificacionBannerComponent } from '../notificacion-banner/notificacion-banner.component';
 
+/**
+ * Componente principal del dashboard del usuario.
+ * Muestra las categorías activas como accesos rápidos según el rol,
+ * y carga el banner de notificaciones globales.
+ */
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -17,10 +22,18 @@ export class DashboardComponent implements OnInit {
   private userService = inject(UserService);
   private postCategoryService = inject(PostCategoryService);
 
+  /** Nombre del usuario autenticado */
   username: string | null = null;
+
+  /** Rol del usuario (`admin`, `student`, etc.) */
   role: string | null = null;
+
+  /**
+   * Categorías visibles en el dashboard, con icono, ruta y visibilidad según rol.
+   */
   categories: (PostCategory & { icono: string; ruta: string, adminOnly?: boolean; })[] = [];
 
+  /** Mapa de slugs a íconos FontAwesome */
   private iconMap: Record<string, string> = {
     'ayudantias-academicas': 'fas fa-book-open',
     'actividades-deportivas': 'fas fa-futbol',
@@ -31,7 +44,11 @@ export class DashboardComponent implements OnInit {
     'reportes': 'fas fa-chart-bar'
   };
 
-
+  /**
+   * Al iniciar el componente:
+   * - Obtiene nombre y rol del usuario.
+   * - Carga las categorías visibles (filtrando las no activas y las solo-admin).
+   */
   ngOnInit(): void {
     this.username = this.userService.getName() || this.userService.getAzureUser()?.fullName || this.userService.getAzureUser()?.email || 'Desconocido';
     this.role = this.userService.getRole();
@@ -64,6 +81,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * Convierte un texto a formato `slug`, eliminando tildes y espacios.
+   * @param text Texto a transformar.
+   * @returns Slug limpio en minúsculas.
+   */
   private slugify(text: string): string {
     return text
       .toLowerCase()
@@ -71,6 +93,5 @@ export class DashboardComponent implements OnInit {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
   }
-
 
 }

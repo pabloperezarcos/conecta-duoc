@@ -120,6 +120,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente raíz de la aplicación ConectaDuoc.
+Gestiona la visibilidad del navbar y footer según la configuración de cada ruta.</p>
+
+    </p>
 
 
 
@@ -246,10 +254,17 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/app.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/app.component.ts:28</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Escucha los cambios de navegación para actualizar la visibilidad
+del navbar y footer según los <code>data</code> de la ruta activa.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -285,14 +300,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/app.component.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/app.component.ts:52</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene la ruta hija más profunda desde el árbol de rutas activas.
+Esto es necesario para acceder correctamente a los <code>data</code> de la ruta actual.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -303,6 +321,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -317,6 +336,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Ruta activa principal.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -326,7 +349,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Ruta hija más profunda.</p>
+
                             </div>
                 </td>
             </tr>
@@ -356,10 +380,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/app.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/app.component.ts:28</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Define si se debe mostrar el footer</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -381,10 +411,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/app.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/app.component.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Define si se debe mostrar el navbar</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -407,7 +443,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/app.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/app.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -433,7 +469,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/app.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/app.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -464,10 +500,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/app.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/app.component.ts:22</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Título principal de la aplicación</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -478,12 +520,15 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Component } from &#x27;@angular/core&#x27;;
-
 import { ActivatedRoute, Data, NavigationEnd, Router, RouterOutlet } from &#x27;@angular/router&#x27;;
 import { NavbarComponent } from &#x27;./components/navbar/navbar.component&#x27;;
 import { FooterComponent } from &#x27;./components/footer/footer.component&#x27;;
 import { filter } from &#x27;rxjs&#x27;;
 
+/**
+ * Componente raíz de la aplicación ConectaDuoc.
+ * Gestiona la visibilidad del navbar y footer según la configuración de cada ruta.
+ */
 @Component({
   selector: &#x27;app-root&#x27;,
   imports: [RouterOutlet, NavbarComponent, FooterComponent],
@@ -491,13 +536,22 @@ import { filter } from &#x27;rxjs&#x27;;
   styleUrl: &#x27;./app.component.scss&#x27;
 })
 export class AppComponent {
-  title &#x3D; &#x27;Conecta-DUOC&#x27;;
-  mostrarNavbar &#x3D; true;
-  mostrarFooter &#x3D; true;
-
   private router &#x3D; inject(Router);
   private route &#x3D; inject(ActivatedRoute);
 
+  /** Título principal de la aplicación */
+  title &#x3D; &#x27;Conecta-DUOC&#x27;;
+
+  /** Define si se debe mostrar el navbar */
+  mostrarNavbar &#x3D; true;
+
+  /** Define si se debe mostrar el footer */
+  mostrarFooter &#x3D; true;
+
+  /**
+   * Escucha los cambios de navegación para actualizar la visibilidad
+   * del navbar y footer según los &#x60;data&#x60; de la ruta activa.
+   */
   constructor() {
     this.router.events
       .pipe(filter(event &#x3D;&gt; event instanceof NavigationEnd))
@@ -510,12 +564,19 @@ export class AppComponent {
       });
   }
 
+  /**
+   * Obtiene la ruta hija más profunda desde el árbol de rutas activas.
+   * Esto es necesario para acceder correctamente a los &#x60;data&#x60; de la ruta actual.
+   * @param route Ruta activa principal.
+   * @returns Ruta hija más profunda.
+   */
   private getChild(route: ActivatedRoute): ActivatedRoute {
     while (route.firstChild) {
       route &#x3D; route.firstChild;
     }
     return route;
   }
+
 }
 </code></pre>
     </div>
@@ -561,7 +622,7 @@ export class AppComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (mostrarNavbar) {  <app-navbar></app-navbar>}<div class="flex-fill d-flex flex-column">  <router-outlet></router-outlet></div>@if (mostrarFooter) {  <app-footer></app-footer>}</div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotificacionBannerComponent', 'selector': 'app-notificacion-banner'},{'name': 'NotificacionesComponent', 'selector': 'app-notificaciones'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

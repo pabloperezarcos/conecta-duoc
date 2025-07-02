@@ -7,6 +7,10 @@ import { PostService } from '../../core/services/post.service';
 import { CommentService } from '../../core/services/comment.service';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 
+/**
+ * Componente administrativo para revisar, moderar y resolver reportes
+ * sobre publicaciones y comentarios en la plataforma ConectaDuoc.
+ */
 @Component({
   selector: 'app-publicaciones-reportadas',
   standalone: true,
@@ -19,17 +23,28 @@ export class PublicacionesReportadasComponent implements OnInit {
   private postService = inject(PostService);
   private commentService = inject(CommentService);
 
+  /** Reportes de publicaciones */
   postReports: Report[] = [];
+
+  /** Reportes de comentarios */
   commentReports: Report[] = [];
+
+  /** Indica si se están cargando los datos */
   loading = true;
+
+  /** Muestra solo reportes pendientes si es `true` */
   mostrarSoloPendientes = true;
-  // Paginación publicaciones
+
+  /** Página actual de publicaciones */
   paginaActualPosts = 1;
+
+  /** Cantidad de ítems por página */
   totalPorPagina = 5;
 
-  // Paginación comentarios
+  /** Página actual de comentarios */
   paginaActualComments = 1;
 
+  /** CONTADORES */
   get postPendientes() {
     return this.postReports?.filter(r => r.status === 1).length || 0;
   }
@@ -49,8 +64,10 @@ export class PublicacionesReportadasComponent implements OnInit {
     return this.commentReports?.filter(r => r.status === 3).length || 0;
   }
 
-
-
+  /**
+   * Al inicializar, obtiene todos los reportes del backend
+   * y carga los datos de las publicaciones asociadas.
+   */
   ngOnInit(): void {
     this.reportService.getAllReports().subscribe({
       next: (reports: Report[]) => {
@@ -78,6 +95,9 @@ export class PublicacionesReportadasComponent implements OnInit {
     });
   }
 
+  /**
+   * Devuelve las publicaciones filtradas y ordenadas según la configuración actual de paginación.
+   */
   get postReportsPaginados(): Report[] {
     const filtrados = this.mostrarSoloPendientes
       ? this.postReports.filter(r => r.status === 1)
@@ -91,6 +111,9 @@ export class PublicacionesReportadasComponent implements OnInit {
     return ordenados.slice(inicio, inicio + this.totalPorPagina);
   }
 
+  /**
+   * Devuelve los comentarios reportados, filtrados y paginados.
+   */
   get commentReportsPaginados(): Report[] {
     const filtrados = this.mostrarSoloPendientes
       ? this.commentReports.filter(r => r.status === 1)
@@ -126,6 +149,11 @@ export class PublicacionesReportadasComponent implements OnInit {
     return Math.ceil(total / this.totalPorPagina);
   }
 
+  /**
+   * Confirma y elimina la publicación reportada.
+   * Marca el reporte como `concedido` (status = 2).
+   * @param reporte Reporte a resolver.
+   */
   confirmarPost(reporte: Report): void {
     const confirmar = confirm('¿Estás seguro de eliminar esta publicación? Esta acción no se puede deshacer.');
     if (!confirmar) return;
@@ -136,12 +164,19 @@ export class PublicacionesReportadasComponent implements OnInit {
     });
   }
 
+  /**
+   * Rechaza el reporte de una publicación (status = 3).
+   * @param reporte Reporte a marcar como rechazado.
+   */
   denegarPost(reporte: Report): void {
     if (!reporte.idReport) return;
     this.reportService.updateStatus(reporte.idReport, 3).subscribe(() => this.recargar());
   }
 
-
+  /**
+   * Elimina un comentario y marca el reporte como `concedido`.
+   * @param reporte Reporte asociado al comentario.
+   */
   confirmarComentario(reporte: Report): void {
     const confirmar = confirm('¿Estás seguro de eliminar este comentario? Esta acción no se puede deshacer.');
     if (!confirmar) return;
@@ -155,6 +190,10 @@ export class PublicacionesReportadasComponent implements OnInit {
     });
   }
 
+  /**
+   * Rechaza un reporte de comentario (status = 3).
+   * @param reporte Reporte a rechazar.
+   */
   denegarComentario(reporte: Report): void {
     if (!reporte.idReport) return;
     this.reportService.updateStatus(reporte.idReport, 3).subscribe(() => {
@@ -162,6 +201,10 @@ export class PublicacionesReportadasComponent implements OnInit {
     });
   }
 
+  /**
+   * Vuelve a cargar todos los reportes desde el backend.
+   * Reinicia paginación y activa el spinner.
+   */
   recargar(): void {
     this.paginaActualPosts = 1;
     this.paginaActualComments = 1;
@@ -169,14 +212,20 @@ export class PublicacionesReportadasComponent implements OnInit {
     this.ngOnInit();
   }
 
-  cambiarPaginaPosts(delta: number) {
+  /**
+   * Cambia la página actual de publicaciones.
+   * @param delta Desplazamiento (1 = siguiente, -1 = anterior).
+   */
+  cambiarPaginaPosts(delta: number): void {
     this.paginaActualPosts += delta;
   }
 
-  cambiarPaginaComments(delta: number) {
+  /**
+   * Cambia la página actual de comentarios.
+   * @param delta Desplazamiento (1 = siguiente, -1 = anterior).
+   */
+  cambiarPaginaComments(delta: number): void {
     this.paginaActualComments += delta;
   }
-
-
 
 }

@@ -124,6 +124,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que gestiona la visualización, creación, filtrado, reporte y puntuación
+de publicaciones dentro de una categoría específica en ConectaDuoc.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -168,6 +176,7 @@
                             <code>ReactiveFormsModule</code>
                             <code>RouterModule</code>
                             <code>CommonModule</code>
+                                <code><a href="../components/NotificacionBannerComponent.html" target="_self" >NotificacionBannerComponent</a></code>
                 </td>
             </tr>
 
@@ -293,9 +302,6 @@
                                 <a href="#cargarPublicaciones" >cargarPublicaciones</a>
                             </li>
                             <li>
-                                <a href="#getSlugFromName" >getSlugFromName</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
@@ -303,6 +309,10 @@
                             </li>
                             <li>
                                 <a href="#reportarPublicacion" >reportarPublicacion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#slugify" >slugify</a>
                             </li>
                             <li>
                                 <a href="#toggleFormulario" >toggleFormulario</a>
@@ -363,8 +373,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="172"
-                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:172</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="214"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:214</a></div>
                         </td>
                     </tr>
 
@@ -442,86 +452,22 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:112</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carga todas las publicaciones de la categoría actual, junto con los nombres de usuarios
+y las puntuaciones (promedio y personales).</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSlugFromName"></a>
-                    <span class="name">
-                        <span ><b>getSlugFromName</b></span>
-                        <a href="#getSlugFromName"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSlugFromName(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="155"
-                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:155</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>name</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -546,14 +492,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:50</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:81</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa la vista de categoría, cargando la categoría correspondiente y sus publicaciones.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -583,14 +531,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="118"
-                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:118</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:163</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Envía una nueva publicación al backend si el formulario es válido.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -620,8 +570,84 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="149"
-                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:149</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Reporta una publicación por contenido inapropiado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>pub</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Post.html" target="_self" >Post</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Publicación a reportar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="slugify"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>slugify</b></span>
+                        <a href="#slugify"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>slugify(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:206</a></div>
                         </td>
                     </tr>
 
@@ -642,9 +668,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>pub</td>
+                                                <td>text</td>
                                             <td>
-                                                            <code><a href="../interfaces/Post.html" target="_self" >Post</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -657,7 +683,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
                             <div class="io-description">
@@ -687,14 +713,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/components/categorias/categorias.component.ts:154</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Muestra u oculta el formulario para crear una nueva publicación.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -734,10 +762,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/categorias/categorias.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/categorias/categorias.component.ts:46</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>ID de la categoría actual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -765,10 +799,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/categorias/categorias.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/categorias/categorias.component.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombre legible de la categoría actual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -791,7 +831,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/categorias/categorias.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/categorias/categorias.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -822,10 +862,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/categorias/categorias.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/categorias/categorias.component.ts:67</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Texto de búsqueda para filtrar publicaciones</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -848,10 +894,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/categorias/categorias.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/categorias/categorias.component.ts:70</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario para nueva publicación</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -873,10 +925,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/categorias/categorias.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/categorias/categorias.component.ts:76</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado de carga</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -904,10 +962,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/categorias/categorias.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/categorias/categorias.component.ts:64</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Diccionario con puntuación personal del usuario en cada publicación</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -929,10 +993,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/categorias/categorias.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/categorias/categorias.component.ts:73</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla visibilidad del formulario</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -960,7 +1030,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/categorias/categorias.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/categorias/categorias.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -991,10 +1061,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/categorias/categorias.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/categorias/categorias.component.ts:58</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Diccionario con nombres de usuarios indexados por ID</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1017,7 +1093,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/categorias/categorias.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/categorias/categorias.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -1043,7 +1119,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/categorias/categorias.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/categorias/categorias.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -1074,10 +1150,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/categorias/categorias.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/components/categorias/categorias.component.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Diccionario con promedios de puntuación por publicación</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1105,10 +1187,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/categorias/categorias.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/categorias/categorias.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Publicaciones cargadas desde el backend</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1131,7 +1219,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/categorias/categorias.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/categorias/categorias.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -1157,7 +1245,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/categorias/categorias.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/categorias/categorias.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -1183,7 +1271,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/categorias/categorias.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/categorias/categorias.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -1209,7 +1297,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/categorias/categorias.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/categorias/categorias.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -1240,10 +1328,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/categorias/categorias.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/categorias/categorias.component.ts:43</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Slug obtenido desde la URL</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1266,7 +1360,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/categorias/categorias.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/categorias/categorias.component.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -1295,9 +1389,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/components/categorias/categorias.component.ts:104</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/components/categorias/categorias.component.ts:142</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Devuelve las publicaciones filtradas por el texto ingresado.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/Post.html" target="_self" >Post[]</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1311,8 +1416,9 @@ import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
 import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
 
-/* BREADCRUMB */
+/* BREADCRUMB y BANNER*/
 import { BreadcrumbComponent } from &#x27;../breadcrumb/breadcrumb.component&#x27;;
+import { NotificacionBannerComponent } from &#x27;../notificacion-banner/notificacion-banner.component&#x27;;
 
 /* MODELS */
 import { Post } from &#x27;../../models/post&#x27;;
@@ -1324,10 +1430,14 @@ import { UserService } from &#x27;../../core/services/user.service&#x27;;
 import { ReportService } from &#x27;../../core/services/report.service&#x27;;
 import { ScoreService } from &#x27;../../core/services/score.service&#x27;;
 
+/**
+ * Componente que gestiona la visualización, creación, filtrado, reporte y puntuación
+ * de publicaciones dentro de una categoría específica en ConectaDuoc.
+ */
 @Component({
   selector: &#x27;app-categorias&#x27;,
   standalone: true,
-  imports: [BreadcrumbComponent, FormsModule, ReactiveFormsModule, RouterModule, CommonModule],
+  imports: [BreadcrumbComponent, FormsModule, ReactiveFormsModule, RouterModule, CommonModule, NotificacionBannerComponent],
   templateUrl: &#x27;./categorias.component.html&#x27;,
   styleUrls: [&#x27;./categorias.component.scss&#x27;]
 })
@@ -1341,19 +1451,45 @@ export class CategoriasComponent implements OnInit {
   private reportService &#x3D; inject(ReportService);
   private scoreService &#x3D; inject(ScoreService);
 
+  /** Slug obtenido desde la URL */
   slug &#x3D; &#x27;&#x27;;
+
+  /** ID de la categoría actual */
   categoriaId: number | null &#x3D; null;
+
+  /** Nombre legible de la categoría actual */
   categoriaNombre &#x3D; &#x27;&#x27;;
+
+  /* Nombre de la categoría a mostrar */
   nombreCategoriaMostrada &#x3D; &#x27;&#x27;;
+
+  /** Publicaciones cargadas desde el backend */
   publicaciones: Post[] &#x3D; [];
+
+  /** Diccionario con nombres de usuarios indexados por ID */
   nombresUsuarios: Record&lt;number, string&gt; &#x3D; {};
+
+  /** Diccionario con promedios de puntuación por publicación */
   promedioScores: Record&lt;number, number&gt; &#x3D; {};
+
+  /** Diccionario con puntuación personal del usuario en cada publicación */
   misScores: Record&lt;number, number | null&gt; &#x3D; {};
+
+  /** Texto de búsqueda para filtrar publicaciones */
   filtroBusqueda &#x3D; &#x27;&#x27;;
+
+  /** Formulario para nueva publicación */
   form!: FormGroup;
+
+  /** Controla visibilidad del formulario */
   mostrarFormulario &#x3D; false;
+
+  /** Estado de carga */
   loading &#x3D; true;
 
+  /**
+   * Inicializa la vista de categoría, cargando la categoría correspondiente y sus publicaciones.
+   */
   ngOnInit(): void {
     this.form &#x3D; this.fb.group({
       title: [&#x27;&#x27;, Validators.required],
@@ -1361,12 +1497,12 @@ export class CategoriasComponent implements OnInit {
     });
 
     this.slug &#x3D; this.route.snapshot.paramMap.get(&#x27;slug&#x27;) || &#x27;&#x27;;
+    console.log(&#x27;Slug cargado:&#x27;, this.slug);
 
     this.postCategoryService.getAll().subscribe(categories &#x3D;&gt; {
       const categoria &#x3D; categories.find(cat &#x3D;&gt;
-        this.getSlugFromName(cat.name) &#x3D;&#x3D;&#x3D; this.slug
+        this.slugify(cat.name) &#x3D;&#x3D;&#x3D; this.slug
       );
-
 
       if (!categoria) {
         this.router.navigate([&#x27;/dashboard&#x27;]);
@@ -1381,6 +1517,10 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
+  /**
+   * Carga todas las publicaciones de la categoría actual, junto con los nombres de usuarios
+   * y las puntuaciones (promedio y personales).
+   */
   cargarPublicaciones(): void {
     if (!this.categoriaId) return;
 
@@ -1408,6 +1548,9 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
+  /**
+   * Devuelve las publicaciones filtradas por el texto ingresado.
+   */
   get publicacionesFiltradas(): Post[] {
     if (!this.filtroBusqueda.trim()) return this.publicaciones;
     const texto &#x3D; this.filtroBusqueda.trim().toLowerCase();
@@ -1417,11 +1560,18 @@ export class CategoriasComponent implements OnInit {
     );
   }
 
+  /**
+   * Muestra u oculta el formulario para crear una nueva publicación.
+   */
   toggleFormulario(): void {
     this.mostrarFormulario &#x3D; !this.mostrarFormulario;
     if (!this.mostrarFormulario) this.form.reset();
   }
 
+
+  /**
+   * Envía una nueva publicación al backend si el formulario es válido.
+   */
   nuevaPublicacion(): void {
     if (this.form.invalid || !this.categoriaId) return;
 
@@ -1453,27 +1603,24 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
+  /**
+   * Reporta una publicación por contenido inapropiado.
+   * @param pub Publicación a reportar.
+   */
   reportarPublicacion(pub: Post): void {
-    this.reportService.reportPost(pub.idPost, &#x27;Contenido inapropiado&#x27;).subscribe(() &#x3D;&gt; {
+    const reason &#x3D; prompt(&#x27;Motivo del reporte&#x27;, &#x27;Contenido inapropiado&#x27;);
+    if (!reason) return;
+    this.reportService.reportPost(pub.idPost, reason).subscribe(() &#x3D;&gt; {
       alert(&#x27;Publicación reportada&#x27;);
     });
   }
 
-  getSlugFromName(name: string): string {
-    switch (name.toLowerCase()) {
-      case &#x27;ayudantías académicas&#x27;:
-        return &#x27;ayudantias&#x27;;
-      case &#x27;actividades deportivas&#x27;:
-        return &#x27;deportes&#x27;;
-      case &#x27;culturales y recreativas&#x27;:
-        return &#x27;culturales&#x27;;
-      case &#x27;voluntariado - ecoduoc&#x27;:
-        return &#x27;voluntariado&#x27;;
-      case &#x27;trueques estudiantiles&#x27;:
-        return &#x27;trueques&#x27;;
-      default:
-        return &#x27;otros&#x27;;
-    }
+  private slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize(&#x27;NFD&#x27;).replace(/[\u0300-\u036f]/g, &#x27;&#x27;)
+      .replace(/[^a-z0-9]+/g, &#x27;-&#x27;)
+      .replace(/(^-|-$)/g, &#x27;&#x27;);
   }
 
   calificar(pub: Post, valor: number): void {
@@ -1488,13 +1635,13 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container mt-4 mb-4 foro-categoria-container&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;app-notificacion-banner&gt;&lt;/app-notificacion-banner&gt;
+&lt;div class&#x3D;&quot;container mt-4 mb-4 foro-categoria-container&quot;&gt;
     &lt;app-breadcrumb&gt;&lt;/app-breadcrumb&gt;
 
     &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center cabecera-categoria mt-3&quot;&gt;
@@ -1709,8 +1856,8 @@ form {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container mt-4 mb-4 foro-categoria-container">    <app-breadcrumb></app-breadcrumb>    <div class="d-flex justify-content-between align-items-center cabecera-categoria mt-3">        <h2 class="titulo-categoria text-capitalize">{{ nombreCategoriaMostrada }}</h2>        <button class="btn btn-warning fw-bold" (click)="toggleFormulario()">            <i class="fas fa-plus"></i>            {{ mostrarFormulario ? \'Cancelar\' : \'Publicar\' }}        </button>    </div>    <p class="text-muted">        Aquí puedes compartir tus dudas, preguntas o temas relacionados con {{ nombreCategoriaMostrada        }}. ¡Sé parte de la comunidad!    </p>    <p class="text-muted">        <strong>Recuerda:</strong> Sé respetuoso y sigue las normas de la comunidad. Las publicaciones inapropiadas        pueden ser eliminadas.    </p>    @if (!publicaciones.length) {    <div class="alert alert-info text-center">        Aún no hay publicaciones en esta categoría. Sé el primero en compartir una 💡    </div>    }    @if (mostrarFormulario) {    <form (ngSubmit)="nuevaPublicacion()" [formGroup]="form" class="mb-4">        <div class="mb-3">            <label for="title">Título</label>            <input id="title" formControlName="title" class="form-control" placeholder="Ej: Ayuda con matemáticas" />        </div>        <div class="mb-3">            <label for="content">Descripción</label>            <textarea id="content" formControlName="content" class="form-control" rows="4"                placeholder="Detalle de la publicación..."></textarea>        </div>        <button type="submit" class="btn btn-warning fw-bold w-100" [disabled]="form.invalid">            Publicar        </button>    </form>    }    @if (publicaciones.length) {    <div class="mt-4 mb-4">        <input type="text" class="form-control" placeholder="Buscar por palabra clave..." [(ngModel)]="filtroBusqueda"            name="filtroBusqueda">    </div>    <div class="row g-3">        <div class="col-12 col-md-6 col-lg-4" *ngFor="let pub of publicacionesFiltradas">            <div class="card h-100 shadow-sm rounded-4 position-relative">                <a [routerLink]="[\'/categoria\', slug, pub.idPost]" class="stretched-link"></a>                <div class="card-body">                    <h5 class="card-title">{{ pub.title }}</h5>                    <p class="text-muted small mb-2">                        por {{ nombresUsuarios[pub.idUser] || \'Cargando...\' }} • {{ pub.createdDate | date:\'dd/MM/yyyy\'                        }}                    </p>                    <p class="card-text text-truncate">                        {{ pub.content }}                    </p>                    <!-- Calificación del usuario y promedio -->                    <div class="d-flex align-items-center gap-2 mt-3">                        <!-- Estrellas de calificación -->                        <ng-container *ngFor="let s of [1,2,3,4,5]">                            <i class="fa-star" [ngClass]="{                            \'fas text-warning\': (misScores[pub.idPost] ?? 0) >= s,                            \'far text-muted\': (misScores[pub.idPost] ?? 0) < s                            }" (click)="calificar(pub, s)" style="cursor:pointer"></i>                        </ng-container>                        <!-- Promedio -->                        <small class="text-muted ms-2">                            {{ promedioScores[pub.idPost] | number:\'1.1-1\' }} / 5                        </small>                        <!-- Botón de reportar -->                        <button class="btn btn-link text-danger p-0 ms-auto" matTooltip="Reportar publicación"                            (click)="reportarPublicacion(pub)">                            <i class="fas fa-flag"></i>                        </button>                    </div>                </div>            </div>        </div>    </div>    }</div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+        var COMPONENT_TEMPLATE = '<div><app-notificacion-banner></app-notificacion-banner><div class="container mt-4 mb-4 foro-categoria-container">    <app-breadcrumb></app-breadcrumb>    <div class="d-flex justify-content-between align-items-center cabecera-categoria mt-3">        <h2 class="titulo-categoria text-capitalize">{{ nombreCategoriaMostrada }}</h2>        <button class="btn btn-warning fw-bold" (click)="toggleFormulario()">            <i class="fas fa-plus"></i>            {{ mostrarFormulario ? \'Cancelar\' : \'Publicar\' }}        </button>    </div>    <p class="text-muted">        Aquí puedes compartir tus dudas, preguntas o temas relacionados con {{ nombreCategoriaMostrada        }}. ¡Sé parte de la comunidad!    </p>    <p class="text-muted">        <strong>Recuerda:</strong> Sé respetuoso y sigue las normas de la comunidad. Las publicaciones inapropiadas        pueden ser eliminadas.    </p>    @if (!publicaciones.length) {    <div class="alert alert-info text-center">        Aún no hay publicaciones en esta categoría. Sé el primero en compartir una 💡    </div>    }    @if (mostrarFormulario) {    <form (ngSubmit)="nuevaPublicacion()" [formGroup]="form" class="mb-4">        <div class="mb-3">            <label for="title">Título</label>            <input id="title" formControlName="title" class="form-control" placeholder="Ej: Ayuda con matemáticas" />        </div>        <div class="mb-3">            <label for="content">Descripción</label>            <textarea id="content" formControlName="content" class="form-control" rows="4"                placeholder="Detalle de la publicación..."></textarea>        </div>        <button type="submit" class="btn btn-warning fw-bold w-100" [disabled]="form.invalid">            Publicar        </button>    </form>    }    @if (publicaciones.length) {    <div class="mt-4 mb-4">        <input type="text" class="form-control" placeholder="Buscar por palabra clave..." [(ngModel)]="filtroBusqueda"            name="filtroBusqueda">    </div>    <div class="row g-3">        <div class="col-12 col-md-6 col-lg-4" *ngFor="let pub of publicacionesFiltradas">            <div class="card h-100 shadow-sm rounded-4 position-relative">                <a [routerLink]="[\'/categoria\', slug, pub.idPost]" class="stretched-link"></a>                <div class="card-body">                    <h5 class="card-title">{{ pub.title }}</h5>                    <p class="text-muted small mb-2">                        por {{ nombresUsuarios[pub.idUser] || \'Cargando...\' }} • {{ pub.createdDate | date:\'dd/MM/yyyy\'                        }}                    </p>                    <p class="card-text text-truncate">                        {{ pub.content }}                    </p>                    <!-- Calificación del usuario y promedio -->                    <div class="d-flex align-items-center gap-2 mt-3">                        <!-- Estrellas de calificación -->                        <ng-container *ngFor="let s of [1,2,3,4,5]">                            <i class="fa-star" [ngClass]="{                            \'fas text-warning\': (misScores[pub.idPost] ?? 0) >= s,                            \'far text-muted\': (misScores[pub.idPost] ?? 0) < s                            }" (click)="calificar(pub, s)" style="cursor:pointer"></i>                        </ng-container>                        <!-- Promedio -->                        <small class="text-muted ms-2">                            {{ promedioScores[pub.idPost] | number:\'1.1-1\' }} / 5                        </small>                        <!-- Botón de reportar -->                        <button class="btn btn-link text-danger p-0 ms-auto" matTooltip="Reportar publicación"                            (click)="reportarPublicacion(pub)">                            <i class="fas fa-flag"></i>                        </button>                    </div>                </div>            </div>        </div>    </div>    }</div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotificacionBannerComponent', 'selector': 'app-notificacion-banner'},{'name': 'NotificacionesComponent', 'selector': 'app-notificaciones'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CategoriasComponent'};
 </script>

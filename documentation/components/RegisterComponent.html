@@ -124,6 +124,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente encargado de registrar un nuevo usuario en ConectaDuoc
+al iniciar sesión por primera vez con Azure AD. El usuario debe seleccionar su sede.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -286,14 +294,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/components/register/register.component.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/components/register/register.component.ts:68</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Envía el formulario de registro al backend.
+Una vez registrado, redirige al usuario a las reglas de la comunidad.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -323,14 +334,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/components/register/register.component.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/components/register/register.component.ts:49</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa el formulario y carga los datos del usuario desde Azure AD.
+Si no hay sesión activa, redirige a la pantalla de inicio.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -370,10 +384,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/register/register.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/register/register.component.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Correo del usuario autenticado (obtenido desde Azure AD)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -396,7 +416,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/register/register.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/register/register.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -427,10 +447,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/register/register.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/register/register.component.ts:30</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombre completo del usuario autenticado (Azure AD)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -453,10 +479,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/register/register.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/register/register.component.ts:24</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo para el registro</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -479,7 +511,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/register/register.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/register/register.component.ts:21</a></div>
                         </td>
                     </tr>
 
@@ -517,10 +549,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/register/register.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/register/register.component.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista de sedes disponibles en Duoc UC.
+El usuario debe seleccionar una como parte del registro.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -543,7 +582,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/register/register.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/register/register.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -562,6 +601,10 @@ import { Router } from &#x27;@angular/router&#x27;;
 import { UserService } from &#x27;../../core/services/user.service&#x27;;
 import { User } from &#x27;../../models/user&#x27;;
 
+/**
+ * Componente encargado de registrar un nuevo usuario en ConectaDuoc
+ * al iniciar sesión por primera vez con Azure AD. El usuario debe seleccionar su sede.
+ */
 @Component({
   selector: &#x27;app-register&#x27;,
   standalone: true,
@@ -574,9 +617,19 @@ export class RegisterComponent implements OnInit {
   private userService &#x3D; inject(UserService);
   private router &#x3D; inject(Router);
 
+  /** Formulario reactivo para el registro */
   registerForm!: FormGroup;
+
+  /** Correo del usuario autenticado (obtenido desde Azure AD) */
   email &#x3D; &#x27;&#x27;;
+
+  /** Nombre completo del usuario autenticado (Azure AD) */
   name &#x3D; &#x27;&#x27;;
+
+  /**
+   * Lista de sedes disponibles en Duoc UC.
+   * El usuario debe seleccionar una como parte del registro.
+   */
   sedes: string[] &#x3D; [
     &#x27;Modalidad online&#x27;, &#x27;Campus Virtual&#x27;, &#x27;Sede Alameda&#x27;, &#x27;Sede Padre Alonso de Ovalle&#x27;,
     &#x27;Sede Antonio Varas&#x27;, &#x27;Sede Educación Continua&#x27;, &#x27;Sede Maipú&#x27;, &#x27;Sede Melipilla&#x27;,
@@ -586,6 +639,10 @@ export class RegisterComponent implements OnInit {
     &#x27;Sede San Andrés de Concepción&#x27;, &#x27;Campus Villarrica&#x27;, &#x27;Sede Puerto Montt&#x27;
   ];
 
+  /**
+   * Inicializa el formulario y carga los datos del usuario desde Azure AD.
+   * Si no hay sesión activa, redirige a la pantalla de inicio.
+   */
   ngOnInit(): void {
     const azureUser &#x3D; this.userService.getAzureUser();
     if (!azureUser) {
@@ -601,6 +658,10 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  /**
+   * Envía el formulario de registro al backend.
+   * Una vez registrado, redirige al usuario a las reglas de la comunidad.
+   */
   guardarRegistro(): void {
     if (this.registerForm.invalid) return;
 
@@ -623,6 +684,7 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
+
 }
 </code></pre>
     </div>
@@ -764,7 +826,7 @@ label {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="container mt-5">  <div class="card registro-card shadow-sm p-4 mx-auto">    <!-- Logo institucional -->    <div class="text-center mb-4">      <img src="assets/logo/logo.png" alt="Logo ConectaDuoc" class="logo-registro mb-2" />      <div class="small text-muted mb-1">¡Bienvenido/a a la comunidad ConectaDuoc!</div>      <h4 class="mb-0 fw-bold titulo-registro">Registro de usuario</h4>    </div>    <form [formGroup]="registerForm" (ngSubmit)="guardarRegistro()">      <div class="mb-3">        <label for="email" class="fw-bold">Email</label>        <input id="email" class="form-control campo-readonly" [value]="email" readonly />      </div>      <div class="mb-3">        <label for="name" class="fw-bold">Nombre completo</label>        <input id="name" class="form-control campo-readonly" [value]="name" readonly />      </div>      <div class="mb-3">        <label for="center" class="fw-bold">Sede</label>        <select id="center" class="form-select" formControlName="center">          <option value="" disabled selected>Seleccione su sede</option>          @for (s of sedes; track s) {          <option [value]="s">{{ s }}</option>          }        </select>      </div>      <button class="btn btn-warning fw-bold w-100 mt-3 boton-registro" [disabled]="registerForm.invalid">        Guardar y continuar      </button>    </form>  </div></div><div class="text-center mt-4">  <a routerLink="/login" class="text-decoration-none text-muted">← Volver al inicio de sesión</a></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotificacionBannerComponent', 'selector': 'app-notificacion-banner'},{'name': 'NotificacionesComponent', 'selector': 'app-notificaciones'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'RegisterComponent'};
 </script>

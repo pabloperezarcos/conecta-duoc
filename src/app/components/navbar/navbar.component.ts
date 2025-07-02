@@ -6,6 +6,10 @@ import { UserService } from '../../core/services/user.service';
 import { MsalService } from '@azure/msal-angular';
 import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/modal-confirmacion.component';
 
+/**
+ * Componente de barra de navegación superior.
+ * Muestra el nombre del usuario, permite navegar y cerrar sesión.
+ */
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -18,11 +22,18 @@ export class NavbarComponent implements OnInit {
   private router = inject(Router);
   private msal = inject(MsalService);
 
+  /** Nombre del usuario visible en el navbar */
   username: string | null = null;
+
+  /** Controla la visibilidad del modal de confirmación de cierre de sesión */
   mostrarModalLogout = false;
+
+  /** Observable del nombre de usuario para actualizaciones reactivas */
   userName$ = this.userService.userName$;
 
-
+  /**
+   * Al iniciar, obtiene el nombre del usuario desde el servicio MSAL o `localStorage`.
+   */
   ngOnInit(): void {
     // Mostrar en consola todos los datos del usuario activo de Azure AD
     const account = this.msal.instance.getActiveAccount();
@@ -39,10 +50,16 @@ export class NavbarComponent implements OnInit {
       null;
   }
 
+  /**
+   * Muestra el modal de confirmación para cerrar sesión.
+   */
   logout() {
     this.mostrarModalLogout = true;
   }
 
+  /**
+   * Cierra la sesión del usuario usando MSAL y limpia los datos locales.
+   */
   confirmarLogout() {
     this.msal.logoutPopup().subscribe({
       next: () => {
@@ -53,7 +70,11 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  /**
+   * Cancela el cierre de sesión y cierra el modal.
+   */
   cancelarLogout() {
     this.mostrarModalLogout = false;
   }
+
 }

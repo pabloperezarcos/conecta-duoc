@@ -90,6 +90,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/NavbarComponent.html" data-type="entity-link" >NavbarComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/NotificacionBannerComponent.html" data-type="entity-link" >NotificacionBannerComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/NotificacionesComponent.html" data-type="entity-link" >NotificacionesComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/PerfilComponent.html" data-type="entity-link" >PerfilComponent</a>
                             </li>
                             <li class="link">
@@ -116,6 +122,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
                                 <li class="link">
                                     <a href="injectables/CommentService.html" data-type="entity-link" >CommentService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/NotificacionService.html" data-type="entity-link" >NotificacionService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/PostCategoryService.html" data-type="entity-link" >PostCategoryService</a>
@@ -163,6 +172,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
                                 <a href="interfaces/Comment.html" data-type="entity-link" >Comment</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/NotificacionGlobal.html" data-type="entity-link" >NotificacionGlobal</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Post.html" data-type="entity-link" >Post</a>

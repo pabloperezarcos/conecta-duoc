@@ -121,6 +121,14 @@
             </p>
 
 
+                <p class="comment">
+                <h3>Description</h3>
+                </p>
+                <p class="comment">
+                    <p>Guard de rutas que restringe el acceso según el rol del usuario.
+Se basa en la información almacenada en <code>localStorage</code> por el <code>UserService</code>.</p>
+
+                </p>
 
 
 
@@ -198,14 +206,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="12"
-                                    class="link-to-prism">src/app/core/guards/role.guard.ts:12</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/core/guards/role.guard.ts:23</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Verifica si el usuario tiene uno de los roles esperados para acceder a una ruta.
+Si no cumple, redirige a la raíz y niega el acceso.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -216,6 +227,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -230,6 +242,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Snapshot de la ruta actual.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -239,7 +255,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p><code>true</code> si el usuario tiene el rol adecuado, <code>false</code> en caso contrario.</p>
+
                             </div>
                 </td>
             </tr>
@@ -254,6 +271,10 @@
 import { CanActivate, ActivatedRouteSnapshot, Router } from &#x27;@angular/router&#x27;;
 import { UserService } from &#x27;../services/user.service&#x27;;
 
+/**
+ * Guard de rutas que restringe el acceso según el rol del usuario.
+ * Se basa en la información almacenada en &#x60;localStorage&#x60; por el &#x60;UserService&#x60;.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -261,6 +282,13 @@ export class RoleGuard implements CanActivate {
   private userService &#x3D; inject(UserService);
   private router &#x3D; inject(Router);
 
+  /**
+   * Verifica si el usuario tiene uno de los roles esperados para acceder a una ruta.
+   * Si no cumple, redirige a la raíz y niega el acceso.
+   *
+   * @param route Snapshot de la ruta actual.
+   * @returns &#x60;true&#x60; si el usuario tiene el rol adecuado, &#x60;false&#x60; en caso contrario.
+   */
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const expectedRoles: string[] &#x3D; route.data[&#x27;expectedRoles&#x27;];
     const userRole &#x3D; this.userService.getRole();

@@ -124,6 +124,15 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente encargado de generar la ruta de navegación (breadcrumb)
+dinámicamente según la URL actual. Mejora la usabilidad al mostrar al usuario
+su posición dentro de la app y permite volver a rutas anteriores.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -274,14 +283,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:31</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Al inicializar el componente, construye los ítems del breadcrumb en base a la URL activa.
+Se ignoran rutas como <code>dashboard</code> o <code>categoria</code> para evitar redundancia visual.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -313,14 +325,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:62</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Convierte un segmento de la URL en un texto legible para mostrar en el breadcrumb.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -331,6 +345,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -345,6 +360,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Fragmento de la URL.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -354,7 +373,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Texto más amigable y traducido si aplica.</p>
+
                             </div>
                 </td>
             </tr>
@@ -390,10 +410,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Arreglo de ítems que componen el breadcrumb. Cada ítem tiene un <code>label</code> visible
+y un <code>path</code> (opcional) para navegar hacia esa sección.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -416,7 +443,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -442,7 +469,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -456,9 +483,14 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
-
 import { RouterModule, ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 
+
+/**
+ * Componente encargado de generar la ruta de navegación (breadcrumb)
+ * dinámicamente según la URL actual. Mejora la usabilidad al mostrar al usuario
+ * su posición dentro de la app y permite volver a rutas anteriores.
+ */
 @Component({
   selector: &#x27;app-breadcrumb&#x27;,
   standalone: true,
@@ -470,18 +502,27 @@ export class BreadcrumbComponent implements OnInit {
   private router &#x3D; inject(Router);
   private route &#x3D; inject(ActivatedRoute);
 
+  /**
+   * Arreglo de ítems que componen el breadcrumb. Cada ítem tiene un &#x60;label&#x60; visible
+   * y un &#x60;path&#x60; (opcional) para navegar hacia esa sección.
+   */
   items: { label: string; path?: string }[] &#x3D; [];
 
+  /**
+   * Al inicializar el componente, construye los ítems del breadcrumb en base a la URL activa.
+   * Se ignoran rutas como &#x60;dashboard&#x60; o &#x60;categoria&#x60; para evitar redundancia visual.
+   */
   ngOnInit(): void {
     const fullPath &#x3D; this.router.url.split(&#x27;?&#x27;)[0];
     const segments &#x3D; fullPath.split(&#x27;/&#x27;).filter(Boolean);
-    
+
     let cumulativePath &#x3D; &#x27;&#x27;;
     this.items &#x3D; [];
 
     segments.forEach((seg, index) &#x3D;&gt; {
       cumulativePath +&#x3D; &#x60;/${seg}&#x60;;
 
+      // Evitar mostrar rutas irrelevantes
       if (seg &#x3D;&#x3D;&#x3D; &#x27;dashboard&#x27; || seg &#x3D;&#x3D;&#x3D; &#x27;categoria&#x27;) {
         return;
       }
@@ -497,6 +538,11 @@ export class BreadcrumbComponent implements OnInit {
     this.items.unshift({ label: &#x27;Inicio&#x27;, path: &#x27;/dashboard&#x27; });
   }
 
+  /**
+   * Convierte un segmento de la URL en un texto legible para mostrar en el breadcrumb.
+   * @param slug Fragmento de la URL.
+   * @returns Texto más amigable y traducido si aplica.
+   */
   private toReadable(slug: string): string {
     const mapa: Record&lt;string, string&gt; &#x3D; {
       ayudantias: &#x27;Ayudantías&#x27;,
@@ -509,6 +555,7 @@ export class BreadcrumbComponent implements OnInit {
 
     return mapa[slug] || slug.charAt(0).toUpperCase() + slug.slice(1);
   }
+
 }
 </code></pre>
     </div>
@@ -590,7 +637,7 @@ export class BreadcrumbComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><nav aria-label="breadcrumb" class="breadcrumb-container">  <ol class="breadcrumb m-0">    @for (item of items; track item; let last = $last) {      <li class="breadcrumb-item" [class.active]="last">        @if (!last && item.path) {          <a [routerLink]="item.path">{{ item.label }}</a>        }        @if (last || !item.path) {          {{ item.label }}        }      </li>    }  </ol></nav></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotificacionBannerComponent', 'selector': 'app-notificacion-banner'},{'name': 'NotificacionesComponent', 'selector': 'app-notificaciones'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'BreadcrumbComponent'};
 </script>

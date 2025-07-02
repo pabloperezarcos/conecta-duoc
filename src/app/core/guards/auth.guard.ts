@@ -10,7 +10,14 @@ import { MsalService } from '@azure/msal-angular';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  /**
+   * Servicio de autenticación MSAL para validar sesión activa.
+   */
   private msalService = inject(MsalService);
+
+  /**
+   * Servicio de enrutamiento para redirigir si no está autenticado.
+   */
   private router = inject(Router);
 
   /**

@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-
 import { RouterLink } from '@angular/router';
 
+/**
+ * Componente de pie de página global para la plataforma ConectaDuoc.
+ * Muestra el año actual y enlaces relevantes si se requieren.
+ */
 @Component({
   selector: 'app-footer',
   standalone: true,
@@ -10,6 +13,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+  /**
+   * Año actual mostrado dinámicamente en el footer.
+   */
   currentYear: number = new Date().getFullYear();
 
 }

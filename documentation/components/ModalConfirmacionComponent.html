@@ -124,6 +124,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente reutilizable para mostrar un modal de confirmación.
+Utilizado para confirmar acciones críticas como eliminar, cerrar sesión, etc.</p>
+
+    </p>
 
 
 
@@ -253,9 +261,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:23</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Mensaje que describe la acción a confirmar.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -279,9 +293,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:18</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Título del modal (por defecto: &quot;¿Estás seguro?&quot;)</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -305,9 +325,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:29</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Controla la visibilidad del modal.
+Si es <code>true</code>, el modal se muestra.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -329,9 +356,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:39</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Evento emitido cuando el usuario cancela la acción.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -350,9 +383,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/shared/modal-confirmacion/modal-confirmacion.component.ts:34</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Evento emitido cuando el usuario confirma la acción.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -366,7 +405,10 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
 
-
+/**
+ * Componente reutilizable para mostrar un modal de confirmación.
+ * Utilizado para confirmar acciones críticas como eliminar, cerrar sesión, etc.
+ */
 @Component({
   selector: &#x27;app-modal-confirmacion&#x27;,
   standalone: true,
@@ -375,14 +417,33 @@
   styleUrls: [&#x27;./modal-confirmacion.component.scss&#x27;]
 })
 export class ModalConfirmacionComponent {
+  /**
+   * Título del modal (por defecto: &quot;¿Estás seguro?&quot;)
+   */
   @Input() titulo &#x3D; &#x27;¿Estás seguro?&#x27;;
+
+  /**
+   * Mensaje que describe la acción a confirmar.
+   */
   @Input() mensaje &#x3D; &#x27;&#x27;;
+
+  /**
+   * Controla la visibilidad del modal.
+   * Si es &#x60;true&#x60;, el modal se muestra.
+   */
   @Input() visible &#x3D; false;
 
+  /**
+   * Evento emitido cuando el usuario confirma la acción.
+   */
   @Output() confirmar &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Evento emitido cuando el usuario cancela la acción.
+   */
   @Output() cancelar &#x3D; new EventEmitter&lt;void&gt;();
-}
-</code></pre>
+
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -480,7 +541,7 @@ export class ModalConfirmacionComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>@if (visible) {  <div class="modal-overlay">    <div class="modal-box">      <h2>{{ titulo }}</h2>      <p>{{ mensaje }}</p>      <div class="acciones">        <button class="btn btn-outline-dark" (click)="cancelar.emit()">Cancelar</button>        <button class="btn btn-amarillo" (click)="confirmar.emit()">Sí, cerrar sesión</button>      </div>    </div>  </div>}</div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CategoriasAdminComponent', 'selector': 'app-config-categorias'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ConfiguracionComponent', 'selector': 'app-configuracion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DetalleComponent', 'selector': 'app-detalle'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalConfirmacionComponent', 'selector': 'app-modal-confirmacion'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotificacionBannerComponent', 'selector': 'app-notificacion-banner'},{'name': 'NotificacionesComponent', 'selector': 'app-notificaciones'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'PublicacionesReportadasComponent', 'selector': 'app-publicaciones-reportadas'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReglasDeLaComunidadComponent', 'selector': 'app-reglas-de-la-comunidad'},{'name': 'UsuariosComponent', 'selector': 'app-config-usuarios'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ModalConfirmacionComponent'};
 </script>
