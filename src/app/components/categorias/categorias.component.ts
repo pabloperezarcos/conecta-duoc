@@ -147,10 +147,13 @@ export class CategoriasComponent implements OnInit {
   }
 
   reportarPublicacion(pub: Post): void {
-    this.reportService.reportPost(pub.idPost, 'Contenido inapropiado').subscribe(() => {
+    const reason = prompt('Motivo del reporte', 'Contenido inapropiado');
+    if (!reason) return;
+    this.reportService.reportPost(pub.idPost, reason).subscribe(() => {
       alert('Publicación reportada');
     });
   }
+
 
   getSlugFromName(name: string): string {
     switch (name.toLowerCase()) {
