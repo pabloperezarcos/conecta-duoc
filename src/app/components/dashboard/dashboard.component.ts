@@ -53,9 +53,34 @@ export class DashboardComponent implements OnInit {
    * - Carga las categorías visibles (filtrando las no activas y las solo-admin).
    */
   ngOnInit(): void {
-    this.username = this.userService.getName() || this.userService.getAzureUser()?.fullName || this.userService.getAzureUser()?.email || 'Desconocido';
-    this.role = this.userService.getRole();
+    const azureUser = this.userService.getAzureUser();
 
+    if (azureUser) {
+      this.userService.getUser(azureUser.email).subscribe(user => {
+        // Refresca el nombre y rol en localStorage + memoria
+        this.userService.setName(user.name);
+        this.userService.setRole(user.role || 'student');
+
+        if (user.idUser !== undefined && user.idUser !== null) {
+          this.userService.setIdUser(user.idUser);
+        }
+
+        // Usa el nombre actualizado para mostrar
+        this.username = user.name || azureUser.fullName || azureUser.email || 'Desconocido';
+        this.role = user.role || 'student';
+
+        // Ahora construimos las categorías usando el rol actualizado
+        this.cargarCategorias();
+      });
+    } else {
+      // Fallback si no hay usuario activo
+      this.username = 'Desconocido';
+      this.role = 'student';
+      this.cargarCategorias();
+    }
+  }
+
+  private cargarCategorias(): void {
     this.postCategoryService.getAll().subscribe(categories => {
       this.categories = categories
         .filter(cat => {
