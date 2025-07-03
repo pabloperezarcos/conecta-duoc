@@ -221,7 +221,6 @@ export class CategoriasComponent implements OnInit {
   /**
    * Convierte un texto en un slug amigable para URL.
    * Elimina tildes, caracteres especiales y reemplaza espacios por guiones.
-   *
    * @param text Texto a transformar
    * @returns Texto transformado en formato slug
    */
