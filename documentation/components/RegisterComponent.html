@@ -294,8 +294,8 @@ al iniciar sesión por primera vez con Azure AD. El usuario debe seleccionar su 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/components/register/register.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/components/register/register.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -334,8 +334,8 @@ Una vez registrado, redirige al usuario a las reglas de la comunidad.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">src/app/components/register/register.component.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/components/register/register.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -384,7 +384,7 @@ Si no hay sesión activa, redirige a la pantalla de inicio.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/register/register.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/register/register.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -416,10 +416,16 @@ Si no hay sesión activa, redirige a la pantalla de inicio.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/register/register.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/register/register.component.ts:20</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para construir y manejar formularios reactivos</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -447,7 +453,7 @@ Si no hay sesión activa, redirige a la pantalla de inicio.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/register/register.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/register/register.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -479,7 +485,7 @@ Si no hay sesión activa, redirige a la pantalla de inicio.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/register/register.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/register/register.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -511,10 +517,16 @@ Si no hay sesión activa, redirige a la pantalla de inicio.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/register/register.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/register/register.component.ts:26</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de ruteo para navegación entre componentes</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -549,7 +561,7 @@ Si no hay sesión activa, redirige a la pantalla de inicio.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/register/register.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/register/register.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -582,10 +594,16 @@ El usuario debe seleccionar una como parte del registro.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/register/register.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/register/register.component.ts:23</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio que gestiona los datos y acciones relacionadas al usuario</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -613,8 +631,13 @@ import { User } from &#x27;../../models/user&#x27;;
   styleUrls: [&#x27;./register.component.scss&#x27;]
 })
 export class RegisterComponent implements OnInit {
+  /** Servicio para construir y manejar formularios reactivos */
   private fb &#x3D; inject(FormBuilder);
+
+  /** Servicio que gestiona los datos y acciones relacionadas al usuario */
   private userService &#x3D; inject(UserService);
+
+  /** Servicio de ruteo para navegación entre componentes */
   private router &#x3D; inject(Router);
 
   /** Formulario reactivo para el registro */
@@ -902,6 +925,7 @@ label {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

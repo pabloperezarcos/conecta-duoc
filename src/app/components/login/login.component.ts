@@ -17,8 +17,13 @@ import { User } from '../../models/user';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  /** Servicio de autenticación MSAL para gestionar login y sesión con Azure AD */
   private msalService = inject(MsalService);
+
+  /** Servicio de enrutamiento para redirigir al usuario según su estado */
   private router = inject(Router);
+
+  /** Servicio encargado de manejar los datos del usuario en la app */
   private userService = inject(UserService);
 
   /** Título de la pantalla de inicio de sesión */

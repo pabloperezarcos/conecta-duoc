@@ -212,8 +212,8 @@ Permite obtener, crear, actualizar y eliminar categorías.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/core/services/post-category.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/core/services/post-category.service.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -287,8 +287,8 @@ Permite obtener, crear, actualizar y eliminar categorías.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/app/core/services/post-category.service.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/core/services/post-category.service.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -361,8 +361,8 @@ Permite obtener, crear, actualizar y eliminar categorías.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/core/services/post-category.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="24"
+                                    class="link-to-prism">src/app/core/services/post-category.service.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -404,8 +404,8 @@ Permite obtener, crear, actualizar y eliminar categorías.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/core/services/post-category.service.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/core/services/post-category.service.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -538,10 +538,16 @@ Permite obtener, crear, actualizar y eliminar categorías.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/services/post-category.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/core/services/post-category.service.ts:18</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP utilizado para realizar peticiones al backend</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -566,6 +572,8 @@ import { PostCategory } from &#x27;../../models/postCategory&#x27;;
 export class PostCategoryService {
   /** URL base del API para categorías de publicaciones */
   private apiUrl &#x3D; &#x27;http://localhost:9090/api/post-category&#x27;;
+
+  /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http &#x3D; inject(HttpClient);
 
   /**
@@ -679,6 +687,7 @@ export class PostCategoryService {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

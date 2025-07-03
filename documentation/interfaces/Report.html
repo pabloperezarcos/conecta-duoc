@@ -260,6 +260,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Comentario asociado al reporte (si aplica)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -464,6 +470,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID del usuario que generó el reporte</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -502,6 +514,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Publicación asociada al reporte (si aplica)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -579,6 +597,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Resolución tomada por el administrador: &#39;concedido&#39; o &#39;rechazado&#39;</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -650,10 +674,18 @@ export interface Report {
     /** Fecha en que se generó el reporte (ISO string) */
     createdDate: string;
 
+    /** ID del usuario que generó el reporte */
     idUser: number;
+
+    /** Publicación asociada al reporte (si aplica) */
     post?: Post;
+
+    /** Comentario asociado al reporte (si aplica) */
     comment?: Comment;
+
+    /** Resolución tomada por el administrador: &#x27;concedido&#x27; o &#x27;rechazado&#x27; */
     resolucion?: &#x27;concedido&#x27; | &#x27;rechazado&#x27;;
+
 }
 </code></pre>
     </div>
@@ -720,6 +752,7 @@ export interface Report {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

@@ -14,6 +14,8 @@ import { Score } from '../../models/post';
 export class ScoreService {
   /** URL base del API de puntuaciones */
   private apiUrl = 'http://localhost:9090/api/score';
+
+  /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http = inject(HttpClient);
 
   /**

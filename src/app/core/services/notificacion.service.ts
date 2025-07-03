@@ -14,6 +14,12 @@ export class NotificacionService {
   /** URL base del API para notificaciones globales */
   private apiUrl = 'http://localhost:9090/api/notificaciones';
 
+  /**
+   * Constructor del servicio.
+   * Inyecta el cliente HTTP para realizar solicitudes al backend.
+   * 
+   * @param http Cliente HTTP de Angular
+   */
   constructor(private http: HttpClient) { }
 
   /**

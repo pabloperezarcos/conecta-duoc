@@ -120,6 +120,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente base del panel de configuración administrativa.
+Actúa como contenedor de navegación hacia módulos como usuarios, categorías y notificaciones.</p>
+
+    </p>
 
 
 
@@ -199,6 +207,10 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
 import { BreadcrumbComponent } from &#x27;../breadcrumb/breadcrumb.component&#x27;;
 
+/**
+ * Componente base del panel de configuración administrativa.
+ * Actúa como contenedor de navegación hacia módulos como usuarios, categorías y notificaciones.
+ */
 @Component({
   selector: &#x27;app-configuracion&#x27;,
   standalone: true,
@@ -359,6 +371,7 @@ export class ConfiguracionComponent {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

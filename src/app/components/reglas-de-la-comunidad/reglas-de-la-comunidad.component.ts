@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/modal-confirmacion.component';
@@ -18,7 +17,10 @@ import { UserService } from '../../core/services/user.service';
   styleUrls: ['./reglas-de-la-comunidad.component.scss']
 })
 export class ReglasDeLaComunidadComponent {
+  /** Servicio que gestiona los datos y estado del usuario en la aplicación */
   private userService = inject(UserService);
+
+  /** Servicio de enrutamiento para navegación entre vistas */
   private router = inject(Router);
 
   /** Controla la visibilidad del modal de confirmación de rechazo */

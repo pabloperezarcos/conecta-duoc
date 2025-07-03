@@ -215,8 +215,8 @@ Permite crear, obtener, eliminar publicaciones y registrar visualizaciones.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/core/services/post.service.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/core/services/post.service.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -291,8 +291,8 @@ El ID, fecha y visualizaciones serán generadas automáticamente por el backend.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">src/app/core/services/post.service.ts:54</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/core/services/post.service.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -366,8 +366,8 @@ El ID, fecha y visualizaciones serán generadas automáticamente por el backend.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/core/services/post.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/app/core/services/post.service.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -441,8 +441,8 @@ El ID, fecha y visualizaciones serán generadas automáticamente por el backend.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/core/services/post.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/core/services/post.service.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -516,8 +516,8 @@ El ID, fecha y visualizaciones serán generadas automáticamente por el backend.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/app/core/services/post.service.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/core/services/post.service.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -633,10 +633,16 @@ El ID, fecha y visualizaciones serán generadas automáticamente por el backend.
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/services/post.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/core/services/post.service.ts:18</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP utilizado para realizar peticiones al backend</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -661,6 +667,8 @@ import { Observable } from &#x27;rxjs&#x27;;
 export class PostService {
   /** URL base del API para publicaciones */
   private apiUrl &#x3D; &#x27;http://localhost:9090/api/post&#x27;;
+
+  /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http &#x3D; inject(HttpClient);
 
   /**
@@ -784,6 +792,7 @@ export class PostService {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

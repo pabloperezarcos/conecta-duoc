@@ -6,6 +6,10 @@ import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../models/user';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 
+/**
+ * Componente del panel de configuración para administrar usuarios.
+ * Permite listar, filtrar, editar y actualizar datos de usuarios registrados.
+ */
 @Component({
   selector: 'app-config-usuarios',
   standalone: true,
@@ -14,13 +18,25 @@ import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
+  /** Servicio para construir y manejar formularios reactivos */
   private fb = inject(FormBuilder);
+
+  /** Servicio para gestionar la información del usuario en la aplicación */
   private userService = inject(UserService);
 
+  /** Lista de usuarios cargados desde el backend */
   users: User[] = [];
+
+  /** Formulario para editar usuario */
   userForm!: FormGroup;
+
+  /** Usuario que está siendo editado actualmente */
   editing: User | null = null;
+
+  /** Texto para filtrar usuarios por nombre */
   filtroNombre: string = '';
+
+  /** Lista de sedes posibles */
   sedes: string[] = [
     'Modalidad online',
     'Campus Virtual',
@@ -46,6 +62,10 @@ export class UsuariosComponent implements OnInit {
     'Sede Puerto Montt'
   ];
 
+
+  /**
+   * Inicializa el formulario de edición y carga los usuarios existentes.
+   */
   ngOnInit(): void {
     this.userForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -57,26 +77,42 @@ export class UsuariosComponent implements OnInit {
     this.cargarUsuarios();
   }
 
+  /**
+   * Devuelve los usuarios filtrados por nombre.
+   */
   get usuariosFiltrados(): User[] {
     if (!this.filtroNombre.trim()) return this.users;
     const filtro = this.filtroNombre.toLowerCase();
     return this.users.filter(u => u.name?.toLowerCase().includes(filtro));
   }
 
+  /**
+   * Carga todos los usuarios desde el backend.
+   */
   cargarUsuarios(): void {
     this.userService.getAll().subscribe(users => (this.users = users));
   }
 
+  /**
+   * Prepara el formulario para editar un usuario seleccionado.
+   * @param user Usuario a editar.
+   */
   editar(user: User): void {
     this.editing = { ...user };
     this.userForm.patchValue(this.editing);
   }
 
+  /**
+   * Cancela la edición del usuario y limpia el formulario.
+   */
   cancelarEdicion(): void {
     this.editing = null;
     this.userForm.reset({ role: 'student' });
   }
 
+  /**
+   * Guarda los cambios realizados al usuario actualmente en edición.
+   */
   guardar(): void {
     if (this.userForm.invalid || !this.editing?.idUser) return;
 
@@ -92,6 +128,10 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  /**
+   * (Comentado) Elimina un usuario del sistema.
+   * @param user Usuario a eliminar.
+   */
   /*   
   eliminar(user: User): void {
       if (!user.idUser) return;
@@ -101,4 +141,5 @@ export class UsuariosComponent implements OnInit {
       });
     } 
     */
+
 }

@@ -30,13 +30,28 @@ import { ScoreService } from '../../core/services/score.service';
   styleUrls: ['./categorias.component.scss']
 })
 export class CategoriasComponent implements OnInit {
+  /** Servicio para acceder a los parámetros de la ruta actual */
   private route = inject(ActivatedRoute);
+
+  /** Servicio para navegar entre rutas del sistema */
   private router = inject(Router);
+
+  /** Servicio para construir formularios reactivos */
   private fb = inject(FormBuilder);
+
+  /** Servicio que gestiona las categorías de publicaciones */
   private postCategoryService = inject(PostCategoryService);
+
+  /** Servicio que gestiona las publicaciones del sistema */
   private postService = inject(PostService);
+
+  /** Servicio que maneja los datos del usuario actual */
   private userService = inject(UserService);
+
+  /** Servicio para enviar y gestionar reportes de publicaciones o comentarios */
   private reportService = inject(ReportService);
+
+  /** Servicio para asignar y consultar calificaciones (scores) de publicaciones */
   private scoreService = inject(ScoreService);
 
   /** Slug obtenido desde la URL */
@@ -203,6 +218,13 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
+  /**
+   * Convierte un texto en un slug amigable para URL.
+   * Elimina tildes, caracteres especiales y reemplaza espacios por guiones.
+   *
+   * @param text Texto a transformar
+   * @returns Texto transformado en formato slug
+   */
   private slugify(text: string): string {
     return text
       .toLowerCase()
@@ -211,6 +233,12 @@ export class CategoriasComponent implements OnInit {
       .replace(/(^-|-$)/g, '');
   }
 
+  /**
+   * Envía una calificación (score) para una publicación y actualiza el promedio mostrado.
+   *
+   * @param pub Publicación a calificar
+   * @param valor Valor de la calificación (de 1 a 5)
+   */
   calificar(pub: Post, valor: number): void {
     const idUser = this.userService.getIdUser();
     if (!idUser) return;

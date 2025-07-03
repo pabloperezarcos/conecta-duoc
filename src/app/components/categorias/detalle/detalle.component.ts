@@ -18,6 +18,10 @@ import { CommentService } from '../../../core/services/comment.service';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 import { NotificacionBannerComponent } from '../../notificacion-banner/notificacion-banner.component';
 
+/**
+ * Componente que muestra el detalle de una publicación individual.
+ * Permite ver comentarios, agregar nuevos, calificar la publicación y reportar contenido inapropiado.
+ */
 @Component({
   selector: 'app-detalle',
   standalone: true,
@@ -26,25 +30,61 @@ import { NotificacionBannerComponent } from '../../notificacion-banner/notificac
   styleUrls: ['./detalle.component.scss']
 })
 export class DetalleComponent implements OnInit {
+  /** Servicio que permite acceder a los parámetros de la ruta actual */
   private route = inject(ActivatedRoute);
+
+  /** Servicio que permite la navegación entre rutas del sistema */
   private router = inject(Router);
+
+  /** Servicio para gestionar publicaciones (crear, obtener, eliminar, etc.) */
   private postService = inject(PostService);
+
+  /** Servicio para manejar comentarios asociados a publicaciones */
   private commentService = inject(CommentService);
+
+  /** Servicio de usuario para acceder a datos del usuario actual y almacenados */
   private userService = inject(UserService);
+
+  /** Servicio para reportar publicaciones o comentarios por parte del usuario */
   private reportService = inject(ReportService);
+
+  /** Servicio que gestiona calificaciones de publicaciones (scores) */
   private scoreService = inject(ScoreService);
+
+  /** Servicio para construir formularios reactivos */
   private fb = inject(FormBuilder);
 
+  /** Publicación actualmente mostrada */
   post: Post | undefined;
+
+  /** Lista de comentarios asociados a la publicación */
   comments: Comment[] = [];
+
+  /** Formulario reactivo para agregar un comentario */
   comentarioForm!: FormGroup;
+
+  /** Estado de carga inicial */
   loading = true;
+
+  /** Flag para evitar múltiples envíos del mismo comentario */
   postingComment = false;
+
+  /** Promedio de calificación del post */
   promedio = 0;
+
+  /** Calificación dada por el usuario actual */
   miScore: number | null = null;
+
+  /** Valores de estrellas disponibles para calificar */
   estrellas = [1, 2, 3, 4, 5];
+
+  /** Nombre del autor del post */
   nombreAutor: string = 'Autor desconocido';
 
+  /**
+   * Inicializa el componente, obtiene la publicación, su autor,
+   * comentarios y calificaciones, y actualiza vistas.
+   */
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (!id) {
@@ -94,6 +134,9 @@ export class DetalleComponent implements OnInit {
 
   }
 
+  /**
+   * Envía un nuevo comentario si el formulario es válido.
+   */
   comentar(): void {
     if (!this.post || this.comentarioForm.invalid || this.postingComment) return;
 
@@ -116,6 +159,9 @@ export class DetalleComponent implements OnInit {
     });
   }
 
+  /**
+   * Reporta una publicación con un motivo opcional.
+   */
   reportarPublicacion(): void {
     if (!this.post) return;
     const reason = prompt('Motivo del reporte', 'Contenido inapropiado');
@@ -125,6 +171,10 @@ export class DetalleComponent implements OnInit {
     });
   }
 
+  /**
+   * Reporta un comentario con un motivo opcional.
+   * @param com Comentario a reportar.
+   */
   reportarComentario(com: Comment): void {
     const reason = prompt('Motivo del reporte', 'Comentario inapropiado');
     if (!reason) return;
@@ -133,11 +183,18 @@ export class DetalleComponent implements OnInit {
     });
   }
 
+  /**
+   * Regresa a la categoría desde la que se abrió esta vista.
+   */
   volver(): void {
     const slug = this.route.snapshot.paramMap.get('slug') || 'dashboard';
     this.router.navigate(['/categoria', slug]);
   }
 
+  /**
+   * Permite al usuario calificar el post con una puntuación del 1 al 5.
+   * @param valor Puntuación seleccionada.
+   */
   calificar(valor: number): void {
     if (!this.post) return;
     const idUser = this.userService.getIdUser();
@@ -150,4 +207,5 @@ export class DetalleComponent implements OnInit {
       });
     });
   }
+
 }

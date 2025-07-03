@@ -295,8 +295,8 @@ y carga el banner de notificaciones globales.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -340,8 +340,8 @@ y carga el banner de notificaciones globales.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -425,7 +425,7 @@ y carga el banner de notificaciones globales.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -471,7 +471,7 @@ y carga el banner de notificaciones globales.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -503,10 +503,16 @@ y carga el banner de notificaciones globales.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:26</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio que maneja las categorías de publicaciones disponibles en el sistema</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -534,7 +540,7 @@ y carga el banner de notificaciones globales.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -571,7 +577,7 @@ y carga el banner de notificaciones globales.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -603,10 +609,16 @@ y carga el banner de notificaciones globales.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/dashboard/dashboard.component.ts:23</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para acceder y gestionar los datos del usuario actual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -637,7 +649,10 @@ import { NotificacionBannerComponent } from &#x27;../notificacion-banner/notific
   styleUrls: [&#x27;./dashboard.component.scss&#x27;]
 })
 export class DashboardComponent implements OnInit {
+  /** Servicio para acceder y gestionar los datos del usuario actual */
   private userService &#x3D; inject(UserService);
+
+  /** Servicio que maneja las categorías de publicaciones disponibles en el sistema */
   private postCategoryService &#x3D; inject(PostCategoryService);
 
   /** Nombre del usuario autenticado */
@@ -916,6 +931,7 @@ export class DashboardComponent implements OnInit {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 
