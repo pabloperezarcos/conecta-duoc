@@ -283,8 +283,8 @@ su posición dentro de la app y permite volver a rutas anteriores.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -325,8 +325,8 @@ Se ignoran rutas como <code>dashboard</code> o <code>categoria</code> para evita
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -410,7 +410,7 @@ Se ignoran rutas como <code>dashboard</code> o <code>categoria</code> para evita
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -443,10 +443,16 @@ y un <code>path</code> (opcional) para navegar hacia esa sección.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:22</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para acceder a los parámetros de la ruta actual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -469,10 +475,16 @@ y un <code>path</code> (opcional) para navegar hacia esa sección.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/breadcrumb/breadcrumb.component.ts:19</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de enrutamiento para redirecciones y navegación</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -499,7 +511,10 @@ import { RouterModule, ActivatedRoute, Router } from &#x27;@angular/router&#x27;
   styleUrls: [&#x27;./breadcrumb.component.scss&#x27;]
 })
 export class BreadcrumbComponent implements OnInit {
+  /** Servicio de enrutamiento para redirecciones y navegación */
   private router &#x3D; inject(Router);
+
+  /** Servicio para acceder a los parámetros de la ruta actual */
   private route &#x3D; inject(ActivatedRoute);
 
   /**
@@ -713,6 +728,7 @@ export class BreadcrumbComponent implements OnInit {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

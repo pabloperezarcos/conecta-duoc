@@ -216,8 +216,8 @@ y comentarios en la plataforma ConectaDuoc.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/core/services/report.service.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -260,8 +260,8 @@ Generalmente usado por el administrador para revisión y gestión.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:54</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/core/services/report.service.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -351,8 +351,8 @@ Generalmente usado por el administrador para revisión y gestión.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/core/services/report.service.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -442,8 +442,8 @@ Generalmente usado por el administrador para revisión y gestión.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">src/app/core/services/report.service.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/core/services/report.service.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -576,10 +576,16 @@ Generalmente usado por el administrador para revisión y gestión.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/services/report.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/services/report.service.ts:19</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP para realizar peticiones al backend</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -602,10 +608,16 @@ Generalmente usado por el administrador para revisión y gestión.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/core/services/report.service.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/core/services/report.service.ts:22</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio que maneja la lógica relacionada con el usuario actual</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -631,7 +643,11 @@ import { UserService } from &#x27;./user.service&#x27;;
 export class ReportService {
   /** URL base del API para reportes */
   private apiUrl &#x3D; &#x27;http://localhost:9090/api/report&#x27;;
+
+  /** Cliente HTTP para realizar peticiones al backend */
   private http &#x3D; inject(HttpClient);
+
+  /** Servicio que maneja la lógica relacionada con el usuario actual */
   private userService &#x3D; inject(UserService);
 
   /**
@@ -769,6 +785,7 @@ export class ReportService {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

@@ -15,7 +15,10 @@ import { RouterModule, ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
+  /** Servicio de enrutamiento para redirecciones y navegación */
   private router = inject(Router);
+
+  /** Servicio para acceder a los parámetros de la ruta actual */
   private route = inject(ActivatedRoute);
 
   /**

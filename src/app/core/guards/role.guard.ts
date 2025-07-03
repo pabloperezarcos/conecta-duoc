@@ -10,7 +10,10 @@ import { UserService } from '../services/user.service';
   providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
+  /** Inyección del servicio de usuario */
   private userService = inject(UserService);
+
+  /** Inyección del router para redirección */
   private router = inject(Router);
 
   /**

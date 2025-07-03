@@ -18,9 +18,15 @@ import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/moda
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  private userService = inject(UserService);
-  private router = inject(Router);
+  /** Servicio de autenticación MSAL para gestionar login y sesión con Azure AD */
   private msal = inject(MsalService);
+
+  /** Servicio de enrutamiento para redirigir al usuario según su estado */
+  private router = inject(Router);
+
+  /** Servicio encargado de manejar los datos del usuario en la app */
+  private userService = inject(UserService);
+
 
   /** Nombre del usuario visible en el navbar */
   username: string | null = null;

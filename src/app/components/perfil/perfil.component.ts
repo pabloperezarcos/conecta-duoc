@@ -34,11 +34,22 @@ import { PostCategory } from '../../models/postCategory';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
+  /** Servicio que gestiona la información y estado del usuario */
   private userService = inject(UserService);
+
+  /** Servicio encargado de operaciones sobre publicaciones */
   private postService = inject(PostService);
+
+  /** Servicio de navegación entre rutas */
   private router = inject(Router);
+
+  /** Servicio para gestionar comentarios de las publicaciones */
   private commentService = inject(CommentService);
+
+  /** Servicio para obtener y administrar categorías de publicaciones */
   private postCategoryService = inject(PostCategoryService);
+
+  /** Servicio que permite obtener y enviar calificaciones (scores) de publicaciones */
   private scoreService = inject(ScoreService);
 
   /** Información del usuario autenticado */

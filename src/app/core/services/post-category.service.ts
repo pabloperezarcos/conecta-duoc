@@ -13,6 +13,8 @@ import { PostCategory } from '../../models/postCategory';
 export class PostCategoryService {
   /** URL base del API para categorías de publicaciones */
   private apiUrl = 'http://localhost:9090/api/post-category';
+
+  /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http = inject(HttpClient);
 
   /**

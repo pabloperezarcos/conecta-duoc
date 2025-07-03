@@ -286,8 +286,8 @@ Si las rechaza, se le cierra la sesión.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:83</a></div>
                         </td>
                     </tr>
 
@@ -326,8 +326,8 @@ También se guarda la aceptación en <code>localStorage</code> para prevenir mú
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="137"
-                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:137</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:139</a></div>
                         </td>
                     </tr>
 
@@ -365,8 +365,8 @@ También se guarda la aceptación en <code>localStorage</code> para prevenir mú
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="110"
-                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:110</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -405,8 +405,8 @@ Se marca <code>policies</code> como 0, se limpia el localStorage y se redirige a
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -448,7 +448,7 @@ Se marca <code>policies</code> como 0, se limpia el localStorage y se redirige a
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -530,7 +530,7 @@ Se marca <code>policies</code> como 0, se limpia el localStorage y se redirige a
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -562,10 +562,16 @@ Se marca <code>policies</code> como 0, se limpia el localStorage y se redirige a
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/reglas-de-la-comunidad/reglas-de-la-comunidad.component.ts:24</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de enrutamiento para navegación entre vistas</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -592,6 +598,12 @@ Se marca <code>policies</code> como 0, se limpia el localStorage y se redirige a
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio que gestiona los datos y estado del usuario en la aplicación</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -602,7 +614,6 @@ Se marca <code>policies</code> como 0, se limpia el localStorage y se redirige a
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
-
 import { Router } from &#x27;@angular/router&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { ModalConfirmacionComponent } from &#x27;../../shared/modal-confirmacion/modal-confirmacion.component&#x27;;
@@ -621,7 +632,10 @@ import { UserService } from &#x27;../../core/services/user.service&#x27;;
   styleUrls: [&#x27;./reglas-de-la-comunidad.component.scss&#x27;]
 })
 export class ReglasDeLaComunidadComponent {
+  /** Servicio que gestiona los datos y estado del usuario en la aplicación */
   private userService &#x3D; inject(UserService);
+
+  /** Servicio de enrutamiento para navegación entre vistas */
   private router &#x3D; inject(Router);
 
   /** Controla la visibilidad del modal de confirmación de rechazo */
@@ -1018,6 +1032,7 @@ export class ReglasDeLaComunidadComponent {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

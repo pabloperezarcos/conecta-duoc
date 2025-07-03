@@ -13,6 +13,8 @@ import { Observable } from 'rxjs';
 export class PostService {
   /** URL base del API para publicaciones */
   private apiUrl = 'http://localhost:9090/api/post';
+
+  /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http = inject(HttpClient);
 
   /**

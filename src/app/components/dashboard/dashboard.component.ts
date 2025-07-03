@@ -19,7 +19,10 @@ import { NotificacionBannerComponent } from '../notificacion-banner/notificacion
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  /** Servicio para acceder y gestionar los datos del usuario actual */
   private userService = inject(UserService);
+
+  /** Servicio que maneja las categorías de publicaciones disponibles en el sistema */
   private postCategoryService = inject(PostCategoryService);
 
   /** Nombre del usuario autenticado */

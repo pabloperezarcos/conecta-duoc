@@ -19,8 +19,13 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
   styleUrls: ['./publicaciones-reportadas.component.scss']
 })
 export class PublicacionesReportadasComponent implements OnInit {
+  /** Servicio que permite crear y gestionar reportes de publicaciones o comentarios */
   private reportService = inject(ReportService);
+
+  /** Servicio que maneja operaciones CRUD sobre publicaciones */
   private postService = inject(PostService);
+
+  /** Servicio encargado de gestionar comentarios asociados a publicaciones */
   private commentService = inject(CommentService);
 
   /** Reportes de publicaciones */

@@ -15,7 +15,10 @@ import { filter } from 'rxjs';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  /** Servicio de enrutamiento para redirigir entre componentes o páginas */
   private router = inject(Router);
+
+  /** Servicio para acceder a parámetros y datos de la ruta activa */
   private route = inject(ActivatedRoute);
 
   /** Título principal de la aplicación */

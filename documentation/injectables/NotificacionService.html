@@ -199,6 +199,9 @@ visibles para todos los usuarios de la plataforma.</p>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del servicio.
+Inyecta el cliente HTTP para realizar solicitudes al backend.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -207,6 +210,7 @@ visibles para todos los usuarios de la plataforma.</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -221,6 +225,10 @@ visibles para todos los usuarios de la plataforma.</p>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Cliente HTTP de Angular</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -256,8 +264,8 @@ visibles para todos los usuarios de la plataforma.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -331,8 +339,8 @@ visibles para todos los usuarios de la plataforma.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -405,8 +413,8 @@ visibles para todos los usuarios de la plataforma.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -448,8 +456,8 @@ visibles para todos los usuarios de la plataforma.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/core/services/notificacion.service.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -537,6 +545,12 @@ export class NotificacionService {
   /** URL base del API para notificaciones globales */
   private apiUrl &#x3D; &#x27;http://localhost:9090/api/notificaciones&#x27;;
 
+  /**
+   * Constructor del servicio.
+   * Inyecta el cliente HTTP para realizar solicitudes al backend.
+   * 
+   * @param http Cliente HTTP de Angular
+   */
   constructor(private http: HttpClient) { }
 
   /**
@@ -643,6 +657,7 @@ export class NotificacionService {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

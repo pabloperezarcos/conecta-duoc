@@ -206,8 +206,8 @@ Se basa en la información almacenada en <code>localStorage</code> por el <code>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/core/guards/role.guard.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="26"
+                                    class="link-to-prism">src/app/core/guards/role.guard.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -279,7 +279,10 @@ import { UserService } from &#x27;../services/user.service&#x27;;
   providedIn: &#x27;root&#x27;
 })
 export class RoleGuard implements CanActivate {
+  /** Inyección del servicio de usuario */
   private userService &#x3D; inject(UserService);
+
+  /** Inyección del router para redirección */
   private router &#x3D; inject(Router);
 
   /**
@@ -370,6 +373,7 @@ export class RoleGuard implements CanActivate {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

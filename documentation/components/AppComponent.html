@@ -254,7 +254,7 @@ Gestiona la visibilidad del navbar y footer según la configuración de cada rut
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/app.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/app.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -300,8 +300,8 @@ del navbar y footer según los <code>data</code> de la ruta activa.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/app.component.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/app.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -380,7 +380,7 @@ Esto es necesario para acceder correctamente a los <code>data</code> de la ruta 
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/app.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/app.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -411,7 +411,7 @@ Esto es necesario para acceder correctamente a los <code>data</code> de la ruta 
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/app.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/app.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -443,10 +443,16 @@ Esto es necesario para acceder correctamente a los <code>data</code> de la ruta 
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/app.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/app.component.ts:22</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para acceder a parámetros y datos de la ruta activa</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -469,10 +475,16 @@ Esto es necesario para acceder correctamente a los <code>data</code> de la ruta 
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/app.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/app.component.ts:19</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de enrutamiento para redirigir entre componentes o páginas</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -500,7 +512,7 @@ Esto es necesario para acceder correctamente a los <code>data</code> de la ruta 
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/app.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/app.component.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -536,7 +548,10 @@ import { filter } from &#x27;rxjs&#x27;;
   styleUrl: &#x27;./app.component.scss&#x27;
 })
 export class AppComponent {
+  /** Servicio de enrutamiento para redirigir entre componentes o páginas */
   private router &#x3D; inject(Router);
+
+  /** Servicio para acceder a parámetros y datos de la ruta activa */
   private route &#x3D; inject(ActivatedRoute);
 
   /** Título principal de la aplicación */
@@ -698,6 +713,7 @@ export class AppComponent {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

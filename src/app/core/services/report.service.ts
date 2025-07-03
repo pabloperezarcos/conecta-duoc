@@ -14,7 +14,11 @@ import { UserService } from './user.service';
 export class ReportService {
   /** URL base del API para reportes */
   private apiUrl = 'http://localhost:9090/api/report';
+
+  /** Cliente HTTP para realizar peticiones al backend */
   private http = inject(HttpClient);
+
+  /** Servicio que maneja la lógica relacionada con el usuario actual */
   private userService = inject(UserService);
 
   /**

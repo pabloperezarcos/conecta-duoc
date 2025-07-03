@@ -213,8 +213,8 @@ según publicaciones y usuarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/app/core/services/score.service.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="26"
+                                    class="link-to-prism">src/app/core/services/score.service.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -288,8 +288,8 @@ según publicaciones y usuarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/app/core/services/score.service.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/core/services/score.service.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -380,8 +380,8 @@ y su propia puntuación en cada publicación.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/core/services/score.service.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/app/core/services/score.service.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -471,8 +471,8 @@ y su propia puntuación en cada publicación.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/app/core/services/score.service.ts:42</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/core/services/score.service.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -588,10 +588,16 @@ y su propia puntuación en cada publicación.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/services/score.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/services/score.service.ts:19</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP utilizado para realizar peticiones al backend</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -617,6 +623,8 @@ import { Score } from &#x27;../../models/post&#x27;;
 export class ScoreService {
   /** URL base del API de puntuaciones */
   private apiUrl &#x3D; &#x27;http://localhost:9090/api/score&#x27;;
+
+  /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http &#x3D; inject(HttpClient);
 
   /**
@@ -730,6 +738,7 @@ export class ScoreService {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

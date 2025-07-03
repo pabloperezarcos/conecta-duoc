@@ -23,8 +23,16 @@ export interface Report {
     /** Fecha en que se generó el reporte (ISO string) */
     createdDate: string;
 
+    /** ID del usuario que generó el reporte */
     idUser: number;
+
+    /** Publicación asociada al reporte (si aplica) */
     post?: Post;
+
+    /** Comentario asociado al reporte (si aplica) */
     comment?: Comment;
+
+    /** Resolución tomada por el administrador: 'concedido' o 'rechazado' */
     resolucion?: 'concedido' | 'rechazado';
+
 }

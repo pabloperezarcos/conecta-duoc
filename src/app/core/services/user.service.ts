@@ -16,12 +16,24 @@ export class UserService {
   /** URL base del API de usuarios */
   private apiUrl = 'http://localhost:9090/api/usuarios';
   //private apiUrl = 'https://yr3rp1l7fd.execute-api.us-east-1.amazonaws.com/api/usuarios';
+
+  /** Servicio MSAL para autenticación con Azure Active Directory */
   private msalService = inject(MsalService);
+
+  /** Cliente HTTP para interactuar con el backend vía API REST */
   private http = inject(HttpClient);
 
+  /** Subject que mantiene el nombre del usuario en tiempo real */
   private userNameSubject = new BehaviorSubject<string | null>(null);
+
+  /** Observable expuesto públicamente para suscribirse al nombre del usuario */
   userName$ = this.userNameSubject.asObservable();
 
+  /**
+   * Constructor del servicio.
+   * Sincroniza el nombre del usuario desde Azure AD o localStorage,
+   * y lo actualiza en el `BehaviorSubject` y almacenamiento local.
+   */
   constructor() {
     const account = this.msalService.instance.getActiveAccount();
     const localName = localStorage.getItem('nombreUsuario');

@@ -16,8 +16,13 @@ import { User } from '../../models/user';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  /** Servicio para construir y manejar formularios reactivos */
   private fb = inject(FormBuilder);
+
+  /** Servicio que gestiona los datos y acciones relacionadas al usuario */
   private userService = inject(UserService);
+
+  /** Servicio de ruteo para navegación entre componentes */
   private router = inject(Router);
 
   /** Formulario reactivo para el registro */

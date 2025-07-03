@@ -212,8 +212,8 @@ Permite obtener, crear, editar y eliminar comentarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/core/services/comment.service.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/core/services/comment.service.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -287,8 +287,8 @@ Permite obtener, crear, editar y eliminar comentarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="41"
-                                    class="link-to-prism">src/app/core/services/comment.service.ts:41</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/app/core/services/comment.service.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -362,8 +362,8 @@ Permite obtener, crear, editar y eliminar comentarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/core/services/comment.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/app/core/services/comment.service.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -437,8 +437,8 @@ Permite obtener, crear, editar y eliminar comentarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/core/services/comment.service.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/core/services/comment.service.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -571,10 +571,16 @@ Permite obtener, crear, editar y eliminar comentarios.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/services/comment.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/core/services/comment.service.ts:18</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cliente HTTP utilizado para realizar peticiones al backend</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -599,6 +605,8 @@ import { Observable } from &#x27;rxjs&#x27;;
 export class CommentService {
   /** URL base del API para comentarios */
   private apiUrl &#x3D; &#x27;http://localhost:9090/api/comment&#x27;;
+
+  /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http &#x3D; inject(HttpClient);
 
   /**
@@ -710,6 +718,7 @@ export class CommentService {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 
