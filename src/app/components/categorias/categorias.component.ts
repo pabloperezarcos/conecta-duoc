@@ -18,6 +18,10 @@ import { UserService } from '../../core/services/user.service';
 import { ReportService } from '../../core/services/report.service';
 import { ScoreService } from '../../core/services/score.service';
 
+/**
+ * Componente que gestiona la visualización, creación, filtrado, reporte y puntuación
+ * de publicaciones dentro de una categoría específica en ConectaDuoc.
+ */
 @Component({
   selector: 'app-categorias',
   standalone: true,
@@ -35,19 +39,45 @@ export class CategoriasComponent implements OnInit {
   private reportService = inject(ReportService);
   private scoreService = inject(ScoreService);
 
+  /** Slug obtenido desde la URL */
   slug = '';
+
+  /** ID de la categoría actual */
   categoriaId: number | null = null;
+
+  /** Nombre legible de la categoría actual */
   categoriaNombre = '';
+
+  /* Nombre de la categoría a mostrar */
   nombreCategoriaMostrada = '';
+
+  /** Publicaciones cargadas desde el backend */
   publicaciones: Post[] = [];
+
+  /** Diccionario con nombres de usuarios indexados por ID */
   nombresUsuarios: Record<number, string> = {};
+
+  /** Diccionario con promedios de puntuación por publicación */
   promedioScores: Record<number, number> = {};
+
+  /** Diccionario con puntuación personal del usuario en cada publicación */
   misScores: Record<number, number | null> = {};
+
+  /** Texto de búsqueda para filtrar publicaciones */
   filtroBusqueda = '';
+
+  /** Formulario para nueva publicación */
   form!: FormGroup;
+
+  /** Controla visibilidad del formulario */
   mostrarFormulario = false;
+
+  /** Estado de carga */
   loading = true;
 
+  /**
+   * Inicializa la vista de categoría, cargando la categoría correspondiente y sus publicaciones.
+   */
   ngOnInit(): void {
     this.form = this.fb.group({
       title: ['', Validators.required],
@@ -75,6 +105,10 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
+  /**
+   * Carga todas las publicaciones de la categoría actual, junto con los nombres de usuarios
+   * y las puntuaciones (promedio y personales).
+   */
   cargarPublicaciones(): void {
     if (!this.categoriaId) return;
 
@@ -102,6 +136,9 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
+  /**
+   * Devuelve las publicaciones filtradas por el texto ingresado.
+   */
   get publicacionesFiltradas(): Post[] {
     if (!this.filtroBusqueda.trim()) return this.publicaciones;
     const texto = this.filtroBusqueda.trim().toLowerCase();
@@ -111,11 +148,18 @@ export class CategoriasComponent implements OnInit {
     );
   }
 
+  /**
+   * Muestra u oculta el formulario para crear una nueva publicación.
+   */
   toggleFormulario(): void {
     this.mostrarFormulario = !this.mostrarFormulario;
     if (!this.mostrarFormulario) this.form.reset();
   }
 
+
+  /**
+   * Envía una nueva publicación al backend si el formulario es válido.
+   */
   nuevaPublicacion(): void {
     if (this.form.invalid || !this.categoriaId) return;
 
@@ -147,6 +191,10 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
+  /**
+   * Reporta una publicación por contenido inapropiado.
+   * @param pub Publicación a reportar.
+   */
   reportarPublicacion(pub: Post): void {
     const reason = prompt('Motivo del reporte', 'Contenido inapropiado');
     if (!reason) return;
@@ -174,6 +222,5 @@ export class CategoriasComponent implements OnInit {
       });
     });
   }
-
 
 }

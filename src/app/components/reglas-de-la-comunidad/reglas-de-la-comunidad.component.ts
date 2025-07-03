@@ -5,6 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { ModalConfirmacionComponent } from '../../shared/modal-confirmacion/modal-confirmacion.component';
 import { UserService } from '../../core/services/user.service';
 
+/**
+ * Componente que muestra las reglas de la comunidad de ConectaDuoc.
+ * Obliga al usuario a aceptarlas antes de utilizar la plataforma por primera vez.
+ * Si las rechaza, se le cierra la sesión.
+ */
 @Component({
   selector: 'app-reglas-de-la-comunidad',
   standalone: true,
@@ -13,10 +18,15 @@ import { UserService } from '../../core/services/user.service';
   styleUrls: ['./reglas-de-la-comunidad.component.scss']
 })
 export class ReglasDeLaComunidadComponent {
-  mostrarModal = false;
   private userService = inject(UserService);
   private router = inject(Router);
 
+  /** Controla la visibilidad del modal de confirmación de rechazo */
+  mostrarModal = false;
+
+  /**
+   * Lista de reglas visibles para el usuario, con título y descripción.
+   */
   reglas = [
     {
       titulo: '1. Respeto ante todo',
@@ -64,6 +74,10 @@ export class ReglasDeLaComunidadComponent {
     }
   ];
 
+  /**
+   * Acepta las reglas de la comunidad y actualiza el campo `policies` del usuario a 1.
+   * También se guarda la aceptación en `localStorage` para prevenir múltiples redirecciones.
+   */
   aceptarReglas() {
     // Llamamos al backend para marcar "policies" como true
     const email = this.userService.getAzureUser()?.email;
@@ -82,10 +96,17 @@ export class ReglasDeLaComunidadComponent {
     }
   }
 
+  /**
+   * Abre el modal de confirmación para rechazar las reglas.
+   */
   rechazarReglas() {
     this.mostrarModal = true;
   }
 
+  /**
+   * Confirma el rechazo de las reglas.
+   * Se marca `policies` como 0, se limpia el localStorage y se redirige al login.
+   */
   confirmarRechazo() {
     const email = this.userService.getAzureUser()?.email;
     if (email) {
@@ -110,6 +131,9 @@ export class ReglasDeLaComunidadComponent {
     }
   }
 
+  /**
+   * Cancela el intento de rechazo de las reglas, cerrando el modal.
+   */
   cancelarRechazo() {
     this.mostrarModal = false;
   }
