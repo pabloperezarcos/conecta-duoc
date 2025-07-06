@@ -23,7 +23,7 @@ export class CommentService {
    * @returns Lista de comentarios.
    */
   getByPostId(idPost: number): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.apiUrl}?idPost=${idPost}`);
+    return this.http.get<Comment[]>(`${this.apiUrl}/post/${idPost}`);
   }
 
   /**

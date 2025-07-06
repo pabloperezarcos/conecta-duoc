@@ -60,6 +60,9 @@ export class DetalleComponent implements OnInit {
   /** Lista de comentarios asociados a la publicación */
   comments: Comment[] = [];
 
+  /** Mapa que relaciona IDs de comentarios con nombres de usuarios */
+  nombresUsuariosComentario: Record<number, string> = {};
+
   /** Formulario reactivo para agregar un comentario */
   comentarioForm!: FormGroup;
 
@@ -79,7 +82,11 @@ export class DetalleComponent implements OnInit {
   estrellas = [1, 2, 3, 4, 5];
 
   /** Nombre del autor del post */
-  nombreAutor: string = 'Autor desconocido';
+  nombreAutor = 'Autor desconocido';
+
+  calificacionUsuariosComentario: Record<number, number> = {};
+
+  idUser = this.userService.getIdUser();
 
   /**
    * Inicializa el componente, obtiene la publicación, su autor,
@@ -124,6 +131,16 @@ export class DetalleComponent implements OnInit {
 
         this.commentService.getByPostId(post.idPost).subscribe(comments => {
           this.comments = comments;
+          comments.forEach(com => {
+            this.userService.getUserById(com.idUser).subscribe(user => {
+              this.nombresUsuariosComentario[com.idComment] = user.name;
+            });
+          });
+          comments.forEach(com => {
+            this.scoreService.getUserScore(com.idPost, com.idUser).subscribe(score => {
+              this.calificacionUsuariosComentario[com.idComment] = score ? score.score : 0;
+            });
+          });
           this.loading = false;
         });
       },
@@ -140,10 +157,11 @@ export class DetalleComponent implements OnInit {
   comentar(): void {
     if (!this.post || this.comentarioForm.invalid || this.postingComment) return;
 
-    const nuevoComentario: Omit<Comment, 'idComment' | 'date'> = {
+    const nuevoComentario: Omit<Comment, 'idComment'> = {
       idPost: this.post.idPost,
-      idUser: this.userService.getAzureUser()?.email || 'anónimo',
-      content: this.comentarioForm.value.content
+      idUser: this.userService.getIdUser()!,
+      content: this.comentarioForm.value.content,
+      createdDate: new Date().toISOString()
     };
 
     this.postingComment = true;
@@ -184,6 +202,18 @@ export class DetalleComponent implements OnInit {
   }
 
   /**
+   * Elimina un comentario si el usuario es el autor.
+   * @param com Comentario a eliminar.
+   */
+  eliminarComentario(com: Comment): void {
+    this.commentService.delete(com.idComment).subscribe(() => {
+      this.comments = this.comments.filter(c => c.idComment !== com.idComment);
+      delete this.nombresUsuariosComentario[com.idComment];
+      delete this.calificacionUsuariosComentario[com.idComment];
+    });
+  }
+
+  /**
    * Regresa a la categoría desde la que se abrió esta vista.
    */
   volver(): void {
@@ -206,6 +236,14 @@ export class DetalleComponent implements OnInit {
         this.promedio = avg;
       });
     });
+  }
+
+  /**
+   * Agregar un comentario al post.
+  */
+  agregarComentario(): void {
+    if (this.comentarioForm.invalid || this.postingComment) return;
+    this.comentar();
   }
 
 }

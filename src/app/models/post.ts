@@ -35,13 +35,13 @@ export interface Comment {
     idPost: number;
 
     /** ID del usuario que escribió el comentario */
-    idUser: string;
+    idUser: number;
 
     /** Contenido del comentario */
     content: string;
 
     /** Fecha en que se realizó el comentario (ISO string) */
-    date: string;
+    createdDate: string;
 }
 
 /**
