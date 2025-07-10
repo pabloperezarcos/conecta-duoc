@@ -105,8 +105,8 @@ export class PublicacionesReportadasComponent implements OnInit {
    */
   get postReportsPaginados(): Report[] {
     const filtrados = this.mostrarSoloPendientes
-      ? this.postReports.filter(r => r.status === 1)
-      : this.postReports;
+      ? this.postReports.filter(r => r && r.status === 1 && r.createdDate)
+      : this.postReports.filter(r => r && r.createdDate);
 
     const ordenados = filtrados.sort((a, b) =>
       new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()

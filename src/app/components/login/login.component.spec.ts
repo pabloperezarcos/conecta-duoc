@@ -95,6 +95,17 @@ describe('LoginComponent', () => {
       expect(redirectSpy).toHaveBeenCalledWith(TEST_EMAIL);
     }));
 
+    it('cuando getAllAccounts devuelve vacío, isLoggedIn se establece en false', fakeAsync(() => {
+      msalServiceStub.loginPopup.and.returnValue(of(void 0));
+      msalServiceStub.instance.getAllAccounts.and.returnValue([]); // Simula lista vacía
+
+      component.isLoggedIn = true; // Simula sesión previa
+      component.login();
+      tick();
+
+      expect(component.isLoggedIn).toBeFalse();
+    }));
+
     it('cuando loginPopup falla deja isLoggedIn=false', fakeAsync(() => {
       msalServiceStub.loginPopup.and.returnValue(throwError(() => 'error'));
       component.isLoggedIn = true; // simulamos sesión previa

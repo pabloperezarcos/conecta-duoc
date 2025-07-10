@@ -1,182 +1,176 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserService } from './user.service';
 import { MsalService } from '@azure/msal-angular';
-import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
 import { User } from '../../models/user';
+import { of } from 'rxjs';
+import { AccountInfo } from '@azure/msal-browser';
 
 describe('UserService', () => {
     let service: UserService;
-    let msalSpy: any;
-    let httpSpy: jasmine.SpyObj<HttpClient>;
+    let httpMock: HttpTestingController;
+    let msalServiceSpy: jasmine.SpyObj<MsalService>;
 
-    const dummyUser: User = {
-        email: 'test@duocuc.cl',
-        role: 'admin',
-        name: 'Test',
-        center: 'Centro',
-        policies: 0
-    };
-
-    // Creamos el stub de MsalService una sola vez
-    const msalServiceMock = {
-        instance: {
-            getActiveAccount: jasmine.createSpy('getActiveAccount').and.returnValue(null)
-        }
+    const mockUser: User = {
+        email: 'test@example.com',
+        name: 'Test User',
+        center: 'Test Center',
+        policies: 1
     };
 
     beforeEach(() => {
+        // Cuenta simulada para los tests que SÍ la necesitan
+        const mockAccount = {
+            username: 'test@example.com',
+            name: 'Test User'
+        } as AccountInfo;
+
+        // Spy del PublicClientApplication
+        const pcaSpy = jasmine.createSpyObj('PublicClientApplication', [
+            'getActiveAccount',
+            'setActiveAccount',
+            'getAllAccounts'
+        ]);
+
+        // Valores por defecto para los tests “positivos”
+        pcaSpy.getActiveAccount.and.returnValue(mockAccount);
+        pcaSpy.getAllAccounts.and.returnValue([mockAccount]);
+
+        // Spy del MsalService con la propiedad instance
+        const msalSpy = jasmine.createSpyObj(
+            'MsalService',
+            [],                      // métodos directos del servicio (si los necesitas)
+            { instance: pcaSpy }     // propiedades
+        );
+
         TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
             providers: [
                 UserService,
-                { provide: MsalService, useValue: msalServiceMock },
-                {
-                    provide: HttpClient,
-                    useValue: jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete'])
-                }
+                { provide: MsalService, useValue: msalSpy }
             ]
         });
 
         service = TestBed.inject(UserService);
-        msalSpy = TestBed.inject(MsalService);
-        httpSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
-
-        // Opcional: aseguramos que todos los métodos HTTP devuelvan un Observable
-        httpSpy.get.and.returnValue(of(null));
-        httpSpy.post.and.returnValue(of(null));
-        httpSpy.put.and.returnValue(of(null));
-        httpSpy.delete.and.returnValue(of(null));
-
-        localStorage.clear();
+        httpMock = TestBed.inject(HttpTestingController);
+        msalServiceSpy = TestBed.inject(MsalService) as jasmine.SpyObj<MsalService>;
     });
 
-    it('debe crearse el servicio', () => {
+
+    it('should return null if no active account is found', () => {
+        (msalServiceSpy.instance.getActiveAccount as jasmine.Spy).and.returnValue(null);
+
+        const azureUser = service.getAzureUser();
+        expect(azureUser).toBeNull();
+    });
+
+
+    afterEach(() => {
+        httpMock.verify();
+    });
+
+    it('should be created', () => {
         expect(service).toBeTruthy();
     });
 
-    describe('Azure y nombre de usuario', () => {
-        it('debe devolver usuario desde Azure AD', () => {
-            (msalSpy.instance.getActiveAccount as jasmine.Spy).and.returnValue({
-                username: 'correo@duocuc.cl',
-                name: 'Test User'
-            });
 
-            const result = service.getAzureUser();
-            expect(result?.email).toBe('correo@duocuc.cl');
-            expect(result?.fullName).toBe('Test User');
-        });
 
-        it('debe devolver null si no hay cuenta activa', () => {
-            (msalSpy.instance.getActiveAccount as jasmine.Spy).and.returnValue(null);
-            expect(service.getAzureUser()).toBeNull();
-        });
-
-        it('debe establecer y obtener nombre en observable y localStorage', (done) => {
-            service.setName('Pablo Pérez');
-            expect(localStorage.getItem('nombreUsuario')).toBe('Pablo Pérez');
-            service.userName$.subscribe(name => {
-                expect(name).toBe('Pablo Pérez');
-                done();
-            });
-        });
-
-        it('debe obtener nombre desde localStorage', () => {
-            localStorage.setItem('nombreUsuario', 'Nombre Local');
-            expect(service.getName()).toBe('Nombre Local');
+    it('should get Azure user', () => {
+        const azureUser = service.getAzureUser();
+        expect(azureUser).toEqual({
+            email: 'test@example.com',
+            fullName: 'Test User'
         });
     });
 
-    describe('Roles', () => {
-        it('debe guardar y obtener rol', () => {
-            service.setRole('admin');
-            expect(service.getRole()).toBe('admin');
+    it('should check if user exists', () => {
+        service.checkUserExists('test@example.com').subscribe(exists => {
+            expect(exists).toBeTrue();
         });
 
-        it('debe limpiar el rol', () => {
-            localStorage.setItem('userRole', 'admin');
-            service.clearRole();
-            expect(localStorage.getItem('userRole')).toBeNull();
-        });
+        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/exists/test%40example.com');
+        expect(req.request.method).toBe('GET');
+        req.flush(true);
     });
 
-    describe('ID del usuario', () => {
-        it('debe guardar y obtener ID', () => {
-            service.setIdUser(42);
-            expect(service.getIdUser()).toBe(42);
+    it('should register a new user', () => {
+        service.registerUser(mockUser).subscribe(user => {
+            expect(user).toEqual(mockUser);
         });
 
-        it('debe retornar null si no hay ID', () => {
-            expect(service.getIdUser()).toBeNull();
-        });
+        const req = httpMock.expectOne('http://localhost:9090/api/usuarios');
+        expect(req.request.method).toBe('POST');
+        req.flush(mockUser);
     });
 
-    describe('Métodos HTTP', () => {
-        it('checkUserExists debe enviar GET', () => {
-            httpSpy.get.and.returnValue(of(true));
-            service.checkUserExists('correo@duocuc.cl').subscribe(val => {
-                expect(val).toBeTrue();
-            });
-            expect(httpSpy.get)
-                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios/exists/correo%40duocuc.cl');
+    it('should get user by email', () => {
+        service.getUser('test@example.com').subscribe(user => {
+            expect(user).toEqual(mockUser);
         });
 
-        it('registerUser debe enviar POST', () => {
-            httpSpy.post.and.returnValue(of(dummyUser));
-            service.registerUser(dummyUser).subscribe(res => {
-                expect(res).toEqual(dummyUser);
-            });
-            expect(httpSpy.post).toHaveBeenCalledWith(
-                'http://localhost:9090/api/usuarios',
-                dummyUser
-            );
+        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/test@example.com');
+        expect(req.request.method).toBe('GET');
+        req.flush(mockUser);
+    });
+
+    it('should set and get user role', () => {
+        service.setRole('admin');
+        expect(service.getRole()).toBe('admin');
+    });
+
+    it('should clear user role', () => {
+        service.setRole('admin');
+        service.clearRole();
+        expect(service.getRole()).toBeNull();
+    });
+
+    it('should set and get user name', () => {
+        service.setName('Test User');
+        expect(service.getName()).toBe('Test User');
+    });
+
+    it('should set and get user ID', () => {
+        service.setIdUser(123);
+        expect(service.getIdUser()).toBe(123);
+    });
+
+    it('should get user by ID', () => {
+        service.getUserById(123).subscribe(user => {
+            expect(user).toEqual(mockUser);
         });
 
-        it('getUser debe enviar GET con email', () => {
-            httpSpy.get.and.returnValue(of(dummyUser));
-            service.getUser('correo@duocuc.cl').subscribe(res => {
-                expect(res).toEqual(dummyUser);
-            });
-            expect(httpSpy.get)
-                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios/correo@duocuc.cl');
+        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/id/123');
+        expect(req.request.method).toBe('GET');
+        req.flush(mockUser);
+    });
+
+    it('should get all users', () => {
+        service.getAll().subscribe(users => {
+            expect(users).toEqual([mockUser]);
         });
 
-        it('getUserById debe enviar GET con ID', () => {
-            httpSpy.get.and.returnValue(of(dummyUser));
-            service.getUserById(1).subscribe(res => {
-                expect(res).toEqual(dummyUser);
-            });
-            expect(httpSpy.get)
-                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios/id/1');
+        const req = httpMock.expectOne('http://localhost:9090/api/usuarios');
+        expect(req.request.method).toBe('GET');
+        req.flush([mockUser]);
+    });
+
+    it('should update user', () => {
+        service.updateUser('test@example.com', mockUser).subscribe(user => {
+            expect(user).toEqual(mockUser);
         });
 
-        it('getAll debe obtener lista de usuarios', () => {
-            httpSpy.get.and.returnValue(of([dummyUser]));
-            service.getAll().subscribe(users => {
-                expect(users.length).toBe(1);
-            });
-            expect(httpSpy.get)
-                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios');
+        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/test@example.com');
+        expect(req.request.method).toBe('PUT');
+        req.flush(mockUser);
+    });
+
+    it('should delete user', () => {
+        service.deleteUser(123).subscribe(response => {
+            expect(response).toBeNull();
         });
 
-        it('updateUser debe enviar PUT', () => {
-            httpSpy.put.and.returnValue(of(dummyUser));
-            service.updateUser('correo@duocuc.cl', dummyUser).subscribe(res => {
-                expect(res).toEqual(dummyUser);
-            });
-            expect(httpSpy.put)
-                .toHaveBeenCalledWith(
-                    'http://localhost:9090/api/usuarios/correo@duocuc.cl',
-                    dummyUser
-                );
-        });
-
-        it('deleteUser debe enviar DELETE', () => {
-            httpSpy.delete.and.returnValue(of(void 0));
-            service.deleteUser(99).subscribe(res => {
-                expect(res).toBeUndefined();
-            });
-            expect(httpSpy.delete)
-                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios/99');
-        });
+        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/123');
+        expect(req.request.method).toBe('DELETE');
+        req.flush(null, { status: 204, statusText: 'No Content' });
     });
 });

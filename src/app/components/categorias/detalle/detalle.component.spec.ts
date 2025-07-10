@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { of, throwError, Subject } from 'rxjs';
@@ -59,6 +59,17 @@ class RouterStub {
   events = new Subject<any>();
 }
 
+const routeStub = {
+  snapshot: {
+    paramMap: {
+      get: jasmine.createSpy('get').and.callFake((k: string) =>
+        k === 'id' ? '1' : 'test'
+      )
+    }
+  }
+};
+
+
 class NotificacionServiceStub {
   success = jasmine.createSpy();
   error = jasmine.createSpy();
@@ -91,6 +102,7 @@ describe('DetalleComponent', () => {
   let deleteCommentSpy: jasmine.Spy;
   let setScoreSpy: jasmine.Spy;
 
+
   beforeEach(async () => {
     /* ─── Instanciamos stubs ────────────────────────────────────────────── */
     router = new RouterStub();
@@ -114,13 +126,14 @@ describe('DetalleComponent', () => {
             }
           }
         },
+        { provide: ActivatedRoute, useValue: routeStub },
         { provide: NotificacionService, useClass: NotificacionServiceStub },
         { provide: PostService, useValue: postService },
         { provide: CommentService, useValue: commentService },
         { provide: UserService, useValue: userService },
         { provide: ReportService, useValue: reportService },
         { provide: ScoreService, useValue: scoreService },
-        FormBuilder                     // <-- se inyecta tal cual
+        FormBuilder
       ]
     }).compileComponents();
 
@@ -164,6 +177,41 @@ describe('DetalleComponent', () => {
     expect(component.nombreAutor).toBe('Test User');
     expect(component.loading).toBeFalse();
   });
+
+  it('should navigate to /dashboard if id is not a valid number', () => {
+    resetAllSpies();
+
+    // forzamos que paramMap.get('id') devuelva null
+    (routeStub.snapshot.paramMap.get as jasmine.Spy).and.returnValue(null);
+
+    component.ngOnInit();
+
+    expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
+  });
+
+  it('should set nombreAutor to "Autor desconocido" if getUserById fails',
+    fakeAsync(() => {
+
+      resetAllSpies();
+
+      // -- Post OK
+      postService.getById.and.returnValue(of({
+        idPost: 1, idUser: 1, title: 'Test', content: '',
+        idCategory: 1, createdDate: '', views: 0
+      }));
+
+      // -- getUserById falla SOLO cuando id === 1
+      userService.getUserById.and.callFake((id: number) =>
+        id === 1
+          ? throwError(() => new Error('fail'))
+          : of({ name: 'Comment User' })
+      );
+
+      component.ngOnInit();
+      tick();
+
+      expect(component.nombreAutor).toBe('Autor desconocido');
+    }));
 
   it('should navigate to /dashboard when post not found', () => {
     resetAllSpies();
@@ -269,6 +317,17 @@ describe('DetalleComponent', () => {
     expect(reportPostSpy).not.toHaveBeenCalled();
   });
 
+  it('reportarPublicacion() should return immediately if post is undefined', () => {
+    resetAllSpies();
+    component.post = undefined; // Simula que no hay publicación
+
+    component.reportarPublicacion();
+
+    expect(promptSpy).not.toHaveBeenCalled();
+    expect(reportPostSpy).not.toHaveBeenCalled();
+    expect(alertSpy).not.toHaveBeenCalled();
+  });
+
   it('reportarComentario() reports when there is a reason', () => {
     resetAllSpies();
     const comment = {
@@ -341,5 +400,6 @@ describe('DetalleComponent', () => {
     component.calificar(5);
     expect(setScoreSpy).not.toHaveBeenCalled();
   });
+
 
 });

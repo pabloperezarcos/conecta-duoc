@@ -158,6 +158,28 @@ describe('PublicacionesReportadasComponent', () => {
         expect(component.paginasPosts).toEqual([1, 2]);
     });
 
+    it('should sort reports by createdDate in descending order', () => {
+        const unorderedReports: Report[] = [
+            { idReport: 1, idPost: 1, createdDate: '2024-06-03T12:00:00', status: 1, idUser: 1, reason: 'Prueba 1' },
+            { idReport: 2, idPost: 2, createdDate: '2024-06-01T10:00:00', status: 1, idUser: 2, reason: 'Prueba 2' },
+            { idReport: 3, idPost: 3, createdDate: '2024-06-02T11:00:00', status: 1, idUser: 3, reason: 'Prueba 3' }
+        ];
+
+        component.postReports = unorderedReports;
+        component.mostrarSoloPendientes = false;
+        component.totalPorPagina = 3;
+        component.paginaActualPosts = 1;
+
+        const sortedReports = component.postReportsPaginados;
+
+        console.log('sortedReports:', sortedReports); // Debug obligado
+
+        expect(sortedReports.length).toBe(3);
+        expect(sortedReports[0]?.idReport).toBe(1);
+        expect(sortedReports[1]?.idReport).toBe(3);
+        expect(sortedReports[2]?.idReport).toBe(2);
+    });
+
     it('should calculate totalPaginasComments and paginasComments', () => {
         component.commentReports = Array(12).fill({ status: 1, createdDate: '2024-06-01T10:00:00' }) as any;
         component.mostrarSoloPendientes = true;
@@ -324,4 +346,14 @@ describe('PublicacionesReportadasComponent', () => {
             expect(component.commentRechazados).toBe(1);
         });
     });
+
+    it('should log a warning if post content cannot be loaded', fakeAsync(() => {
+        spyOn(console, 'warn');
+        reportServiceSpy.getAllReports.and.returnValue(of(mockReports));
+        postServiceSpy.getById.and.returnValue(throwError(() => new Error('fail')));
+        fixture.detectChanges();
+        tick();
+        expect(console.warn).toHaveBeenCalledWith('No se pudo cargar el contenido de la publicación #1');
+    }));
+
 });
