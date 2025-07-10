@@ -1,7 +1,7 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { of, throwError, Subject } from 'rxjs';
+import { of, throwError, Subject, defer } from 'rxjs';
 import { DetalleComponent } from './detalle.component';
 
 import { CommentService } from '../../../core/services/comment.service';
@@ -117,15 +117,6 @@ describe('DetalleComponent', () => {
       providers: [
         provideHttpClientTesting(),
         { provide: Router, useValue: router },
-        {
-          provide: ActivatedRoute, useValue: {
-            snapshot: {
-              paramMap: {
-                get: (k: string) => k === 'id' ? '1' : 'test'
-              }
-            }
-          }
-        },
         { provide: ActivatedRoute, useValue: routeStub },
         { provide: NotificacionService, useClass: NotificacionServiceStub },
         { provide: PostService, useValue: postService },
@@ -213,12 +204,52 @@ describe('DetalleComponent', () => {
       expect(component.nombreAutor).toBe('Autor desconocido');
     }));
 
+  it('debe poner nombreAutor = "Autor desconocido" cuando falla getUserById', fakeAsync(() => {
+    resetAllSpies();
+
+    postService.getById.and.returnValue(of({
+      idPost: 1, idUser: 1, title: 'Test', content: '',
+      idCategory: 1, createdDate: '', views: 0
+    }));
+
+    userService.getUserById.and.callFake((id: number) =>
+      id === 1
+        ? defer(() => throwError(() => new Error('fail'))) // error SINCRÓNICO
+        : of({ name: `User ${id}` })
+    );
+
+    // Comentarios vacíos para simplificar
+    commentService.getByPostId.and.returnValue(of([]));
+
+    component.ngOnInit();
+    tick();
+
+    expect(component.nombreAutor).toBe('Autor desconocido');
+  }));
+
+
   it('should navigate to /dashboard when post not found', () => {
     resetAllSpies();
     postService.getById.and.returnValue(throwError(() => new Error('fail')));
     component.ngOnInit();
     expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
   });
+
+  it('debe navegar a /dashboard cuando getById devuelve error (async)', fakeAsync(() => {
+    resetAllSpies();
+
+    // ➜ getById emite el error en la micro-tarea siguiente
+    postService.getById.and.returnValue(
+      defer(() => throwError(() => new Error('fail')))
+    );
+
+    // Dejamos el resto de stubs como están; no se ejecutarán porque salta el error
+    component.ngOnInit();
+
+    tick();                         // drena la micro-tarea del defer()
+
+    expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
+  }));
 
   /* ------------------------------ VOLVER ------------------------------ */
 
@@ -291,6 +322,8 @@ describe('DetalleComponent', () => {
     component.comentar();
     expect(component.postingComment).toBeFalse();
   });
+
+
 
   /* ----------------------------- REPORTES ----------------------------- */
 
