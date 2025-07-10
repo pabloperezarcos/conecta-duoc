@@ -140,6 +140,7 @@ export class CategoriasComponent implements OnInit {
       });
 
       const idUser = this.userService.getIdUser();
+      console.log('idUser:', idUser); // Añade este log para verificar el valor
       if (idUser) {
         this.scoreService.getResumenScores(idUser, this.categoriaId ?? undefined).subscribe(resumenes => {
           resumenes.forEach(r => {

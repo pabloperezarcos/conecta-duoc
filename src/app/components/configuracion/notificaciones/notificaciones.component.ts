@@ -84,9 +84,14 @@ export class NotificacionesComponent implements OnInit {
   crear() {
     if (this.formulario.invalid) return;
 
-    this.notificacionService.crear(this.formulario.value).subscribe(() => {
-      this.formulario.reset();
-      this.cargarNotificaciones();
+    this.notificacionService.crear(this.formulario.value).subscribe({
+      next: () => {
+        this.formulario.reset();
+        this.cargarNotificaciones();
+      },
+      error: (err) => {
+         console.log(err);
+      }
     });
   }
 

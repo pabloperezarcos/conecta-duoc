@@ -1,7 +1,7 @@
 /****************************************************************************************
  * NOTIFICACIONES COMPONENT – FULL COVERAGE SPEC  ✅
  ****************************************************************************************/
-import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, tick } from '@angular/core/testing';
 import { ErrorHandler } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -118,20 +118,27 @@ describe('NotificacionesComponent', () => {
   });
 
   it('crear() maneja el error del servicio sin arrojar excepción', fakeAsync(() => {
+    spyOn(component, 'cargarNotificaciones');
     service.crear.and.returnValue(throwError(() => new Error('fail')));
+
+    const today = new Date().toISOString().split('T')[0];
     component.formulario.setValue({
-      titulo: 'X', mensaje: 'Y',
-      fechaInicio: '2024-01-01', fechaFin: '2024-12-31'
+      titulo: 'X',
+      mensaje: 'Y',
+      fechaInicio: today,
+      fechaFin: today
     });
 
-    // no debería lanzar; simplemente no debe romper la app
     component.crear();
-    flushMicrotasks();
+    tick();
 
     expect(service.crear).toHaveBeenCalled();
-    // el formulario vuelve a pristine porque reset() se ejecuta en el error-handler interno
+    expect(component.cargarNotificaciones).not.toHaveBeenCalled();
     expect(component.formulario.pristine).toBeTrue();
+    expect(component.notificaciones.length).toBe(2);
   }));
+
+
 
 
   /* ---------------------------------------------------------------------- */
