@@ -1,17 +1,67 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { RoleGuard } from './role.guard';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
-import { roleGuard } from './role.guard';
-
-describe('roleGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => roleGuard(...guardParameters));
+describe('RoleGuard', () => {
+  let guard: RoleGuard;
+  let userServiceSpy: jasmine.SpyObj<UserService>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    const userServiceMock = jasmine.createSpyObj('UserService', ['getRole']);
+    const routerMock = jasmine.createSpyObj('Router', ['navigate']);
+
+    TestBed.configureTestingModule({
+      providers: [
+        RoleGuard,
+        { provide: UserService, useValue: userServiceMock },
+        { provide: Router, useValue: routerMock }
+      ]
+    });
+
+    guard = TestBed.inject(RoleGuard);
+    userServiceSpy = TestBed.inject(UserService) as jasmine.SpyObj<UserService>;
+    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+  it('debe permitir el acceso si el rol del usuario está autorizado', () => {
+    const mockRoute = {
+      data: { expectedRoles: ['admin', 'moderador'] }
+    } as unknown as ActivatedRouteSnapshot;
+
+    userServiceSpy.getRole.and.returnValue('admin');
+
+    const result = guard.canActivate(mockRoute);
+
+    expect(result).toBeTrue();
+    expect(routerSpy.navigate).not.toHaveBeenCalled();
+  });
+
+  it('debe denegar el acceso si el rol del usuario no está autorizado', () => {
+    const mockRoute = {
+      data: { expectedRoles: ['admin', 'moderador'] }
+    } as unknown as ActivatedRouteSnapshot;
+
+    userServiceSpy.getRole.and.returnValue('estudiante');
+
+    const result = guard.canActivate(mockRoute);
+
+    expect(result).toBeFalse();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
+  });
+
+  it('debe denegar el acceso si no hay rol', () => {
+    const mockRoute = {
+      data: { expectedRoles: ['admin'] }
+    } as unknown as ActivatedRouteSnapshot;
+
+    userServiceSpy.getRole.and.returnValue(null);
+
+    const result = guard.canActivate(mockRoute);
+
+    expect(result).toBeFalse();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
   });
 });

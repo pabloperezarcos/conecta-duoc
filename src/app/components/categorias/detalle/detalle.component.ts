@@ -37,19 +37,19 @@ export class DetalleComponent implements OnInit {
   private router = inject(Router);
 
   /** Servicio para gestionar publicaciones (crear, obtener, eliminar, etc.) */
-  private postService = inject(PostService);
+  public postService = inject(PostService);
 
   /** Servicio para manejar comentarios asociados a publicaciones */
-  private commentService = inject(CommentService);
+  public commentService = inject(CommentService);
 
   /** Servicio de usuario para acceder a datos del usuario actual y almacenados */
-  private userService = inject(UserService);
+  public userService = inject(UserService);
 
   /** Servicio para reportar publicaciones o comentarios por parte del usuario */
-  private reportService = inject(ReportService);
+  public reportService = inject(ReportService);
 
   /** Servicio que gestiona calificaciones de publicaciones (scores) */
-  private scoreService = inject(ScoreService);
+  public scoreService = inject(ScoreService);
 
   /** Servicio para construir formularios reactivos */
   private fb = inject(FormBuilder);
