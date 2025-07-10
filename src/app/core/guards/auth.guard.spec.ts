@@ -1,53 +1,52 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthGuard } from './auth.guard';
-import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
+import { Router } from '@angular/router';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
-  let routerSpy: jasmine.SpyObj<Router>;
-  let msalServiceSpy: jasmine.SpyObj<MsalService>;
+  let msalServiceStub: any;
+  let routerSpy: any;
 
   beforeEach(() => {
-    const routerMock = jasmine.createSpyObj('Router', ['navigate']);
-    const msalServiceMock = {
-      instance: jasmine.createSpyObj('PublicClientApplication', ['getActiveAccount'])
+    msalServiceStub = {
+      instance: {
+        getActiveAccount: jasmine.createSpy('getActiveAccount')
+      }
+    };
+    routerSpy = {
+      navigate: jasmine.createSpy('navigate')
     };
 
     TestBed.configureTestingModule({
       providers: [
         AuthGuard,
-        { provide: Router, useValue: routerMock },
-        { provide: MsalService, useValue: msalServiceMock }
+        { provide: MsalService, useValue: msalServiceStub },
+        { provide: Router, useValue: routerSpy }
       ]
     });
-
     guard = TestBed.inject(AuthGuard);
-    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-    msalServiceSpy = TestBed.inject(MsalService) as jasmine.SpyObj<MsalService>;
   });
 
-  it('debe permitir el acceso si hay una cuenta activa', () => {
-    spyOn(msalServiceSpy.instance, 'getActiveAccount').and.returnValue({
-      username: 'test@duocuc.cl',
-      homeAccountId: '',
-      environment: '',
-      tenantId: '',
-      localAccountId: ''
-    });
+  it('should be created', () => {
+    expect(guard).toBeTruthy();
+  });
 
-    const result = guard.canActivate();
-
-    expect(result).toBeTrue();
+  it('should allow activation when there is an active account', () => {
+    msalServiceStub.instance.getActiveAccount.and.returnValue({ username: 'user@duoc.cl' });
+    const can = guard.canActivate();
+    expect(can).toBeTrue();
     expect(routerSpy.navigate).not.toHaveBeenCalled();
   });
 
-  it('debe redirigir si no hay una cuenta activa', () => {
-    spyOn(msalServiceSpy.instance, 'getActiveAccount').and.returnValue(null);
-
-    const result = guard.canActivate();
-
-    expect(result).toBeFalse();
+  it('should block activation and redirect when there is no active account', () => {
+    msalServiceStub.instance.getActiveAccount.and.returnValue(null);
+    spyOn(console, 'warn');
+    const can = guard.canActivate();
+    expect(can).toBeFalse();
+    expect(console.warn).toHaveBeenCalledWith(
+      'No se encontró una cuenta activa, redirigiendo al inicio de sesión.'
+    );
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
   });
 });

@@ -9,20 +9,23 @@ describe('UserService', () => {
     let service: UserService;
     let msalSpy: any;
     let httpSpy: jasmine.SpyObj<HttpClient>;
+
     const dummyUser: User = {
-        email: 'test@duocuc.cl', role: 'admin',
-        name: '',
-        center: '',
+        email: 'test@duocuc.cl',
+        role: 'admin',
+        name: 'Test',
+        center: 'Centro',
         policies: 0
     };
 
-    beforeEach(() => {
-        const msalServiceMock = {
-            instance: {
-                getActiveAccount: jasmine.createSpy('getActiveAccount')
-            }
-        };
+    // Creamos el stub de MsalService una sola vez
+    const msalServiceMock = {
+        instance: {
+            getActiveAccount: jasmine.createSpy('getActiveAccount').and.returnValue(null)
+        }
+    };
 
+    beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 UserService,
@@ -37,6 +40,12 @@ describe('UserService', () => {
         service = TestBed.inject(UserService);
         msalSpy = TestBed.inject(MsalService);
         httpSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
+
+        // Opcional: aseguramos que todos los métodos HTTP devuelvan un Observable
+        httpSpy.get.and.returnValue(of(null));
+        httpSpy.post.and.returnValue(of(null));
+        httpSpy.put.and.returnValue(of(null));
+        httpSpy.delete.and.returnValue(of(null));
 
         localStorage.clear();
     });
@@ -107,7 +116,8 @@ describe('UserService', () => {
             service.checkUserExists('correo@duocuc.cl').subscribe(val => {
                 expect(val).toBeTrue();
             });
-            expect(httpSpy.get).toHaveBeenCalledWith('http://localhost:9090/api/usuarios/exists/correo%40duocuc.cl');
+            expect(httpSpy.get)
+                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios/exists/correo%40duocuc.cl');
         });
 
         it('registerUser debe enviar POST', () => {
@@ -115,6 +125,10 @@ describe('UserService', () => {
             service.registerUser(dummyUser).subscribe(res => {
                 expect(res).toEqual(dummyUser);
             });
+            expect(httpSpy.post).toHaveBeenCalledWith(
+                'http://localhost:9090/api/usuarios',
+                dummyUser
+            );
         });
 
         it('getUser debe enviar GET con email', () => {
@@ -122,6 +136,8 @@ describe('UserService', () => {
             service.getUser('correo@duocuc.cl').subscribe(res => {
                 expect(res).toEqual(dummyUser);
             });
+            expect(httpSpy.get)
+                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios/correo@duocuc.cl');
         });
 
         it('getUserById debe enviar GET con ID', () => {
@@ -129,6 +145,8 @@ describe('UserService', () => {
             service.getUserById(1).subscribe(res => {
                 expect(res).toEqual(dummyUser);
             });
+            expect(httpSpy.get)
+                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios/id/1');
         });
 
         it('getAll debe obtener lista de usuarios', () => {
@@ -136,6 +154,8 @@ describe('UserService', () => {
             service.getAll().subscribe(users => {
                 expect(users.length).toBe(1);
             });
+            expect(httpSpy.get)
+                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios');
         });
 
         it('updateUser debe enviar PUT', () => {
@@ -143,6 +163,11 @@ describe('UserService', () => {
             service.updateUser('correo@duocuc.cl', dummyUser).subscribe(res => {
                 expect(res).toEqual(dummyUser);
             });
+            expect(httpSpy.put)
+                .toHaveBeenCalledWith(
+                    'http://localhost:9090/api/usuarios/correo@duocuc.cl',
+                    dummyUser
+                );
         });
 
         it('deleteUser debe enviar DELETE', () => {
@@ -150,6 +175,8 @@ describe('UserService', () => {
             service.deleteUser(99).subscribe(res => {
                 expect(res).toBeUndefined();
             });
+            expect(httpSpy.delete)
+                .toHaveBeenCalledWith('http://localhost:9090/api/usuarios/99');
         });
     });
 });

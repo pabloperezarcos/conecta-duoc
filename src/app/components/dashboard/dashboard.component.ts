@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../core/services/user.service';
 import { RouterModule } from '@angular/router';
+
 import { PostCategoryService } from '../../core/services/post-category.service';
 import { PostCategory } from '../../models/postCategory';
 import { NotificacionBannerComponent } from '../notificacion-banner/notificacion-banner.component';

@@ -23,6 +23,10 @@ describe('CategoriasComponent', () => {
   let fixture: ComponentFixture<CategoriasComponent>;
   let fb: FormBuilder;
 
+  const notificacionStub = {
+    getVigentes: jasmine.createSpy('getVigentes').and.returnValue(of([]))
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CategoriasComponent, ReactiveFormsModule],
@@ -38,7 +42,7 @@ describe('CategoriasComponent', () => {
         { provide: UserService, useClass: DummyService },
         { provide: ReportService, useClass: DummyService },
         { provide: ScoreService, useClass: DummyService },
-        { provide: NotificacionService, useClass: DummyNotificacionService },
+        { provide: NotificacionService, useValue: notificacionStub },
         {
           provide: ActivatedRoute,
           useValue: {
