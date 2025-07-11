@@ -12,7 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class NotificacionService {
   /** URL base del API para notificaciones globales */
-  private apiUrl = 'http://localhost:9090/api/notificaciones';
+  //private apiUrl = 'http://localhost:9090/api/notificaciones';
+  private apiUrl = 'https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/notificaciones';
 
   /**
    * Constructor del servicio.

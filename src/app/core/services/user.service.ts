@@ -14,8 +14,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class UserService {
   /** URL base del API de usuarios */
-  private apiUrl = 'http://localhost:9090/api/usuarios';
-  //private apiUrl = 'https://yr3rp1l7fd.execute-api.us-east-1.amazonaws.com/api/usuarios';
+  //private apiUrl = 'http://localhost:9090/api/usuarios';
+  private apiUrl = 'https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios';
 
   /** Servicio MSAL para autenticación con Azure Active Directory */
   private msalService = inject(MsalService);

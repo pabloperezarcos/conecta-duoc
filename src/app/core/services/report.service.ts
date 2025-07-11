@@ -13,7 +13,8 @@ import { UserService } from './user.service';
 })
 export class ReportService {
   /** URL base del API para reportes */
-  private apiUrl = 'http://localhost:9090/api/report';
+  //private apiUrl = 'http://localhost:9090/api/report';
+  private apiUrl = 'https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/report';
 
   /** Cliente HTTP para realizar peticiones al backend */
   private http = inject(HttpClient);

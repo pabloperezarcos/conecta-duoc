@@ -12,7 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class CommentService {
   /** URL base del API para comentarios */
-  private apiUrl = 'http://localhost:9090/api/comment';
+  //private apiUrl = 'http://localhost:9090/api/comment';
+  private apiUrl = 'https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/comment';
 
   /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http = inject(HttpClient);
