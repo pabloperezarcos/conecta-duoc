@@ -88,7 +88,7 @@ describe('UserService', () => {
             expect(exists).toBeTrue();
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/exists/test%40example.com');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/exists/test%40example.com');
         expect(req.request.method).toBe('GET');
         req.flush(true);
     });
@@ -98,7 +98,7 @@ describe('UserService', () => {
             expect(user).toEqual(mockUser);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/usuarios');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios');
         expect(req.request.method).toBe('POST');
         req.flush(mockUser);
     });
@@ -108,7 +108,7 @@ describe('UserService', () => {
             expect(user).toEqual(mockUser);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/test@example.com');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/test@example.com');
         expect(req.request.method).toBe('GET');
         req.flush(mockUser);
     });
@@ -139,7 +139,7 @@ describe('UserService', () => {
             expect(user).toEqual(mockUser);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/id/123');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/id/123');
         expect(req.request.method).toBe('GET');
         req.flush(mockUser);
     });
@@ -149,7 +149,7 @@ describe('UserService', () => {
             expect(users).toEqual([mockUser]);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/usuarios');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios');
         expect(req.request.method).toBe('GET');
         req.flush([mockUser]);
     });
@@ -159,7 +159,7 @@ describe('UserService', () => {
             expect(user).toEqual(mockUser);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/test@example.com');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/test@example.com');
         expect(req.request.method).toBe('PUT');
         req.flush(mockUser);
     });
@@ -169,7 +169,7 @@ describe('UserService', () => {
             expect(response).toBeNull();
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/usuarios/123');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/123');
         expect(req.request.method).toBe('DELETE');
         req.flush(null, { status: 204, statusText: 'No Content' });
     });

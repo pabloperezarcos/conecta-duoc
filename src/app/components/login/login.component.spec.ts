@@ -1,189 +1,232 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { LoginComponent } from './login.component';
-import { MsalService } from '@azure/msal-angular';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { UserService } from '../../core/services/user.service';
+import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+
+import { MsalService } from '@azure/msal-angular';
+
+import { LoginComponent } from './login.component';
+import { UserService } from '../../core/services/user.service';
+
+/* ------------------------------------------------------------------
+ * 🔧 Mocks
+ * ------------------------------------------------------------------*/
+interface UserResp { exists: boolean; idUser?: number; }
+
+class MockUserService {
+  private _checkResp: UserResp = { exists: false };
+  private _user: any = { idUser: 1, name: 'Test', role: 'student', policies: 0 };
+  private _checkErr = false;
+  clearRole = jasmine.createSpy('clearRole');
+  setRole = jasmine.createSpy('setRole');
+  setName = jasmine.createSpy('setName');
+  setIdUser = jasmine.createSpy('setIdUser');
+
+  checkUserExistsWithId = jasmine.createSpy('checkUserExistsWithId').and.callFake(() => {
+    return this._checkErr ? throwError(() => new Error('check error')) : of(this._checkResp);
+  });
+
+  getUserById = jasmine.createSpy('getUserById').and.callFake(() => of(this._user));
+
+  /* helpers */
+  setScenario({ checkResp = this._checkResp, user = this._user, checkErr = false }: { checkResp?: UserResp; user?: any; checkErr?: boolean }) {
+    this._checkResp = checkResp;
+    this._user = user;
+    this._checkErr = checkErr;
+  }
+}
+
+class MockMsalService {
+  /* internal account store */
+  private _account: any = null;
+
+  /* MSAL instance API used by component */
+  instance = {
+    getActiveAccount: () => this._account,
+    setActiveAccount: (acc: any) => (this._account = acc),
+    getAllAccounts: () => (this._account ? [this._account] : []),
+  } as any;
+
+  /* Observable factories controllable per test */
+  private _loginObservable = of(null);
+  private _logoutObservable = of(null);
+
+  loginPopup = jasmine.createSpy('loginPopup').and.callFake(() => this._loginObservable);
+  logoutPopup = jasmine.createSpy('logoutPopup').and.callFake(() => this._logoutObservable);
+
+  /* helpers to configure behaviour */
+  setActiveAccount(acc: any) { this._account = acc; }
+  setLoginSuccess(acc?: any) {
+    if (acc) this._account = acc;
+    this._loginObservable = of(null);
+  }
+  setLoginError() {
+    this._loginObservable = throwError(() => new Error('login fail'));
+  }
+  setLogoutSuccess() {
+    this._logoutObservable = of(null);
+  }
+  setLogoutError() {
+    this._logoutObservable = throwError(() => new Error('logout fail'));
+  }
+}
+
+/* ------------------------------------------------------------------
+ * 🧪 Test Suite
+ * ------------------------------------------------------------------*/
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-
-  // stubs
-  let msalServiceStub: any;
-  let userServiceStub: any;
-  let routerSpy: any;
-
-  const TEST_EMAIL = 'test@duoc.cl';
-  const MOCK_ACCOUNT = { username: TEST_EMAIL };
+  let msal: MockMsalService;
+  let userService: MockUserService;
+  let router: Router;
 
   beforeEach(async () => {
-    // MsalService stub
-    msalServiceStub = {
-      instance: {
-        getActiveAccount: jasmine.createSpy('getActiveAccount').and.returnValue(null),
-        getAllAccounts: jasmine.createSpy('getAllAccounts').and.returnValue([]),
-        setActiveAccount: jasmine.createSpy('setActiveAccount'),
-      },
-      loginPopup: jasmine.createSpy('loginPopup').and.returnValue(of(void 0)),
-      logoutPopup: jasmine.createSpy('logoutPopup').and.returnValue(of(void 0)),
-    };
-
-    // UserService stub
-    userServiceStub = {
-      checkUserExists: jasmine.createSpy('checkUserExists').and.returnValue(of(false)),
-      getUser: jasmine.createSpy('getUser').and.returnValue(of({})),
-      setRole: jasmine.createSpy('setRole'),
-      setName: jasmine.createSpy('setName'),
-      setIdUser: jasmine.createSpy('setIdUser'),
-      clearRole: jasmine.createSpy('clearRole'),
-    };
-
-    // Router spy
-    routerSpy = { navigate: jasmine.createSpy('navigate') };
-
     await TestBed.configureTestingModule({
-      imports: [LoginComponent],
+      imports: [RouterTestingModule, LoginComponent],
       providers: [
-        { provide: MsalService, useValue: msalServiceStub },
-        { provide: UserService, useValue: userServiceStub },
-        { provide: Router, useValue: routerSpy },
+        { provide: MsalService, useClass: MockMsalService },
+        { provide: UserService, useClass: MockUserService },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
+    component = TestBed.createComponent(LoginComponent).componentInstance;
+    msal = TestBed.inject(MsalService) as unknown as MockMsalService;
+    userService = TestBed.inject(UserService) as unknown as MockUserService;
+    router = TestBed.inject(Router);
+    spyOn(router, 'navigate');
+    spyOn(localStorage, 'setItem');
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-    expect(component.title).toBe('Conecta-DUOC');
+  /* --------------------------------------------------------------
+   * 💤 ngOnInit - no active account
+   * --------------------------------------------------------------*/
+  it('should stay logged out when no active account', () => {
+    msal.setActiveAccount(null);
+    component.ngOnInit();
     expect(component.isLoggedIn).toBeFalse();
+    expect(router.navigate).not.toHaveBeenCalled();
   });
 
-  describe('ngOnInit()', () => {
-    it('sin cuenta activa deja isLoggedIn=false y no redirige', () => {
-      msalServiceStub.instance.getActiveAccount.and.returnValue(null);
-      const spy = spyOn<any>(component, 'checkAndRedirect');
-      component.ngOnInit();
-      expect(component.isLoggedIn).toBeFalse();
-      expect(spy).not.toHaveBeenCalled();
-    });
+  /* --------------------------------------------------------------
+   * ✅ ngOnInit - account, user exists, policies=1 -> dashboard
+   * --------------------------------------------------------------*/
+  it('should redirect to dashboard when user accepted policies', fakeAsync(() => {
+    msal.setActiveAccount({ username: 'a@b.com' });
+    userService.setScenario({ checkResp: { exists: true, idUser: 7 }, user: { idUser: 7, name: 'Ana', role: 'student', policies: 1 } });
 
-    it('con cuenta activa marca isLoggedIn=true y llama a checkAndRedirect', () => {
-      msalServiceStub.instance.getActiveAccount.and.returnValue(MOCK_ACCOUNT);
-      const spy = spyOn<any>(component, 'checkAndRedirect');
-      component.ngOnInit();
-      expect(component.isLoggedIn).toBeTrue();
-      expect(spy).toHaveBeenCalledWith(TEST_EMAIL);
-    });
-  });
+    component.ngOnInit();
+    tick();
 
-  describe('login()', () => {
-    it('cuando loginPopup emite correcto activa cuenta y redirige', fakeAsync(() => {
-      // Preparo stub para flujo feliz
-      msalServiceStub.loginPopup.and.returnValue(of(void 0));
-      msalServiceStub.instance.getAllAccounts.and.returnValue([MOCK_ACCOUNT]);
+    expect(router.navigate).toHaveBeenCalledOnceWith(['/dashboard']);
+    expect(localStorage.setItem).toHaveBeenCalledWith('conectaReglasAceptadas', 'true');
+  }));
 
-      const redirectSpy = spyOn<any>(component, 'checkAndRedirect');
-      component.login();
-      tick(); // por si hay microtasks (aunque of() es síncrono)
-      expect(msalServiceStub.instance.setActiveAccount).toHaveBeenCalledWith(MOCK_ACCOUNT);
-      expect(component.isLoggedIn).toBeTrue();
-      expect(redirectSpy).toHaveBeenCalledWith(TEST_EMAIL);
-    }));
+  /* --------------------------------------------------------------
+   * 📜 policies=0 -> reglas-de-la-comunidad
+   * --------------------------------------------------------------*/
+  it('should redirect to community rules when policies not accepted', fakeAsync(() => {
+    msal.setActiveAccount({ username: 'x@y.com' });
+    userService.setScenario({ checkResp: { exists: true, idUser: 8 }, user: { idUser: 8, name: 'Bob', role: 'student', policies: 0 } });
 
-    it('cuando getAllAccounts devuelve vacío, isLoggedIn se establece en false', fakeAsync(() => {
-      msalServiceStub.loginPopup.and.returnValue(of(void 0));
-      msalServiceStub.instance.getAllAccounts.and.returnValue([]); // Simula lista vacía
+    component.ngOnInit();
+    tick();
 
-      component.isLoggedIn = true; // Simula sesión previa
-      component.login();
-      tick();
+    expect(router.navigate).toHaveBeenCalledOnceWith(['/reglas-de-la-comunidad']);
+    expect(localStorage.setItem).toHaveBeenCalledWith('conectaReglasAceptadas', 'false');
+  }));
 
-      expect(component.isLoggedIn).toBeFalse();
-    }));
+  /* --------------------------------------------------------------
+   * 🆕 usuario nuevo -> registro
+   * --------------------------------------------------------------*/
+  it('should redirect to registro when user does not exist', fakeAsync(() => {
+    msal.setActiveAccount({ username: 'new@user.com' });
+    userService.setScenario({ checkResp: { exists: false } });
 
-    it('cuando loginPopup falla deja isLoggedIn=false', fakeAsync(() => {
-      msalServiceStub.loginPopup.and.returnValue(throwError(() => 'error'));
-      component.isLoggedIn = true; // simulamos sesión previa
-      component.login();
-      tick();
-      expect(component.isLoggedIn).toBeFalse();
-    }));
-  });
+    component.ngOnInit();
+    tick();
 
-  describe('logout()', () => {
-    it('logoutPopup exitoso limpia rol y navega a "/"', fakeAsync(() => {
-      msalServiceStub.logoutPopup.and.returnValue(of(void 0));
-      component.isLoggedIn = true;
-      component.logout();
-      tick();
-      expect(component.isLoggedIn).toBeFalse();
-      expect(userServiceStub.clearRole).toHaveBeenCalled();
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
-    }));
+    expect(router.navigate).toHaveBeenCalledOnceWith(['/registro']);
+  }));
 
-    it('logoutPopup error no cambia isLoggedIn ni navega', fakeAsync(() => {
-      msalServiceStub.logoutPopup.and.returnValue(throwError(() => 'fail'));
-      component.isLoggedIn = true;
-      component.logout();
-      tick();
-      expect(component.isLoggedIn).toBeTrue();
-      expect(userServiceStub.clearRole).not.toHaveBeenCalled();
-      expect(routerSpy.navigate).not.toHaveBeenCalled();
-    }));
-  });
+  /* --------------------------------------------------------------
+   * 🛑 Error al validar usuario -> llama logout
+   * --------------------------------------------------------------*/
+  it('should call logout when checkUserExists fails', fakeAsync(() => {
+    msal.setActiveAccount({ username: 'err@user.com' });
+    userService.setScenario({ checkErr: true });
+    spyOn(component as any, 'logout');
 
-  describe('checkAndRedirect()', () => {
-    it('usuario existe con policies=1 → guarda datos y navega a "/dashboard"', () => {
-      userServiceStub.checkUserExists.and.returnValue(of(true));
-      const mockUser = { name: 'N', role: 'admin', idUser: 42, policies: 1 };
-      userServiceStub.getUser.and.returnValue(of(mockUser));
+    component.ngOnInit();
+    tick();
 
-      (component as any).checkAndRedirect(TEST_EMAIL);
+    expect((component as any).logout).toHaveBeenCalled();
+  }));
 
-      expect(userServiceStub.setRole).toHaveBeenCalledWith('admin');
-      expect(userServiceStub.setName).toHaveBeenCalledWith('N');
-      expect(userServiceStub.setIdUser).toHaveBeenCalledWith(42);
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/dashboard']);
-    });
+  /* --------------------------------------------------------------
+   * 🙋‍♂️ login() éxito con account
+   * --------------------------------------------------------------*/
+  it('should set logged in and call checkAndRedirect after successful login', fakeAsync(() => {
+    // Configure login success to set account
+    msal.setLoginSuccess({ username: 'login@success.com' });
+    spyOn<any>(component as any, 'checkAndRedirect');
 
-    it('usuario existe con policies=0 → navega a "/reglas-de-la-comunidad"', () => {
-      userServiceStub.checkUserExists.and.returnValue(of(true));
-      const mockUser = { name: 'N', role: 'admin', idUser: 7, policies: 0 };
-      userServiceStub.getUser.and.returnValue(of(mockUser));
+    component.login();
+    tick();
 
-      (component as any).checkAndRedirect(TEST_EMAIL);
+    expect(component.isLoggedIn).toBeTrue();
+    expect(msal.loginPopup).toHaveBeenCalled();
+    expect((component as any).checkAndRedirect).toHaveBeenCalledWith('login@success.com');
+  }));
 
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/reglas-de-la-comunidad']);
-    });
+  /* --------------------------------------------------------------
+   * 🙅‍♀️ login() éxito sin account -> isLoggedIn false
+   * --------------------------------------------------------------*/
+  it('should reset logged flag when login returns no account', fakeAsync(() => {
+    msal.setLoginSuccess(); // no account set
 
-    it('usuario NO existe → navega a "/registro"', () => {
-      userServiceStub.checkUserExists.and.returnValue(of(false));
+    component.login();
+    tick();
 
-      (component as any).checkAndRedirect(TEST_EMAIL);
+    expect(component.isLoggedIn).toBeFalse();
+  }));
 
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/registro']);
-    });
+  /* --------------------------------------------------------------
+   * ❌ login() error
+   * --------------------------------------------------------------*/
+  it('should keep logged out when login fails', fakeAsync(() => {
+    msal.setLoginError();
+    component.login();
+    tick();
 
-    it('error en checkUserExists llama a logout()', () => {
-      userServiceStub.checkUserExists.and.returnValue(throwError(() => 'fail'));
-      const logoutSpy = spyOn(component, 'logout');
-      (component as any).checkAndRedirect(TEST_EMAIL);
-      expect(logoutSpy).toHaveBeenCalled();
-    });
+    expect(component.isLoggedIn).toBeFalse();
+  }));
 
-    it('error en getUser no navega ni lanza error', () => {
-      userServiceStub.checkUserExists.and.returnValue(of(true));
-      userServiceStub.getUser.and.returnValue(throwError(() => 'fail'));
-      (component as any).checkAndRedirect(TEST_EMAIL);
-      // ni setRole, ni setName, ni navigate
-      expect(userServiceStub.setRole).not.toHaveBeenCalled();
-      expect(userServiceStub.setName).not.toHaveBeenCalled();
-      expect(routerSpy.navigate).not.toHaveBeenCalled();
-    });
-  });
+  /* --------------------------------------------------------------
+   * 🔓 logout() success
+   * --------------------------------------------------------------*/
+  it('should clear role and redirect root on logout success', fakeAsync(() => {
+    component.isLoggedIn = true;
+    msal.setLogoutSuccess();
+
+    component.logout();
+    tick();
+
+    expect(component.isLoggedIn).toBeFalse();
+    expect(userService.clearRole).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalledOnceWith(['/']);
+  }));
+
+  /* --------------------------------------------------------------
+   * 🔒 logout() error
+   * --------------------------------------------------------------*/
+  it('should keep logged state when logout fails', fakeAsync(() => {
+    component.isLoggedIn = true;
+    msal.setLogoutError();
+
+    component.logout();
+    tick();
+
+    expect(component.isLoggedIn).toBeTrue();
+  }));
 });

@@ -35,7 +35,7 @@ describe('CommentService', () => {
       expect(comments).toEqual(dummyComments);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/comment/post/1');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/comment/post/1');
     expect(req.request.method).toBe('GET');
     req.flush(dummyComments);
   });
@@ -55,7 +55,7 @@ describe('CommentService', () => {
       expect(comment).toEqual(createdComment);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/comment');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/comment');
     expect(req.request.method).toBe('POST');
     req.flush(createdComment);
   });
@@ -65,7 +65,7 @@ describe('CommentService', () => {
       expect(response).toBeNull();
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/comment/1');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/comment/1');
     expect(req.request.method).toBe('DELETE');
     req.flush(null, { status: 204, statusText: 'No Content' });
   });
@@ -84,7 +84,7 @@ describe('CommentService', () => {
       expect(comment).toEqual(updatedComment);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/comment/1');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/comment/1');
     expect(req.request.method).toBe('PUT');
     req.flush(updatedComment);
   });

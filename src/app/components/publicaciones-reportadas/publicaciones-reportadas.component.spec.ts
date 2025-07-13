@@ -172,7 +172,7 @@ describe('PublicacionesReportadasComponent', () => {
 
         const sortedReports = component.postReportsPaginados;
 
-        console.log('sortedReports:', sortedReports); // Debug obligado
+        //console.log('sortedReports:', sortedReports); // Debug obligado
 
         expect(sortedReports.length).toBe(3);
         expect(sortedReports[0]?.idReport).toBe(1);

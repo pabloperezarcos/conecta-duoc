@@ -93,34 +93,35 @@ export class LoginComponent implements OnInit {
    * @param email Correo del usuario autenticado por MSAL.
    */
   private checkAndRedirect(email: string) {
-    this.userService.checkUserExists(email).subscribe({
-      next: (exists) => {
-        //console.log('Existe usuario?', exists);
+    this.userService.checkUserExistsWithId(email).subscribe({
+      next: (response) => {
+        //console.log('Existe usuario?', response.exists, 'ID:', response.idUser);
 
-        if (exists) {
-          this.userService.getUser(email).subscribe({
+        if (response.exists && response.idUser !== undefined) {
+          this.userService.getUserById(response.idUser).subscribe({
             next: (user: User) => {
               this.userService.setRole(user.role || 'student');
               this.userService.setName(user.name);
+              this.userService.setIdUser(user.idUser!);
 
-              if (user.idUser !== undefined && user.idUser !== null) {
-                this.userService.setIdUser(user.idUser);
-              }
+              //console.log(user);
+              //console.log('Tipo de policies:', typeof user.policies, 'Valor:', user.policies);
 
               if (user.policies === 1) {
+                localStorage.setItem('conectaReglasAceptadas', 'true');
                 this.router.navigate(['/dashboard']);
               } else {
+                localStorage.setItem('conectaReglasAceptadas', 'false');
                 this.router.navigate(['/reglas-de-la-comunidad']);
               }
+
             },
             error: err => {
-              console.error('Error al traer usuario:', err);
+              console.error('Error al traer usuario por ID:', err);
             }
           });
-        }
-
-        else {
-          console.log('Redirijo a registro');
+        } else {
+          //console.log('Redirijo a registro');
           this.router.navigate(['/registro']);
         }
       },
@@ -130,5 +131,6 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
 
 }

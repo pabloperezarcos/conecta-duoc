@@ -13,7 +13,8 @@ import { Score } from '../../models/post';
 })
 export class ScoreService {
   /** URL base del API de puntuaciones */
-  private apiUrl = 'http://localhost:9090/api/score';
+  //private apiUrl = 'http://localhost:9090/api/score';
+  private apiUrl = 'https://8d20h7wiag.execute-api.us-east-2.amazonaws.com/api/score';
 
   /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http = inject(HttpClient);

@@ -36,7 +36,7 @@ describe('PostService', () => {
       expect(posts).toEqual(dummyPosts);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post');
     expect(req.request.method).toBe('GET');
     req.flush(dummyPosts);
   });
@@ -51,7 +51,7 @@ describe('PostService', () => {
       expect(posts).toEqual(dummyPosts);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post?idCategory=1');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post?idCategory=1');
     expect(req.request.method).toBe('GET');
     req.flush(dummyPosts);
   });
@@ -63,7 +63,7 @@ describe('PostService', () => {
       expect(post).toEqual(dummyPost);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post/1');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post/1');
     expect(req.request.method).toBe('GET');
     req.flush(dummyPost);
   });
@@ -82,7 +82,7 @@ describe('PostService', () => {
       expect(post).toEqual(createdPost);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post');
     expect(req.request.method).toBe('POST');
     req.flush(createdPost);
   });
@@ -92,7 +92,7 @@ describe('PostService', () => {
       expect(response).toBeNull();
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post/1');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post/1');
     expect(req.request.method).toBe('DELETE');
     req.flush(null, { status: 204, statusText: 'No Content' });
   });
@@ -102,7 +102,7 @@ describe('PostService', () => {
       expect(response).toBeNull();
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post/1/view');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post/1/view');
     expect(req.request.method).toBe('PUT');
     req.flush(null, { status: 204, statusText: 'No Content' });
   });

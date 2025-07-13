@@ -100,7 +100,7 @@ export class CategoriasComponent implements OnInit {
     });
 
     this.slug = this.route.snapshot.paramMap.get('slug') || '';
-    console.log('Slug cargado:', this.slug);
+    //console.log('Slug cargado:', this.slug);
 
     this.postCategoryService.getAll().subscribe(categories => {
       const categoria = categories.find(cat =>
@@ -140,7 +140,7 @@ export class CategoriasComponent implements OnInit {
       });
 
       const idUser = this.userService.getIdUser();
-      console.log('idUser:', idUser); // Añade este log para verificar el valor
+      //console.log('idUser:', idUser);
       if (idUser) {
         this.scoreService.getResumenScores(idUser, this.categoriaId ?? undefined).subscribe(resumenes => {
           resumenes.forEach(r => {

@@ -1,139 +1,176 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { DashboardComponent } from './dashboard.component';
-import { PostCategoryService } from '../../core/services/post-category.service';
-import { UserService } from '../../core/services/user.service';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component } from '@angular/core';
-import { NotificacionService } from '../../core/services/notificacion.service';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { of, throwError } from 'rxjs';
 
-class DummyUserService {
-  getAzureUser() { return null; }
-  getUser() { return of({ name: 'Test User', role: 'student', idUser: 1 }); }
-  setName() { }
-  setRole() { }
-  setIdUser() { }
+import { DashboardComponent } from './dashboard.component';
+import { UserService } from '../../core/services/user.service';
+import { PostCategoryService } from '../../core/services/post-category.service';
+import { MsalService } from '@azure/msal-angular';
+
+/* ------------------------------------------------------------------
+ * 🪄 Stub del banner (para evitar dependencias complejas)
+ * ------------------------------------------------------------------*/
+@Component({ selector: 'app-notificacion-banner', standalone: true, template: '' })
+class StubNotificacionBannerComponent { }
+
+/* ------------------------------------------------------------------
+ * 🔧 Mocks
+ * ------------------------------------------------------------------*/
+interface CatBase { idCategory: number; name: string; status: boolean; }
+
+class MockPostCategoryService {
+  private _cats: CatBase[] = [];
+  getAll = jasmine.createSpy('getAll').and.callFake(() => of(this._cats));
+  setCats(cats: CatBase[]) { this._cats = cats; }
 }
 
-class PostCategoryServiceStub {
-  getAll = jasmine.createSpy().and.returnValue(of([]));
+class MockUserService {
+  private _idUser: number | null = 1;
+  private _user: any = { idUser: 1, name: 'Tester', role: 'student' };
+  private _error = false;
+
+  // Methods used by component
+  getIdUser = jasmine.createSpy('getIdUser').and.callFake(() => this._idUser);
+  getUserById = jasmine.createSpy('getUserById').and.callFake(() => {
+    return this._error ? throwError(() => new Error('fail')) : of(this._user);
+  });
+  setName = jasmine.createSpy('setName');
+  setRole = jasmine.createSpy('setRole');
+  setIdUser = jasmine.createSpy('setIdUser');
+
+  // Helpers to change scenario
+  setScenario({ idUser = 1, user = this._user, error = false }: { idUser?: number | null; user?: any; error?: boolean }) {
+    this._idUser = idUser;
+    this._user = user;
+    this._error = error;
+  }
 }
 
-@Component({
-  selector: 'app-notificacion-banner',
-  template: ''
-})
-class MockNotificacionBannerComponent { }
+/* ------------------------------------------------------------------
+ * 🧪 Test Suite
+ * ------------------------------------------------------------------*/
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
-  let postCategoryService: PostCategoryServiceStub;
+  let userService: MockUserService;
+  let catService: MockPostCategoryService;
 
-  const notificacionStub = {
-    getVigentes: jasmine.createSpy('getVigentes').and.returnValue(of([]))
-  };
+  const defaultCats = [
+    { idCategory: 1, name: 'Ayudantias Académicas', status: true },
+    { idCategory: 2, name: 'Panel de Configuración', status: true },
+    { idCategory: 3, name: 'Reportes', status: true },
+    { idCategory: 4, name: 'Inactivo', status: false },
+    { idCategory: 5, name: 'Árbol de Prueba', status: true },
+  ];
 
   beforeEach(async () => {
-    postCategoryService = new PostCategoryServiceStub();
     await TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
+        CommonModule,
+        RouterModule,
         DashboardComponent,
-        MockNotificacionBannerComponent
+        StubNotificacionBannerComponent,
       ],
       providers: [
-        provideHttpClientTesting(),
-        { provide: PostCategoryService, useValue: postCategoryService },
-        { provide: UserService, useClass: DummyUserService },
-        { provide: NotificacionService, useValue: notificacionStub }
-      ]
+        { provide: PostCategoryService, useClass: MockPostCategoryService },
+        { provide: UserService, useClass: MockUserService },
+        { provide: MsalService, useValue: {} }, // requerido por UserService real
+      ],
     })
+      .overrideComponent(DashboardComponent, {
+        set: {
+          imports: [CommonModule, RouterModule, StubNotificacionBannerComponent],
+        },
+      })
       .compileComponents();
 
-    fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = TestBed.createComponent(DashboardComponent).componentInstance;
+    userService = TestBed.inject(UserService) as unknown as MockUserService;
+    catService = TestBed.inject(PostCategoryService) as unknown as MockPostCategoryService;
+
+    // Datos por defecto
+    catService.setCats(defaultCats);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  /* --------------------------------------------------------------
+   * 👩‍🎓 1. Flujo para estudiante: excluye adminOnly
+   * --------------------------------------------------------------*/
+  it('should load student dashboard excluding admin-only categories', fakeAsync(() => {
+    userService.setScenario({ user: { idUser: 1, name: 'Ana', role: 'student' } });
 
-  it('should slugify text correctly', () => {
-    const slug = (component as any).slugify('Árbol de Navidad');
-    expect(slug).toBe('arbol-de-navidad');
-  });
-
-  it('should set username and role to fallback values if no azureUser', () => {
-    spyOn(component['userService'], 'getAzureUser').and.returnValue(null);
-    const cargarCategoriasSpy = spyOn<any>(component, 'cargarCategorias');
     component.ngOnInit();
-    expect(component.username).toBe('Desconocido');
-    expect(component.role).toBe('student');
-    expect(cargarCategoriasSpy).toHaveBeenCalled();
-  });
-
-  it('should set username and role from userService if azureUser exists', () => {
-    const azureUser = { email: 'test@duoc.cl', fullName: 'Test User' };
-    spyOn(component['userService'], 'getAzureUser').and.returnValue(azureUser);
-    spyOn(component['userService'], 'getUser').and.returnValue(of({
-      name: 'Nombre Real',
-      role: 'admin',
-      idUser: 123,
-      email: 'test@duoc.cl',
-      center: '',
-      policies: 0
-    }));
-    const setNameSpy = spyOn(component['userService'], 'setName');
-    const setRoleSpy = spyOn(component['userService'], 'setRole');
-    const setIdUserSpy = spyOn(component['userService'], 'setIdUser');
-    const cargarCategoriasSpy = spyOn<any>(component, 'cargarCategorias');
-    component.ngOnInit();
-    expect(setNameSpy).toHaveBeenCalledWith('Nombre Real');
-    expect(setRoleSpy).toHaveBeenCalledWith('admin');
-    expect(setIdUserSpy).toHaveBeenCalledWith(123);
-    expect(component.username).toBe('Nombre Real');
-    expect(component.role).toBe('admin');
-    expect(cargarCategoriasSpy).toHaveBeenCalled();
-  });
-
-  it('should load categories filtering by role', () => {
-    const categorias = [
-      { idCategory: 1, name: 'Ayudantías Académicas', description: '', status: 1 },
-      { idCategory: 2, name: 'Reportes', description: '', status: 1 },
-      { idCategory: 3, name: 'Inactiva', description: '', status: 0 }
-    ];
-    postCategoryService.getAll.and.returnValue(of(categorias));
-    component.role = 'student';
-    (component as any).cargarCategorias();
-    expect(component.categories.length).toBe(1);
-    expect(component.categories[0].ruta).toBe('/categoria/ayudantias-academicas');
-
-    component.role = 'admin';
-    (component as any).cargarCategorias();
-    expect(component.categories.some(c => c.ruta === '/dashboard/reportes')).toBeTrue();
-  });
-
-  it('should assign default icon if slug not in iconMap', fakeAsync(() => {
-    const categorias = [
-      { idCategory: 1, name: 'Categoria Nueva', description: '', status: 1 }
-    ];
-    postCategoryService.getAll.and.returnValue(of(categorias));
-    component.role = 'student';
-    (component as any).cargarCategorias();
     tick();
-    expect(component.categories[0].icono).toBe('fas fa-asterisk');
+
+    const slugs = component.categories.map(c => c.ruta);
+    expect(slugs).toContain('/categoria/ayudantias-academicas');
+    expect(slugs).toContain('/categoria/arbol-de-prueba'); // slugify with tildes
+    // Admin-only routes should be absent
+    expect(slugs).not.toContain('/dashboard/panel-de-configuracion');
+    expect(slugs).not.toContain('/dashboard/reportes');
+
+    // Icon fallback for unknown slug
+    const arb = component.categories.find(c => c.ruta.endsWith('arbol-de-prueba'))!;
+    expect(arb.icono).toBe('fas fa-asterisk');
   }));
 
-  it('should not include inactive categories', () => {
-    const categorias = [
-      { idCategory: 1, name: 'Activa', description: '', status: 1 },
-      { idCategory: 2, name: 'Inactiva', description: '', status: 0 }
-    ];
-    postCategoryService.getAll.and.returnValue(of(categorias));
-    component.role = 'student';
-    (component as any).cargarCategorias();
-    expect(component.categories.length).toBe(1);
-    expect(component.categories[0].name).toBe('Activa');
-  });
+  /* --------------------------------------------------------------
+   * 🛡️ 2. Flujo para admin: incluye adminOnly con rutas /dashboard
+   * --------------------------------------------------------------*/
+  it('should include admin-only categories for admin role', fakeAsync(() => {
+    userService.setScenario({ user: { idUser: 2, name: 'Root', role: 'admin' } });
+
+    component.ngOnInit();
+    tick();
+
+    const rutas = component.categories.map(c => c.ruta);
+    expect(rutas).toContain('/dashboard/panel-de-configuracion');
+    expect(rutas).toContain('/dashboard/reportes');
+
+    const adminCats = component.categories.filter(c => c.adminOnly);
+    expect(adminCats.length).toBe(2);
+  }));
+
+  /* --------------------------------------------------------------
+   * ❓ 3. Sin idUser en localStorage
+   * --------------------------------------------------------------*/
+  it('should fall back to unknown user when idUser is null', fakeAsync(() => {
+    userService.setScenario({ idUser: null });
+
+    component.ngOnInit();
+    tick();
+
+    expect(component.username).toBe('Desconocido');
+    expect(component.role).toBe('student');
+  }));
+
+  /* --------------------------------------------------------------
+   * ⚠️ 4. Error al obtener usuario
+   * --------------------------------------------------------------*/
+  it('should handle error from getUserById gracefully', fakeAsync(() => {
+    userService.setScenario({ error: true });
+
+    component.ngOnInit();
+    tick();
+
+    expect(component.username).toBe('Desconocido');
+    expect(component.role).toBe('student');
+  }));
+
+  /* --------------------------------------------------------------
+   * 🖇️ 5. slugify debería manejar acentos y espacios correctamente (indirecto)
+   * --------------------------------------------------------------*/
+  it('should generate correct slug and route for accented names', fakeAsync(() => {
+    // Solo categoría con acento
+    catService.setCats([{ idCategory: 10, name: 'Árbol de Prueba', status: true }]);
+    userService.setScenario({});
+
+    component.ngOnInit();
+    tick();
+
+    expect(component.categories[0].ruta).toBe('/categoria/arbol-de-prueba');
+  }));
 });
