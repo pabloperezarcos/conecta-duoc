@@ -35,7 +35,7 @@ describe('PostCategoryService', () => {
       expect(categories).toEqual(dummyCategories);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post-category');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post-category');
     expect(req.request.method).toBe('GET');
     req.flush(dummyCategories);
   });
@@ -53,7 +53,7 @@ describe('PostCategoryService', () => {
       expect(category).toEqual(createdCategory);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post-category');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post-category');
     expect(req.request.method).toBe('POST');
     req.flush(createdCategory);
   });
@@ -70,7 +70,7 @@ describe('PostCategoryService', () => {
       expect(category).toEqual(updatedCategory);
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post-category/1');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post-category/1');
     expect(req.request.method).toBe('PUT');
     req.flush(updatedCategory);
   });
@@ -80,7 +80,7 @@ describe('PostCategoryService', () => {
       expect(response).toBeNull();
     });
 
-    const req = httpMock.expectOne('http://localhost:9090/api/post-category/1');
+    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post-category/1');
     expect(req.request.method).toBe('DELETE');
     req.flush(null, { status: 204, statusText: 'No Content' });
   });

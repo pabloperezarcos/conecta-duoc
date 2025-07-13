@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 
 /**
  * Servicio responsable de gestionar la información de los usuarios
@@ -15,7 +15,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class UserService {
   /** URL base del API de usuarios */
   //private apiUrl = 'http://localhost:9090/api/usuarios';
-  private apiUrl = 'https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios';
+  private apiUrl = 'https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios';
 
   /** Servicio MSAL para autenticación con Azure Active Directory */
   private msalService = inject(MsalService);
@@ -66,8 +66,36 @@ export class UserService {
    */
   checkUserExists(email: string): Observable<boolean> {
     const encodedEmail = encodeURIComponent(email);
-    return this.http.get<boolean>(`${this.apiUrl}/exists/${encodedEmail}`);
+    //console.log('Verificando existencia de usuario:', email);
+    //console.log('Email codificado:', encodedEmail);
+
+    return this.http.get<boolean>(`${this.apiUrl}/exists/${encodedEmail}`).pipe(
+      tap(response => {
+        //console.log('Respuesta de exists:', response);
+      }),
+      catchError(error => {
+        console.error('Error al verificar usuario:', error);
+        return of(false);
+      })
+    );
   }
+
+  checkUserExistsWithId(email: string): Observable<{ exists: boolean; idUser?: number }> {
+    const encodedEmail = encodeURIComponent(email);
+    //console.log('Verificando existencia de usuario con ID:', email);
+
+    return this.http.get<{ exists: boolean; idUser?: number }>(`${this.apiUrl}/exists/${encodedEmail}`).pipe(
+      tap(response => {
+        //console.log('Respuesta de exists + idUser:', response);
+      }),
+      catchError(error => {
+        console.error('Error al verificar usuario con ID:', error);
+        return of({ exists: false });
+      })
+    );
+  }
+
+
 
   /**
    * Registra un nuevo usuario en la base de datos.

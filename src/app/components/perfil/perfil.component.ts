@@ -113,22 +113,27 @@ export class PerfilComponent implements OnInit {
    * sus publicaciones, comentarios y puntajes asociados.
    */
   ngOnInit(): void {
-    const email = this.userService.getAzureUser()?.email || this.userService.getName();
-    if (!email) {
+    const idUser = this.userService.getIdUser();
+
+    if (!idUser) {
       this.router.navigate(['/']);
       return;
     }
 
-    this.postCategoryService.getAll().subscribe(cats => (this.categories = cats));
+    this.postCategoryService.getAll().subscribe(cats => {
+      this.categories = cats;
+    });
 
-    this.userService.getUser(email).subscribe(user => {
+    this.userService.getUserById(idUser).subscribe(user => {
       this.user = user;
       this.sede = user.center;
+
       if (user.idUser !== undefined) {
         this.cargarPublicaciones(user.idUser);
       }
     });
   }
+
 
   /**
    * Carga todas las publicaciones del usuario y calcula

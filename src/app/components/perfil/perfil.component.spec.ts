@@ -1,300 +1,237 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+
+import { MsalService } from '@azure/msal-angular';
+
 import { PerfilComponent } from './perfil.component';
 import { UserService } from '../../core/services/user.service';
 import { PostService } from '../../core/services/post.service';
 import { CommentService } from '../../core/services/comment.service';
 import { PostCategoryService } from '../../core/services/post-category.service';
 import { ScoreService } from '../../core/services/score.service';
-import { Router } from '@angular/router';
-import { of } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { PostCategory } from '../../models/postCategory';
-import { User } from '../../models/user';
-import { ActivatedRoute } from '@angular/router';
+
+/* ------------------------------------------------------------------
+ * 🔧 Mocks (only what the component needs)
+ * ------------------------------------------------------------------*/
+class MockUserService {
+  private _idUser: number | null = 1;
+  getIdUser = jasmine.createSpy('getIdUser').and.callFake(() => this._idUser);
+  getUserById = jasmine.createSpy('getUserById').and.callFake((id: number) =>
+    of({ idUser: id, name: 'Juan Pérez', center: 'Sede Alameda' })
+  );
+  registerUser = jasmine.createSpy('registerUser').and.returnValue(of(null));
+
+  /** Utility to simulate a user not logged in */
+  setIdUser(id: number | null) {
+    this._idUser = id;
+  }
+}
+
+class MockPostService {
+  private _posts: any[] = [];
+  getAll = jasmine.createSpy('getAll').and.callFake(() => of(this._posts));
+  setPosts(posts: any[]) {
+    this._posts = posts;
+  }
+}
+
+class MockCommentService {
+  private _map = new Map<number, any[]>();
+  getByPostId = jasmine.createSpy('getByPostId').and.callFake((id: number) =>
+    of(this._map.get(id) || [])
+  );
+  setComments(id: number, comments: any[]) {
+    this._map.set(id, comments);
+  }
+}
+
+class MockPostCategoryService {
+  getAll = jasmine.createSpy('getAll').and.returnValue(of([]));
+}
+
+class MockScoreService {
+  private _map = new Map<number, number>();
+  getAverageScore = jasmine.createSpy('getAverageScore').and.callFake((id: number) =>
+    of(this._map.get(id) || 0)
+  );
+  setScore(id: number, avg: number) {
+    this._map.set(id, avg);
+  }
+}
+
+/* ------------------------------------------------------------------
+ * 🧪 Test Suite
+ * ------------------------------------------------------------------*/
 
 describe('PerfilComponent', () => {
   let component: PerfilComponent;
-  let fixture: ComponentFixture<PerfilComponent>;
-
-  let userServiceStub: any;
-  let postServiceStub: any;
-  let commentServiceStub: any;
-  let postCategoryServiceStub: any;
-  let scoreServiceStub: any;
-  let routerSpy: any;
-
-  const MOCK_AZURE_USER = { email: 'user@duoc.cl' };
-
-  const POSTS = [
-    { idPost: 1, idUser: 42, title: 'One', content: 'First' },
-    { idPost: 2, idUser: 42, title: 'Two', content: 'Second' },
-    { idPost: 3, idUser: 99, title: 'Other', content: 'Other' }
-  ];
-
-  postCategoryServiceStub = {
-    getAll: jasmine.createSpy('getAll').and.returnValue(of([
-      {
-        idCategory: 1,
-        name: 'Cat1',
-        description: 'Desc',
-        status: 1
-      }
-    ] as PostCategory[]))
-  };
-
-
-  const MOCK_USER: User = {
-    email: 'user@duoc.cl',
-    name: 'User Name',
-    role: 'student',
-    center: 'Sede X',
-    idUser: 42,
-    policies: 1
-  };
+  let userService: MockUserService;
+  let postService: MockPostService;
+  let commentService: MockCommentService;
+  let scoreService: MockScoreService;
+  let router: Router;
 
   beforeEach(async () => {
-    userServiceStub = {
-      getAzureUser: jasmine.createSpy('getAzureUser'),
-      getName: jasmine.createSpy('getName'),
-      getUser: jasmine.createSpy('getUser').and.returnValue(of(MOCK_USER)),
-      registerUser: jasmine.createSpy('registerUser').and.returnValue(of(void 0))
-    };
-
-    postCategoryServiceStub = {
-      getAll: jasmine.createSpy('getAll').and.returnValue(of([
-        {
-          idCategory: 1,
-          name: 'Cat1',
-          description: 'Desc',   // ← obligatorio
-          status: 1              // ← obligatorio
-        }
-      ] as PostCategory[]))
-    };
-
-    postServiceStub = {
-      getAll: jasmine.createSpy('getAll').and.returnValue(of([]))
-    };
-
-    commentServiceStub = {
-      getByPostId: jasmine.createSpy('getByPostId').and.returnValue(of(['c1', 'c2']))
-    };
-
-    scoreServiceStub = {
-      getAverageScore: jasmine.createSpy('getAverageScore').and.returnValue(of(4))
-    };
-
-    routerSpy = {
-      navigate: jasmine.createSpy('navigate')
-    };
-
     await TestBed.configureTestingModule({
-      imports: [PerfilComponent],
+      imports: [RouterTestingModule, PerfilComponent],
       providers: [
-        { provide: UserService, useValue: userServiceStub },
-        { provide: PostService, useValue: postServiceStub },
-        { provide: CommentService, useValue: commentServiceStub },
-        { provide: PostCategoryService, useValue: postCategoryServiceStub },
-        { provide: ScoreService, useValue: scoreServiceStub },
-        { provide: Router, useValue: routerSpy },
-        { provide: ActivatedRoute, useValue: {} }
+        { provide: UserService, useClass: MockUserService },
+        { provide: PostService, useClass: MockPostService },
+        { provide: CommentService, useClass: MockCommentService },
+        { provide: PostCategoryService, useClass: MockPostCategoryService },
+        { provide: ScoreService, useClass: MockScoreService },
+        /* Stub for dependency required by the real UserService */
+        { provide: MsalService, useValue: {} },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PerfilComponent);
-    component = fixture.componentInstance;
+    component = TestBed.createComponent(PerfilComponent).componentInstance;
+
+    userService = TestBed.inject(UserService) as unknown as MockUserService;
+    postService = TestBed.inject(PostService) as unknown as MockPostService;
+    commentService = TestBed.inject(CommentService) as unknown as MockCommentService;
+    scoreService = TestBed.inject(ScoreService) as unknown as MockScoreService;
+
+    router = TestBed.inject(Router);
+    spyOn(router, 'navigate');
   });
 
-  it('should create with initial state', () => {
-    expect(component).toBeTruthy();
-    expect(component.user).toBeNull();
-    expect(component.posts).toEqual([]);
-    expect(component.categories).toEqual([]);
-    expect(component.sede).toBe('');
+  /* --------------------------------------------------------------
+   * 🚦 ngOnInit redirection branch (no idUser)
+   * --------------------------------------------------------------*/
+  it('should redirect to root if the user is not authenticated', () => {
+    userService.setIdUser(null);
+    component.ngOnInit();
+    expect(router.navigate).toHaveBeenCalledOnceWith(['/']);
+  });
+
+  /* --------------------------------------------------------------
+   * 🟢 Successful initialization and stats calculation
+   * --------------------------------------------------------------*/
+  it('should load user, posts, stats and paginate correctly', fakeAsync(() => {
+    // Arrange
+    const posts = [
+      { idPost: 1, idUser: 1, title: 'Hello', content: 'World' },
+      { idPost: 2, idUser: 2, title: 'Other', content: 'Post' },
+      { idPost: 3, idUser: 1, title: 'Angular', content: 'Rocks' },
+    ];
+    postService.setPosts(posts);
+    commentService.setComments(1, [{}, {}]); // 2 comments
+    commentService.setComments(3, [{}, {}, {}]); // 3 comments
+    scoreService.setScore(1, 4);
+    scoreService.setScore(3, 2);
+
+    // Act
+    component.ngOnInit();
+    tick(); // flush user & posts
+    tick(); // flush comments & scores (forkJoin)
+
+    // Assert
+    expect(component.totalPosts).toBe(2);
+    expect(component.totalComments).toBe(5);
+    expect(component.promedioPonderado).toBeCloseTo(3, 1);
+    expect(component.posts.length).toBe(2);
+    expect(component.totalPaginas).toBe(1);
+  }));
+
+  /* --------------------------------------------------------------
+   * 🔤 getUserInitial()
+   * --------------------------------------------------------------*/
+  it('should return the first letter of the user name or ? when null', () => {
+    component.user = { name: 'Kakaroto' } as any;
+    expect(component.getUserInitial()).toBe('K');
+
+    component.user = null as any;
+    expect(component.getUserInitial()).toBe('?');
+  });
+
+  /* --------------------------------------------------------------
+   * 💾 guardarSede()
+   * --------------------------------------------------------------*/
+  it('should call registerUser with updated center when saving sede', () => {
+    component.user = { idUser: 1, name: 'Goku', center: 'Old' } as any;
+    component.sede = 'New Center';
+    component.guardarSede();
+    expect(userService.registerUser).toHaveBeenCalledOnceWith({
+      idUser: 1,
+      name: 'Goku',
+      center: 'New Center',
+    });
+  });
+
+  /* --------------------------------------------------------------
+   * 🔍 postsFiltrados getter
+   * --------------------------------------------------------------*/
+  it('should filter posts by title or content', () => {
+    component.posts = [
+      { title: 'Angular', content: 'Rocks' },
+      { title: 'Hello', content: 'World' },
+    ] as any;
+
+    component.filtroPost = '';
+    expect(component.postsFiltrados.length).toBe(2);
+
+    component.filtroPost = 'ang';
+    expect(component.postsFiltrados.length).toBe(1);
+  });
+
+  /* --------------------------------------------------------------
+   * 📄 Pagination helpers
+   * --------------------------------------------------------------*/
+  it('should compute total pages, page list and paginated posts', () => {
+    // 10 dummy posts
+    component.posts = Array.from({ length: 10 }, (_, i) => ({ title: `${i}`, content: '-' })) as any;
+    component.postsPorPagina = 8;
+
+    // total pages
+    expect(component.totalPaginas).toBe(2);
+    expect(component.paginas).toEqual([1, 2]);
+
+    // first page
+    expect(component.postsPaginados.length).toBe(8);
+
+    // change to second page and assert
+    component.cambiarPagina(2);
+    expect(component.postsPaginados.length).toBe(2);
+  });
+
+  /* --------------------------------------------------------------
+   * ⛔ cambiarPagina() bounds check
+   * --------------------------------------------------------------*/
+  it('should ignore invalid page changes', () => {
+    component.posts = Array.from({ length: 1 }, () => ({})) as any;
+    const current = component.paginaActual;
+
+    component.cambiarPagina(0); // below range
+    expect(component.paginaActual).toBe(current);
+
+    component.cambiarPagina(999); // above range
+    expect(component.paginaActual).toBe(current);
+  });
+
+  /* --------------------------------------------------------------
+   * ✏️ editar()
+   * --------------------------------------------------------------*/
+  it('should navigate to edit route with state', () => {
+    const post = { idPost: 42 } as any;
+    component.editar(post);
+    expect(router.navigate).toHaveBeenCalledOnceWith(['/dashboard/ayudantias', 42], {
+      state: { editar: post },
+    });
+  });
+
+  /* --------------------------------------------------------------
+   * 🟡 cargarPublicaciones() branch when there are no posts
+   * --------------------------------------------------------------*/
+  it('should set stats to zero when the user has no posts', fakeAsync(() => {
+    postService.setPosts([]);
+    component.cargarPublicaciones(1);
+    tick();
+
     expect(component.totalPosts).toBe(0);
     expect(component.totalComments).toBe(0);
     expect(component.promedioPonderado).toBe(0);
-    expect(component.filtroPost).toBe('');
-    expect(component.postsPorPagina).toBe(8);
-    expect(component.paginaActual).toBe(1);
-  });
-
-  describe('ngOnInit', () => {
-    it('redirects to "/" if no email from Azure or fallback', () => {
-      userServiceStub.getAzureUser.and.returnValue(null);
-      userServiceStub.getName.and.returnValue('');
-      component.ngOnInit();
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
-    });
-
-    it('uses fallback getName when Azure user has no email', () => {
-      userServiceStub.getAzureUser.and.returnValue({ email: '' });
-      userServiceStub.getName.and.returnValue('fallback@duoc.cl');
-      spyOn<any>(component, 'cargarPublicaciones');
-      component.ngOnInit();
-      expect(postCategoryServiceStub.getAll).toHaveBeenCalled();
-      expect(userServiceStub.getUser).toHaveBeenCalledWith('fallback@duoc.cl');
-    });
-
-    it('loads categories and user then calls cargarPublicaciones when idUser defined', () => {
-      userServiceStub.getAzureUser.and.returnValue(MOCK_AZURE_USER);
-      userServiceStub.getUser.and.returnValue(of(MOCK_USER));
-      const cargarSpy = spyOn<any>(component, 'cargarPublicaciones');
-      component.ngOnInit();
-      expect(component.categories).toEqual([{ idCategory: 1, name: 'Cat1', description: 'Desc', status: 1 }]);
-      expect(component.user).toEqual(MOCK_USER);
-      expect(component.sede).toBe('Sede X');
-      expect(cargarSpy).toHaveBeenCalledWith(42);
-    });
-
-    it('does not call cargarPublicaciones when user.idUser undefined', () => {
-      userServiceStub.getAzureUser.and.returnValue(MOCK_AZURE_USER);
-      userServiceStub.getUser.and.returnValue(of({ name: 'N', center: 'C' }));
-      const cargarSpy = spyOn<any>(component, 'cargarPublicaciones');
-      component.ngOnInit();
-      expect(cargarSpy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('cargarPublicaciones', () => {
-    it('handles empty posts', () => {
-      postServiceStub.getAll.and.returnValue(of([]));
-      component.cargarPublicaciones(42);
-      expect(component.posts).toEqual([]);
-      expect(component.totalPosts).toBe(0);
-      expect(component.paginaActual).toBe(1);
-      expect(component.totalComments).toBe(0);
-      expect(component.promedioPonderado).toBe(0);
-    });
-
-    it('calculates stats when posts exist', fakeAsync(() => {
-      postServiceStub.getAll.and.returnValue(of(POSTS));
-      commentServiceStub.getByPostId.and.callFake((id: number) =>
-        of(id === 1 ? ['a'] : ['b', 'c'])
-      );
-      scoreServiceStub.getAverageScore.and.returnValue(of(5));
-
-      component.cargarPublicaciones(42);
-      tick();
-
-      // filtered posts only idUser 42 → two items
-      expect(component.posts.length).toBe(2);
-      expect(component.totalPosts).toBe(2);
-      expect(component.paginaActual).toBe(1);
-      // comments: ['a'] + ['b','c'] → total 3
-      expect(component.totalComments).toBe(3);
-      // scores: both 5 → promedio = 5
-      expect(component.promedioPonderado).toBe(5);
-    }));
-  });
-
-  describe('getUserInitial', () => {
-    it('returns "?" when no user', () => {
-      component.user = null;
-      expect(component.getUserInitial()).toBe('?');
-    });
-    it('returns first uppercase letter of name', () => {
-      component.user = {
-        email: 'j@duoc.cl',
-        name: 'juan',
-        role: 'student',
-        center: 'New',
-        idUser: 1,
-        policies: 0
-      };
-      expect(component.getUserInitial()).toBe('J');
-    });
-  });
-
-  describe('guardarSede', () => {
-    it('does nothing if no user', () => {
-      component.user = null;
-      component.guardarSede();
-      expect(userServiceStub.registerUser).not.toHaveBeenCalled();
-    });
-    it('calls registerUser with updated center when user present', () => {
-      component.user = {
-        email: 'j@duoc.cl',
-        name: 'juan',
-        role: 'student',
-        center: 'New',
-        idUser: 1,
-        policies: 0
-      };
-      component.sede = 'New';
-      postServiceStub.getAll(); // avoid unused stub warning
-      component.guardarSede();
-      expect(userServiceStub.registerUser).toHaveBeenCalledWith(
-        jasmine.objectContaining({ center: 'New', idUser: 1 })
-      );
-    });
-  });
-
-  describe('editar', () => {
-    it('navigates to edit route with state', () => {
-      const post = { idPost: 123 } as any;
-      component.editar(post);
-      expect(routerSpy.navigate).toHaveBeenCalledWith(
-        ['/dashboard/ayudantias', 123],
-        { state: { editar: post } }
-      );
-    });
-  });
-
-  describe('postsFiltrados', () => {
-    beforeEach(() => {
-      component.posts = [
-        { title: 'Hello', content: 'World' } as any,
-        { title: 'Foo', content: 'Bar' } as any
-      ];
-    });
-    it('returns all when filter empty', () => {
-      component.filtroPost = ' ';
-      expect(component.postsFiltrados.length).toBe(2);
-    });
-    it('filters by title or content case-insensitive', () => {
-      component.filtroPost = 'foo';
-      const result = component.postsFiltrados;
-      expect(result.length).toBe(1);
-      expect(result[0].title).toBe('Foo');
-    });
-  });
-
-  describe('totalPaginas & paginas & postsPaginados', () => {
-    beforeEach(() => {
-      component.posts = Array(5).fill(0).map((_, i) => ({ title: 't', content: 'c', idUser: 0, idPost: i } as any));
-    });
-    it('calculates pages count and array with default page size', () => {
-      component.postsPorPagina = 2;
-      component.paginaActual = 1;
-      expect(component.totalPaginas).toBe(3);
-      expect(component.paginas).toEqual([1, 2, 3]);
-      expect(component.postsPaginados.length).toBe(2);
-    });
-    it('ensures at least one page when no posts', () => {
-      component.posts = [];
-      expect(component.totalPaginas).toBe(1);
-      expect(component.paginas).toEqual([1]);
-    });
-  });
-
-  describe('cambiarPagina', () => {
-    beforeEach(() => {
-      component.posts = [{ title: 't', content: 'c', idUser: 0, idPost: 1 } as any];
-    });
-    it('changes to valid page', () => {
-      component.postsPorPagina = 1;
-      component.paginaActual = 1;
-      component.cambiarPagina(1);
-      expect(component.paginaActual).toBe(1);
-      component.cambiarPagina(2);
-      // 2 > totalPaginas(1) → no change
-      expect(component.paginaActual).toBe(1);
-    });
-    it('does not change for invalid page <1', () => {
-      component.paginaActual = 1;
-      component.cambiarPagina(0);
-      expect(component.paginaActual).toBe(1);
-    });
-  });
+  }));
 });

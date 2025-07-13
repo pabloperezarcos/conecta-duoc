@@ -30,7 +30,7 @@ describe('ScoreService', () => {
             expect(average).toBe(dummyAverage);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/score/average/1');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/score/average/1');
         expect(req.request.method).toBe('GET');
         req.flush(dummyAverage);
     });
@@ -41,7 +41,7 @@ describe('ScoreService', () => {
             expect(score).toEqual(dummyScore);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/score/user/1/post/1');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/score/user/1/post/1');
         expect(req.request.method).toBe('GET');
         req.flush(dummyScore);
     });
@@ -52,7 +52,7 @@ describe('ScoreService', () => {
             expect(score).toEqual(dummyScore);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/score/save');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/score/save');
         expect(req.request.method).toBe('POST');
         req.flush(dummyScore);
     });
@@ -66,7 +66,7 @@ describe('ScoreService', () => {
             expect(resumen).toEqual(dummyResumen);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/score/resumen?idUser=1');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/score/resumen?idUser=1');
         expect(req.request.method).toBe('GET');
         req.flush(dummyResumen);
     });
@@ -79,7 +79,7 @@ describe('ScoreService', () => {
             expect(resumen).toEqual(dummyResumen);
         });
 
-        const req = httpMock.expectOne('http://localhost:9090/api/score/resumen?idUser=1&idCategoria=2');
+        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/score/resumen?idUser=1&idCategoria=2');
         expect(req.request.method).toBe('GET');
         req.flush(dummyResumen);
     });

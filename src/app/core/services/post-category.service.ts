@@ -13,7 +13,7 @@ import { PostCategory } from '../../models/postCategory';
 export class PostCategoryService {
   /** URL base del API para categorías de publicaciones */
   //private apiUrl = 'http://localhost:9090/api/post-category';
-  private apiUrl = 'https://yr3rp1l7fd.execute-api.us-east-1.amazonaws.com/api/post-category';
+  private apiUrl = 'https://8d20h7wiag.execute-api.us-east-2.amazonaws.com/api/post-category';
 
   /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http = inject(HttpClient);

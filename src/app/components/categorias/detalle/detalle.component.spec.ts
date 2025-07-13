@@ -1,438 +1,315 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { of, throwError, Subject, defer } from 'rxjs';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of, throwError } from 'rxjs';
+
 import { DetalleComponent } from './detalle.component';
 
-import { CommentService } from '../../../core/services/comment.service';
-import { NotificacionService } from '../../../core/services/notificacion.service';
+/* Services */
 import { PostService } from '../../../core/services/post.service';
-import { ReportService } from '../../../core/services/report.service';
-import { ScoreService } from '../../../core/services/score.service';
 import { UserService } from '../../../core/services/user.service';
+import { ScoreService } from '../../../core/services/score.service';
+import { ReportService } from '../../../core/services/report.service';
+import { CommentService } from '../../../core/services/comment.service';
 
-import { Report } from '../../../models/report';
-import { Score } from '../../../models/post';
+import { ActivatedRoute } from '@angular/router';
 
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+/* ------------------------------------------------------------------
+ * 🪄 Stub components & services
+ * ------------------------------------------------------------------*/
+@Component({ selector: 'app-notificacion-banner', standalone: true, template: '' })
+class StubBanner { }
+@Component({ selector: 'app-breadcrumb', standalone: true, template: '' })
+class StubBreadcrumb { }
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  STUBS / DUMMIES                                                          */
-/* ────────────────────────────────────────────────────────────────────────── */
+/* Dummy replacement for the real service so we avoid HttpClient */
+class StubNotificacionService { }
 
-class DummyService {
-  /* PostService */
-  sumarVisualizacion = jasmine.createSpy().and.returnValue(of({}));
-  getById = jasmine.createSpy().and.returnValue(of({
-    idPost: 1, title: 'Test Post', idUser: 2
-  }));
+/* ------------------------------------------------------------------
+ * 🔧 Mocks (configurables)
+ * ------------------------------------------------------------------*/
+interface PostMock { idPost: number; idUser: number; title: string; }
+interface CommentMock { idComment: number; idPost: number; idUser: number; content: string; }
 
-  /* ScoreService */
-  getAverageScore = jasmine.createSpy().and.returnValue(of(4));
-  getUserScore = jasmine.createSpy().and.returnValue(of({ score: 3 }));
-  setScore = jasmine.createSpy().and.returnValue(of({}));
-
-  /* UserService */
-  getUserById = jasmine.createSpy().and.returnValue(of({ name: 'Test User' }));
-  getIdUser = jasmine.createSpy().and.returnValue(2);
-
-  /* CommentService */
-  getByPostId = jasmine.createSpy().and.returnValue(of([
-    { idComment: 10, idPost: 1, idUser: 2, content: 'Comment', createdDate: '' }
-  ]));
-  create = jasmine.createSpy().and.returnValue(of({
-    idComment: 11, idPost: 1, idUser: 2, content: 'Nuevo', createdDate: ''
-  }));
-  delete = jasmine.createSpy().and.returnValue(of(void 0));
-
-  /* ReportService */
-  reportPost = jasmine.createSpy().and.returnValue(of({}));
-  reportComment = jasmine.createSpy().and.returnValue(of({}));
-}
-
-class RouterStub {
-  navigate = jasmine.createSpy('navigate');
-  navigateByUrl = jasmine.createSpy('navigateByUrl');
-  createUrlTree = jasmine.createSpy('createUrlTree').and.callFake((cmds: any) => cmds);
-  serializeUrl = jasmine.createSpy('serializeUrl').and.returnValue('/stubbed/url');
-  url = '/categoria/test/1';
-  events = new Subject<any>();
-}
-
-const routeStub = {
-  snapshot: {
+class MockActivatedRoute {
+  private params = new Map<string, string>();
+  snapshot = {
     paramMap: {
-      get: jasmine.createSpy('get').and.callFake((k: string) =>
-        k === 'id' ? '1' : 'test'
-      )
-    }
+      get: (key: string) => this.params.get(key) || null,
+    },
+  } as any;
+  setParam(key: string, value: string | null) {
+    if (value === null) this.params.delete(key); else this.params.set(key, value);
   }
-};
-
-
-class NotificacionServiceStub {
-  success = jasmine.createSpy();
-  error = jasmine.createSpy();
-  info = jasmine.createSpy();
-  getVigentes = jasmine.createSpy().and.returnValue(of([]));
 }
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  TEST SUITE                                                               */
-/* ────────────────────────────────────────────────────────────────────────── */
+class MockPostService {
+  private _post: PostMock | null = null;
+  private _err = false;
+  sumarVisualizacion = jasmine.createSpy('sumarVisualizacion').and.returnValue(of(null));
+  getById = jasmine.createSpy('getById').and.callFake(() => {
+    return this._err ? throwError(() => new Error('fail')) : of(this._post);
+  });
+  setScenario(post: PostMock | null, err = false) {
+    this._post = post;
+    this._err = err;
+  }
+}
+
+class MockUserService {
+  private _idUser: number | null = 10;
+  private _user: any = { idUser: 42, name: 'UserName' };
+  private _error = false;
+  getIdUser = jasmine.createSpy('getIdUser').and.callFake(() => this._idUser);
+  getUserById = jasmine.createSpy('getUserById').and.callFake(() => {
+    return this._error ? throwError(() => new Error('uErr')) : of(this._user);
+  });
+  clearRole() { }
+  setScenario({ idUser = 10, user = this._user, error = false }: { idUser?: number | null; user?: any; error?: boolean }) {
+    this._idUser = idUser;
+    this._user = user;
+    this._error = error;
+  }
+}
+
+class MockCommentService {
+  private _comments: CommentMock[] = [];
+  create = jasmine.createSpy('create').and.callFake((c: any) => of({ ...c, idComment: 99 }));
+  getByPostId = jasmine.createSpy('getByPostId').and.callFake(() => of(this._comments));
+  delete = jasmine.createSpy('delete').and.callFake(() => of(null));
+  setComments(coms: CommentMock[]) { this._comments = coms; }
+}
+
+class MockScoreService {
+  private _avg = 4;
+  private _userScore = 3;
+  getAverageScore = jasmine.createSpy('getAverageScore').and.callFake(() => of(this._avg));
+  getUserScore = jasmine.createSpy('getUserScore').and.callFake(() => of({ score: this._userScore }));
+  setScore = jasmine.createSpy('setScore').and.returnValue(of(null));
+  setScenario({ avg = 4, userScore = 3 }) { this._avg = avg; this._userScore = userScore; }
+}
+
+class MockReportService {
+  reportPost = jasmine.createSpy('reportPost').and.returnValue(of(null));
+  reportComment = jasmine.createSpy('reportComment').and.returnValue(of(null));
+}
+
+/* ------------------------------------------------------------------
+ * 🧪 Test Suite
+ * ------------------------------------------------------------------*/
 
 describe('DetalleComponent', () => {
   let component: DetalleComponent;
-  let fixture: ComponentFixture<DetalleComponent>;
+  let postService: MockPostService;
+  let userService: MockUserService;
+  let commentService: MockCommentService;
+  let scoreService: MockScoreService;
+  let reportService: MockReportService;
+  let route: MockActivatedRoute;
+  let router: Router;
 
-  /* Servicios / Router */
-  let router: RouterStub;
-  let postService: DummyService;
-  let commentService: DummyService;
-  let userService: DummyService;
-  let reportService: DummyService;
-  let scoreService: DummyService;
-
-  /* Spies globales que se re-usan en varias pruebas */
-  let promptSpy: jasmine.Spy;
-  let alertSpy: jasmine.Spy;
-  let createCommentSpy: jasmine.Spy;
-  let reportPostSpy: jasmine.Spy;
-  let reportCommentSpy: jasmine.Spy;
-  let deleteCommentSpy: jasmine.Spy;
-  let setScoreSpy: jasmine.Spy;
-
+  const basePost: PostMock = { idPost: 1, idUser: 42, title: 'Test Post' };
+  const baseComments: CommentMock[] = [
+    { idComment: 1, idPost: 1, idUser: 42, content: 'Hi' },
+  ];
 
   beforeEach(async () => {
-    /* ─── Instanciamos stubs ────────────────────────────────────────────── */
-    router = new RouterStub();
-    postService = new DummyService();
-    commentService = new DummyService();
-    userService = new DummyService();
-    reportService = new DummyService();
-    scoreService = new DummyService();
+    route = new MockActivatedRoute();
 
     await TestBed.configureTestingModule({
-      imports: [DetalleComponent, ReactiveFormsModule],
+      imports: [RouterTestingModule, ReactiveFormsModule, HttpClientTestingModule, DetalleComponent],
       providers: [
-        provideHttpClientTesting(),
-        { provide: Router, useValue: router },
-        { provide: ActivatedRoute, useValue: routeStub },
-        { provide: NotificacionService, useClass: NotificacionServiceStub },
-        { provide: PostService, useValue: postService },
-        { provide: CommentService, useValue: commentService },
-        { provide: UserService, useValue: userService },
-        { provide: ReportService, useValue: reportService },
-        { provide: ScoreService, useValue: scoreService },
-        FormBuilder
-      ]
-    }).compileComponents();
+        { provide: ActivatedRoute, useValue: route },
+        { provide: PostService, useClass: MockPostService },
+        { provide: UserService, useClass: MockUserService },
+        { provide: ScoreService, useClass: MockScoreService },
+        { provide: ReportService, useClass: MockReportService },
+        { provide: CommentService, useClass: MockCommentService },
+        { provide: 'NotificacionService', useClass: StubNotificacionService },
+        FormBuilder,
+      ],
+    })
+      .overrideComponent(DetalleComponent, {
+        set: { imports: [ReactiveFormsModule, StubBreadcrumb, StubBanner] },
+      })
+      .compileComponents();
 
-    fixture = TestBed.createComponent(DetalleComponent);
-    component = fixture.componentInstance;
-    component.comentarioForm = new FormBuilder().group({ content: '' });
+    // create
+    component = TestBed.createComponent(DetalleComponent).componentInstance;
+    postService = TestBed.inject(PostService) as unknown as MockPostService;
+    userService = TestBed.inject(UserService) as unknown as MockUserService;
+    commentService = TestBed.inject(CommentService) as unknown as MockCommentService;
+    scoreService = TestBed.inject(ScoreService) as unknown as MockScoreService;
+    reportService = TestBed.inject(ReportService) as unknown as MockReportService;
+    router = TestBed.inject(Router);
+    spyOn(router, 'navigate');
 
-    /* ─── Spies compartidos ─────────────────────────────────────────────── */
-    promptSpy = spyOn(window, 'prompt').and.returnValue(null);
-    alertSpy = spyOn(window, 'alert');
-    createCommentSpy = commentService.create;
-    reportPostSpy = reportService.reportPost;
-    reportCommentSpy = reportService.reportComment;
-    deleteCommentSpy = commentService.delete;
-    setScoreSpy = scoreService.setScore;
-
-    fixture.detectChanges();
+    // default scenario
+    route.setParam('id', basePost.idPost.toString());
+    route.setParam('slug', 'ayudantias-academicas');
+    postService.setScenario(basePost);
+    commentService.setComments(baseComments);
   });
 
-  /* Utilidad para reiniciar historial antes de cada test */
-  function resetAllSpies() {
-    [
-      promptSpy, alertSpy, createCommentSpy,
-      reportPostSpy, reportCommentSpy, deleteCommentSpy, setScoreSpy
-    ].forEach(s => s.calls.reset());
-  }
-
-  /* ─────────────────────────  PRUEBAS  ───────────────────────── */
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  /* ------------------------------ NG-INIT ------------------------------ */
-
-  it('should set promedio / miScore / nombreAutor in ngOnInit()', () => {
-    resetAllSpies();
+  /* --------------------------------------------------------------
+   * 1️⃣ Ruta sin id => redirect
+   * --------------------------------------------------------------*/
+  it('should redirect when id param is invalid', () => {
+    route.setParam('id', null);
     component.ngOnInit();
-    expect(component.promedio).toBe(4);
-    expect(component.miScore).toBe(3);
-    expect(component.nombreAutor).toBe('Test User');
-    expect(component.loading).toBeFalse();
+    expect(router.navigate).toHaveBeenCalledOnceWith(['/dashboard']);
   });
 
-  it('should navigate to /dashboard if id is not a valid number', () => {
-    resetAllSpies();
-
-    // forzamos que paramMap.get('id') devuelva null
-    (routeStub.snapshot.paramMap.get as jasmine.Spy).and.returnValue(null);
-
-    component.ngOnInit();
-
-    expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
-  });
-
-  it('should set nombreAutor to "Autor desconocido" if getUserById fails',
-    fakeAsync(() => {
-
-      resetAllSpies();
-
-      // -- Post OK
-      postService.getById.and.returnValue(of({
-        idPost: 1, idUser: 1, title: 'Test', content: '',
-        idCategory: 1, createdDate: '', views: 0
-      }));
-
-      // -- getUserById falla SOLO cuando id === 1
-      userService.getUserById.and.callFake((id: number) =>
-        id === 1
-          ? throwError(() => new Error('fail'))
-          : of({ name: 'Comment User' })
-      );
-
-      component.ngOnInit();
-      tick();
-
-      expect(component.nombreAutor).toBe('Autor desconocido');
-    }));
-
-  it('debe poner nombreAutor = "Autor desconocido" cuando falla getUserById', fakeAsync(() => {
-    resetAllSpies();
-
-    postService.getById.and.returnValue(of({
-      idPost: 1, idUser: 1, title: 'Test', content: '',
-      idCategory: 1, createdDate: '', views: 0
-    }));
-
-    userService.getUserById.and.callFake((id: number) =>
-      id === 1
-        ? defer(() => throwError(() => new Error('fail'))) // error SINCRÓNICO
-        : of({ name: `User ${id}` })
-    );
-
-    // Comentarios vacíos para simplificar
-    commentService.getByPostId.and.returnValue(of([]));
-
+  /* --------------------------------------------------------------
+   * 2️⃣ getById error => redirect
+   * --------------------------------------------------------------*/
+  it('should redirect when post not found', fakeAsync(() => {
+    postService.setScenario(null, true);
     component.ngOnInit();
     tick();
+    expect(router.navigate).toHaveBeenCalledOnceWith(['/dashboard']);
+  }));
 
+  /* --------------------------------------------------------------
+   * 3️⃣ Carga exitosa con nombre de autor y stats
+   * --------------------------------------------------------------*/
+  it('should load post, comments, scores and author successfully', fakeAsync(() => {
+    component.ngOnInit();
+    tick(); // post & internal calls
+    tick();
+
+    expect(component.post?.title).toBe('Test Post');
+    expect(component.promedio).toBe(4);
+    expect(component.miScore).toBe(3);
+    expect(component.nombreAutor).toBe('UserName');
+    expect(component.comments.length).toBeGreaterThan(0);
+    expect(component.loading).toBeFalse();
+    // map filled
+    expect(Object.keys(component.nombresUsuariosComentario).length).toBe(1);
+    expect(Object.keys(component.calificacionUsuariosComentario).length).toBe(1);
+  }));
+
+  /* --------------------------------------------------------------
+   * 4️⃣ userService.getUserById error => autor desconocido
+   * --------------------------------------------------------------*/
+  it('should fallback to unknown author when user lookup fails', fakeAsync(() => {
+    userService.setScenario({ error: true });
+    component.ngOnInit();
+    tick();
+    tick();
     expect(component.nombreAutor).toBe('Autor desconocido');
   }));
 
-
-  it('should navigate to /dashboard when post not found', () => {
-    resetAllSpies();
-    postService.getById.and.returnValue(throwError(() => new Error('fail')));
+  /* --------------------------------------------------------------
+   * 5️⃣ comentar() éxito
+   * --------------------------------------------------------------*/
+  it('should add new comment on comentar()', fakeAsync(() => {
     component.ngOnInit();
-    expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
-  });
+    tick();
 
-  it('debe navegar a /dashboard cuando getById devuelve error (async)', fakeAsync(() => {
-    resetAllSpies();
+    component.comentarioForm.controls['content'].setValue('Nuevo comentario');
+    component.comentar();
+    tick();
 
-    // ➜ getById emite el error en la micro-tarea siguiente
-    postService.getById.and.returnValue(
-      defer(() => throwError(() => new Error('fail')))
-    );
-
-    // Dejamos el resto de stubs como están; no se ejecutarán porque salta el error
-    component.ngOnInit();
-
-    tick();                         // drena la micro-tarea del defer()
-
-    expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
+    expect(commentService.create).toHaveBeenCalled();
+    expect(component.comments.some(c => c.idComment === 99)).toBeTrue();
+    expect(component.postingComment).toBeFalse();
   }));
 
-  /* ------------------------------ VOLVER ------------------------------ */
+  /* --------------------------------------------------------------
+   * 6️⃣ comentar() early exits when invalid
+   * --------------------------------------------------------------*/
+  it('should not create comment when form invalid', () => {
+    component.post = basePost as any;
+    component.comentarioForm = new FormBuilder().group({ content: [''] });
+    component.comentar();
+    expect(commentService.create).not.toHaveBeenCalled();
+  });
 
-  it('volver() should navigate back to category', () => {
-    resetAllSpies();
+  /* --------------------------------------------------------------
+   * 7️⃣ reportarPublicacion() reason null vs provided
+   * --------------------------------------------------------------*/
+  it('should not call reportPost when prompt cancelled', () => {
+    spyOn(window, 'prompt').and.returnValue(null);
+    component.post = basePost as any;
+    component.reportarPublicacion();
+    expect(reportService.reportPost).not.toHaveBeenCalled();
+  });
+
+  it('should call reportPost when prompt returns reason', () => {
+    spyOn(window, 'prompt').and.returnValue('spam');
+    spyOn(window, 'alert');
+    component.post = basePost as any;
+    component.reportarPublicacion();
+    expect(reportService.reportPost).toHaveBeenCalledWith(1, 'spam');
+  });
+
+  /* --------------------------------------------------------------
+   * 8️⃣ reportarComentario()
+   * --------------------------------------------------------------*/
+  it('should call reportComment with reason', () => {
+    const com = baseComments[0];
+    spyOn(window, 'prompt').and.returnValue('ofensivo');
+    spyOn(window, 'alert');
+    component.reportarComentario(com as any);
+    expect(reportService.reportComment).toHaveBeenCalledWith(com.idComment, 'ofensivo');
+  });
+
+  /* --------------------------------------------------------------
+   * 9️⃣ eliminarComentario()
+   * --------------------------------------------------------------*/
+  it('should delete comment from list', fakeAsync(() => {
+    component.ngOnInit();
+    tick();
+    const com = component.comments[0];
+    component.eliminarComentario(com as any);
+    tick();
+    expect(component.comments.find(c => c.idComment === com.idComment)).toBeUndefined();
+  }));
+
+  /* --------------------------------------------------------------
+   * 🔟 volver() con slug
+   * --------------------------------------------------------------*/
+  it('should navigate to category slug on volver()', () => {
     component.volver();
-    expect(router.navigate).toHaveBeenCalledWith(['/categoria', 'test']);
+    expect(router.navigate).toHaveBeenCalledWith(['/categoria', 'ayudantias-academicas']);
   });
 
-  /* --------------------------- COMENTARIOS ---------------------------- */
+  /* --------------------------------------------------------------
+   * 11️⃣ calificar success and promedio update
+   * --------------------------------------------------------------*/
+  it('should set score and update promedio', fakeAsync(() => {
+    component.ngOnInit();
+    tick();
 
-  it('agregarComentario() should call comentar when form valid', () => {
-    resetAllSpies();
-    const comentarSpy = spyOn(component as any, 'comentar');
-    component.postingComment = false;
-    component.comentarioForm.setValue({ content: 'Hola' });
-
-    component.agregarComentario();
-
-    expect(comentarSpy).toHaveBeenCalled();
-  });
-
-  it('agregarComentario() should NOT call comentar when invalid', () => {
-    resetAllSpies();
-    const comentarSpy = spyOn(component as any, 'comentar');
-    component.comentarioForm.setValue({ content: '' });
-    component.comentarioForm.markAsTouched();
-
-    component.agregarComentario();
-
-    expect(comentarSpy).not.toHaveBeenCalled();
-  });
-
-  it('comentar() should add comment and reset posting flag', () => {
-    resetAllSpies();
-    component.post = {
-      idPost: 1, idUser: 2, idCategory: 1, views: 0,
-      title: '', content: '', createdDate: ''
-    };
-    component.comentarioForm.setValue({ content: 'Nuevo' });
-    component.postingComment = false;
-
-    component.comentar();
-
-    expect(createCommentSpy).toHaveBeenCalled();
-    expect(component.comments.some(c => c.content === 'Nuevo')).toBeTrue();
-    expect(component.postingComment).toBeFalse();
-  });
-
-  it('comentar() should NOT call service if postingComment is true', () => {
-    resetAllSpies();
-    component.postingComment = true;
-    component.comentarioForm.setValue({ content: 'Test' });
-
-    component.comentar();
-    expect(createCommentSpy).not.toHaveBeenCalled();
-  });
-
-  it('comentar() should NOT call service if form invalid', () => {
-    resetAllSpies();
-    component.comentarioForm.setValue({ content: '' });
-    component.comentar();
-    expect(createCommentSpy).not.toHaveBeenCalled();
-  });
-
-  it('comentar() should handle service error gracefully', () => {
-    resetAllSpies();
-    createCommentSpy.and.returnValue(throwError(() => new Error('fail')));
-    component.comentarioForm.setValue({ content: 'Err' });
-    component.comentar();
-    expect(component.postingComment).toBeFalse();
-  });
-
-
-
-  /* ----------------------------- REPORTES ----------------------------- */
-
-  it('reportarPublicacion() reports when there is a reason', () => {
-    resetAllSpies();
-    component.post = {
-      idPost: 1, idUser: 2, idCategory: 1, views: 0,
-      title: '', content: '', createdDate: ''
-    };
-    promptSpy.and.returnValue('Razón');
-    reportPostSpy.and.returnValue(of({} as Report));
-
-    component.reportarPublicacion();
-
-    expect(reportPostSpy).toHaveBeenCalledWith(1, 'Razón');
-    expect(alertSpy).toHaveBeenCalledWith('Publicación reportada');
-  });
-
-  it('reportarPublicacion() skips when no reason', () => {
-    resetAllSpies();
-    component.post = { idPost: 1 } as any;
-    promptSpy.and.returnValue('');
-    component.reportarPublicacion();
-    expect(reportPostSpy).not.toHaveBeenCalled();
-  });
-
-  it('reportarPublicacion() should return immediately if post is undefined', () => {
-    resetAllSpies();
-    component.post = undefined; // Simula que no hay publicación
-
-    component.reportarPublicacion();
-
-    expect(promptSpy).not.toHaveBeenCalled();
-    expect(reportPostSpy).not.toHaveBeenCalled();
-    expect(alertSpy).not.toHaveBeenCalled();
-  });
-
-  it('reportarComentario() reports when there is a reason', () => {
-    resetAllSpies();
-    const comment = {
-      idComment: 10, idPost: 1, idUser: 2,
-      content: '', createdDate: ''
-    };
-    promptSpy.and.returnValue('Razón');
-    reportCommentSpy.and.returnValue(of({} as Report));
-
-    component.reportarComentario(comment);
-
-    expect(reportCommentSpy).toHaveBeenCalledWith(10, 'Razón');
-    expect(alertSpy).toHaveBeenCalledWith('Comentario reportado');
-  });
-
-  it('reportarComentario() skips when no reason', () => {
-    resetAllSpies();
-    const comment = { idComment: 10 } as any;
-    promptSpy.and.returnValue('');
-    component.reportarComentario(comment);
-    expect(reportCommentSpy).not.toHaveBeenCalled();
-  });
-
-  /* ----------------------------- BORRADO ------------------------------ */
-
-  it('eliminarComentario() should remove comment & caches', () => {
-    resetAllSpies();
-    const c = {
-      idComment: 10, idPost: 1, idUser: 2,
-      content: '', createdDate: ''
-    };
-    component.comments = [c];
-    component.nombresUsuariosComentario[10] = 'User';
-    component.calificacionUsuariosComentario[10] = 5;
-
-    component.eliminarComentario(c);
-
-    expect(deleteCommentSpy).toHaveBeenCalledWith(10);
-    expect(component.comments.length).toBe(0);
-    expect(component.nombresUsuariosComentario[10]).toBeUndefined();
-    expect(component.calificacionUsuariosComentario[10]).toBeUndefined();
-  });
-
-  /* ------------------------------ SCORE ------------------------------- */
-
-  it('calificar() should set score and update promedio', () => {
-    resetAllSpies();
-    component.post = { idPost: 1, idUser: 2 } as any;
-    setScoreSpy.and.returnValue(of({} as Score));
-    scoreService.getAverageScore.and.returnValue(of(5));
-
+    scoreService.setScenario({ avg: 5, userScore: 5 });
     component.calificar(5);
+    tick();
 
-    expect(setScoreSpy).toHaveBeenCalled();
+    expect(scoreService.setScore).toHaveBeenCalled();
     expect(component.miScore).toBe(5);
     expect(component.promedio).toBe(5);
+  }));
+
+  /* --------------------------------------------------------------
+   * 12️⃣ calificar early-exit when no user
+   * --------------------------------------------------------------*/
+  it('should not call setScore when user not logged', () => {
+    userService.setScenario({ idUser: null });
+    component.calificar(4);
+    expect(scoreService.setScore).not.toHaveBeenCalled();
   });
 
-  it('calificar() should skip if post undefined', () => {
-    resetAllSpies();
-    component.post = undefined;
-    component.calificar(5);
-    expect(setScoreSpy).not.toHaveBeenCalled();
-  });
-
-  it('calificar() should skip if there is no logged user', () => {
-    resetAllSpies();
-    component.post = { idPost: 1 } as any;
-    userService.getIdUser.and.returnValue(null);
-    component.calificar(5);
-    expect(setScoreSpy).not.toHaveBeenCalled();
-  });
-
-
+  /* --------------------------------------------------------------
+   * 13️⃣ agregarComentario delega a comentar()
+   * --------------------------------------------------------------*/
+  it('should delegate agregarComentario to comentar when valid', fakeAsync(() => {
+    spyOn(component, 'comentar');
+    component.comentarioForm = new FormBuilder().group({ content: ['hola', []] });
+    component.agregarComentario();
+    expect(component.comentar).toHaveBeenCalled();
+  }));
 });

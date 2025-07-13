@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class PostService {
   /** URL base del API para publicaciones */
   //private apiUrl = 'http://localhost:9090/api/post';
-  private apiUrl = 'https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/post';
+  private apiUrl = 'https://8d20h7wiag.execute-api.us-east-2.amazonaws.com/api/post';
 
   /** Cliente HTTP utilizado para realizar peticiones al backend */
   private http = inject(HttpClient);

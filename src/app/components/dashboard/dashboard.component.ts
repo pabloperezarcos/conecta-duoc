@@ -54,32 +54,38 @@ export class DashboardComponent implements OnInit {
    * - Carga las categorías visibles (filtrando las no activas y las solo-admin).
    */
   ngOnInit(): void {
-    const azureUser = this.userService.getAzureUser();
+    const idUser = this.userService.getIdUser();
 
-    if (azureUser) {
-      this.userService.getUser(azureUser.email).subscribe(user => {
-        // Refresca el nombre y rol en localStorage + memoria
-        this.userService.setName(user.name);
-        this.userService.setRole(user.role || 'student');
+    if (idUser !== null) {
+      this.userService.getUserById(idUser).subscribe({
+        next: (user) => {
+          // Refresca el nombre y rol en localStorage + memoria
+          this.userService.setName(user.name);
+          this.userService.setRole(user.role || 'student');
+          this.userService.setIdUser(user.idUser!);
 
-        if (user.idUser !== undefined && user.idUser !== null) {
-          this.userService.setIdUser(user.idUser);
+          // Usa el nombre actualizado para mostrar
+          this.username = user.name || 'Desconocido';
+          this.role = user.role || 'student';
+
+          // Ahora construimos las categorías usando el rol actualizado
+          this.cargarCategorias();
+        },
+        error: (err) => {
+          console.error('Error al obtener usuario por ID:', err);
+          this.username = 'Desconocido';
+          this.role = 'student';
+          this.cargarCategorias();
         }
-
-        // Usa el nombre actualizado para mostrar
-        this.username = user.name || azureUser.fullName || azureUser.email || 'Desconocido';
-        this.role = user.role || 'student';
-
-        // Ahora construimos las categorías usando el rol actualizado
-        this.cargarCategorias();
       });
     } else {
-      // Fallback si no hay usuario activo
+      console.warn('No se encontró ID de usuario en localStorage.');
       this.username = 'Desconocido';
       this.role = 'student';
       this.cargarCategorias();
     }
   }
+
 
   private cargarCategorias(): void {
     this.postCategoryService.getAll().subscribe(categories => {
