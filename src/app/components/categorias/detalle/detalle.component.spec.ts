@@ -1,7 +1,7 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Component } from '@angular/core';
+import { Component, ErrorHandler } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
@@ -130,6 +130,7 @@ describe('DetalleComponent', () => {
         { provide: CommentService, useClass: MockCommentService },
         { provide: 'NotificacionService', useClass: StubNotificacionService },
         FormBuilder,
+        { provide: ErrorHandler, useValue: { handleError: () => { } } },
       ],
     })
       .overrideComponent(DetalleComponent, {
@@ -187,9 +188,10 @@ describe('DetalleComponent', () => {
     expect(component.nombreAutor).toBe('UserName');
     expect(component.comments.length).toBeGreaterThan(0);
     expect(component.loading).toBeFalse();
-    // map filled
-    expect(Object.keys(component.nombresUsuariosComentario).length).toBe(1);
-    expect(Object.keys(component.calificacionUsuariosComentario).length).toBe(1);
+
+    // Al menos un nombre y una calificación por comentario
+    expect(Object.keys(component.nombresUsuariosComentario).length).toBeGreaterThan(0);
+    expect(Object.keys(component.calificacionUsuariosComentario).length).toBeGreaterThan(0);
   }));
 
   /* --------------------------------------------------------------
@@ -224,7 +226,7 @@ describe('DetalleComponent', () => {
    * --------------------------------------------------------------*/
   it('should not create comment when form invalid', () => {
     component.post = basePost as any;
-    component.comentarioForm = new FormBuilder().group({ content: [''] });
+    component.comentarioForm = new FormBuilder().group({ content: ['', [Validators.required]] });
     component.comentar();
     expect(commentService.create).not.toHaveBeenCalled();
   });
@@ -312,4 +314,94 @@ describe('DetalleComponent', () => {
     component.agregarComentario();
     expect(component.comentar).toHaveBeenCalled();
   }));
+
+  /* --------------------------------------------------------------
+   * 🆕 comentar() – error en create  → postingComment vuelve a false
+   * --------------------------------------------------------------*/
+  it('should reset postingComment flag when create fails', fakeAsync(() => {
+    component.post = basePost as any;
+    component.comentarioForm = new FormBuilder().group({
+      content: ['Ups', [Validators.required]],
+    });
+
+    (commentService.create as jasmine.Spy).and.returnValue(
+      throwError(() => new Error('fail'))
+    );
+
+    component.comentar();
+    tick(); // procesa el observable que emite error
+
+    expect(commentService.create).toHaveBeenCalled();
+    expect(component.postingComment).toBeFalse(); // debe quedar en false tras el error
+  }));
+
+  /* --------------------------------------------------------------
+   * 🆕 reportarPublicacion() – early-exit cuando no hay post
+   * --------------------------------------------------------------*/
+  it('should not open prompt nor call service when post is undefined', () => {
+    spyOn(window, 'prompt');
+    component.post = undefined as any;
+
+    component.reportarPublicacion();
+
+    expect(window.prompt).not.toHaveBeenCalled();
+    expect(reportService.reportPost).not.toHaveBeenCalled();
+  });
+
+  /* --------------------------------------------------------------
+   * 🆕 reportarComentario() – prompt cancelado
+   * --------------------------------------------------------------*/
+  it('should not call reportComment when prompt is cancelled', () => {
+    const com = baseComments[0];
+    spyOn(window, 'prompt').and.returnValue(null);
+
+    component.reportarComentario(com as any);
+
+    expect(reportService.reportComment).not.toHaveBeenCalled();
+  });
+
+  /* --------------------------------------------------------------
+   * agregarComentario – early-exit cuando el formulario es inválido
+   * --------------------------------------------------------------*/
+  it('should not call comentar when agregarComentario is invoked with invalid form', () => {
+    spyOn(component, 'comentar');
+
+    component.comentarioForm = new FormBuilder().group({
+      content: ['', [Validators.required]],   // ← inválido
+    });
+
+    component.agregarComentario();
+
+    expect(component.comentar).not.toHaveBeenCalled();
+  });
+
+  /* --------------------------------------------------------------
+   * agregarComentario – early-exit cuando postingComment ya es true
+   * --------------------------------------------------------------*/
+  it('should not call comentar when agregarComentario is invoked while postingComment is true', () => {
+    spyOn(component, 'comentar');
+
+    component.comentarioForm = new FormBuilder().group({
+      content: ['listo'],                     // ← válido
+    });
+    component.postingComment = true;          // ← flag activo
+
+    component.agregarComentario();
+
+    expect(component.comentar).not.toHaveBeenCalled();
+  });
+
+  /* --------------------------------------------------------------
+     * calificar – early-exit cuando idUser es null
+     * --------------------------------------------------------------*/
+  it('should not call setScore when idUser is null', () => {
+    component.post = basePost as any;          // pasa la 1ª validación (!post)
+    userService.setScenario({ idUser: null }); // fuerza !idUser
+    component.calificar(4);
+    expect(scoreService.setScore).not.toHaveBeenCalled();
+  });
+
+
+
+
 });

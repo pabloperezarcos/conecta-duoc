@@ -9,12 +9,24 @@ import { Injectable } from '@angular/core';
 })
 export class RoleService {
 
+  private readonly STORAGE_KEY = 'userRole';
+
+  setRole(role: string): void {
+    localStorage.setItem(this.STORAGE_KEY, role);
+  }
+
+  clearRole(): void {
+    localStorage.removeItem(this.STORAGE_KEY);
+  }
+
   /**
    * Obtiene el rol actual almacenado en `localStorage`.
    * @returns Rol como string (ej: 'admin', 'student') o `null` si no está definido.
    */
   getRole(): string | null {
-    return localStorage.getItem('userRole');
+    //return localStorage.getItem('userRole');
+    const role = localStorage.getItem(this.STORAGE_KEY);
+    return role ? role : null; 
   }
 
   /**

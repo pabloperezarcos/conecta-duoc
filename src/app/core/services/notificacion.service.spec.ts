@@ -35,7 +35,7 @@ describe('NotificacionService', () => {
       expect(notifications).toEqual(dummyNotifications);
     });
 
-    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/notificaciones');
+    const req = httpMock.expectOne('https://ahjk4h0dne.execute-api.us-east-2.amazonaws.com/api/notificaciones');
     expect(req.request.method).toBe('GET');
     req.flush(dummyNotifications);
   });
@@ -53,7 +53,7 @@ describe('NotificacionService', () => {
       expect(notification).toEqual(newNotification);
     });
 
-    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/notificaciones');
+    const req = httpMock.expectOne('https://ahjk4h0dne.execute-api.us-east-2.amazonaws.com/api/notificaciones');
     expect(req.request.method).toBe('POST');
     req.flush(newNotification);
   });
@@ -63,7 +63,7 @@ describe('NotificacionService', () => {
       expect(response).toBeNull();
     });
 
-    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/notificaciones/1');
+    const req = httpMock.expectOne('https://ahjk4h0dne.execute-api.us-east-2.amazonaws.com/api/notificaciones/1');
     expect(req.request.method).toBe('DELETE');
     req.flush(null, { status: 204, statusText: 'No Content' });
   });
@@ -78,7 +78,7 @@ describe('NotificacionService', () => {
       expect(notifications).toEqual(dummyActiveNotifications);
     });
 
-    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/notificaciones/vigentes');
+    const req = httpMock.expectOne('https://ahjk4h0dne.execute-api.us-east-2.amazonaws.com/api/notificaciones/vigentes');
     expect(req.request.method).toBe('GET');
     req.flush(dummyActiveNotifications);
   });

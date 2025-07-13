@@ -57,4 +57,19 @@ describe('RoleService', () => {
         localStorage.setItem('userRole', 'admin');
         expect(service.isStudent()).toBeFalse();
     });
+
+    it('should store the role in localStorage with setRole', () => {
+        service.setRole('admin');
+        expect(localStorage.getItem('userRole')).toBe('admin');
+    });
+
+    it('should remove the role from localStorage with clearRole', () => {
+        localStorage.setItem('userRole', 'admin');
+        service.clearRole();
+        expect(localStorage.getItem('userRole')).toBeNull();
+    });
+
+
+
+
 });
