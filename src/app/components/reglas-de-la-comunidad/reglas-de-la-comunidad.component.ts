@@ -80,19 +80,18 @@ export class ReglasDeLaComunidadComponent {
    * Acepta las reglas de la comunidad y actualiza el campo `policies` del usuario a 1.
    * También se guarda la aceptación en `localStorage` para prevenir múltiples redirecciones.
    */
-  aceptarReglas() {
-    // Llamamos al backend para marcar "policies" como true
-    const email = this.userService.getAzureUser()?.email;
-    if (email) {
-      this.userService.getUser(email).subscribe(user => {
-        const updatedUser = { ...user, policies: 1 };
+  aceptarReglas(): void {
+    const idUser = this.userService.getIdUser();
+    if (idUser !== null) {
+      this.userService.getUserById(idUser).subscribe(dbUser => {
+        const updatedUser = { ...dbUser, policies: 1 };
         this.userService.registerUser(updatedUser).subscribe(() => {
           localStorage.setItem('conectaReglasAceptadas', 'true');
           this.router.navigate(['/dashboard']);
         });
       });
     } else {
-      // Fallback: solo localStorage (en caso de error raro)
+      /* Fallback extremadamente raro: sin ID en storage */
       localStorage.setItem('conectaReglasAceptadas', 'true');
       this.router.navigate(['/dashboard']);
     }
@@ -109,11 +108,11 @@ export class ReglasDeLaComunidadComponent {
    * Confirma el rechazo de las reglas.
    * Se marca `policies` como 0, se limpia el localStorage y se redirige al login.
    */
-  confirmarRechazo() {
-    const email = this.userService.getAzureUser()?.email;
-    if (email) {
-      this.userService.getUser(email).subscribe(user => {
-        const updatedUser = { ...user, policies: 0 };
+  confirmarRechazo(): void {
+    const idUser = this.userService.getIdUser();
+    if (idUser !== null) {
+      this.userService.getUserById(idUser).subscribe(dbUser => {
+        const updatedUser = { ...dbUser, policies: 0 };
         this.userService.registerUser(updatedUser).subscribe(() => {
           // Ahora sí, limpia el storage y cierra sesión
           localStorage.removeItem('conectaReglasAceptadas');
