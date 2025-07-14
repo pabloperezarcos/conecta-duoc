@@ -7,11 +7,11 @@ En la carpeta **`/DocumentationProyecto`** encontrarás los documentos formales 
 
 | # | Documento | Descripción breve |
 |---|-----------|-------------------|
-| 1 | [Fundamentación del Proyecto](DocumentationProyecto/1.%20Fundamentación%20del%20Proyecto.docx) | Contexto, relevancia y objetivos generales de ConectaDuoc. |
-| 2 | [Plan de Calidad](DocumentationProyecto/2.%20Plan%20de%20Calidad.docx) | Estándares, métricas e indicadores de calidad que guían el desarrollo. |
-| 3 | [Plan de Pruebas](DocumentationProyecto/3.%20Plan%20de%20Pruebas.docx) | Estrategia, tipos de pruebas, criterios de aceptación y cronograma de testing. |
-| 4 | [Plan de Riesgos](DocumentationProyecto/4.%20Plan%20de%20Riesgos.docx) | Identificación, análisis y respuesta a los riesgos del proyecto. |
-| 5 | [Plan de Comunicaciones](DocumentationProyecto/5.%20Plan%20de%20Comunicaciones.docx) | Canales, frecuencia y responsables de la comunicación con los stakeholders. |
+| 1 | [Fundamentación del Proyecto](DocumentaciónProyecto/1.%20Fundamentación%20delProyecto.docx) | Contexto, relevancia y objetivos generales de ConectaDuoc. |
+| 2 | [Plan de Calidad](DocumentaciónProyecto/2.%20Plan%20de%20Calidad.docx) | Estándares, métricas e indicadores de calidad que guían el desarrollo. |
+| 3 | [Plan de Pruebas](DocumentaciónProyecto/3.%20Plan%20de%20Pruebas.docx) | Estrategia, tipos de pruebas, criterios de aceptación y cronograma de testing. |
+| 4 | [Plan de Riesgos](DocumentaciónProyecto/4.%20Plan%20de%20Riesgos.docx) | Identificación, análisis y respuesta a los riesgos del proyecto. |
+| 5 | [Plan de Comunicaciones](DocumentaciónProyecto/5.%20Plan%20de%20Comunicaciones.docx) | Canales, frecuencia y responsables de la comunicación con los stakeholders. |
 
 ## Índice
 1. [Instalación](#instalacion)
