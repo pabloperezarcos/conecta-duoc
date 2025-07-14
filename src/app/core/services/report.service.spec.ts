@@ -49,7 +49,7 @@ describe('ReportService', () => {
       expect(report).toEqual(dummyReport);
     });
 
-    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/report/publicacion');
+    const req = httpMock.expectOne('https://8d20h7wiag.execute-api.us-east-2.amazonaws.com/api/report/publicacion');
     expect(req.request.method).toBe('POST');
     req.flush(dummyReport);
   });
@@ -69,7 +69,7 @@ describe('ReportService', () => {
       expect(report).toEqual(dummyReport);
     });
 
-    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/report/comentario');
+    const req = httpMock.expectOne('https://8d20h7wiag.execute-api.us-east-2.amazonaws.com/api/report/comentario');
     expect(req.request.method).toBe('POST');
     req.flush(dummyReport);
   });
@@ -85,7 +85,7 @@ describe('ReportService', () => {
       expect(reports).toEqual(dummyReports);
     });
 
-    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/report');
+    const req = httpMock.expectOne('https://8d20h7wiag.execute-api.us-east-2.amazonaws.com/api/report');
     expect(req.request.method).toBe('GET');
     req.flush(dummyReports);
   });
@@ -103,7 +103,7 @@ describe('ReportService', () => {
       expect(report).toEqual(updatedReport);
     });
 
-    const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/report/1');
+    const req = httpMock.expectOne('https://8d20h7wiag.execute-api.us-east-2.amazonaws.com/api/report/1');
     expect(req.request.method).toBe('PUT');
     req.flush(updatedReport);
   });

@@ -88,7 +88,7 @@ describe('UserService', () => {
             expect(exists).toBeTrue();
         });
 
-        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/exists/test%40example.com');
+        const req = httpMock.expectOne('https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios/exists/test%40example.com');
         expect(req.request.method).toBe('GET');
         req.flush(true);
     });
@@ -98,7 +98,7 @@ describe('UserService', () => {
             expect(user).toEqual(mockUser);
         });
 
-        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios');
+        const req = httpMock.expectOne('https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios');
         expect(req.request.method).toBe('POST');
         req.flush(mockUser);
     });
@@ -108,7 +108,7 @@ describe('UserService', () => {
             expect(user).toEqual(mockUser);
         });
 
-        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/test@example.com');
+        const req = httpMock.expectOne('https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios/test@example.com');
         expect(req.request.method).toBe('GET');
         req.flush(mockUser);
     });
@@ -139,7 +139,7 @@ describe('UserService', () => {
             expect(user).toEqual(mockUser);
         });
 
-        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/id/123');
+        const req = httpMock.expectOne('https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios/id/123');
         expect(req.request.method).toBe('GET');
         req.flush(mockUser);
     });
@@ -149,7 +149,7 @@ describe('UserService', () => {
             expect(users).toEqual([mockUser]);
         });
 
-        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios');
+        const req = httpMock.expectOne('https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios');
         expect(req.request.method).toBe('GET');
         req.flush([mockUser]);
     });
@@ -159,7 +159,7 @@ describe('UserService', () => {
             expect(user).toEqual(mockUser);
         });
 
-        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/test@example.com');
+        const req = httpMock.expectOne('https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios/test@example.com');
         expect(req.request.method).toBe('PUT');
         req.flush(mockUser);
     });
@@ -169,8 +169,54 @@ describe('UserService', () => {
             expect(response).toBeNull();
         });
 
-        const req = httpMock.expectOne('https://w1fcx9tewi.execute-api.us-east-2.amazonaws.com/api/usuarios/123');
+        const req = httpMock.expectOne('https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios/123');
         expect(req.request.method).toBe('DELETE');
         req.flush(null, { status: 204, statusText: 'No Content' });
+    });
+
+    // --------------- NUEVAS PRUEBAS -----------------
+    describe('checkUserExists – manejo de errores', () => {
+        it('should return false when server returns an error', () => {
+            service.checkUserExists('error@example.com').subscribe(exists => {
+                expect(exists).toBeFalse();
+            });
+
+            const req = httpMock.expectOne(
+                'https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios/exists/error%40example.com'
+            );
+            expect(req.request.method).toBe('GET');
+
+            // Simulamos error 500
+            req.flush(null, { status: 500, statusText: 'Server Error' });
+        });
+    });
+
+    describe('checkUserExistsWithId', () => {
+
+        it('should return exists true with idUser when backend indicates user present', () => {
+            service.checkUserExistsWithId('test@example.com').subscribe(resp => {
+                expect(resp).toEqual({ exists: true, idUser: 42 });
+            });
+
+            const req = httpMock.expectOne(
+                'https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios/exists/test%40example.com'
+            );
+            expect(req.request.method).toBe('GET');
+            req.flush({ exists: true, idUser: 42 });
+        });
+
+        it('should return { exists:false } when server returns an error', () => {
+            service.checkUserExistsWithId('err@example.com').subscribe(resp => {
+                expect(resp).toEqual({ exists: false });
+            });
+
+            const req = httpMock.expectOne(
+                'https://8469n57kta.execute-api.us-east-2.amazonaws.com/api/usuarios/exists/err%40example.com'
+            );
+            expect(req.request.method).toBe('GET');
+
+            // Forzamos error de red / servidor
+            req.flush(null, { status: 404, statusText: 'Not Found' });
+        });
     });
 });

@@ -229,4 +229,34 @@ describe('LoginComponent', () => {
 
     expect(component.isLoggedIn).toBeTrue();
   }));
+
+  /* --------------------------------------------------------------
+   * 🛑 Error en getUserById dentro de checkAndRedirect
+   * --------------------------------------------------------------*/
+  it('should log an error when getUserById fails', fakeAsync(() => {
+    // ‑ Configuramos cuenta activa y que el usuario exista
+    msal.setActiveAccount({ username: 'fail@getid.com' });
+    userService.setScenario({ checkResp: { exists: true, idUser: 99 } });
+
+    // ‑ Forzamos fallo en getUserById
+    (userService.getUserById as jasmine.Spy).and.callFake(() =>
+      throwError(() => new Error('uErr'))
+    );
+
+    const consoleSpy = spyOn(console, 'error');
+
+    component.ngOnInit();
+    tick();
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Error al traer usuario por ID:',
+      jasmine.any(Error)
+    );
+
+    // Aseguramos que no navega a dashboard ni a reglas
+    expect(router.navigate).not.toHaveBeenCalledWith(['/dashboard']);
+    expect(router.navigate).not.toHaveBeenCalledWith(['/reglas-de-la-comunidad']);
+  }));
+
+
 });

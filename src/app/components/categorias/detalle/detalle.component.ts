@@ -17,6 +17,7 @@ import { CommentService } from '../../../core/services/comment.service';
 /* BreadCrumb y BANNER */
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 import { NotificacionBannerComponent } from '../../notificacion-banner/notificacion-banner.component';
+import { catchError, of } from 'rxjs';
 
 /**
  * Componente que muestra el detalle de una publicación individual.
@@ -132,7 +133,9 @@ export class DetalleComponent implements OnInit {
         this.commentService.getByPostId(post.idPost).subscribe(comments => {
           this.comments = comments;
           comments.forEach(com => {
-            this.userService.getUserById(com.idUser).subscribe(user => {
+            this.userService.getUserById(com.idUser).pipe(
+              catchError(() => of({ name: 'Autor desconocido' }))
+            ).subscribe(user => {
               this.nombresUsuariosComentario[com.idComment] = user.name;
             });
           });
